@@ -19,9 +19,9 @@ CMD mkdir /usr/src/app
 COPY ./app /usr/src/app
 
 # Make port available to the world outside this container
-EXPOSE 80
+EXPOSE 8081
 
 # Define environment variable
 #ENV NAME World
 
-ENTRYPOINT gunicorn --chdir /usr/src/app main:app -w 2 --threads 2 -b 0.0.0.0:80
+ENTRYPOINT gunicorn --chdir /usr/src/app main:app -w 2 --threads 2 -b 0.0.0.0:8081

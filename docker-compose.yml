@@ -10,14 +10,14 @@ services:
     volumes:
       - ./app:/usr/src/app
     ports:
-      - "80:80"
+      - "8081:8081"
     environment:
       - FLASK_DEBUG=1
       - PYTHONUNBUFFERED=TRUE # Stuff printed to logs are visible immediately
     entrypoint: >
       gunicorn 
       --chdir /usr/src/app main:app -w 1 
-      --threads 1 -b 0.0.0.0:80
+      --threads 1 -b 0.0.0.0:8081
       --timeout 120 
       --reload
 #      --reload-extra-file /usr/src/app/templates/base.html
