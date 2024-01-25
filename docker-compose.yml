@@ -1,0 +1,25 @@
+
+version: '3'
+
+# This file defines development setting, e.g. debugging & realoading
+
+services:
+  web:
+    build: ./
+    image: species-challenge:latest
+    volumes:
+      - ./app:/usr/src/app
+    ports:
+      - "80:80"
+    environment:
+      - FLASK_DEBUG=1
+      - PYTHONUNBUFFERED=TRUE # Stuff printed to logs are visible immediately
+    entrypoint: >
+      gunicorn 
+      --chdir /usr/src/app main:app -w 1 
+      --threads 1 -b 0.0.0.0:80
+      --timeout 120 
+      --reload
+#      --reload-extra-file /usr/src/app/templates/base.html
+    # Note that the extra-files have to exist, otherwise dockec-compose will complain "Error: File ... does not exists."
+  
