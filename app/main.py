@@ -21,11 +21,12 @@ print("\n-------------- species-challenge --------------\n", file = sys.stdout)
 def before_request():
     g.token = session.get("token", None)
     g.user_data = session.get("user_data", None)
+    g.is_admin = session.get("is_admin", None)
 
 # Make user data available for templates
 @app.context_processor
 def inject_user_data():
-    return dict(user_data=g.user_data)
+    return dict(user_data=g.user_data, is_admin=g.is_admin)
 
 # ----------------------------------------
 # Controllers
@@ -34,6 +35,7 @@ def inject_user_data():
 def root():
     html = controllers.index.main()
     return render_template("index.html", html=html)
+
 
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
@@ -48,7 +50,13 @@ def login(person_token_untrusted):
     # Get user data
     session["token"] = person_token
     session["user_data"] = common_helpers.fetch_finbif_api(f"https://api.laji.fi/v0/person/{ person_token }?access_token=")
+
+    session["is_admin"] = False
+    if ("MA.admin" in session["user_data"]["role"]):
+        session["is_admin"] = True
+
     return redirect("/")
+
 
 @app.route("/logout")
 def logout():

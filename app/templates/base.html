@@ -12,6 +12,9 @@
             {% if user_data %}
                 <!-- Logged in as user_data['id'] -->
                 Hei {{ user_data['fullName'] }}! <a href="/logout">Kirjaudu ulos</a>
+                {% if is_admin %}
+                    <span id="admin_link"><a href='#'>Admin</a></span>
+                {% endif %}
             {% else %}
                 <!-- Not logged in -->
                 <a href="https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev">Kirjaudu sisään</a>
