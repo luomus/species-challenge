@@ -9,7 +9,7 @@ import controllers.index
 app = Flask(__name__)
 
 # Get secret key from environment variables, stop if not found.
-secret_key = os.environ.get('FLASK_SECRET_KEY')
+secret_key = os.environ.get("FLASK_SECRET_KEY")
 if secret_key is None:
     raise ValueError("No FLASK_SECRET_KEY set.")
 app.secret_key = secret_key
@@ -19,8 +19,8 @@ print("\n-------------- species-challenge --------------\n", file = sys.stdout)
 # Make user data available for controllers
 @app.before_request
 def before_request():
-    g.token = session.get('token', None)
-    g.user_data = session.get('user_data', None)
+    g.token = session.get("token", None)
+    g.user_data = session.get("user_data", None)
 
 # Make user data available for templates
 @app.context_processor
@@ -38,11 +38,11 @@ def root():
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
     # Get user data
-    session['token'] = person_token_untrusted
-    session['user_data'] = common_helpers.fetch_finbif_api(f"https://api.laji.fi/v0/person/{ person_token_untrusted }?access_token=")
-    return redirect(url_for('root'))
+    session["token"] = person_token_untrusted
+    session["user_data"] = common_helpers.fetch_finbif_api(f"https://api.laji.fi/v0/person/{ person_token_untrusted }?access_token=")
+    return redirect("/")
 
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect('/')
+    return redirect("/")
