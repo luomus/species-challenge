@@ -1,12 +1,13 @@
 from flask import g
 from helpers import common_db
+import datetime
 
 
-def get_challenges(year):
-    params = (year,)
+
+def get_open_challenges():
     with common_db.connection() as conn:
-        query = "SELECT * FROM challenges WHERE year = %s"
-        data = common_db.select(conn, query, params)
+        query = "SELECT * FROM challenges WHERE status = 'open'"
+        data = common_db.select(conn, query)
     return data
 
 
@@ -22,7 +23,7 @@ def main():
     html = dict()
     html["hello"] = "Hoi "
 
-    challenges = get_challenges(2024)
+    challenges = get_open_challenges()
     html["challenges"] = create_challenges_html(challenges)
 
     print("== home ==")
