@@ -30,4 +30,31 @@ https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_d
 
 ### Features
 
-- Slug for 
+- Slug for challenges?
+
+#### Pages
+
+- My participations
+    - open
+    - closed
+    - link to edit
+    - link to results
+- Participation creation page
+- Participation edit page
+- Challenge result page
+    - list of species
+    - list of those with >= 100 species
+    - how many % have passed 100 species
+    - chart?
+- Admin page
+    - button to add a challenge
+    - open challenges
+    - draft challenges
+    - closed challenges
+    - edit link to each
+    - statistics of each
+        - number of participants
+        - number of those with >= 100 species
+        - number of active participants (added species last 7 days)
+- Challenge creation page
+- Challenge edit page
