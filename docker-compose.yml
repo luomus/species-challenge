@@ -38,5 +38,16 @@ services:
     ports:
       - "3306:3306"
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 100M
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+      
 volumes:
   mariadb_data:
