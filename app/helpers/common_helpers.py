@@ -18,12 +18,12 @@ def fetch_finbif_api(api_url, log = False):
     except ConnectionError:
         print("ERROR: api.laji.fi error.", file = sys.stdout)
 
-    dataJson = r.text
-    dataDict = json.loads(dataJson)
+    data_json = r.text
+    data_dict = json.loads(data_json)
 
-    if "status" in dataDict:
-        if 403 == dataDict["status"]:
+    if "status" in data_dict:
+        if 403 == data_dict["status"]:
             print("ERROR: api.laji.fi 403 error.", file = sys.stdout)
             raise ConnectionError
 
-    return dataDict
+    return data_dict
