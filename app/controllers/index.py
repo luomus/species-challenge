@@ -1,5 +1,5 @@
 
 def main():
     html = dict()
-    html["hello"] = "Hello World!"
+    html["hello"] = "Hello "
     return html
