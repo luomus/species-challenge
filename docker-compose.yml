@@ -11,9 +11,8 @@ services:
       - ./app:/usr/src/app
     ports:
       - "8081:8081"
-    environment:
-      - FLASK_DEBUG=1
-      - PYTHONUNBUFFERED=TRUE # Stuff printed to logs are visible immediately
+    env_file:
+      - .env
     entrypoint: >
       gunicorn 
       --chdir /usr/src/app main:app -w 1 
@@ -30,11 +29,8 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    env_file:
+      - .env
     ports:
       - "3306:3306"
 
