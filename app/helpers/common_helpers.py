@@ -27,3 +27,10 @@ def fetch_finbif_api(api_url, log = False):
             raise ConnectionError
 
     return data_dict
+
+
+def clean_token(input_string):
+    for character in input_string:
+        if not character.isalnum():
+            return False
+    return True

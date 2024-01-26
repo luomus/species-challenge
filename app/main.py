@@ -37,9 +37,17 @@ def root():
 
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
+
+    # Sanitize token
+    token_id_clean = common_helpers.clean_token(person_token_untrusted)
+    if not token_id_clean:
+        raise ValueError("Token contains disallowed characters.")
+    else:
+        person_token = person_token_untrusted
+
     # Get user data
-    session["token"] = person_token_untrusted
-    session["user_data"] = common_helpers.fetch_finbif_api(f"https://api.laji.fi/v0/person/{ person_token_untrusted }?access_token=")
+    session["token"] = person_token
+    session["user_data"] = common_helpers.fetch_finbif_api(f"https://api.laji.fi/v0/person/{ person_token }?access_token=")
     return redirect("/")
 
 @app.route("/logout")
