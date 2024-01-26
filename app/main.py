@@ -41,3 +41,8 @@ def login(person_token_untrusted):
     session['token'] = person_token_untrusted
     session['user_data'] = common_helpers.fetch_finbif_api(f"https://api.laji.fi/v0/person/{ person_token_untrusted }?access_token=")
     return redirect(url_for('root'))
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect('/')

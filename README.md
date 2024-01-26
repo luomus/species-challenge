@@ -20,6 +20,8 @@ https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_d
 
 ## Todo
 
+- Login to dev/prod parametrized
+- Get data system id for dev, test and production? or use intermediate login redirection like on Havistin?
 - Database sorting/collation settings
 - Generic exception handling?
 - Automate database setup - does OpenShift need this?
