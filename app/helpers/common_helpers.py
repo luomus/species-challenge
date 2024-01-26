@@ -4,7 +4,7 @@ import sys
 import os
 
 def fetch_finbif_api(api_url, log = False):
-    if "&access_token=" not in api_url:
+    if "access_token=" not in api_url:
         print("WARNING: access_token param is missing from your url!", file = sys.stdout)
 
     api_url = api_url + os.environ.get('FINBIF_API_TOKEN')
