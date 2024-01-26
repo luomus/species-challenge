@@ -6,8 +6,10 @@
 
 {% block body %}
 
-    <h1>100 Lajia -haaste</h1>
+    <h1>100 Lajia -haasteet</h1>
 
-    <p>{{ html["hello"] }}</p>
+    <div id="challenges">
+        {{ html["challenges"]|safe }}
+    </div>
 
 {% endblock %}

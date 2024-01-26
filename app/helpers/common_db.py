@@ -15,11 +15,13 @@ def connection():
     finally:
         conn.close()
 
-def select(conn, query):
+def select(conn, query, params = None):
     cursor = conn.cursor()
     try:
-        cursor.execute(query)
-        return cursor.fetchall()
+        cursor.execute(query, params)
+        # Use column names as dictionary keys 
+        columns = [col[0] for col in cursor.description]
+        return [dict(zip(columns, row)) for row in cursor.fetchall()]
     except Exception as e:
         conn.rollback()
         raise e
