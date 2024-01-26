@@ -15,10 +15,17 @@ RUN apt-get update && \
 COPY requirements.txt /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Copy the app
-COPY ./app /usr/src/app
+# Create a non-root user and change the ownership of the relevant directories
+RUN useradd -m myuser && \
+    mkdir -p /usr/src/app && \
+    chown -R myuser:myuser /usr/src/app
 
+# Copy the app using the non-root user
+COPY --chown=myuser:myuser ./app /usr/src/app
+
+# Final setup
 EXPOSE 8081
 WORKDIR /usr/src/app
+USER myuser
 
 ENTRYPOINT ["gunicorn", "--chdir", "/usr/src/app", "main:app", "-w", "2", "--threads", "2", "-b", "0.0.0.0:8081"]
