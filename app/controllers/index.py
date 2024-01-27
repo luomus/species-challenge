@@ -1,8 +1,8 @@
+# Controller for the front page that displays open and closed challenges.
+
 from flask import g
 from helpers import common_db
 import datetime
-
-
 
 def get_open_challenges():
     with common_db.connection() as conn:

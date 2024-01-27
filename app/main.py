@@ -1,3 +1,5 @@
+# Flask app main file.
+
 from flask import Flask, render_template, redirect, session, g, url_for
 import sys
 import os
