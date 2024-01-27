@@ -10,16 +10,17 @@
         {% block head %}{% endblock %}
     </head>
     <body>
-        <div id="login">
+        <div id="login_navi">
             {% if user_data %}
                 <!-- Logged in as user_data['id'] -->
-                Hei {{ user_data['fullName'] }}! <a href="/logout">Kirjaudu ulos</a>
+                <span id="user_info">Hei {{ user_data['fullName'] }}!</span>
+                <span id="logout"><a href="/logout">Kirjaudu ulos</a></span>
                 {% if is_admin %}
-                    <span id="admin_link"><a href='/admin'>Admin</a></span>
+                    <span id="admin"><a href='/admin'>Admin</a></span>
                 {% endif %}
             {% else %}
                 <!-- Not logged in -->
-                <a href="https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev">Kirjaudu sisään</a>
+                <span id="login"><a href="https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev">Kirjaudu sisään</a></span>
             {% endif %}
         </div>
 
