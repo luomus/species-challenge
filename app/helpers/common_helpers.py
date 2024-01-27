@@ -1,5 +1,6 @@
 # Common helpers functions.
 
+import uuid
 import requests
 import json
 import sys
@@ -60,5 +61,26 @@ def clean_token(input_string):
     for character in input_string:
         if not character.isalnum():
             raise ValueError("Token contains disallowed characters.")
+
+    return input_string
+
+
+def clean_uuid(input_string):
+    """
+    Validates if a given string is a valid UUID.
+
+    Args:
+    input_string (str): The string to validate.
+
+    Returns:
+    str: The input_string if it is a valid UUID.
+
+    Raises:
+    ValueError: If the input_string is invalid as an UUID.
+    """
+    try:
+        uuid.UUID(input_string, version=4)
+    except ValueError:
+        raise ValueError("UUID is not valid.")
 
     return input_string

@@ -8,10 +8,24 @@
 
 {% block body %}
 
-    <h1>Uusi osallistuminen</h1>
+    <h1>Uusi osallistuminen: {{ html['challenge_name'] }}</h1>
 
-    <div class="challenges">
-        {{ html["challenges"]|safe }}
-    </div>
+    <form action="/uusi_osallistuminen/{{ html['challenge_id'] }}" method="post">
+        <input type="hidden" name="challenge_id" value="{{ html['challenge_id'] }}">
+    
+        <p>
+            <label for="participant_name">Osallistujan nimi tai nimimerkki:</label>
+            <input type="text" id="participant_name" name="participant_name" required>
+        </p>
+
+        <p>
+            <label for="location">Paikka, esim. kunta:</label>
+            <input type="text" id="location" name="location" required>
+        </p>
+    
+        <p>
+            <button type="submit">Tallenna uusi osallistuminen</button>
+        </p>
+    </form>
 
 {% endblock %}

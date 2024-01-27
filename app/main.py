@@ -1,6 +1,6 @@
 # Flask app main file.
 
-from flask import Flask, render_template, redirect, session, g, flash
+from flask import Flask, render_template, redirect, session, g, flash, request
 from functools import wraps
 import sys
 import os
@@ -68,10 +68,13 @@ def admin():
 
 
 import controllers.new_participation
-@app.route("/uusi_osallistuminen")
+@app.route("/uusi_osallistuminen/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
 @login_required
-def new_participation():
-    html = controllers.new_participation.main()
+def new_participation(challenge_id_untrusted):
+    if request.method == 'POST':
+        html = controllers.new_participation.main(challenge_id_untrusted, request.form)
+    else:
+        html = controllers.new_participation.main(challenge_id_untrusted)
     return render_template("new_participation.html", html=html)
 
 
