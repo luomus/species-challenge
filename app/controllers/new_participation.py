@@ -2,11 +2,12 @@
 # Available for logged in users.
 
 import datetime
-from flask import g, flash, redirect
+import time
+from flask import g, flash, redirect, url_for
 from helpers import common_db
 from helpers import common_helpers
 
-def insert_participation(challenge_id, form_data):
+def save_participation(challenge_id, participation_id, form_data):
     """
     Inserts participation data to the database.
 
@@ -19,12 +20,33 @@ def insert_participation(challenge_id, form_data):
 
     # Current datetime in MySQL format
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
+
+    # CASE 1: Edit existing participation
+    # Update form data in the database
+    print("CASE 1")
+    if participation_id:
+        params = (
+            form_data["participant_name"],
+            form_data["participation_location"],
+            g.user_data["id"],
+            now,
+            challenge_id,
+            participation_id,
+        )
+
+        with common_db.connection() as conn:
+            query = "UPDATE participations SET participant_name = %s, location = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s AND id = %s"
+            success, id = common_db.transaction(conn, query, params)
+
+        return success
+
+    # CASE 2: Insert new participation
     # Insert form data into the database
+    print("CASE 2")
     params = (
         challenge_id,
         form_data["participant_name"],
-        form_data["location"],
+        form_data["participation_location"],
         g.user_data["id"],
         now,
         g.user_data["id"],
@@ -33,9 +55,10 @@ def insert_participation(challenge_id, form_data):
 
     with common_db.connection() as conn:
         query = "INSERT INTO participations (challenge_id, participant_name, location, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        success = common_db.insert(conn, query, params)
+        success, id = common_db.transaction(conn, query, params)
+        print("Success: ", success)
 
-    return success
+    return success, id
 
 
 def validate_data(form_data):
@@ -51,9 +74,9 @@ def validate_data(form_data):
     errors = ""
 
     # Validate form data
-    if not form_data["name"]:
+    if not form_data["participant_name"]:
         errors += "Osallistujan nimi puuttuu."
-    if not form_data["location"]:
+    if not form_data["participation_location"]:
         errors += "Paikka puuttuu."
 
     return errors
@@ -63,8 +86,12 @@ def validate_data(form_data):
 def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html = dict()
 
+    print("Form data:")
+    print(form_data) # Debug
+
     challenge_id = common_helpers.clean_uuid(challenge_id_untrusted)
-    participation_id = common_helpers.clean_uuid(participation_id_untrusted)
+    participation_id = common_helpers.clean_int(participation_id_untrusted)
+
     html["challenge_id"] = challenge_id
     html["participation_id"] = participation_id
 
@@ -80,61 +107,73 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     if not challenge:
         flash("Haastetta ei löytynyt tai siihen ei voi enää osallistua.")
-        return redirect("/")
+        return {"redirect": True, "url": "/"}
 
     # Get challenge information
     print(challenge) # Debug
     html["challenge_name"] = challenge[0]["name"]
 
     # Case A: User opened an existing participation for editing.
+    # http://localhost:8081/osallistuminen/a04c89f9-bc6f-11ee-837a-0242c0a8a002/1
     if participation_id and not form_data:
+        print("CASE A")
+        print("part: ", participation_id)
+        print("chall: ", challenge_id)
         # Load participation data from the database
         with common_db.connection() as conn:
             query = "SELECT * FROM participations WHERE id = %s AND challenge_id = %s"
             params = (participation_id, challenge_id)
             participation = common_db.select(conn, query, params)
             print(participation) # Debug
+
+        # Check that participation exists
+        if not participation:
+            print("CASE A1")
+            flash("Osallistumista ei löytynyt.")
+            return {"redirect": True, "url": "/"}
         
-        html["name"] = participation[0]["name"]
-        html["location"] = participation[0]["location"]
+        print("CASE A2")
+        html["participant_name"] = participation[0]["participant_name"]
+        html["participation_location"] = participation[0]["location"]
         return html
 
     # Case B: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:
-        print("Empty form") # Debug
+        print("CASE B")
+        print("part: ", participation_id)
+        print("chall: ", challenge_id)
         return html
     
-    # Case C: Use has submitted participation data. Validate and insert to database.
+    # Case C: User has submitted participation data. Validate and insert to database.
     if form_data:
-        print("HERE:")
+        print("CASE C")
+        print("part: ", participation_id)
+        print("chall: ", challenge_id)
         print(form_data) # Debug
-        exit("STOPPED HERE")
         errors = validate_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
+            print("CASE C1")
             flash(errors)
-            html["name"] = form_data["name"]
-            html["location"] = form_data["location"]
+            html["participant_name"] = form_data["participant_name"]
+            html["participation_location"] = form_data["participation_location"]
             return html
         
         # Case C2: No errors found. Insert to database and redirect to participation page.
-        if not errors:
-            # Insert to database and redirect to participation page
-            success = insert_participation(challenge_id, form_data)
-            if success:
-                flash("Osallistumisesi on nyt tallennettu.")
-                return redirect(f"/osallistuminen/{challenge_id}/{participation_id}")
+        print("CASE C2")
+        # Insert to database and redirect to participation page
+        success, id = save_participation(challenge_id, participation_id, form_data)
+        print(success, id) # Debug
+        if success:
+            print("CASE C2 A")
+            flash("Osallistumisesi on nyt tallennettu.")
+            return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
 
-            raise Exception("Error in new_participation.py")
-            # Todo: handle database errors
+        print("CASE C2 B")
+        raise Exception("Error in new_participation.py")
+        # Todo: handle database errors
 
-    # Case: Something went wrong.
-    print("Error")
-    print(challenge_id)
-    print(participation_id)
-    print(form_data)
-    raise Exception("Error in new_participation.py")
 
     """    
     # If user already submitted data, use that to fill in the form.

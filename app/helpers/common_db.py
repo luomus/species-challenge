@@ -47,26 +47,32 @@ def select(conn, query, params = None):
     finally:
         cursor.close()
 
-def insert(conn, query, params):
+def transaction(conn, query, params):
     """
-    Executes an INSERT query and commits the transaction.
+    Executes an transaction (INSERT or UPDATE) and commits it.
 
     Args:
         conn (MySQLConnection): The database connection object.
-        query (str): The INSERT query to be executed.
+        query (str): The query to be executed.
         params (tuple): Parameters to be used in the query.
 
     Returns:
         bool: True if the query was successfully executed and committed, False otherwise.
+        int: The ID of the last inserted row, if any.
     """
+    print(query)
+    print(params)
+
     cursor = conn.cursor()
     try:
         cursor.execute(query, params)
         conn.commit()
-        return True
+        cursor.execute("SELECT LAST_INSERT_ID()")
+        last_id = cursor.fetchone()[0]
+        return True, last_id
     except Exception as e:
         conn.rollback()
-        raise e
+        return False, None
     finally:
         cursor.close()
 

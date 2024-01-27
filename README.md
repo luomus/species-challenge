@@ -32,6 +32,10 @@ https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_d
 
 - Slug for challenges?
 - Test giving malicious login token
+- Can we trust session user_id, or should we check that from FinBIF api with the token?
+- Field value validations:
+    - strip/sanitize
+    - length limit
 
 #### Pages
 

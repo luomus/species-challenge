@@ -79,7 +79,11 @@ def clean_uuid(input_string):
     Raises:
     ValueError: If the input_string is invalid as an UUID.
     """
+
+    # Todo: Think this through
     if input_string is None:
+        return None
+    if input_string == "None":
         return None
 
     try:
@@ -88,3 +92,25 @@ def clean_uuid(input_string):
         raise ValueError("UUID is not valid.")
 
     return input_string
+
+
+def clean_int(input_string):
+    """
+    Validates if a given string is a valid integer
+
+    Args:
+    input_string (str): The string to validate.
+
+    Returns:
+    int: The input_string converted to integer.
+    None: if the input_string is None.
+
+    Raises:
+    ValueError: If the input_string cannot be converted to integer.
+    """
+    if not input_string:
+        return None
+    try:
+        return int(input_string)
+    except ValueError:
+        raise ValueError("Input is not an integer.")
