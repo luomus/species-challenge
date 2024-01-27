@@ -52,9 +52,13 @@ def clean_token(input_string):
     input_string (str): The string to validate.
 
     Returns:
-    bool: True if the string is alphanumeric, False otherwise.
+    str: The input_string if it is alphanumeric.
+
+    Raises:
+    ValueError: If the input_string contains disallowed characters.
     """
     for character in input_string:
         if not character.isalnum():
-            return False
-    return True
+            raise ValueError("Token contains disallowed characters.")
+
+    return input_string

@@ -60,13 +60,7 @@ def admin():
 
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
-
-    # Sanitize token
-    token_id_clean = common_helpers.clean_token(person_token_untrusted)
-    if not token_id_clean:
-        raise ValueError("Token contains disallowed characters.")
-    else:
-        person_token = person_token_untrusted
+    person_token = common_helpers.clean_token(person_token_untrusted)
 
     # Get user data
     session["token"] = person_token
