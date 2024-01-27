@@ -16,7 +16,7 @@ def make_challenges_html(challenges):
     html = "<div class='challenge'>\n"
     for challenge in challenges:
         html += f"<h4>{ challenge['name'] }</a></h4>\n"
-        html += f"<p>{ challenge['year'] }</p>\n"
+        html += f"<p>{ challenge['year'] }, <a href='https://laji.fi/taxon/{ challenge['taxon'] }' target='_blank'>{ challenge['taxon'] }</a></p>\n"
         html += f"<p><a href='/edit_challenge{ challenge['id'] }' class='button'>Muokkaa</a></p>\n"
     html += "</div>\n"
     return html
@@ -25,7 +25,9 @@ def make_challenges_html(challenges):
 def main():
     html = dict()
 
-    open_challenges = get_challenges("open")
-    html["open_challenges"] = make_challenges_html(open_challenges)
+    html["open_challenges"] = make_challenges_html(get_challenges("open"))
+    html["draft_challenges"] = make_challenges_html(get_challenges("draft"))
+    html["closed_challenges"] = make_challenges_html(get_challenges("closed"))
+
 
     return html

@@ -11,8 +11,18 @@
     <h1>Admin</h1>
 
     <div class="challenges open">
-        <h3>Avoimet haasteet</h3>
+        <h3>Avoimet</h3>
         {{ html["open_challenges"]|safe }}
+    </div>
+
+    <div class="challenges draft">
+        <h3>Luonnokset</h3>
+        {{ html["draft_challenges"]|safe }}
+    </div>
+
+    <div class="challenges closed">
+        <h3>Suljetut</h3>
+        {{ html["closed_challenges"]|safe }}
     </div>
 
 {% endblock %}
