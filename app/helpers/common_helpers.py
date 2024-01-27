@@ -73,11 +73,15 @@ def clean_uuid(input_string):
     input_string (str): The string to validate.
 
     Returns:
+    None: if the input_string is None.
     str: The input_string if it is a valid UUID.
 
     Raises:
     ValueError: If the input_string is invalid as an UUID.
     """
+    if input_string is None:
+        return None
+
     try:
         uuid.UUID(input_string, version=4)
     except ValueError:

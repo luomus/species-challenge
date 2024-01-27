@@ -68,13 +68,15 @@ def admin():
 
 
 import controllers.new_participation
-@app.route("/uusi_osallistuminen/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
+@app.route("/osallistuminen/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
+@app.route("/osallistuminen/<string:challenge_id_untrusted>/", methods=['GET', 'POST'])
+@app.route("/osallistuminen/<string:challenge_id_untrusted>/<string:participation_id_untrusted>", methods=['GET', 'POST'])
 @login_required
-def new_participation(challenge_id_untrusted):
+def new_participation(challenge_id_untrusted, participation_id_untrusted = None):
     if request.method == 'POST':
-        html = controllers.new_participation.main(challenge_id_untrusted, request.form)
+        html = controllers.new_participation.main(challenge_id_untrusted, participation_id_untrusted, request.form)
     else:
-        html = controllers.new_participation.main(challenge_id_untrusted)
+        html = controllers.new_participation.main(challenge_id_untrusted, participation_id_untrusted)
     return render_template("new_participation.html", html=html)
 
 
