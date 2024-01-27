@@ -1,6 +1,6 @@
 # Flask app main file.
 
-from flask import Flask, render_template, redirect, session, g, url_for
+from flask import Flask, render_template, redirect, session, g, flash
 from functools import wraps
 import sys
 import os
@@ -24,6 +24,15 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not g.is_admin:
+            return redirect("/")
+        return f(*args, **kwargs)
+    return decorated_function
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not g.user_data:
+            flash("Kirjaudu ensin sisään.")
             return redirect("/")
         return f(*args, **kwargs)
     return decorated_function
@@ -56,6 +65,14 @@ import controllers.admin
 def admin():
     html = controllers.admin.main()
     return render_template("admin.html", html=html)
+
+
+import controllers.new_participation
+@app.route("/uusi_osallistuminen")
+@login_required
+def new_participation():
+    html = controllers.new_participation.main()
+    return render_template("new_participation.html", html=html)
 
 
 @app.route("/login/<string:person_token_untrusted>")

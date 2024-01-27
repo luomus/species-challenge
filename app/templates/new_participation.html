@@ -1,0 +1,17 @@
+<!-- Template for a page for submitting a new participation to a challenge. -->
+
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Species Challenge - Luomus</title>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Uusi osallistuminen</h1>
+
+    <div class="challenges">
+        {{ html["challenges"]|safe }}
+    </div>
+
+{% endblock %}
