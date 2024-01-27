@@ -1,12 +1,13 @@
 # Flask app main file.
 
 from flask import Flask, render_template, redirect, session, g, url_for
+from functools import wraps
 import sys
 import os
 
 from helpers import common_helpers
 
-import controllers.index
+print("\n-------------- species-challenge --------------\n", file = sys.stdout)
 
 app = Flask(__name__)
 
@@ -16,7 +17,16 @@ if secret_key is None:
     raise ValueError("No FLASK_SECRET_KEY set.")
 app.secret_key = secret_key
 
-print("\n-------------- species-challenge --------------\n", file = sys.stdout)
+# ----------------------------------------
+# Setup
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not g.is_admin:
+            return redirect("/")
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Make user data available for controllers
 @app.before_request
@@ -33,10 +43,19 @@ def inject_user_data():
 # ----------------------------------------
 # Controllers
 
+import controllers.index
 @app.route("/")
 def root():
     html = controllers.index.main()
     return render_template("index.html", html=html)
+
+
+import controllers.admin
+@app.route("/admin")
+@admin_required
+def admin():
+    html = controllers.admin.main()
+    return render_template("admin.html", html=html)
 
 
 @app.route("/login/<string:person_token_untrusted>")

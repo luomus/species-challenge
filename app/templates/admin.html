@@ -1,0 +1,18 @@
+<!-- Template for the administration page that displays challenges. -->
+
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Species Challenge - Luomus</title>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Admin</h1>
+
+    <div class="challenges open">
+        <h3>Avoimet haasteet</h3>
+        {{ html["open_challenges"]|safe }}
+    </div>
+
+{% endblock %}

@@ -31,6 +31,7 @@ https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_d
 ### Features
 
 - Slug for challenges?
+- Test @admin_required
 
 #### Pages
 
