@@ -71,7 +71,6 @@ import controllers.new_participation
 @app.route("/osallistuminen/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
 @app.route("/osallistuminen/<string:challenge_id_untrusted>/", methods=['GET', 'POST'])
 @app.route("/osallistuminen/<string:challenge_id_untrusted>/<string:participation_id_untrusted>", methods=['GET', 'POST'])
-@app.route("/osallistuminen/<string:challenge_id_untrusted>/<string:participation_id_untrusted>", methods=['GET', 'POST'])
 @login_required
 def new_participation(challenge_id_untrusted, participation_id_untrusted = None):
     if request.method == "GET":
@@ -82,12 +81,6 @@ def new_participation(challenge_id_untrusted, participation_id_untrusted = None)
         return redirect(html['url'])
     
     return render_template("new_participation.html", html=html)
-
-
-@app.route("/intermediate/<string:challenge_id_untrusted>/<string:participation_id_untrusted>")
-@login_required
-def intermediate(challenge_id_untrusted, participation_id_untrusted):
-    return redirect(f"/osallistuminen/{challenge_id_untrusted}/{participation_id_untrusted}")
 
 
 @app.route("/login/<string:person_token_untrusted>")

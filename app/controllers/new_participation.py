@@ -69,15 +69,21 @@ def validate_data(form_data):
         form_data (dict): The form data to be validated.
 
     Returns:
-        string: A validation error message, or empty if no errors were found.
+        string: A validation error message if errors were found.
+        False: If no errors were found.
     """
     errors = ""
 
     # Validate form data
     if not form_data["participant_name"]:
-        errors += "Osallistujan nimi puuttuu."
+        errors += "osallistujan nimi puuttuu. "
     if not form_data["participation_location"]:
-        errors += "Paikka puuttuu."
+        errors += "paikka puuttuu. "
+
+    if errors:
+        errors = "Tarkista lomakkeen tiedot: " + errors
+    else:
+        errors = False
 
     return errors
 
