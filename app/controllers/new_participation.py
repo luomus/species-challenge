@@ -2,8 +2,7 @@
 # Available for logged in users.
 
 import datetime
-import time
-from flask import g, flash, redirect, url_for
+from flask import g, flash
 from helpers import common_db
 from helpers import common_helpers
 
@@ -92,6 +91,15 @@ def validate_participation_data(form_data):
 
 
 def get_challenge(challenge_id):
+    """
+    Gets challenge data from the database.
+
+    Args:
+        challenge_id (int): The challenge ID.
+
+    Returns:
+        dict: The challenge data as a dictionary.
+    """
     with common_db.connection() as conn:
         query = "SELECT * FROM challenges WHERE challenge_id = %s"
         params = (challenge_id,)
@@ -101,6 +109,16 @@ def get_challenge(challenge_id):
 
 
 def get_participation(challenge_id, participation_id):
+    """
+    Gets participation data from the database.
+
+    Args:
+        challenge_id (int): The challenge ID.
+        participation_id (int): The participation ID.
+    
+    Returns:
+        dict: The participation data as a dictionary.
+    """
     params = (participation_id, challenge_id, g.user_data["id"])
 
     with common_db.connection() as conn:
@@ -120,7 +138,10 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html["challenge_id"] = challenge_id
     html["participation_id"] = participation_id
 
-    # Todo: Check if this is needed
+    print("challenge_id: ", challenge_id)
+    print("participation_id: ", participation_id)
+
+    # Jinja template needs these to be empty strings instead of None
     if html["participation_id"] == None:
         html["participation_id"] = ""
 
