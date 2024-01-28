@@ -35,6 +35,16 @@ To have many types of challenges, you would need to:
 
 ## Todo
 
+
+### Next
+
+- Handle data from taxa.
+    - How? Can HTML have hierarchical keys?
+    - Generate JSON
+    - Save to database
+- Prepopulate dates from db
+
+
 ### Setup
 
 - participation id as int
@@ -60,18 +70,17 @@ To have many types of challenges, you would need to:
     - closed
     - link to edit
     - link to results
-- Participation creation page
-- Participation edit page
+- Participation creation page ✅
+- Participation edit page ✅
 - Challenge result page
     - list of species
     - list of those with >= 100 species
     - how many % have passed 100 species
-    - chart?
 - Admin page
     - button to add a challenge
-    - open challenges
-    - draft challenges
-    - closed challenges
+    - open challenges ✅
+    - draft challenges ✅
+    - closed challenges ✅
     - edit link to each
     - statistics of each
         - number of participants
