@@ -5,6 +5,8 @@ import requests
 import json
 import sys
 import os
+import re
+
 
 def fetch_finbif_api(api_url, log = False):
     """
@@ -114,3 +116,9 @@ def clean_int(input_string):
         return int(input_string)
     except ValueError:
         raise ValueError("Input is not an integer.")
+    
+
+def sanitize_name(name):
+    # Allow Unicode letter characters, spaces, hyphens, and apostrophes
+    pattern = re.compile(r'[^\w\s\'-]', re.UNICODE)
+    return pattern.sub('', name)

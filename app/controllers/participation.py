@@ -65,29 +65,43 @@ def save_participation(challenge_id, participation_id, form_data):
 
 def validate_participation_data(form_data):
     """
-    Validates the form data.
+    Validates and sanitized form data.
 
     Args:
         form_data (dict): The form data to be validated.
 
     Returns:
-        string: A validation error message if errors were found.
-        False: If no errors were found.
+        tuple: A tuple containing:
+            - error_message (str or False): If validation errors are found, a 
+              string with the error message is returned. If no errors are 
+              found, False is returned.
+            - sanitized_form_data (dict): The form data dictionary with 
+              sanitized values.
     """
     errors = ""
+    print("form_data: ", form_data)
 
     # Validate form data
     if not form_data["name"]:
         errors += "osallistujan nimi puuttuu. "
+    else:
+        if len(form_data["name"]) > 120:
+            errors += "osallistujan nimi on liian pitkä, maksimi 120 merkkiä. "
     if not form_data["place"]:
         errors += "paikka puuttuu. "
+    else:
+        if len(form_data["place"]) > 120:
+            errors += "paikka on liian pitkä, maksimi 120 merkkiä. "
+
+    form_data["name"] = common_helpers.sanitize_name(form_data["name"].strip())
+    form_data["place"] = common_helpers.sanitize_name(form_data["place"].strip())
 
     if errors:
         errors = "Tarkista lomakkeen tiedot: " + errors
     else:
         errors = False
 
-    return errors
+    return errors, form_data
 
 
 def get_challenge(challenge_id):
@@ -195,7 +209,10 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     # Case C: User has submitted participation data. Validate and insert to database.
     if form_data:
         print("CASE C")
-        errors = validate_participation_data(form_data)
+
+        # Convert to normal dictionary for sanitization
+        form_data = form_data.to_dict()
+        errors, form_data = validate_participation_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
