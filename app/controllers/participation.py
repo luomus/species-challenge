@@ -5,6 +5,32 @@ import datetime
 from flask import g, flash
 from helpers import common_db
 from helpers import common_helpers
+import json
+
+# Todo: use dynamic taxon_id
+def make_taxa_html(taxon_id = "MX.53078"):
+    """
+    Generates a list of species names and date input fields for a given higher taxon.
+
+    Args:
+        taxon_id (str): The ID of the higher taxon.
+        For development purposes, taxon is always "MX.53078".
+
+    Returns:
+        str: The HTML code for the list of species names and date input fields.
+    """
+    html = ""
+
+    file_path = f"./data/{ taxon_id }_taxa.json"
+    with open(file_path, 'r') as file:
+        taxa = json.load(file)
+
+    for key, taxon in taxa.items():
+        html += f"<li>{ taxon['fi'] } (<em>{ taxon['sci'] }</em>) <input type='date' name='{ key }'></li>\n"
+
+    html = f"<ul>\n{ html }</ul>\n"
+    return html
+
 
 def save_participation(challenge_id, participation_id, form_data):
     """
@@ -144,6 +170,7 @@ def get_participation(challenge_id, participation_id):
 
 def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html = dict()
+    html['taxa'] = make_taxa_html()
 
     # Get challenge and participation IDs from URL
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
