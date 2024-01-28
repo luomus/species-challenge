@@ -67,35 +67,6 @@ def clean_token(input_string):
     return input_string
 
 
-def clean_uuid(input_string):
-    """
-    Validates if a given string is a valid UUID.
-
-    Args:
-    input_string (str): The string to validate.
-
-    Returns:
-    None: if the input_string is None.
-    str: The input_string if it is a valid UUID.
-
-    Raises:
-    ValueError: If the input_string is invalid as an UUID.
-    """
-
-    # Todo: Think this through
-    if input_string is None:
-        return None
-    if input_string == "None":
-        return None
-
-    try:
-        uuid.UUID(input_string, version=4)
-    except ValueError:
-        raise ValueError("UUID is not valid.")
-
-    return input_string
-
-
 def clean_int(input_string):
     """
     Validates if a given string is a valid integer
