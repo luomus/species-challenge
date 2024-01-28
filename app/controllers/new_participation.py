@@ -90,6 +90,15 @@ def validate_participation_data(form_data):
     return errors
 
 
+def get_challenge(challenge_id):
+    with common_db.connection() as conn:
+        query = "SELECT * FROM challenges WHERE challenge_id = %s"
+        params = (challenge_id,)
+        challenge = common_db.select(conn, query, params)
+
+    print(challenge) # Debug
+    return challenge[0]
+
 
 def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html = dict()
@@ -105,34 +114,35 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     if html["participation_id"] == None:
         html["participation_id"] = ""
 
-    # Check that challenge exists and is open
-    with common_db.connection() as conn:
-        query = "SELECT * FROM challenges WHERE challenge_id = %s AND status = 'open'"
-        params = (challenge_id,)
-        challenge = common_db.select(conn, query, params)
+    # Get challenge data to see that it exists and if it is draft/open/closed.
+    challenge = get_challenge(challenge_id)
 
     # CASE X: Challenge cannot be found or participation is closed
     # Todo: Allow user to view, edit and remove their own participation even if the challenge is closed or draft 
     if not challenge:
         print("CASE X")
-        flash("Haastetta ei löytynyt tai siihen ei voi enää osallistua.")
+        flash("Haastetta ei löytynyt.")
         return {"redirect": True, "url": "/"}
 
-    # Get challenge information
-    html["challenge_name"] = challenge[0]["title"]
+    html["challenge"] = challenge
 
     # Case A: User opened an existing participation for editing.
     # http://localhost:8081/osallistuminen/a04c89f9-bc6f-11ee-837a-0242c0a8a002/1
     if participation_id and not form_data:
         print("CASE A")
-        # Load participation data from the database
+
+        # Show warning if challenge is closed or draft, but still allow editing.
+        if challenge["status"] != "open":
+            flash("Tämä haaste on suljettu. Et voi muokata havaittuja lajeja.")
+
+        # Load participation data from the database.
         with common_db.connection() as conn:
             query = "SELECT * FROM participations WHERE participation_id = %s AND challenge_id = %s"
             params = (participation_id, challenge_id)
             participation = common_db.select(conn, query, params)
             print(participation) # Debug
 
-        # Check that participation exists
+        # Check that participation exists.
         if not participation:
             flash("Osallistumista ei löytynyt.")
             return {"redirect": True, "url": "/"}
@@ -145,6 +155,13 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     # Case B: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:
         print("CASE B")
+
+        # Allow adding participation only if challenge is open
+        if challenge["status"] != "open":
+            flash("Tätä haastetta ei ole olemassa tai siihen ei voi enää osallistua.")
+            return {"redirect": True, "url": "/"}
+
+        # Setup empty form
         html["data_fields"] = dict()
         return html
     
