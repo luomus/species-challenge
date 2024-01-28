@@ -18,6 +18,21 @@ phpMyAdmin admin UI will be at http://localhost:8080
 Login to dev at
 https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev
 
+To have many types of challenges, you would need to:
+
+- define types
+- when loading participation edit form, load the challenge data to see the type
+    - router calls a helper, passes this data also to method
+- on router, select template based on the type
+    - template includes additional fields (no rendering same field differently, that would create complexity)
+- on method, select type-specific validator (using a function that passes the validator) to validate participation data
+- this way form template and validator make sure the data is always ok.
+- data structure need to be defined in three places
+    - database: new fields
+    - form: new fields and UI
+    - validator: field values
+
+
 ## Todo
 
 ### Setup
@@ -31,9 +46,7 @@ https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_d
 
 ### Features
 
-- Slug for challenges?
 - Test giving malicious login token
-- Can we trust session user_id, or should we check that from FinBIF api with the token?
 - Field value validations:
     - strip/sanitize
     - length limit
