@@ -59,9 +59,9 @@ To have many types of challenges, you would need to:
 - Test automatic logout after inactivity
     - When tested, set app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours = 2)
 - Test giving malicious login token
-- Field value validations:
-    - strip/sanitize
-    - length limit
+- Admin ability to edit any participations
+- Admin set by custom value from Laji.fi?
+- Trash own participations
 
 #### Pages
 
