@@ -11,8 +11,6 @@
     <h1>Uusi osallistuminen: {{ html['challenge_name'] }}</h1>
 
     <form action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
-        <input type="hidden" name="challenge_id" value="{{ html['challenge_id'] }}">
-        <input type="hidden" name="participation_id" value="{{ html['participation_id'] }}">
     
         <p>
             <label for="name">Osallistujan nimi tai nimimerkki:</label>
@@ -20,7 +18,7 @@
                 type="text" 
                 id="name" 
                 name="name" 
-                value="{{ html['name'] }}" 
+                value="{{ html['data_fields'].get('name', '') }}"
             required>
         </p>
 
@@ -30,7 +28,7 @@
                 type="text" 
                 id="place" 
                 name="place" 
-                value="{{ html['place'] }}" 
+                value="{{ html['data_fields'].get('place', '') }}" 
             required>
         </p>
     

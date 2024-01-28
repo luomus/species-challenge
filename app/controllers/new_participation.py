@@ -63,7 +63,7 @@ def save_participation(challenge_id, participation_id, form_data):
     return success, id
 
 
-def validate_data(form_data):
+def validate_participation_data(form_data):
     """
     Validates the form data.
 
@@ -112,6 +112,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         challenge = common_db.select(conn, query, params)
 
     # CASE X: Challenge cannot be found or participation is closed
+    # Todo: Allow user to view, edit and remove their own participation even if the challenge is closed or draft 
     if not challenge:
         print("CASE X")
         flash("Haastetta ei löytynyt tai siihen ei voi enää osallistua.")
@@ -136,27 +137,28 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             flash("Osallistumista ei löytynyt.")
             return {"redirect": True, "url": "/"}
         
-        html["name"] = participation[0]["name"]
-        html["place"] = participation[0]["place"]
+        # Todo: have form data under single key
+        html["data_fields"] = participation[0]
 
         return html
 
     # Case B: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:
         print("CASE B")
+        html["data_fields"] = dict()
         return html
     
     # Case C: User has submitted participation data. Validate and insert to database.
     if form_data:
         print("CASE C")
-        errors = validate_data(form_data)
+        errors = validate_participation_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
             print("CASE C1")
             flash(errors)
-            html["name"] = form_data["name"]
-            html["place"] = form_data["place"]
+
+            html["data_fields"] = form_data
             return html
         
         # Case C2: No errors found. Insert to database and redirect to participation page.
