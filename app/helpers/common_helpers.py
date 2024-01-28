@@ -122,3 +122,19 @@ def sanitize_name(name):
     # Allow Unicode letter characters, spaces, hyphens, and apostrophes
     pattern = re.compile(r'[^\w\s\'-]', re.UNICODE)
     return pattern.sub('', name)
+
+
+def is_yyyy_mm_dd(input_string):
+    """
+    Validates if a given string is a valid date in YYYY-MM-DD format.
+
+    Args:
+    input_string (str): The string to validate.
+
+    Returns:
+    bool: True if the input_string is a valid date in YYYY-MM-DD format,
+    False otherwise.
+    """
+    pattern = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+    return bool(pattern.match(input_string))
+

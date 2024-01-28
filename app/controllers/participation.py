@@ -26,7 +26,7 @@ def make_taxa_html(taxon_id = "MX.53078"):
         taxa = json.load(file)
 
     for key, taxon in taxa.items():
-        html += f"<li>{ taxon['fi'] } (<em>{ taxon['sci'] }</em>) <input type='date' name='{ key }'></li>\n"
+        html += f"<li>{ taxon['fi'] } (<em>{ taxon['sci'] }</em>) <input type='date' name='taxa:{ key }'></li>\n"
 
     html = f"<ul>\n{ html }</ul>\n"
     return html
@@ -53,15 +53,17 @@ def save_participation(challenge_id, participation_id, form_data):
         params = (
             form_data["name"],
             form_data["place"],
+            form_data["taxa_count"],
+            form_data["taxa_json"],
             g.user_data["id"],
             now,
             challenge_id,
             participation_id,
-            g.user_data["id"]
+            g.user_data["id"] # Only allow editing if user is the creator
         )
 
         with common_db.connection() as conn:
-            query = "UPDATE participations SET name = %s, place = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s AND participation_id = %s AND meta_created_by = %s"
+            query = "UPDATE participations SET name = %s, place = %s, taxa_count = %s, taxa_json = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s AND participation_id = %s AND meta_created_by = %s"
             success = common_db.transaction(conn, query, params)
 
         # Return success and existing participation ID
@@ -74,6 +76,8 @@ def save_participation(challenge_id, participation_id, form_data):
         challenge_id,
         form_data["name"],
         form_data["place"],
+        form_data["taxa_count"],
+        form_data["taxa_json"],
         g.user_data["id"],
         now,
         g.user_data["id"],
@@ -81,12 +85,24 @@ def save_participation(challenge_id, participation_id, form_data):
     )
 
     with common_db.connection() as conn:
-        query = "INSERT INTO participations (challenge_id, name, place, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
-        print("Success: ", success)
+#        print("Success: ", success)
 
     # Return success and new participation ID returned by the database
     return success, id
+
+
+def taxa_to_dict(form_data):
+    taxa_data = {}
+    prefix = "taxa:"
+
+    for key, value in form_data.items():
+        if key.startswith(prefix):
+            _, qname = key.split(':')
+            taxa_data[qname] = value
+
+    return taxa_data
 
 
 def validate_participation_data(form_data):
@@ -105,7 +121,7 @@ def validate_participation_data(form_data):
               sanitized values.
     """
     errors = ""
-    print("form_data: ", form_data)
+#    print("form_data: ", form_data)
 
     # Validate form data
     if not form_data["name"]:
@@ -119,8 +135,28 @@ def validate_participation_data(form_data):
         if len(form_data["place"]) > 120:
             errors += "paikka on liian pitkä, maksimi 120 merkkiä. "
 
+    # Sanitize field values
     form_data["name"] = common_helpers.sanitize_name(form_data["name"].strip())
     form_data["place"] = common_helpers.sanitize_name(form_data["place"].strip())
+
+    # Handle taxon data
+    # 1) Extract taxon data from form data
+    taxa_data = taxa_to_dict(form_data)
+
+    # 2) Remove empty values
+    taxa_data = {k: v for k, v in taxa_data.items() if v}
+    
+    # 3) Remove values that are not YYYY-MM-DD dates
+    for key, value in taxa_data.items():
+        if not common_helpers.is_yyyy_mm_dd(value):
+            del taxa_data[key]
+
+    # 4) Calculate number of species
+    form_data["taxa_count"] = len(taxa_data)
+
+    # 5) Convert to JSON string (for database JSON field) where dates are YYYY-MM-DD
+    # Note: form_data still has the original taxon data
+    form_data["taxa_json"] = json.dumps(taxa_data)
 
     if errors:
         errors = "Tarkista lomakkeen tiedot: " + errors
@@ -179,8 +215,8 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html["challenge_id"] = challenge_id
     html["participation_id"] = participation_id
 
-    print("challenge_id: ", challenge_id)
-    print("participation_id: ", participation_id)
+#    print("challenge_id: ", challenge_id)
+#    print("participation_id: ", participation_id)
 
     # Jinja template needs these to be empty strings instead of None
     if html["participation_id"] == None:
@@ -199,7 +235,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html["challenge"] = challenge
 
     # Case A: User opened an existing participation for editing.
-    # http://localhost:8081/osallistuminen/a04c89f9-bc6f-11ee-837a-0242c0a8a002/1
+    # Example: http://localhost:8081/osallistuminen/4/6
     if participation_id and not form_data:
         print("CASE A")
 
@@ -239,6 +275,9 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
         # Convert to normal dictionary for sanitization
         form_data = form_data.to_dict()
+
+        print(form_data) # Debug
+
         errors, form_data = validate_participation_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
