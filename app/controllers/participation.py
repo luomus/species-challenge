@@ -8,25 +8,28 @@ from helpers import common_helpers
 import json
 
 # Todo: use dynamic taxon_id
-def make_taxa_html(taxon_id = "MX.53078"):
+def make_taxa_html(taxon_id, taxa_dates_json = None):
     """
     Generates a list of species names and date input fields for a given higher taxon.
 
     Args:
         taxon_id (str): The ID of the higher taxon.
-        For development purposes, taxon is always "MX.53078".
+        taxa_dates_json (str, optional): A JSON string containing the species names and dates. Defaults to None.
 
     Returns:
         str: The HTML code for the list of species names and date input fields.
     """
     html = ""
 
+    if taxa_dates_json:
+        taxa_dates = json.loads(taxa_dates_json)
+
     file_path = f"./data/{ taxon_id }_taxa.json"
     with open(file_path, 'r') as file:
-        taxa = json.load(file)
+        taxa_names = json.load(file)
 
-    for key, taxon in taxa.items():
-        html += f"<li>{ taxon['fi'] } (<em>{ taxon['sci'] }</em>) <input type='date' name='taxa:{ key }'></li>\n"
+    for key, taxon in taxa_names.items():
+        html += f"<li>{ taxon['fi'] } (<em>{ taxon['sci'] }</em>) <input type='date' name='taxa:{ key }' value='{ taxa_dates.get(key, '') }'></li>\n"
 
     html = f"<ul>\n{ html }</ul>\n"
     return html
@@ -206,7 +209,6 @@ def get_participation(challenge_id, participation_id):
 
 def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html = dict()
-    html['taxa'] = make_taxa_html()
 
     # Get challenge and participation IDs from URL
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
@@ -251,7 +253,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             flash("Tätä osallistumista ei löytynyt tililtäsi.")
             return {"redirect": True, "url": "/"}
         
-        # Todo: have form data under single key
+        html['taxa'] = make_taxa_html(challenge["taxon"], participation["taxa_json"])
         html["data_fields"] = participation
 
         return html
@@ -266,6 +268,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             return {"redirect": True, "url": "/"}
 
         # Setup empty form
+        html['taxa'] = make_taxa_html(challenge["taxon"])
         html["data_fields"] = dict()
         return html
     
