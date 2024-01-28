@@ -1,0 +1,73 @@
+<!-- Template for a page for submitting a new participation to a challenge. -->
+
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Haaste</title>
+{% endblock %}
+
+{% block body %}
+
+    <h1>Haaste {{ html['challenge']['title'] }}</h1>
+
+    <form action="/haaste/{{ html['challenge_id'] }}" method="post">
+    
+        <p>
+            <label for="title">Haasteen nimi:</label>
+            <input 
+                type="text" 
+                id="title" 
+                name="title" 
+                value="{{ html['data_fields'].get('title', '') }}"
+            required>
+        </p>
+
+        <p>
+            <label for="title">Taksonin tunniste (MX...):</label>
+            <input 
+                type="text" 
+                id="taxon" 
+                name="taxon" 
+                value="{{ html['data_fields'].get('taxon', '') }}"
+            required>
+        </p>
+
+        <p>
+            <label for="year">Vuosi:</label>
+            <input 
+                type="text" 
+                id="year" 
+                name="year" 
+                value="{{ html['data_fields'].get('year', '') }}"
+            required>
+        </p>
+
+        <!-- Todo: Set as dropdown -->
+        <p>
+            <label for="type">Tyyppi (challenge100):</label>
+            <input 
+                type="text" 
+                id="type" 
+                name="type" 
+                value="{{ html['data_fields'].get('type', '') }}"
+            required>
+        </p>
+
+        <!-- Todo: Set as dropdown -->
+        <p>
+            <label for="status">Status (draft, open, closed):</label>
+            <input 
+                type="text" 
+                id="status" 
+                name="status" 
+                value="{{ html['data_fields'].get('status', '') }}"
+            required>
+        </p>
+
+        <p>
+            <button type="submit">Tallenna haaste</button>
+        </p>
+        
+    </form>
+
+{% endblock %}

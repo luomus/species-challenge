@@ -89,6 +89,22 @@ def new_participation(challenge_id_untrusted, participation_id_untrusted = None)
     return render_template("form_challenge100.html", html=html)
 
 
+import controllers.challenge
+@app.route("/haaste", methods=['GET', 'POST'])
+@app.route("/haaste/", methods=['GET', 'POST'])
+@app.route("/haaste/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
+@admin_required
+def challenge(challenge_id_untrusted = None):
+    if request.method == "GET":
+        request.form = None
+    html = controllers.challenge.main(challenge_id_untrusted, request.form)
+
+    if html.get('redirect'):
+        return redirect(html['url'])
+    
+    return render_template("challenge.html", html=html)
+
+
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
     person_token = common_helpers.clean_token(person_token_untrusted)

@@ -1,4 +1,4 @@
-# Controller for a form to submit new participation to a challenge.
+# Controller for a form to edit and submit participation to a challenge.
 # Available for logged in users.
 
 import datetime
@@ -51,8 +51,8 @@ def save_participation(challenge_id, participation_id, form_data):
 
     # CASE 1: Edit existing participation
     # Update form data in the database
-    print("CASE 1")
     if participation_id:
+        print("CASE 1")
         params = (
             form_data["name"],
             form_data["place"],
@@ -236,6 +236,9 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     html["challenge"] = challenge
 
+    # Case Y: Participation cannot be found
+    # Todo
+
     # Case A: User opened an existing participation for editing.
     # Example: http://localhost:8081/osallistuminen/4/6
     if participation_id and not form_data:
@@ -301,7 +304,8 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
 
         # Database error or trying to edit someone else's participation
+        # Todo: Fix this case: If fails when adding new participation, id is None. Also for challenges.
         print("CASE C2 FAIL")
         flash("Tietojen tallennus epäonnistui, kokeile uudelleen.")
-        return {"redirect": True, "url": "/osallistuminen/{ challenge_id }/{ id }"}
+        return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
     
