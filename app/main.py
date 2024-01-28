@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, redirect, session, g, flash, request
 from functools import wraps
+from datetime import timedelta
 import sys
 import os
 
@@ -16,6 +17,8 @@ secret_key = os.environ.get("FLASK_SECRET_KEY")
 if secret_key is None:
     raise ValueError("No FLASK_SECRET_KEY set.")
 app.secret_key = secret_key
+
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours = 2)
 
 # ----------------------------------------
 # Setup
@@ -37,9 +40,12 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Make user data available for controllers
 @app.before_request
 def before_request():
+    # Make session permanent for all controllers
+    session.permanent = True
+
+    # Make user data available for controllers
     g.token = session.get("token", None)
     g.user_data = session.get("user_data", None)
     g.is_admin = session.get("is_admin", None)

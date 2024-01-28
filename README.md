@@ -46,6 +46,8 @@ To have many types of challenges, you would need to:
 
 ### Features
 
+- Test automatic logout after inactivity
+    - When tested, set app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours = 2)
 - Test giving malicious login token
 - Field value validations:
     - strip/sanitize
