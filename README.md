@@ -22,6 +22,7 @@ https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_d
 
 ### Setup
 
+- participation id as int
 - Login to dev/prod parametrized
 - Get data system id for dev, test and production? or use intermediate login redirection like on Havistin?
 - Database sorting/collation settings
