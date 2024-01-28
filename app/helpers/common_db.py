@@ -60,8 +60,6 @@ def transaction(conn, query, params):
         bool: True if the query was successfully executed and committed, False otherwise.
         int: The ID of the last inserted row, if any.
     """
-    print(query)
-    print(params)
 
     cursor = conn.cursor()
     try:
