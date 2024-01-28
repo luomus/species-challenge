@@ -67,7 +67,7 @@ def admin():
     return render_template("admin.html", html=html)
 
 
-import controllers.new_participation
+import controllers.participation
 @app.route("/osallistuminen/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
 @app.route("/osallistuminen/<string:challenge_id_untrusted>/", methods=['GET', 'POST'])
 @app.route("/osallistuminen/<string:challenge_id_untrusted>/<string:participation_id_untrusted>", methods=['GET', 'POST'])
@@ -75,12 +75,12 @@ import controllers.new_participation
 def new_participation(challenge_id_untrusted, participation_id_untrusted = None):
     if request.method == "GET":
         request.form = None
-    html = controllers.new_participation.main(challenge_id_untrusted, participation_id_untrusted, request.form)
+    html = controllers.participation.main(challenge_id_untrusted, participation_id_untrusted, request.form)
 
     if html.get('redirect'):
         return redirect(html['url'])
     
-    return render_template("new_participation.html", html=html)
+    return render_template("form_challenge100.html", html=html)
 
 
 @app.route("/login/<string:person_token_untrusted>")
