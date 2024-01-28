@@ -96,8 +96,17 @@ def get_challenge(challenge_id):
         params = (challenge_id,)
         challenge = common_db.select(conn, query, params)
 
-    print(challenge) # Debug
     return challenge[0]
+
+
+def get_participation(challenge_id, participation_id):
+    params = (participation_id, challenge_id, g.user_data["id"])
+
+    with common_db.connection() as conn:
+        query = "SELECT * FROM participations WHERE participation_id = %s AND challenge_id = %s AND meta_created_by = %s"
+        participation = common_db.select(conn, query, params)
+    
+    return participation[0]
 
 
 def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
@@ -136,11 +145,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             flash("Tämä haaste on suljettu. Et voi muokata havaittuja lajeja.")
 
         # Load participation data from the database.
-        with common_db.connection() as conn:
-            query = "SELECT * FROM participations WHERE participation_id = %s AND challenge_id = %s"
-            params = (participation_id, challenge_id)
-            participation = common_db.select(conn, query, params)
-            print(participation) # Debug
+        participation = get_participation(challenge_id, participation_id)
 
         # Check that participation exists.
         if not participation:
@@ -148,7 +153,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             return {"redirect": True, "url": "/"}
         
         # Todo: have form data under single key
-        html["data_fields"] = participation[0]
+        html["data_fields"] = participation
 
         return html
 
