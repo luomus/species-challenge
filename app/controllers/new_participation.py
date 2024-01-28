@@ -32,10 +32,11 @@ def save_participation(challenge_id, participation_id, form_data):
             now,
             challenge_id,
             participation_id,
+            g.user_data["id"]
         )
 
         with common_db.connection() as conn:
-            query = "UPDATE participations SET name = %s, place = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s AND participation_id = %s"
+            query = "UPDATE participations SET name = %s, place = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s AND participation_id = %s AND meta_created_by = %s"
             success = common_db.transaction(conn, query, params)
 
         # Return success and existing participation ID
@@ -144,12 +145,12 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         if challenge["status"] != "open":
             flash("Tämä haaste on suljettu. Et voi muokata havaittuja lajeja.")
 
-        # Load participation data from the database.
+        # Load participation data from the database with this user.
         participation = get_participation(challenge_id, participation_id)
 
         # Check that participation exists.
         if not participation:
-            flash("Osallistumista ei löytynyt.")
+            flash("Tätä osallistumista ei löytynyt tililtäsi.")
             return {"redirect": True, "url": "/"}
         
         # Todo: have form data under single key
@@ -188,9 +189,12 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Insert to database and redirect to participation page
         success, id = save_participation(challenge_id, participation_id, form_data)
         if success:
+            print("CASE C2 SUCCESS")
             flash("Osallistumisesi on nyt tallennettu.")
             return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
 
-        raise Exception("Error in saving participation to database.")
-        # Todo: handle database errors
+        # Database error or trying to edit someone else's participation
+        print("CASE C2 FAIL")
+        flash("Tietojen tallennus epäonnistui, kokeile uudelleen.")
+        return {"redirect": True, "url": "/osallistuminen/{ challenge_id }/{ id }"}
     
