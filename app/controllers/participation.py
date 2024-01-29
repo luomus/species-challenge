@@ -21,6 +21,7 @@ def make_taxa_html(taxon_id, taxa_dates_json = None):
     """
     html = ""
 
+    taxa_dates = {} # Empty dictionary for new participations
     if taxa_dates_json:
         taxa_dates = json.loads(taxa_dates_json)
 
