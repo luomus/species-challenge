@@ -35,15 +35,18 @@ To have many types of challenges, you would need to:
 
 ## Todo
 
+### Decidions to do
+
+- Should challenge have a description, or is a link to an external website enough?
+    - No: simpler
+    - Yes: description could also include a logo, if it allows html.
+- Should challenge have a start and end date?
+    - No, if there is description which can include this. 
+    - Yes, if we want to validate that observation dates are within this limit.
 
 ### Next
 
-- Handle data from taxa.
-    - How? Can HTML have hierarchical keys?
-    - Generate JSON
-    - Save to database
-- Prepopulate dates from db
-
+Basic navigation
 
 ### Setup
 
@@ -86,5 +89,5 @@ To have many types of challenges, you would need to:
         - number of participants
         - number of those with >= 100 species
         - number of active participants (added species last 7 days)
-- Challenge creation page
-- Challenge edit page
+- Challenge creation page ✅
+- Challenge edit page ✅
