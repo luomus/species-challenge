@@ -53,7 +53,7 @@ def save_participation(challenge_id, participation_id, form_data):
     # CASE 1: Edit existing participation
     # Update form data in the database
     if participation_id:
-        print("CASE 1")
+        print("CASE 1: UPDATE")
         params = (
             form_data["name"],
             form_data["place"],
@@ -75,7 +75,7 @@ def save_participation(challenge_id, participation_id, form_data):
 
     # CASE 2: Insert new participation
     # Insert form data into the database
-    print("CASE 2")
+    print("CASE 2: INSERT")
     params = (
         challenge_id,
         form_data["name"],
@@ -89,7 +89,7 @@ def save_participation(challenge_id, participation_id, form_data):
     )
 
     with common_db.connection() as conn:
-        query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
 #        print("Success: ", success)
 
@@ -299,14 +299,20 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         print("CASE C2")
         # Insert to database and redirect to participation page
         success, id = save_participation(challenge_id, participation_id, form_data)
-        if success[0]:
+
+        # Todo: Figure out why this is needed when db insert/update fails?
+        if type(success) == tuple:
+            success = success[0]
+        
+        if success:
             print("CASE C2 SUCCESS")
             flash("Osallistumisesi on nyt tallennettu.", "success")
             return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
 
         # Database error or trying to edit someone else's participation
         # Todo: Now this shows data from the database, should show the form data instead.
-        # Todo: Fix this case: If fails when adding new participation, id is None. Also for challenges.
+        # Todo: Fix this case: If fails when adding new participation, id is None. Also fix for challenges.
+        # Easiest fix would be to ask user to click back-button to the form and try again.
         print("CASE C2 FAIL")
         flash("Tietojen tallennus epäonnistui, kokeile uudelleen.", "error")
         return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}

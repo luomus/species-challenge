@@ -10,6 +10,8 @@
 
     <h1>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</h1>
 
+    <p><a href="/haaste/{{ html["challenge_id"] }}">&laquo; Takaisin tämän haasteen etusivulle</a></p>
+
     <form action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
     
         <p>

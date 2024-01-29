@@ -48,6 +48,7 @@ To have many types of challenges, you would need to:
 
 Basic admin and user navigation
 Prepopulated dropdowns to challenge page
+/login router
 
 ### Setup
 

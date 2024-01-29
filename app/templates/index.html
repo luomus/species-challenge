@@ -10,8 +10,14 @@
 
     <h1>100 Lajia -haasteet</h1>
 
-    <div class="challenges">
-        {{ html["challenges"]|safe }}
+    <div class="challenges open">
+        <h2>Avoimet</h2>
+        {{ html["open_challenges"]|safe }}
     </div>
 
+    <div class="challenges closed">
+        <h2>Suljetut</h2>
+        {{ html["closed_challenges"]|safe }}
+    </div>
+    
 {% endblock %}

@@ -77,6 +77,7 @@ def transaction(conn, query, params):
         return True, last_id
     except Exception as e:
         conn.rollback()
+        print("DATABASE ERROR:", e)
         return False, None
     finally:
         cursor.close()

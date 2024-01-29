@@ -59,7 +59,7 @@ body {
     align-items: center;
 }
 
-#navi h1 {
+#navi h2 {
     font-size: 100%;
     display: inline;
     text-transform: uppercase;  
@@ -67,7 +67,7 @@ body {
     letter-spacing: 0.1rem;
 }
 
-#navi h1 a {
+#navi h2 a {
     text-decoration: none;
 }
 
@@ -86,7 +86,7 @@ body {
 }
 
 
-h3 {
+h2 {
     margin-top: 2em;
 }
 
@@ -94,6 +94,7 @@ h3 {
     margin: 1em 0 1em 0;
     padding: 1em;
     background-color: #ddd;
+    border-radius: 5px;
 }
 
 .open .challenge {
@@ -108,7 +109,7 @@ h3 {
     background-color: #ddd;
 }
 
-.challenge h4 {
+.challenge h3 {
     margin-top: 0;
 }
 
@@ -125,5 +126,6 @@ h3 {
     display: inline-block;
     padding: 0.3em 0.4em;
     text-decoration: none;
+    margin-right: 1em;
 }
 

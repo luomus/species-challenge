@@ -8,6 +8,8 @@
 
 {% block body %}
 
-    <h1>Haaste</h1>
+    {{ html["challenge_html"]|safe }}
+    {{ html["participations_html"]|safe }}
+
 
 {% endblock %}
