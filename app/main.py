@@ -65,6 +65,18 @@ def root():
     return render_template("index.html", html=html)
 
 
+import controllers.challenge
+@app.route("/haaste/<string:challenge_id_untrusted>")
+@app.route("/haaste/<string:challenge_id_untrusted>/")
+def challenge(challenge_id_untrusted):
+    html = controllers.challenge.main(challenge_id_untrusted)
+
+    if html.get('redirect'):
+        return redirect(html['url'])
+
+    return render_template("challenge.html", html=html)
+
+
 import controllers.admin
 @app.route("/admin")
 @admin_required
