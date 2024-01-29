@@ -231,7 +231,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     # Todo: Allow user to view, edit and remove their own participation even if the challenge is closed or draft 
     if not challenge:
         print("CASE X")
-        flash("Haastetta ei löytynyt.")
+        flash("Haastetta ei löytynyt.", "info")
         return {"redirect": True, "url": "/"}
 
     html["challenge"] = challenge
@@ -246,14 +246,14 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
         # Show warning if challenge is closed or draft, but still allow editing.
         if challenge["status"] != "open":
-            flash("Tämä haaste on suljettu. Et voi muokata havaittuja lajeja.")
+            flash("Tämä haaste on suljettu. Et voi muokata havaittuja lajeja.", "info")
 
         # Load participation data from the database with this user.
         participation = get_participation(challenge_id, participation_id)
 
         # Check that participation exists.
         if not participation:
-            flash("Tätä osallistumista ei löytynyt tililtäsi.")
+            flash("Tätä osallistumista ei löytynyt tililtäsi.", "info")
             return {"redirect": True, "url": "/"}
         
         html['taxa'] = make_taxa_html(challenge["taxon"], participation["taxa_json"])
@@ -267,7 +267,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
         # Allow adding participation only if challenge is open
         if challenge["status"] != "open":
-            flash("Tätä haastetta ei ole olemassa tai siihen ei voi enää osallistua.")
+            flash("Tätä haastetta ei ole olemassa tai siihen ei voi enää osallistua.", "info")
             return {"redirect": True, "url": "/"}
 
         # Setup empty form
@@ -289,7 +289,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
             print("CASE C1")
-            flash(errors)
+            flash(errors, "error")
 
             html["data_fields"] = form_data
             return html
@@ -300,12 +300,12 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         success, id = save_participation(challenge_id, participation_id, form_data)
         if success:
             print("CASE C2 SUCCESS")
-            flash("Osallistumisesi on nyt tallennettu.")
+            flash("Osallistumisesi on nyt tallennettu.", "success")
             return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
 
         # Database error or trying to edit someone else's participation
         # Todo: Fix this case: If fails when adding new participation, id is None. Also for challenges.
         print("CASE C2 FAIL")
-        flash("Tietojen tallennus epäonnistui, kokeile uudelleen.")
+        flash("Tietojen tallennus epäonnistui, kokeile uudelleen.", "error")
         return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
     

@@ -2,3 +2,29 @@ body {
     background-color: #f6f6f5;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.flash {
+    border: 2px solid #999;
+    background-color: #eee;
+    margin: 1em 0.5em 0 0.5em 0;
+    padding: 0.5em;
+}
+
+.error {
+    background-color: #ffecec;
+    border-color: #f5aca6;
+    color: #f04437;
+}
+
+.success {
+    background-color: #e9ffd9;
+    border-color: #a6ca8a;
+    color: #3e7800;
+}
+
+.info {
+    background-color: #d5edf8;
+    border-color: #92cae4;
+    color: #205791;
+}
+

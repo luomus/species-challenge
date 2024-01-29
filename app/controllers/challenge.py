@@ -169,7 +169,7 @@ def main(challenge_id_untrusted = None, form_data = None):
     # CASE A: Challenge id given, but it does not exist in the database.
     if not challenge and not form_data:
         print("CASE A")
-        flash("Haastetta ei löytynyt.")
+        flash("Haastetta ei löytynyt.", "info")
         return {"redirect": True, "url": "/admin"}
 
     # Case B: Editing an existing challenge, with a form filled in from the database.
@@ -196,7 +196,7 @@ def main(challenge_id_untrusted = None, form_data = None):
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
             print("CASE C1")
-            flash(errors)
+            flash(errors, "error")
             html["challenge"] = dict()
             html["challenge"]["title"] = form_data["title"]
             html["data_fields"] = form_data
@@ -208,11 +208,11 @@ def main(challenge_id_untrusted = None, form_data = None):
         success, id = save_challenge(challenge_id, form_data)
         if success:
             print("CASE C2 SUCCESS")
-            flash("Haaste on nyt tallennettu.")
+            flash("Haaste on nyt tallennettu.", "success")
             return {"redirect": True, "url": f"/haaste/{ id }"}
 
         # Database error or trying to edit someone else's participation
         print("CASE C2 FAIL")
-        flash("Tietojen tallennus epäonnistui, kokeile uudelleen.")
+        flash("Tietojen tallennus epäonnistui, kokeile uudelleen.", "error")
         return {"redirect": True, "url": f"/haaste/{ challenge_id }/{ id }"}
     
