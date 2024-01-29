@@ -28,3 +28,32 @@ body {
     color: #205791;
 }
 
+h3 {
+    margin-top: 2em;
+}
+
+.challenge {
+    margin: 1em 0 1em 0;
+    padding: 1em;
+    background-color: #ddd;
+}
+
+.challenge h4 {
+    margin-top: 0;
+}
+
+.challenge p {
+    margin-bottom: 0;
+}
+
+/* Button that has rounded corners and light grey 3D effect */
+.button {
+    background-color: #eee;
+    border: 1px solid #999;
+    border-radius: 5px;
+    color: #333;
+    display: inline-block;
+    padding: 0.3em 0.4em;
+    text-decoration: none;
+}
+
