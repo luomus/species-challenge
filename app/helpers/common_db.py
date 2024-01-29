@@ -4,6 +4,11 @@ import mysql.connector
 from contextlib import contextmanager
 import os
 
+
+def none_to_empty_string(row):
+    return ["" if column is None else column for column in row]
+
+
 @contextmanager
 def connection():
     """
@@ -23,6 +28,7 @@ def connection():
     finally:
         conn.close()
 
+
 def select(conn, query, params = None):
     """
     Executes a SELECT query and returns the results as a list of dictionaries.
@@ -40,12 +46,13 @@ def select(conn, query, params = None):
         cursor.execute(query, params)
         # Use column names as dictionary keys 
         columns = [col[0] for col in cursor.description]
-        return [dict(zip(columns, row)) for row in cursor.fetchall()]
+        return [dict(zip(columns, none_to_empty_string(row))) for row in cursor.fetchall()]
     except Exception as e:
         conn.rollback()
         raise e
     finally:
         cursor.close()
+
 
 def transaction(conn, query, params):
     """
