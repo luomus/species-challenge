@@ -46,7 +46,8 @@ To have many types of challenges, you would need to:
 
 ### Next
 
-Basic navigation
+Basic admin and user navigation
+Prepopulated dropdowns to challenge page
 
 ### Setup
 

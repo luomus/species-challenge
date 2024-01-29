@@ -1,6 +1,27 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('/static/fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/static/fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/static/fonts/Roboto-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
 body {
     background-color: #f6f6f5;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .flash {
@@ -28,6 +49,43 @@ body {
     color: #205791;
 }
 
+#navi {
+    background-color: #1F74AD; /* Laji.fi darker blue */
+    color: #f1f1f1;
+    padding: 1em;
+    margin: -10px -10px 1em -10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navi h1 {
+    font-size: 100%;
+    display: inline;
+    text-transform: uppercase;  
+    margin: 0;
+    letter-spacing: 0.1rem;
+}
+
+#navi h1 a {
+    text-decoration: none;
+}
+
+#navi a,
+#navi a:link
+#navi a:visited
+#navi a:active
+{
+    color: #fff;
+}
+
+#login_navi {
+    text-align: right;
+    display: flex;
+    gap: 10px; /* Adds space between items in #login_navi */
+}
+
+
 h3 {
     margin-top: 2em;
 }
@@ -35,6 +93,18 @@ h3 {
 .challenge {
     margin: 1em 0 1em 0;
     padding: 1em;
+    background-color: #ddd;
+}
+
+.open .challenge {
+    background-color: #d5eac6;
+}
+
+.draft .challenge {
+    background-color: #d5edf8;
+}
+
+.closed .challenge {
     background-color: #ddd;
 }
 

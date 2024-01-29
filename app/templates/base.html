@@ -10,18 +10,21 @@
         {% block head %}{% endblock %}
     </head>
     <body>
-        <div id="login_navi">
-            {% if user_data %}
-                <!-- Logged in as user_data['id'] -->
-                <span id="user_info">Hei {{ user_data['fullName'] }}!</span>
-                <span id="logout"><a href="/logout">Kirjaudu ulos</a></span>
-                {% if is_admin %}
-                    <span id="admin"><a href='/admin'>Admin</a></span>
+        <div id="navi">
+            <h1><a href='/'>Haasteet</a></h1>
+            <div id="login_navi">
+                {% if user_data %}
+                    <!-- Logged in as {{ user_data['id'] }} -->
+                    <span id="user_info">{{ user_data['fullName'] }}</span>
+                    {% if is_admin %}
+                        <span id="admin"><a href='/admin'>Admin</a></span>
+                    {% endif %}
+                    <span id="logout"><a href="/logout">Kirjaudu ulos</a></span>
+                {% else %}
+                    <!-- Not logged in -->
+                    <span id="login"><a href="https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev">Kirjaudu sisään</a></span>
                 {% endif %}
-            {% else %}
-                <!-- Not logged in -->
-                <span id="login"><a href="https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev">Kirjaudu sisään</a></span>
-            {% endif %}
+            </div>
         </div>
 
         <!-- Show latest flash message, if exists. -->

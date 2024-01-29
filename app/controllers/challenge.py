@@ -180,7 +180,7 @@ def main(challenge_id_untrusted = None, form_data = None):
         html["challenge"] = dict()
 
         # Todo: think through how title should be handled
-        html["challenge"]["title"] = "(uusi)"
+        html["challenge"]["title"] = "Uusi"
         return html
 
     # Get challenge data to see that it exists and if it is draft/open/closed.
