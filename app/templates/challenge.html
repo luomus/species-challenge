@@ -23,24 +23,12 @@
         </p>
 
         <p>
-            <label for="title">Taksonin tunniste (MX...):</label>
-            <input 
-                type="text" 
-                id="taxon" 
-                name="taxon" 
-                value="{{ html['data_fields'].get('taxon', '') }}"
-            required>
-        </p>
-
-        <p>
-            <label for="year">Vuosi:</label>
-            <input 
-                type="text" 
-                id="year" 
-                name="year" 
-                value="{{ html['data_fields'].get('year', '') }}"
-            required>
-        </p>
+            <label for="description">Description:</label>
+            <textarea 
+                id="description" 
+                name="description"
+            >{{ html['data_fields'].get('description', '') }}</textarea>
+        </p>        
 
         <!-- Todo: Set as dropdown -->
         <p>
@@ -61,6 +49,26 @@
                 id="status" 
                 name="status" 
                 value="{{ html['data_fields'].get('status', '') }}"
+            required>
+        </p>
+
+        <p>
+            <label for="title">Taksonin tunniste (MX...):</label>
+            <input 
+                type="text" 
+                id="taxon" 
+                name="taxon" 
+                value="{{ html['data_fields'].get('taxon', '') }}"
+            required>
+        </p>
+
+        <p>
+            <label for="year">Vuosi:</label>
+            <input 
+                type="text" 
+                id="year" 
+                name="year" 
+                value="{{ html['data_fields'].get('year', '') }}"
             required>
         </p>
 

@@ -31,13 +31,14 @@ def save_challenge(challenge_id, form_data):
             form_data["type"],
             form_data["title"],
             form_data["status"],
+            form_data["description"],
             g.user_data["id"],
             now,
             challenge_id,
         )
 
         with common_db.connection() as conn:
-            query = "UPDATE challenges SET taxon = %s, year = %s, type = %s, title = %s, status = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
+            query = "UPDATE challenges SET taxon = %s, year = %s, type = %s, title = %s, status = %s, description = %s meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
             success = common_db.transaction(conn, query, params)
 
         # Return success and existing challenge ID
@@ -53,6 +54,7 @@ def save_challenge(challenge_id, form_data):
         form_data["type"],
         form_data["title"],
         form_data["status"],
+        form_data["description"],
         g.user_data["id"],
         now,
         g.user_data["id"],
@@ -62,7 +64,7 @@ def save_challenge(challenge_id, form_data):
     print("PARAMS:", params)
 
     with common_db.connection() as conn:
-        query = "INSERT INTO challenges (taxon, year, type, title, status, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO challenges (taxon, year, type, title, status, description, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
 
     print("DEBUG: ", success, id) # Debug
@@ -94,6 +96,11 @@ def validate_challenge_data(form_data):
     else:
         if len(form_data["title"]) > 240:
             errors += "Haasteen nimi on liian pitkä, maksimi 240 merkkiä. "
+
+    if len(form_data["description"]) > 2000:
+        errors += "Haasteen nimi on liian pitkä, maksimi 2000 merkkiä. "
+
+
     if not form_data["taxon"]:
         errors += "Taksoni puuttuu. "
     else:
@@ -103,6 +110,7 @@ def validate_challenge_data(form_data):
                 errors += f"Taksonin { form_data['taxon'] } lajiluetteloa ei löytynyt: valitse toinen taksoni tai pyydä ylläpitäjää lisäämään luettelo. "
         else:
             errors += "Anna taksonin MX-tunniste, esim. 'MX.1'. "
+
     if not form_data["year"]:
         errors += "Vuosi puuttuu. "
     # Check that year is a number
@@ -139,6 +147,12 @@ def get_challenge(challenge_id):
 
     if not challenge:
         return False
+    
+    # Set all None values to empty strings
+    for key, value in challenge[0].items():
+        if value == None:
+            challenge[0][key] = ""
+
     return challenge[0]
 
 

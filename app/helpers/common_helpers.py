@@ -125,6 +125,16 @@ def is_year(input_string):
 
 
 def valid_taxon_qname(input_string):
+    """
+    Validates if a given string is a valid taxon QName.
+
+    Args:
+    input_string (str): The string to validate.
+
+    Returns:
+    bool: True if the input_string is a valid taxon QName,
+    False otherwise.
+    """
     pattern = r'^MX\.\d+$'
     return bool(re.match(pattern, input_string))
 
