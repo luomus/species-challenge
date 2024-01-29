@@ -37,9 +37,13 @@ def save_challenge(challenge_id, form_data):
             challenge_id,
         )
 
+        print("PARAMS CASE 1:", params)
+
         with common_db.connection() as conn:
-            query = "UPDATE challenges SET taxon = %s, year = %s, type = %s, title = %s, status = %s, description = %s meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
+            query = "UPDATE challenges SET taxon = %s, year = %s, type = %s, title = %s, status = %s, description = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
             success = common_db.transaction(conn, query, params)
+
+        print("HERE: ", success) # Debug
 
         # Return success and existing challenge ID
         return success, challenge_id
@@ -61,7 +65,7 @@ def save_challenge(challenge_id, form_data):
         now
     )
 
-    print("PARAMS:", params)
+    print("PARAMS CASE 2:", params)
 
     with common_db.connection() as conn:
         query = "INSERT INTO challenges (taxon, year, type, title, status, description, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -153,6 +157,8 @@ def get_challenge(challenge_id):
         if value == None:
             challenge[0][key] = ""
 
+#    print(challenge[0]) # Debug
+
     return challenge[0]
 
 
@@ -203,7 +209,6 @@ def main(challenge_id_untrusted = None, form_data = None):
 
         # Convert to normal dictionary for sanitization
         form_data = form_data.to_dict()
-        print(form_data) # Debug
 
         errors, form_data = validate_challenge_data(form_data)
 
@@ -220,13 +225,14 @@ def main(challenge_id_untrusted = None, form_data = None):
         print("CASE C2")
         # Insert to database and redirect to participation page
         success, id = save_challenge(challenge_id, form_data)
-        if success:
+        if success[0]:
             print("CASE C2 SUCCESS")
             flash("Haaste on nyt tallennettu.", "success")
             return {"redirect": True, "url": f"/haaste/{ id }"}
 
-        # Database error or trying to edit someone else's participation
+        # Database error
+        # Todo: Now this shows data from the database, should show the form data instead.
         print("CASE C2 FAIL")
         flash("Tietojen tallennus epäonnistui, kokeile uudelleen.", "error")
-        return {"redirect": True, "url": f"/haaste/{ challenge_id }/{ id }"}
+        return {"redirect": True, "url": f"/haaste/{ id }"}
     
