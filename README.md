@@ -60,8 +60,6 @@ Prepopulated dropdowns to challenge page
 
 ### Features
 
-- Test automatic logout after inactivity
-    - When tested, set app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours = 2)
 - Test giving malicious login token
 - Admin ability to edit any participations
 - Admin set by custom value from Laji.fi?

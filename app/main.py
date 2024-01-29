@@ -18,7 +18,7 @@ if secret_key is None:
     raise ValueError("No FLASK_SECRET_KEY set.")
 app.secret_key = secret_key
 
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours = 2)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days = 10)
 
 # ----------------------------------------
 # Setup
