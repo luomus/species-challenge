@@ -24,6 +24,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+a:link,
+a:visited {
+    color: #1F74AD;
+}
+
 .flash {
     border: 2px solid #999;
     background-color: #eee;
@@ -60,7 +65,7 @@ body {
 }
 
 #navi h2 {
-    font-size: 100%;
+    font-size: 120%;
     display: inline;
     text-transform: uppercase;  
     margin: 0;
@@ -93,20 +98,19 @@ h2 {
 .challenge {
     margin: 1em 0 1em 0;
     padding: 1em;
-    background-color: #ddd;
-    border-radius: 5px;
+    background-color: #fff;
 }
 
 .open .challenge {
-    background-color: #d5eac6;
+    border-left: 5px solid #1fad32;
 }
 
 .draft .challenge {
-    background-color: #d5edf8;
+    border-left: 5px solid #1F74AD;
 }
 
 .closed .challenge {
-    background-color: #ddd;
+    border-left: 5px solid #ad301f;
 }
 
 .challenge h3 {
@@ -118,7 +122,7 @@ h2 {
 }
 
 /* Button that has rounded corners and light grey 3D effect */
-.button {
+a.button {
     background-color: #eee;
     border: 1px solid #999;
     border-radius: 5px;
