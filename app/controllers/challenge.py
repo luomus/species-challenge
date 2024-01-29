@@ -90,20 +90,24 @@ def validate_challenge_data(form_data):
 
     # Validate form data
     if not form_data["title"]:
-        errors += "haasteen nimi puuttuu. "
+        errors += "Haasteen nimi puuttuu. "
     else:
         if len(form_data["title"]) > 240:
-            errors += "haasteen nimi on liian pitkä, maksimi 240 merkkiä. "
+            errors += "Haasteen nimi on liian pitkä, maksimi 240 merkkiä. "
     if not form_data["taxon"]:
-        errors += "taksoni puuttuu. "
+        errors += "Taksoni puuttuu. "
     else:
-        if len(form_data["taxon"]) > 16:
-            errors += "taksoni on liian pitkä, maksimi 16 merkkiä. "
+        if common_helpers.valid_taxon_qname(form_data["taxon"]):
+            # Check if file exists in ./data/{taxon}_taxa.json
+            if not common_helpers.taxon_file_exists(form_data["taxon"]):
+                errors += f"Taksonin { form_data['taxon'] } lajiluetteloa ei löytynyt: valitse toinen taksoni tai pyydä ylläpitäjää lisäämään luettelo. "
+        else:
+            errors += "Anna taksonin MX-tunniste, esim. 'MX.1'. "
     if not form_data["year"]:
-        errors += "vuosi puuttuu. "
+        errors += "Vuosi puuttuu. "
     # Check that year is a number
     if not common_helpers.is_year(form_data["year"]):
-        errors += "vuoden pitää olla numero. "
+        errors += "Vuoden pitää olla numero. "
 
     # Todo: more validations
 

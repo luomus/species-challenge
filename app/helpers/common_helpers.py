@@ -1,6 +1,5 @@
 # Common helpers functions.
 
-import uuid
 import requests
 import json
 import sys
@@ -109,6 +108,7 @@ def is_yyyy_mm_dd(input_string):
     pattern = re.compile(r'^\d{4}-\d{2}-\d{2}$')
     return bool(pattern.match(input_string))
 
+
 def is_year(input_string):
     """
     Validates if a given string is a valid year in YYYY format.
@@ -122,3 +122,23 @@ def is_year(input_string):
     """
     pattern = re.compile(r'^\d{4}$')
     return bool(pattern.match(input_string))
+
+
+def valid_taxon_qname(input_string):
+    pattern = r'^MX\.\d+$'
+    return bool(re.match(pattern, input_string))
+
+
+def taxon_file_exists(taxon_qname):
+    """
+    Checks if a file exists in ./data/{taxon}_taxa.json.
+
+    Args:
+    taxon_qname (str): The taxon QName.
+
+    Returns:
+    bool: True if the file exists, False otherwise.
+    """
+    filename = "./data/" + taxon_qname + "_taxa.json"
+    return os.path.isfile(filename)
+
