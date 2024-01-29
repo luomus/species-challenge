@@ -43,21 +43,22 @@ To have many types of challenges, you would need to:
 - Should challenge have a start and end date?
     - No, if there is description which can include this. 
     - Yes, if we want to validate that observation dates are within this limit.
+- Do we need a login info page, or is it enough to just link to login page?
 
 ### Next
 
-Basic admin and user navigation
 Prepopulated dropdowns to challenge page
 /login router
 
 ### Setup
 
 - participation id as int
-- Login to dev/prod parametrized
+- Login to dev/prod parametrized through /login
 - Get data system id for dev, test and production? or use intermediate login redirection like on Havistin?
 - Database sorting/collation settings
 - Generic exception handling?
 - Automate database setup - does OpenShift need this?
+- Test that database errors are handled gracefully
 
 ### Features
 
@@ -65,6 +66,7 @@ Prepopulated dropdowns to challenge page
 - Admin ability to edit any participations
 - Admin set by custom value from Laji.fi?
 - Trash own participations
+- Challenge sort order (int)
 
 #### Pages
 
@@ -84,7 +86,7 @@ Prepopulated dropdowns to challenge page
     - open challenges ✅
     - draft challenges ✅
     - closed challenges ✅
-    - edit link to each
+    - edit link to each ✅
     - statistics of each
         - number of participants
         - number of those with >= 100 species
