@@ -90,9 +90,9 @@ def new_participation(challenge_id_untrusted, participation_id_untrusted = None)
 
 
 import controllers.challenge
-@app.route("/haaste", methods=['GET', 'POST'])
-@app.route("/haaste/", methods=['GET', 'POST'])
-@app.route("/haaste/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
+@app.route("/admin/haaste", methods=['GET', 'POST'])
+@app.route("/admin/haaste/", methods=['GET', 'POST'])
+@app.route("/admin/haaste/<string:challenge_id_untrusted>", methods=['GET', 'POST'])
 @admin_required
 def challenge(challenge_id_untrusted = None):
     if request.method == "GET":

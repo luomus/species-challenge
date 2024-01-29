@@ -14,7 +14,7 @@ def get_open_challenges():
 def make_challenges_html(challenges):
     html = "<ul>\n"
     for challenge in challenges:
-        html += f"<li><a href='/haaste/{ challenge['challenge_id'] }'>{ challenge['title'] }</a></li>\n"
+        html += f"<li><a href='/admin/haaste/{ challenge['challenge_id'] }'>{ challenge['title'] }</a></li>\n"
     html += "</ul>\n"
     return html
 

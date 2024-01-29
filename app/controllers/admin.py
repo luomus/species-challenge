@@ -18,7 +18,7 @@ def make_challenges_html(challenges):
         html += "<div class='challenge'>\n"
         html += f"<h4>{ challenge['title'] }</a></h4>\n"
         html += f"<p>{ challenge['year'] }, <a href='https://laji.fi/taxon/{ challenge['taxon'] }' target='_blank'>{ challenge['taxon'] }</a></p>\n"
-        html += f"<p><a href='/haaste/{ challenge['challenge_id'] }' class='button'>Muokkaa</a></p>\n"
+        html += f"<p><a href='/admin/haaste/{ challenge['challenge_id'] }' class='button'>Muokkaa</a></p>\n"
         html += "</div>\n"
     return html
 
