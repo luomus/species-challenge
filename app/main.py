@@ -57,7 +57,7 @@ def inject_user_data():
 
 @app.errorhandler(500)
 def internal_error(error):
-    return "<h4>Anteeksi, tapahtui virhe! Palaa takaisin selaimen takaisin/back -nappia painamalla.</h4>\n{}".format(error), 500
+    return "<h4>Anteeksi, tapahtui virhe! Palaa takaisin selaimen takaisin/back -nappia painamalla.</h4> {}".format(error), 500
 
 # ----------------------------------------
 # Controllers

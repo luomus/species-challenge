@@ -88,17 +88,18 @@ def validate_challenge_data(form_data):
     """
     errors = ""
 
-    # Validate form data
+    # Title
     if not form_data["title"]:
         errors += "Haasteen nimi puuttuu. "
     else:
         if len(form_data["title"]) > 240:
             errors += "Haasteen nimi on liian pitkä, maksimi 240 merkkiä. "
 
+    # Description
     if len(form_data["description"]) > 2000:
         errors += "Haasteen nimi on liian pitkä, maksimi 2000 merkkiä. "
 
-
+    # Taxon
     if not form_data["taxon"]:
         errors += "Taksoni puuttuu. "
     else:
@@ -109,13 +110,12 @@ def validate_challenge_data(form_data):
         else:
             errors += "Anna taksonin MX-tunniste, esim. 'MX.1'. "
 
+    # Year
     if not form_data["year"]:
         errors += "Vuosi puuttuu. "
     # Check that year is a number
     if not common_helpers.is_year(form_data["year"]):
         errors += "Vuoden pitää olla numero. "
-
-    # Todo: more validations
 
     # Sanitize field values
     form_data["title"] = common_helpers.sanitize_name(form_data["title"].strip())

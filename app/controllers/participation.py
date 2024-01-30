@@ -123,14 +123,15 @@ def validate_participation_data(form_data):
               sanitized values.
     """
     errors = ""
-#    print("form_data: ", form_data)
 
-    # Validate form data
+    # Name
     if not form_data["name"]:
         errors += "osallistujan nimi puuttuu. "
     else:
         if len(form_data["name"]) > 120:
             errors += "osallistujan nimi on liian pitkä, maksimi 120 merkkiä. "
+
+    # Place
     if not form_data["place"]:
         errors += "paikka puuttuu. "
     else:
