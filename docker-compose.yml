@@ -19,7 +19,9 @@ services:
       --threads 1 -b 0.0.0.0:8081
       --timeout 120 
       --reload
-#      --reload-extra-file /usr/src/app/templates/base.html
+      --reload-extra-file /usr/src/app/templates/base.html
+      --reload-extra-file /usr/src/app/templates/index.html
+      --reload-extra-file /usr/src/app/templates/my.html
     # Note that the extra-files have to exist, otherwise dockec-compose will complain "Error: File ... does not exists."  
     depends_on:
       - db
