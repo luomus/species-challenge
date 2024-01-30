@@ -1,0 +1,47 @@
+{
+    "controlledVocabularyFields": {
+        "type": {
+            "label": {
+                "fi": "Tyyppi",
+                "en": "Type"
+            },
+            "options": [
+                {
+                    "key": "challenge100",
+                    "label": {
+                        "fi": "100 lajia -haaste"
+                    }
+                }
+            ]
+        },
+        "status": {
+            "label": {
+                "fi": "Tila",
+                "en": "Status"
+            },
+            "options": [
+                {
+                    "key": "draft",
+                    "label": {
+                        "fi": "Luonnos",
+                        "en": "Draft"
+                    }
+                },
+                {
+                    "key": "open",
+                    "label": {
+                        "fi": "Avoin",
+                        "en": "Open"
+                    }
+                },
+                {
+                    "key": "closed",
+                    "label": {
+                        "fi": "Suljettu",
+                        "en": "Closed"
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,11 +1,11 @@
 # Controller for a form to edit and submit a challenge.
 # Available for admin users.
 
-import datetime
 from flask import g, flash
 from helpers import common_db
 from helpers import common_helpers
-
+import json
+import datetime
 
 def save_challenge(challenge_id, form_data):
     """
@@ -162,6 +162,33 @@ def get_challenge(challenge_id):
     return challenge[0]
 
 
+def make_option_field_html(field_name, challenge_data = None):
+    # Load schema from a CSV file
+    filename = "./data/challenge_vocabulary.json"
+    with open(filename, "r") as f:
+        schema = json.load(f)
+
+    html = ""
+
+    # Selected field
+    selected_option = challenge_data[field_name]
+
+    # Generate HTML for option fields
+    field = schema["controlledVocabularyFields"][field_name]
+
+    html += f"<label for='{field_name}'>{field['label']['fi']}:</label>\n"
+    html += f"<select name='{field_name}' id='{field_name}' required>\n"
+    html += "    <option value=''>(valitse)</option>\n"
+    for option in field["options"]:
+        selected = ""
+        if option["key"] == selected_option:
+            selected = " selected='selected'"
+        html += f"    <option value='{option['key']}'{selected}>{option['label']['fi']}</option>\n"
+    html += "</select>\n"
+
+    return html
+
+
 def main(challenge_id_untrusted = None, form_data = None):
     html = dict()
 
@@ -173,14 +200,20 @@ def main(challenge_id_untrusted = None, form_data = None):
     if html["challenge_id"] == None:
         html["challenge_id"] = ""
 
+
     # CASE 0: Adding a new challenge with an empty form.
     if not challenge_id and not form_data:
         # Setup empty form
+        html["status_field_html"] = make_option_field_html("status")
+        html["type_field_html"] = make_option_field_html("type")
         html["data_fields"] = dict()
         return html
 
     # Get challenge data to see that it exists and if it is draft/open/closed.
     challenge = get_challenge(challenge_id)
+    print(challenge) # Debug
+    html["status_field_html"] = make_option_field_html("status", challenge)
+    html["type_field_html"] = make_option_field_html("type", challenge)
 
     # CASE A: Challenge id given, but it does not exist in the database.
     if not challenge and not form_data:

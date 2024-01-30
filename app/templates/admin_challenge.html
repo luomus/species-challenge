@@ -3,12 +3,12 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <title>Haaste</title>
+    <title>Haasten muokkaus: {{ html['data_fields'].get('title', '') }}</title>
 {% endblock %}
 
 {% block body %}
 
-    <h1>Haasteen muokkaus</h1>
+    <h1>Haasteen muokkaus: {{ html['data_fields'].get('title', '') }}</h1>
 
     <form action="/admin/haaste/{{ html['challenge_id'] }}" method="post">
     
@@ -30,26 +30,12 @@
             >{{ html['data_fields'].get('description', '') }}</textarea>
         </p>        
 
-        <!-- Todo: Set as dropdown -->
         <p>
-            <label for="type">Tyyppi (challenge100):</label>
-            <input 
-                type="text" 
-                id="type" 
-                name="type" 
-                value="{{ html['data_fields'].get('type', '') }}"
-            required>
+            {{ html['type_field_html']|safe }}
         </p>
 
-        <!-- Todo: Set as dropdown -->
         <p>
-            <label for="status">Status (draft, open, closed):</label>
-            <input 
-                type="text" 
-                id="status" 
-                name="status" 
-                value="{{ html['data_fields'].get('status', '') }}"
-            required>
+            {{ html['status_field_html']|safe }}
         </p>
 
         <p>
