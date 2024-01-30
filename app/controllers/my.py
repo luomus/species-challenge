@@ -14,11 +14,6 @@ def get_participations(status):
         data = common_db.select(conn, query, params)
     return data
 
-'''
-Data from the above query looks like this:
-
-[{'participation_id': 5, 'challenge_id': 4, 'name': 'Nimi Merkkinen', 'place': 'Nimismiehenkylä', 'taxa_count': 0, 'taxa_json': '{}', 'meta_created_by': 'MA.3', 'meta_created_at': datetime.datetime(2024, 1, 28, 10, 42, 23), 'meta_edited_by': 'MA.3', 'meta_edited_at': datetime.datetime(2024, 1, 30, 15, 48, 43), 'taxon': 'MX.53078', 'year': 2024, 'type': 'challenge100', 'title': 'Putkilokasvit 2024 D', 'status': 'open', 'description': 'Foo bar'}, {'participation_id': 6, 'challenge_id': 4, 'name': "André D'Artágnan", 'place': 'Ääkkölä ääkkölärules', 'taxa_count': 6, 'taxa_json': '{"MX.37691": "2024-01-11", "MX.37721": "2024-01-02", "MX.37717": "2024-01-27", "MX.37719": "2024-01-28", "MX.37763": "2024-01-10", "MX.37771": "2024-01-18"}', 'meta_created_by': 'MA.3', 'meta_created_at': datetime.datetime(2024, 1, 28, 10, 42, 23), 'meta_edited_by': 'MA.3', 'meta_edited_at': datetime.datetime(2024, 1, 30, 15, 48, 43), 'taxon': 'MX.53078', 'year': 2024, 'type': 'challenge100', 'title': 'Putkilokasvit 2024 D', 'status': 'open', 'description': 'Foo bar'}, {'participation_id': 7, 'challenge_id': 5, 'name': 'Foo', 'place': 'Bar', 'taxa_count': 0, 'taxa_json': '{}', 'meta_created_by': 'MA.3', 'meta_created_at': datetime.datetime(2024, 1, 28, 22, 32, 58), 'meta_edited_by': 'MA.3', 'meta_edited_at': datetime.datetime(2024, 1, 28, 22, 32, 58), 'taxon': 'MX.53078', 'year': 2024, 'type': 'challenge100', 'title': 'sdf', 'status': 'open', 'description': ''}, {'participation_id': 8, 'challenge_id': 4, 'name': 'Foo', 'place': 'Bar', 'taxa_count': 0, 'taxa_json': '{}', 'meta_created_by': 'MA.3', 'meta_created_at': datetime.datetime(2024, 1, 28, 10, 42, 23), 'meta_edited_by': 'MA.3', 'meta_edited_at': datetime.datetime(2024, 1, 30, 15, 48, 43), 'taxon': 'MX.53078', 'year': 2024, 'type': 'challenge100', 'title': 'Putkilokasvit 2024 D', 'status': 'open', 'description': 'Foo bar'}]
-'''
 
 def make_participations_html(participations):
     html = ""
