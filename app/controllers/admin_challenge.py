@@ -188,7 +188,7 @@ def make_option_field_html(field_name, challenge_data = None):
 def main(challenge_id_untrusted = None, form_data = None):
     html = dict()
 
-    # Get challenge and participation IDs from URL
+    # Get challenge IDs from URL
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
 
     # Jinja template needs these to be empty strings instead of None
@@ -197,8 +197,9 @@ def main(challenge_id_untrusted = None, form_data = None):
         html["challenge_id"] = ""
 
 
-    # CASE 0: Adding a new challenge with an empty form.
+    # CASE A: Adding a new challenge with an empty form.
     if not challenge_id and not form_data:
+        print("CASE A")
         # Setup empty form
         html["status_field_html"] = make_option_field_html("status")
         html["type_field_html"] = make_option_field_html("type")
@@ -207,28 +208,29 @@ def main(challenge_id_untrusted = None, form_data = None):
 
     # Get challenge data to see that it exists and if it is draft/open/closed.
     challenge = get_challenge(challenge_id)
-    print(challenge) # Debug
-    html["status_field_html"] = make_option_field_html("status", challenge)
-    html["type_field_html"] = make_option_field_html("type", challenge)
 
-    # CASE A: Challenge id given, but it does not exist in the database.
+    # CASE B: Challenge id given, but it does not exist in the database.
     if not challenge and not form_data:
-        print("CASE A")
+        print("CASE B")
         flash("Haastetta ei löytynyt.", "info")
         return {"redirect": True, "url": "/admin"}
 
-    # Case B: Editing an existing challenge, with a form filled in from the database.
+    # Case C: Editing an existing challenge, with a form filled in from the database.
     # Challenge found from the database
     # Example: http://localhost:8081/osallistuminen/4
     if challenge and not form_data:
-        print("CASE B")
+        print("CASE C")
+
+        # Setup form with data
+        html["status_field_html"] = make_option_field_html("status", challenge)
+        html["type_field_html"] = make_option_field_html("type", challenge)
         html["data_fields"] = challenge
 
         return html
     
-    # Case C: User has submitted challenge data. Validate and insert to database.
+    # Case D: User has submitted challenge data. Validate and insert to database.
     if form_data:
-        print("CASE C")
+        print("CASE D")
 
         # Convert to normal dictionary for sanitization
         form_data = form_data.to_dict()

@@ -7,7 +7,7 @@ from helpers import common_db
 from helpers import common_helpers
 import json
 
-# Todo: use dynamic taxon_id
+
 def make_taxa_html(taxon_id, taxa_dates_json = None):
     """
     Generates a list of species names and date input fields for a given higher taxon.
@@ -217,9 +217,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html["challenge_id"] = challenge_id
     html["participation_id"] = participation_id
 
-#    print("challenge_id: ", challenge_id)
-#    print("participation_id: ", participation_id)
-
     # Jinja template needs these to be empty strings instead of None
     if html["participation_id"] == None:
         html["participation_id"] = ""
@@ -228,7 +225,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     challenge = get_challenge(challenge_id)
 
     # CASE X: Challenge cannot be found or participation is closed
-    # Todo: Allow user to view, edit and remove their own participation even if the challenge is closed or draft 
     if not challenge:
         print("CASE X")
         flash("Haastetta ei löytynyt.", "info")
@@ -236,10 +232,21 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     html["challenge"] = challenge
 
-    # Case Y: Participation cannot be found
-    # Todo
+    # Case A: User opened an empty form for submitting a new participation.
+    if not participation_id and not form_data:
+        print("CASE B")
 
-    # Case A: User opened an existing participation for editing.
+        # Allow adding participation only if challenge is open
+        if challenge["status"] != "open":
+            flash("Tätä haastetta ei ole olemassa tai siihen ei voi enää osallistua.", "info")
+            return {"redirect": True, "url": "/"}
+
+        # Setup empty form
+        html['taxa'] = make_taxa_html(challenge["taxon"])
+        html["data_fields"] = dict()
+        return html
+    
+    # Case B: User opened an existing participation for editing.
     # Example: http://localhost:8081/osallistuminen/4/6
     if participation_id and not form_data:
         print("CASE A")
@@ -261,20 +268,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
         return html
 
-    # Case B: User opened an empty form for submitting a new participation.
-    if not participation_id and not form_data:
-        print("CASE B")
-
-        # Allow adding participation only if challenge is open
-        if challenge["status"] != "open":
-            flash("Tätä haastetta ei ole olemassa tai siihen ei voi enää osallistua.", "info")
-            return {"redirect": True, "url": "/"}
-
-        # Setup empty form
-        html['taxa'] = make_taxa_html(challenge["taxon"])
-        html["data_fields"] = dict()
-        return html
-    
     # Case C: User has submitted participation data. Validate and insert to database.
     if form_data:
         print("CASE C")
