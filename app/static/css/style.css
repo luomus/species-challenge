@@ -99,29 +99,35 @@ h2 {
     margin-top: 2em;
 }
 
-.challenge {
+.challenge,
+.participation {
     margin: 1em 0 1em 0;
     padding: 1em;
     background-color: #fff;
 }
 
-.open .challenge {
+.open .challenge,
+.open .participation {
     border-left: 5px solid #1fad32;
 }
 
-.draft .challenge {
+.draft .challenge,
+.draft .participation {
     border-left: 5px solid #1F74AD;
 }
 
-.closed .challenge {
+.closed .challenge,
+.closed .participation {
     border-left: 5px solid #ad301f;
 }
 
-.challenge h3 {
+.challenge h3,
+.participation h3 {
     margin-top: 0;
 }
 
-.challenge p {
+.challenge p,
+.participation p {
     margin-bottom: 0;
 }
 

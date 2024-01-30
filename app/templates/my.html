@@ -3,12 +3,40 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <title>Species Challenge - Luomus</title>
+    <title>Omat osallistumiset - Haasteet</title>
 {% endblock %}
 
 {% block body %}
 
     <h1>Omat</h1>
+
+    {% if html["open_participations"] == "" and html["draft_participations"] == "" and html["closed_participations"] == "" %}
+        <p>Sinulla ei ole osallistumisia.</p>
+    {% endif %}
+
+    {% if html["open_participations"] != "" %}
+        <div class="challenges open">
+            <h2>Osallistumiset avoimiin haasteisiin</h2>
+            {{ html["open_participations"]|safe }}
+        </div>
+    {% endif %}
+
+    {% if html["draft_participations"] != "" %}
+        <div class="challenges draft">
+            <h2>Osallistumiset väliaikaisesti suljettuihin haasteisiin</h2>
+            {{ html["draft_participations"]|safe }}
+        </div>
+    {% endif %}
+
+    {% if html["closed_participations"] != "" %}
+        <div class="challenges closed">
+            <h2>Osallistumiset päättyneisiin haasteisiin</h2>
+            {{ html["closed_participations"]|safe }}
+        </div>
+    {% endif %}
+
+
+
 
 
 {% endblock %}
