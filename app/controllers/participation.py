@@ -310,10 +310,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
 
         # Database error or trying to edit someone else's participation
-        # Todo: Now this shows data from the database, should show the form data instead.
-        # Todo: Fix this case: If fails when adding new participation, id is None. Also fix for challenges.
-        # Easiest fix would be to ask user to click back-button to the form and try again.
         print("CASE C2 FAIL")
-        flash("Tietojen tallennus epäonnistui, kokeile uudelleen.", "error")
-        return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
+        raise Exception("Error saving participation to database.")
     

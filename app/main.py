@@ -55,6 +55,10 @@ def before_request():
 def inject_user_data():
     return dict(user_data=g.user_data, is_admin=g.is_admin)
 
+@app.errorhandler(500)
+def internal_error(error):
+    return "<h4>Anteeksi, tapahtui virhe! Palaa takaisin selaimen takaisin/back -nappia painamalla.</h4>\n{}".format(error), 500
+
 # ----------------------------------------
 # Controllers
 
@@ -115,6 +119,7 @@ def admin_challenge(challenge_id_untrusted = None):
         return redirect(html['url'])
     
     return render_template("admin_challenge.html", html=html)
+    
 
 
 @app.route("/login/<string:person_token_untrusted>")
@@ -136,3 +141,5 @@ def login(person_token_untrusted):
 def logout():
     session.clear()
     return redirect("/")
+
+

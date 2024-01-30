@@ -256,8 +256,6 @@ def main(challenge_id_untrusted = None, form_data = None):
             return {"redirect": True, "url": f"/admin/haaste/{ id }"}
 
         # Database error
-        # Todo: Now this shows data from the database, should show the form data instead.
         print("CASE C2 FAIL")
-        flash("Tietojen tallennus epäonnistui, kokeile uudelleen.", "error")
-        return {"redirect": True, "url": f"/admin/haaste/{ id }"}
+        raise Exception("Error saving challenge to database.")
     
