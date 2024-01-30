@@ -68,7 +68,7 @@ def save_participation(challenge_id, participation_id, form_data):
 
         with common_db.connection() as conn:
             query = "UPDATE participations SET name = %s, place = %s, taxa_count = %s, taxa_json = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s AND participation_id = %s AND meta_created_by = %s"
-            success = common_db.transaction(conn, query, params)
+            success, _ = common_db.transaction(conn, query, params)
 
         # Return success and existing participation ID
         return success, participation_id
@@ -91,9 +91,7 @@ def save_participation(challenge_id, participation_id, form_data):
     with common_db.connection() as conn:
         query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
-#        print("Success: ", success)
 
-    # Return success and new participation ID returned by the database
     return success, id
 
 
@@ -297,13 +295,8 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         
         # Case C2: No errors found. Insert to database and redirect to participation page.
         print("CASE C2")
-        # Insert to database and redirect to participation page
         success, id = save_participation(challenge_id, participation_id, form_data)
 
-        # Todo: Figure out why this is needed when db insert/update fails?
-        if type(success) == tuple:
-            success = success[0]
-        
         if success:
             print("CASE C2 SUCCESS")
             flash("Osallistumisesi on nyt tallennettu.", "success")

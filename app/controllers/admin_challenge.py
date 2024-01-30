@@ -37,13 +37,9 @@ def save_challenge(challenge_id, form_data):
             challenge_id,
         )
 
-        print("PARAMS CASE 1:", params)
-
         with common_db.connection() as conn:
             query = "UPDATE challenges SET taxon = %s, year = %s, type = %s, title = %s, status = %s, description = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
-            success = common_db.transaction(conn, query, params)
-
-        print("HERE: ", success) # Debug
+            success, _ = common_db.transaction(conn, query, params)
 
         # Return success and existing challenge ID
         return success, challenge_id
@@ -70,8 +66,6 @@ def save_challenge(challenge_id, form_data):
     with common_db.connection() as conn:
         query = "INSERT INTO challenges (taxon, year, type, title, status, description, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
-
-    print("DEBUG: ", success, id) # Debug
 
     # Return success and new challenge ID returned by the database
     return success, id
@@ -171,7 +165,9 @@ def make_option_field_html(field_name, challenge_data = None):
     html = ""
 
     # Selected field
-    selected_option = challenge_data[field_name]
+    selected_option = ""
+    if challenge_data:
+        selected_option = challenge_data[field_name]
 
     # Generate HTML for option fields
     field = schema["controlledVocabularyFields"][field_name]
@@ -248,9 +244,9 @@ def main(challenge_id_untrusted = None, form_data = None):
         
         # Case C2: No errors found. Insert to database and redirect to participation page.
         print("CASE C2")
-        # Insert to database and redirect to participation page
         success, id = save_challenge(challenge_id, form_data)
-        if success[0]:
+
+        if success:
             print("CASE C2 SUCCESS")
             flash("Haaste on nyt tallennettu.", "success")
             return {"redirect": True, "url": f"/admin/haaste/{ id }"}
