@@ -1,0 +1,47 @@
+This page describes the data models of this app. Character set is utf8mb4.
+
+# MariaDB database tables:
+
+Table structure for table `challenges`.
+Only admins can create and edit challenges.
+
+CREATE TABLE `challenges` (
+  `challenge_id` int(11) NOT NULL,
+  `taxon` varchar(16) NOT NULL, Taxon identifier.
+  `year` int(11) DEFAULT NULL,
+  `type` varchar(16) NOT NULL, Currently only one allowed value: challenge100.
+  `title` varchar(255) NOT NULL, Name of the challenge.
+  `status` varchar(8) NOT NULL, Allowed values: draft, open, closed.
+  `description` varchar(2048) DEFAULT NULL,
+  `meta_created_by` varchar(16) NOT NULL, User id.
+  `meta_created_at` datetime NOT NULL,
+  `meta_edited_by` varchar(16) NOT NULL, User id.
+  `meta_edited_at` datetime NOT NULL
+)
+
+Table structure for table `participations`.
+Each participation belongs to a single challenge.
+Any user can create participations and edit their own participations.
+
+CREATE TABLE `participations` (
+  `participation_id` int(11) NOT NULL,
+  `challenge_id` int(11) NOT NULL,
+  `name` varchar(128) NOT NULL, Participant name or nicname.
+  `place` varchar(128) DEFAULT NULL, Location name.
+  `taxa_count` int(11) DEFAULT NULL, Number of species in this participation.
+  `taxa_json` longtext DEFAULT NULL CHECK (json_valid(`taxa_json`)), List of species observed, each with an identifier and a date.
+  `meta_created_by` varchar(16) NOT NULL, User id, owner of the participation.
+  `meta_created_at` datetime NOT NULL,
+  `meta_edited_by` varchar(16) NOT NULL, User id.
+  `meta_edited_at` datetime NOT NULL
+)
+
+# Flask session variables:
+
+g.user_data (dict): information about the current user. Contains following fields (keys):
+    - id (string): unique identifier of the user.
+    - fullName (string): firstname lastname.
+    - emailAddress (string): email address.
+    - role (list of strings): a list of roles. If one of these is "MA.admin", this user is an admin.
+g.is_admin (boolean): if current user is admin or regular user.
+g.token (string): Token of this app, used to fetch data from FinBIF API at https://api.laji.fi 
