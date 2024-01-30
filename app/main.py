@@ -35,7 +35,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not g.user_data:
-            flash("Kirjaudu ensin sisään.")
+            flash("<a href='/login'>Kirjaudu ensin sisään</a>.")
             return redirect("/")
         return f(*args, **kwargs)
     return decorated_function
@@ -121,7 +121,6 @@ def admin_challenge(challenge_id_untrusted = None):
     return render_template("admin_challenge.html", html=html)
     
 
-
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
     person_token = common_helpers.clean_token(person_token_untrusted)
@@ -135,6 +134,16 @@ def login(person_token_untrusted):
         session["is_admin"] = True
 
     return redirect("/")
+
+
+@app.route("/login")
+def login_page():
+    if g.user_data:
+        print(g.user_data)
+        flash(f"Olet jo kirjautunut sisään nimellä { g.user_data.get('fullName', '(tunnukseesi ei ole kirjattu nimeä)') }.", "info")
+        return redirect("/")
+    else:
+        return render_template("login.html")
 
 
 @app.route("/logout")

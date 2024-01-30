@@ -22,7 +22,7 @@
                     <span id="logout"><a href="/logout">Kirjaudu ulos</a></span>
                 {% else %}
                     <!-- Not logged in -->
-                    <span id="login"><a href="https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev">Kirjaudu sisään</a></span>
+                    <span id="login"><a href="/login">Kirjaudu sisään</a></span>
                 {% endif %}
             </div>
         </div>
@@ -31,7 +31,7 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% set category, message = messages[-1] %}
-                <div class="flash {{ category }}">{{ message }}</div>
+                <div class="flash {{ category }}">{{ message|safe }}</div>
             {% endif %}
         {% endwith %}
 

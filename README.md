@@ -47,9 +47,6 @@ To have many types of challenges, you would need to:
 
 ### Next
 
-/login router
-Todo's
-
 ### Setup
 
 - participation id as int
