@@ -16,6 +16,7 @@
                 {% if user_data %}
                     <!-- Logged in as {{ user_data['id'] }} -->
                     <span id="user_info">{{ user_data['fullName'] }}</span>
+                    <span id="my"><a href="/oma">Omat osallistumiset</a></span>
                     {% if is_admin %}
                         <span id="admin"><a href='/admin'>Admin</a></span>
                     {% endif %}

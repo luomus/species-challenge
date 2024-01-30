@@ -47,15 +47,15 @@ To have many types of challenges, you would need to:
 
 ### Next
 
+- species names to json
+
 ### Setup
 
-- participation id as int
 - Login to dev/prod parametrized through /login
 - Get data system id for dev, test and production? or use intermediate login redirection like on Havistin?
-- Database sorting/collation settings
-- Generic exception handling?
+- Database sorting/collation settings utf8mb4_swedish_ci
+- Generic exception handling
 - Automate database setup - does OpenShift need this?
-- Test that database errors are handled gracefully
 
 ### Features
 
@@ -64,6 +64,7 @@ To have many types of challenges, you would need to:
 - Admin set by custom value from Laji.fi?
 - Trash own participations
 - Challenge sort order (int)
+- Mobile navi
 
 #### Pages
 

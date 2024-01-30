@@ -69,6 +69,14 @@ def root():
     return render_template("index.html", html=html)
 
 
+import controllers.my
+@app.route("/oma")
+@login_required
+def my():
+    html = controllers.my.main()
+    return render_template("my.html", html=html)
+
+
 import controllers.challenge
 @app.route("/haaste/<string:challenge_id_untrusted>")
 @app.route("/haaste/<string:challenge_id_untrusted>/")
