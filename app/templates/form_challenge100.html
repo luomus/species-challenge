@@ -3,7 +3,34 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <title>Osallistuminen haasteeseen</title>
+    <title>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const listItems = document.querySelectorAll('#taxa li');
+            listItems.forEach(li => {
+                // Update class based on the initial state
+                updateClass(li);
+
+                // Add click event listener
+                li.addEventListener('click', function() {
+                    let dateInput = this.querySelector('input[type="date"]');
+                    if (dateInput && dateInput.value === '') {
+                        dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
+                        updateClass(this);
+                    }
+                });
+            });
+        });
+
+        function updateClass(li) {
+            let dateInput = li.querySelector('input[type="date"]');
+            if (dateInput && dateInput.value !== '') {
+                li.classList.add('date-filled');
+            } else {
+                li.classList.remove('date-filled');
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -37,6 +64,12 @@
         <p>
             <button type="submit">Tallenna osallistuminen</button>
         </p>
+
+        {% if html['data_fields']['taxa_count'] == 0 %}
+            <p class="error">Et ole tallentanut vielä yhtään lajia.</p>
+        {% else %}
+            <h3>{{ html['data_fields']['taxa_count'] }} lajia</h3>
+        {% endif %}
 
         {{ html['taxa']|safe }}
         

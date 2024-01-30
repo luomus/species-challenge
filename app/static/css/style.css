@@ -143,3 +143,29 @@ a.button {
     margin-right: 1em;
 }
 
+#taxa {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#taxa li {
+    padding: 0.5em;
+    list-style-type: none;
+}
+
+#taxa .date-filled {
+    background-color: #d1ff98;
+}
+
+#taxa li:nth-child(3n) {
+    border-bottom: 1px solid #999;
+}
+
+#taxa li:first-child {
+    border-top: 1px solid #999;
+}
+
+#taxa li span {
+    min-width: 18em;
+    display: inline-block;
+}

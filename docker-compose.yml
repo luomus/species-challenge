@@ -21,7 +21,7 @@ services:
       --reload
       --reload-extra-file /usr/src/app/templates/base.html
       --reload-extra-file /usr/src/app/templates/index.html
-      --reload-extra-file /usr/src/app/templates/my.html
+      --reload-extra-file /usr/src/app/templates/form_challenge100.html
     # Note that the extra-files have to exist, otherwise dockec-compose will complain "Error: File ... does not exists."  
     depends_on:
       - db
