@@ -177,10 +177,6 @@ def main(challenge_id_untrusted = None, form_data = None):
     if not challenge_id and not form_data:
         # Setup empty form
         html["data_fields"] = dict()
-        html["challenge"] = dict()
-
-        # Todo: think through how title should be handled
-        html["challenge"]["title"] = "Uusi"
         return html
 
     # Get challenge data to see that it exists and if it is draft/open/closed.
@@ -198,8 +194,6 @@ def main(challenge_id_untrusted = None, form_data = None):
     if challenge and not form_data:
         print("CASE B")
         html["data_fields"] = challenge
-        html["challenge"] = dict()
-        html["challenge"]["title"] = challenge["title"]
 
         return html
     
@@ -216,8 +210,6 @@ def main(challenge_id_untrusted = None, form_data = None):
         if errors:
             print("CASE C1")
             flash(errors, "error")
-            html["challenge"] = dict()
-            html["challenge"]["title"] = form_data["title"]
             html["data_fields"] = form_data
             return html
         
