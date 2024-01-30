@@ -1,4 +1,4 @@
-# Controller for a page that displays a single challenge and statistics about it.
+# Controller for a page that displays a single challenge, my participations and statistics about it.
 
 from flask import g, flash
 from helpers import common_db
