@@ -30,6 +30,24 @@
                 li.classList.remove('date-filled');
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var trashButton = document.getElementById("trash_button");
+            var confirmButton = document.getElementById("confirm_button");
+            var form = document.getElementById("challenge");
+            var visibilitySelect = document.getElementById("visibility");
+
+            trashButton.addEventListener("click", function() {
+                confirmButton.style.display = "block"; // Show the confirm button
+                trashButton.style.display = "none"; // Hide the trash button
+            });
+
+            confirmButton.addEventListener("click", function() {
+                visibilitySelect.value = "trash"; // Set the visibility to trash
+                form.submit(); // Submit the form
+            });
+        });
+
     </script>
 {% endblock %}
 
@@ -39,7 +57,7 @@
 
     <p><a href="/haaste/{{ html["challenge_id"] }}">&laquo; Takaisin tämän haasteen etusivulle</a></p>
 
-    <form action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
+    <form name="challenge" id="challenge" action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
     
         <p>
             <label for="name">Osallistujan nimi tai nimimerkki:</label>
@@ -60,7 +78,19 @@
                 value="{{ html['data_fields'].get('place', '') }}" 
             required>
         </p>
+
+        <!-- Trash button -->
+        <div id="trash">
+            <select id="visibility" name="visibility">
+                <option value="public">Julkinen</option>
+                <option value="trash">Poistettu</option>
+                <!-- Other options here -->
+            </select>
     
+            <button type="button" id="trash_button">Poista osallistuminen</button>
+            <button type="button" id="confirm_button">Olen varma: Poista osallistuminen</button>
+        </div>
+
         <p>
             <button type="submit">Tallenna osallistuminen</button>
         </p>

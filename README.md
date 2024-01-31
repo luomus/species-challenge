@@ -68,24 +68,24 @@ To have many types of challenges, you would need to:
 
 #### Pages
 
-- My participations
-    - open
-    - closed
-    - link to edit
-    - link to results
+- My participations ✅
+    - open ✅
+    - closed ✅
+    - link to edit ✅
+    - link to results ❌
 - Participation creation page ✅
 - Participation edit page ✅
-- Challenge result page
-    - list of species
-    - list of those with >= 100 species
-    - how many % have passed 100 species
-- Admin page
-    - button to add a challenge
+- Challenge result page ❌
+    - list of species ❌
+    - list of those with >= 100 species ❌
+    - how many % have passed 100 species ❌
+- Admin page ✅
+    - button to add a challenge ✅
     - open challenges ✅
     - draft challenges ✅
     - closed challenges ✅
     - edit link to each ✅
-    - statistics of each
+    - statistics page of each
         - number of participants
         - number of those with >= 100 species
         - number of active participants (added species last 7 days)

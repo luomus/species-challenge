@@ -131,16 +131,25 @@ h2 {
     margin-bottom: 0;
 }
 
-/* Button that has rounded corners and light grey 3D effect */
-a.button {
+/* Buttons */
+a.button,
+button {
     background-color: #eee;
     border: 1px solid #999;
     border-radius: 5px;
-    color: #333;
+    color: #000;
     display: inline-block;
     padding: 0.3em 0.4em;
     text-decoration: none;
     margin-right: 1em;
+    font-size: 100%;
+
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%)
+}
+
+a.button:active,
+button:active {
+    transform: translateY(2px);
 }
 
 #taxa {
@@ -169,3 +178,29 @@ a.button {
     min-width: 18em;
     display: inline-block;
 }
+
+#trash {
+    float: right;
+    width: 20%;
+    height: 4em;
+    position: relative;
+}
+
+#trash #visibility {
+    display: none; /* The option field is hidden for non-trashed challenges */
+}
+
+#trash #trash_button {
+    background-color: #ffcccc;
+    background-image: linear-gradient(to top, #ffa7a7 0%, #ffcccc 80%, #ffd8d8 100%)
+}
+
+#trash #confirm_button {
+    display: none; /* Hidden initially */
+    background-image: linear-gradient(to top, #dd0000 0%, #ff6464 80%, #ff9f9f 100%);
+    color: #fff;
+    border: 1px solid #ef7979;
+    position: absolute;
+    bottom: 0;
+}
+
