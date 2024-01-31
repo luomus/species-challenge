@@ -136,6 +136,10 @@ h2 {
     margin-bottom: 0;
 }
 
+.participation .button {
+    margin-left: 1em;
+}
+
 /* Buttons */
 a.button,
 button {
