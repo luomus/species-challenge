@@ -46,10 +46,14 @@ To have many types of challenges, you would need to:
     - No, if there is description which can include this. 
     - Yes, if we want to validate that observation dates are within this limit.
 - Do we need a login info page, or is it enough to just link to login page?
+- Subheadings to species list? e.g. Lehtisammalet
+- Non-species to the list? E.g. voikukat
+    - Yes.
 
 ### Next
 
-- species names to json
+- Species names to json, when we get list from the project.
+- List of species observed in the challenge
 
 ### Setup
 
@@ -72,6 +76,7 @@ To have many types of challenges, you would need to:
     - Setting challenge start and end dates
     - Disable selecting date beyon start/end page
     - Add species names to participation JSON (fi + sci?)
+    - Ability to add additional species
 
 #### Pages
 
@@ -82,10 +87,10 @@ To have many types of challenges, you would need to:
     - link to results ❌
 - Participation creation page ✅
 - Participation edit page ✅
-- Challenge result page ❌
+- Challenge result page ✅
     - list of species ❌
-    - list of those with >= 100 species ❌
-    - how many % have passed 100 species ❌
+    - list of those with >= 100 species / all participants ✅
+    - how many % have passed 100 species ✅
 - Admin page ✅
     - button to add a challenge ✅
     - open challenges ✅

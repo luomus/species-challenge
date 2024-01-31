@@ -27,7 +27,7 @@ def make_challenge_html(challenge):
 
 
 # Function to get participations of current user to this challenge, excluding trashed participations
-def get_participations(challenge_id):
+def get_my_participations(challenge_id):
     with common_db.connection() as conn:
         query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s AND trashed = 0"
         params = (challenge_id, g.user_data["id"])
@@ -46,7 +46,7 @@ def make_participations_html(participations, challenge_id, challenge_status):
         html += "</li>"
 
     if html:
-        html = f"<h2>Osallistumiseni</h2>\n<ul>\n{ html }\n</ul>"
+        html = f"<ul>\n{ html }\n</ul>"
         if challenge_status == "open":
             html += f"<a href='/osallistuminen/{ challenge_id }' class='button'>Lisää uusi osallistuminen</a></p>"
     else:
@@ -54,6 +54,98 @@ def make_participations_html(participations, challenge_id, challenge_status):
         if challenge_status == "open":
             html += f"<a href='/osallistuminen/{ challenge_id }' class='button'>Osallistu</a></p>"
 
+    return html
+
+
+def get_all_participations(challenge_id):
+    with common_db.connection() as conn:
+        query = "SELECT * FROM participations WHERE challenge_id = %s and trashed = 0 ORDER BY taxa_count DESC"
+        params = (challenge_id,)
+        participations = common_db.select(conn, query, params)
+
+    return participations
+
+
+def make_participant_html(participations):
+    '''
+    participations -variable contains data like this:
+    [
+        {
+            'participation_id': 5, 
+            'challenge_id': 4, 
+            'name': 
+            'Nimi Merkkinen', 'place': 
+            'Nimismiehenkylä', 'taxa_count': 28, 
+            'taxa_json': '{"MX.37691": "2024-01-30", "MX.37721": "2024-01-30", "MX.37717": "2024-01-17", "MX.37719": "2024-01-25", "MX.37763": "2024-01-01", "MX.37771": "2024-01-30", "MX.4994055": "2024-01-03", "MX.37752": "2024-01-30", "MX.37747": "2024-01-30", "MX.37826": "2024-01-30", "MX.37812": "2024-01-10", "MX.37819": "2024-01-30", "MX.40138": "2024-01-30", "MX.39201": "2024-01-30", "MX.39235": "2024-01-30", "MX.4973227": "2024-01-17", "MX.39887": "2024-01-30", "MX.39917": "2024-01-11", "MX.38279": "2024-01-02", "MX.38598": "2024-01-13", "MX.39052": "2024-01-20", "MX.39038": "2024-01-11", "MX.39465": "2024-01-18", "MX.39673": "2024-01-30", "MX.39967": "2024-01-30", "MX.38301": "2024-01-30", "MX.40632": "2024-01-11", "MX.38843": "2024-01-25"}', 
+            'meta_created_by': 'MA.3', 
+            'meta_created_at': datetime.datetime(2024, 1, 28, 15, 19, 17), 
+            'meta_edited_by': 'MA.3', 
+            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 37, 2), 
+            'trashed': 0
+        },
+        {
+            'participation_id': 6, 
+            'challenge_id': 4, 
+            'name': "André D'Artágnan", 
+            'place': 'Ääkkölä ääkkölärules', 
+            'taxa_count': 14, 
+            'taxa_json': '{"MX.37691": "2024-01-11", "MX.37721": "2024-01-02", "MX.37717": "2024-01-27", "MX.37719": "2024-01-28", "MX.37763": "2024-01-10", "MX.37771": "2024-01-18", "MX.4994055": "2024-01-18", "MX.37752": "2024-01-30", "MX.40138": "2024-01-30", "MX.40150": "2024-01-30", "MX.39201": "2024-01-30", "MX.4973227": "2024-01-17", "MX.39827": "2024-01-25", "MX.39917": "2024-01-30"}', 
+            'meta_created_by': 'MA.3', 
+            'meta_created_at': datetime.datetime(2024, 1, 28, 15, 29, 1), 
+            'meta_edited_by': 'MA.3', 
+            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 34, 47), 
+            'trashed': 0
+        },
+        {
+            'participation_id': 8, 
+            'challenge_id': 4, 
+            'name': 'Foo', 
+            'place': 'Bar', 
+            'taxa_count': 7, 
+            'taxa_json': '{"MX.37721": "2024-01-11", "MX.37719": "2024-01-16", "MX.39761": "2024-01-01", "MX.39889": "2024-01-30", "MX.39823": "2024-01-31", "MX.39328": "2024-01-31", "MX.38048": "2024-01-10"}', 
+            'meta_created_by': 'MA.3', 
+            'meta_created_at': datetime.datetime(2024, 1, 30, 15, 48, 29), 
+            'meta_edited_by': 'MA.3', 
+            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 35, 36), 
+            'trashed': 0
+        }
+    ]
+    '''
+
+    if not participations:
+        return "<p>Kukaan ei ole vielä osallistunut tähän haasteeseen.</p>"
+
+    html = ""
+    table = ""
+
+    table += "<table id='participant_results'>"
+    table += "<tr><th>Osallistuja</th><th>Paikka</th><th>Lajimäärä</th></tr>"
+
+    target_count = 10
+    target_taxa_count_reached = 0
+    taxa_count_total = 0
+
+    # Table of participants: name, place, taxon_count
+    for participation in participations:
+        table += "<tr>"
+        table += "<td>" + participation["name"] + "</td>"
+        table += "<td>" + participation["place"] + "</td>"
+        table += "<td>" + str(participation["taxa_count"]) + "</td>"
+        table += "</tr>"
+
+        taxa_count_total = taxa_count_total + participation["taxa_count"]
+        if participation["taxa_count"] >= target_count:
+            target_taxa_count_reached += 1
+    
+    table += "</table>"
+
+    number_of_participants = len(participations)
+    target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
+    taxa_count_average = round(taxa_count_total / number_of_participants, 1)
+
+    html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ target_taxa_count_reached_percent } % ) on savuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { taxa_count_average } lajia.</p>"
+
+    html += table 
     return html
 
 
@@ -78,18 +170,21 @@ def main(challenge_id_untrusted):
     # Participation data
     # Logged in user
     if g.user_data:
-        my_participations = get_participations(challenge_id)
+        my_participations = get_my_participations(challenge_id)
         html["participations_html"] = make_participations_html(my_participations, challenge_id, challenge_data["status"])
 
     # Anonymous user
     else:
         html["participations_html"] = "<a href='/login'>Kirjaudu sisään</a> osallistuaksesi.</p>"
 
-
     # Challenge data
     print(challenge_data)
     html["challenge"] = challenge_data
     html["challenge_html"] = make_challenge_html(challenge_data)
+
+    # Participation stats
+    participations = get_all_participations(challenge_id)
+    html["participant_html"] = make_participant_html(participations)
 
 
     return html
