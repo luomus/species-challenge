@@ -58,7 +58,7 @@ def make_participations_html(participations, challenge_id, challenge_status):
     return html
 
 
-def make_taxa_html(participations):
+def make_taxa_html(participations, taxon_id):
     '''
     participations -variable contains data like this:
     [
@@ -91,7 +91,9 @@ def make_taxa_html(participations):
     ]
     '''
     if not participations:
-        return "<p>Ei havaittuja lajeja.</p>"
+        return "<p>Yhtään lajia ei ole vielä havaittu.</p>"
+    
+    taxon_names = common_helpers.load_taxon_file(taxon_id)
     
     number_of_participations = len(participations)
 
@@ -112,7 +114,7 @@ def make_taxa_html(participations):
     table += "<tr><th>Laji</th><th>Havaintoja</th><th>%</th></tr>"
     for taxon_id, count in taxa_counts_sorted:
         table += "<tr>"
-        table += "<td>" + taxon_id + "</td>"
+        table += f"<td>{ taxon_names[taxon_id]['fi'] } <em>({ taxon_names[taxon_id]['sci'] })</em></td>"
         table += "<td>" + str(count) + "</td>"
         table += "<td>" + str(round(((count / number_of_participations) * 100), 1)) + " %</td>"
         table += "</tr>"
@@ -198,7 +200,6 @@ def main(challenge_id_untrusted):
         html["participations_html"] = "<a href='/login'>Kirjaudu sisään</a> osallistuaksesi.</p>"
 
     # Challenge data
-    print(challenge_data)
     html["challenge"] = challenge_data
     html["challenge_html"] = make_challenge_html(challenge_data)
 
@@ -206,6 +207,6 @@ def main(challenge_id_untrusted):
     participations = get_all_participations(challenge_id)
     html["participant_html"] = make_participant_html(participations)
 
-    html["taxa_html"] = make_taxa_html(participations)
+    html["taxa_html"] = make_taxa_html(participations, challenge_data["taxon"])
 
     return html

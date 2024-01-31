@@ -25,9 +25,7 @@ def make_taxa_html(taxon_id, taxa_dates_json = None):
     if taxa_dates_json:
         taxa_dates = json.loads(taxa_dates_json)
 
-    file_path = f"./data/{ taxon_id }_taxa.json"
-    with open(file_path, 'r') as file:
-        taxa_names = json.load(file)
+    taxa_names = common_helpers.load_taxon_file(taxon_id)
 
     for key, taxon in taxa_names.items():
         html += f"<li><span>{ taxon['fi'] } (<em>{ taxon['sci'] }</em>)</span> <input type='date' name='taxa:{ key }' value='{ taxa_dates.get(key, '') }'></li>\n"

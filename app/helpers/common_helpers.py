@@ -152,3 +152,20 @@ def taxon_file_exists(taxon_qname):
     filename = "./data/" + taxon_qname + "_taxa.json"
     return os.path.isfile(filename)
 
+
+def load_taxon_file(taxon_id):
+    """
+    Loads a taxon file from ./data/{taxon}_taxa.json.
+
+    Args:
+    taxon_id (str): The taxon QName.
+
+    Returns:
+    dict: A dictionary containing the taxon file data.
+    """
+    file_path = f"./data/{ taxon_id }_taxa.json"
+    with open(file_path, 'r') as file:
+        taxa_names = json.load(file)
+
+    return taxa_names
+
