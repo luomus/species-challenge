@@ -3,6 +3,7 @@
 from flask import g, flash
 from helpers import common_db
 from helpers import common_helpers
+import json
 
 def get_challenge(challenge_id):
     params = (challenge_id,)
@@ -57,16 +58,7 @@ def make_participations_html(participations, challenge_id, challenge_status):
     return html
 
 
-def get_all_participations(challenge_id):
-    with common_db.connection() as conn:
-        query = "SELECT * FROM participations WHERE challenge_id = %s and trashed = 0 ORDER BY taxa_count DESC"
-        params = (challenge_id,)
-        participations = common_db.select(conn, query, params)
-
-    return participations
-
-
-def make_participant_html(participations):
+def make_taxa_html(participations):
     '''
     participations -variable contains data like this:
     [
@@ -95,23 +87,51 @@ def make_participant_html(participations):
             'meta_edited_by': 'MA.3', 
             'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 34, 47), 
             'trashed': 0
-        },
-        {
-            'participation_id': 8, 
-            'challenge_id': 4, 
-            'name': 'Foo', 
-            'place': 'Bar', 
-            'taxa_count': 7, 
-            'taxa_json': '{"MX.37721": "2024-01-11", "MX.37719": "2024-01-16", "MX.39761": "2024-01-01", "MX.39889": "2024-01-30", "MX.39823": "2024-01-31", "MX.39328": "2024-01-31", "MX.38048": "2024-01-10"}', 
-            'meta_created_by': 'MA.3', 
-            'meta_created_at': datetime.datetime(2024, 1, 30, 15, 48, 29), 
-            'meta_edited_by': 'MA.3', 
-            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 35, 36), 
-            'trashed': 0
         }
     ]
     '''
+    if not participations:
+        return "<p>Ei havaittuja lajeja.</p>"
+    
+    number_of_participations = len(participations)
 
+    taxa_counts = dict()
+    for participation in participations:
+        # Get taxa dict from taxa_jdon field
+        taxa = json.loads(participation["taxa_json"])
+        
+        for taxon_id, date in taxa.items():
+            if taxon_id not in taxa_counts:
+                taxa_counts[taxon_id] = 0
+            taxa_counts[taxon_id] += 1
+
+    # Sort taxa by count
+    taxa_counts_sorted = sorted(taxa_counts.items(), key=lambda x: x[1], reverse=True)
+
+    table = "<table id='taxa_results'>"
+    table += "<tr><th>Laji</th><th>Havaintoja</th><th>%</th></tr>"
+    for taxon_id, count in taxa_counts_sorted:
+        table += "<tr>"
+        table += "<td>" + taxon_id + "</td>"
+        table += "<td>" + str(count) + "</td>"
+        table += "<td>" + str(round(((count / number_of_participations) * 100), 1)) + " %</td>"
+        table += "</tr>"
+
+    table += "</table>"
+    
+    return table
+
+
+def get_all_participations(challenge_id):
+    with common_db.connection() as conn:
+        query = "SELECT * FROM participations WHERE challenge_id = %s and trashed = 0 ORDER BY taxa_count DESC"
+        params = (challenge_id,)
+        participations = common_db.select(conn, query, params)
+
+    return participations
+
+
+def make_participant_html(participations):
     if not participations:
         return "<p>Kukaan ei ole vielä osallistunut tähän haasteeseen.</p>"
 
@@ -186,5 +206,6 @@ def main(challenge_id_untrusted):
     participations = get_all_participations(challenge_id)
     html["participant_html"] = make_participant_html(participations)
 
+    html["taxa_html"] = make_taxa_html(participations)
 
     return html

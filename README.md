@@ -68,6 +68,7 @@ To have many types of challenges, you would need to:
 - Plan:
     - Admin role set by custom value from Laji.fi?
 - Test:
+    - Automated testing
     - Giving malicious login token
 - Features:
     - Admin ability to edit any participations
