@@ -35,7 +35,7 @@ def make_participations_html(participations):
             participation['taxa_count'] = 0
 
         html += f"<div class='participation'>\n"
-        html += f"<h3>{ participation['title'] }</a></h3>\n"
+        html += f"<h3><a href='/haaste/{ participation['challenge_id'] }'>{ participation['title'] }</a></h3>\n"
         html += f"<p>{ participation['name'] }, { participation['place'] }</p>\n"
         html += f"<p>{ participation['taxa_count'] } lajia <a href='/osallistuminen/{ participation['challenge_id'] }/{ participation['participation_id'] }' class='button'>Muokkaa osallistumista</a></p>\n"
         html += "</div>\n"

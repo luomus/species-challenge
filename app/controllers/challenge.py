@@ -154,10 +154,10 @@ def make_participant_html(participations):
         sparkles = ""
         if participation["taxa_count"] >= target_count:
             sparkles = "✨"
-            
+
         table += "<tr>"
         table += f"<td>{ participation['name'] }</td>"
-        table += f"<td>{ participation['place'] }/td>"
+        table += f"<td>{ participation['place'] }</td>"
         table += f"<td>{ participation['taxa_count'] } { sparkles }</td>"
         table += "</tr>"
 

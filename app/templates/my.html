@@ -16,28 +16,28 @@
 
     {% if html["open_participations"] != "" %}
         <div class="challenges open">
-            <h2>Osallistumiset avoimiin haasteisiin</h2>
+            <h2>Osallistumisesi avoimiin haasteisiin</h2>
             {{ html["open_participations"]|safe }}
         </div>
     {% endif %}
 
     {% if html["draft_participations"] != "" %}
         <div class="challenges draft">
-            <h2>Osallistumiset väliaikaisesti suljettuihin haasteisiin</h2>
+            <h2>Osallistumisesi väliaikaisesti suljettuihin haasteisiin</h2>
             {{ html["draft_participations"]|safe }}
         </div>
     {% endif %}
 
     {% if html["closed_participations"] != "" %}
         <div class="challenges closed">
-            <h2>Osallistumiset päättyneisiin haasteisiin</h2>
+            <h2>Osallistumisesi päättyneisiin haasteisiin</h2>
             {{ html["closed_participations"]|safe }}
         </div>
     {% endif %}
 
     {% if html["trashed_participations"] != "" %}
         <div class="challenges trashed">
-            <h2>Poistetut osallistumiset</h2>
+            <h2>Poistamasi osallistumiset</h2>
             {{ html["trashed_participations"]|safe }}
         </div>
     {% endif %}
