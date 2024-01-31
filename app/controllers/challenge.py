@@ -109,19 +109,21 @@ def make_taxa_html(participations, taxon_id):
 
     # Sort taxa by count
     taxa_counts_sorted = sorted(taxa_counts.items(), key=lambda x: x[1], reverse=True)
+    number_of_taxa = len(taxa_counts_sorted)
 
-    table = "<table id='taxa_results'>"
-    table += "<tr><th>Laji</th><th>Havaintoja</th><th>%</th></tr>"
+    html = f"<p>Osallistujat ovat havainneet yhteensä { number_of_taxa } lajia.</p>"
+    html += "<table id='taxa_results'>"
+    html += "<tr><th>Laji</th><th>Havaintoja</th><th>%</th></tr>"
     for taxon_id, count in taxa_counts_sorted:
-        table += "<tr>"
-        table += f"<td>{ taxon_names[taxon_id]['fi'] } <em>({ taxon_names[taxon_id]['sci'] })</em></td>"
-        table += "<td>" + str(count) + "</td>"
-        table += "<td>" + str(round(((count / number_of_participations) * 100), 1)) + " %</td>"
-        table += "</tr>"
+        html += "<tr>"
+        html += f"<td>{ taxon_names[taxon_id]['fi'] } <em>({ taxon_names[taxon_id]['sci'] })</em></td>"
+        html += f"<td>{ count }</td>"
+        html += f"<td>{ round(((count / number_of_participations) * 100), 1) } %</td>"
+        html += "</tr>"
 
-    table += "</table>"
+    html += "</table>"
     
-    return table
+    return html
 
 
 def get_all_participations(challenge_id):
@@ -149,10 +151,14 @@ def make_participant_html(participations):
 
     # Table of participants: name, place, taxon_count
     for participation in participations:
+        sparkles = ""
+        if participation["taxa_count"] >= target_count:
+            sparkles = "✨"
+            
         table += "<tr>"
-        table += "<td>" + participation["name"] + "</td>"
-        table += "<td>" + participation["place"] + "</td>"
-        table += "<td>" + str(participation["taxa_count"]) + "</td>"
+        table += f"<td>{ participation['name'] }</td>"
+        table += f"<td>{ participation['place'] }/td>"
+        table += f"<td>{ participation['taxa_count'] } { sparkles }</td>"
         table += "</tr>"
 
         taxa_count_total = taxa_count_total + participation["taxa_count"]
