@@ -35,7 +35,7 @@
             var trashButton = document.getElementById("trash_button");
             var confirmButton = document.getElementById("confirm_button");
             var form = document.getElementById("challenge");
-            var visibilitySelect = document.getElementById("visibility");
+            var trashedSelect = document.getElementById("trashed");
 
             trashButton.addEventListener("click", function() {
                 confirmButton.style.display = "block"; // Show the confirm button
@@ -43,7 +43,7 @@
             });
 
             confirmButton.addEventListener("click", function() {
-                visibilitySelect.value = "trash"; // Set the visibility to trash
+                trashedSelect.value = "1"; // Set trashed = 1 (true)
                 form.submit(); // Submit the form
             });
         });
@@ -57,7 +57,7 @@
 
     <p><a href="/haaste/{{ html["challenge_id"] }}">&laquo; Takaisin tämän haasteen etusivulle</a></p>
 
-    <form name="challenge" id="challenge" action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
+    <form name="challenge" id="challenge" class="trashed_{{ html['data_fields'].get('trashed', 'false') }}" action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
     
         <p>
             <label for="name">Osallistujan nimi tai nimimerkki:</label>
@@ -81,12 +81,14 @@
 
         <!-- Trash button -->
         <div id="trash">
-            <select id="visibility" name="visibility">
-                <option value="public">Julkinen</option>
-                <option value="trash">Poistettu</option>
-                <!-- Other options here -->
-            </select>
-    
+            <div id="trashed_formfield">
+                <label for="trashed">Osallistumisen tila:</label>
+                <select id="trashed" name="trashed">
+                    <option value="0" {{ html['public_selected'] }}>Julkinen</option>
+                    <option value="1" {{ html['trashed_selected'] }}>Poistettu</option>
+                </select>
+            </div>
+
             <button type="button" id="trash_button">Poista osallistuminen</button>
             <button type="button" id="confirm_button">Olen varma: Poista osallistuminen</button>
         </div>

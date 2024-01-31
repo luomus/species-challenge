@@ -61,13 +61,14 @@ def save_participation(challenge_id, participation_id, form_data):
             form_data["taxa_json"],
             g.user_data["id"],
             now,
+            form_data["trashed"],
             challenge_id,
             participation_id,
             g.user_data["id"] # Only allow editing if user is the creator
         )
 
         with common_db.connection() as conn:
-            query = "UPDATE participations SET name = %s, place = %s, taxa_count = %s, taxa_json = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s AND participation_id = %s AND meta_created_by = %s"
+            query = "UPDATE participations SET name = %s, place = %s, taxa_count = %s, taxa_json = %s, meta_edited_by = %s, meta_edited_at = %s, trashed = %s WHERE challenge_id = %s AND participation_id = %s AND meta_created_by = %s"
             success, _ = common_db.transaction(conn, query, params)
 
         # Return success and existing participation ID
@@ -82,6 +83,7 @@ def save_participation(challenge_id, participation_id, form_data):
         form_data["place"],
         form_data["taxa_count"],
         form_data["taxa_json"],
+        form_data["trashed"],
         g.user_data["id"],
         now,
         g.user_data["id"],
@@ -89,7 +91,7 @@ def save_participation(challenge_id, participation_id, form_data):
     )
 
     with common_db.connection() as conn:
-        query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
 
     return success, id
@@ -208,7 +210,11 @@ def get_participation(challenge_id, participation_id):
 
 
 def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
+
+    # Default values
     html = dict()
+    html["public_selected"] = "selected='selected'"
+    html["trashed_selected"] = "selected='selected'"
 
     # Get challenge and participation IDs from URL
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
@@ -265,6 +271,11 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         
         html['taxa'] = make_taxa_html(challenge["taxon"], participation["taxa_json"])
         html["data_fields"] = participation
+
+        # Change default trashed value based on database value
+        if participation["trashed"]:
+            html["trashed_selected"] = "selected='selected'"
+            html["public_selected"] = ""
 
         return html
 

@@ -181,13 +181,12 @@ button:active {
 
 #trash {
     float: right;
-    width: 20%;
+    width: 20em;
     height: 4em;
     position: relative;
-}
-
-#trash #visibility {
-    display: none; /* The option field is hidden for non-trashed challenges */
+    background-color: #ffcccc;
+    border-radius: 5px;
+    padding: 0.5em;
 }
 
 #trash #trash_button {
@@ -201,6 +200,18 @@ button:active {
     color: #fff;
     border: 1px solid #ef7979;
     position: absolute;
-    bottom: 0;
+    bottom: 0.5em;
+}
+
+#trash #trashed_formfield {
+    display: none; /* The option field is hidden for non-trashed challenges */
+}
+    
+/* If form is already trashed, show the select option field, but not the trash button */
+.trashed_1 #trash #trashed_formfield {
+    display: block;
+}
+.trashed_1 #trash #trash_button {
+    display: none;
 }
 

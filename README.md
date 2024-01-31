@@ -35,6 +35,8 @@ To have many types of challenges, you would need to:
 
 ## Todo
 
+- Test http://localhost:8081/osallistuminen/4/4
+
 ### Decidions to do
 
 - Should challenge have a description, or is a link to an external website enough?
