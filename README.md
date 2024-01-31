@@ -61,12 +61,14 @@ To have many types of challenges, you would need to:
 
 ### Features
 
-- Test giving malicious login token
-- Admin ability to edit any participations
-- Admin set by custom value from Laji.fi?
-- Trash own participations
-- Challenge sort order (int)
-- Mobile navi
+- Plan:
+    - Admin role set by custom value from Laji.fi?
+- Test:
+    - Giving malicious login token
+- Features:
+    - Admin ability to edit any participations
+    - Challenge sort order (int) on front page
+    - Mobile navi
 
 #### Pages
 
@@ -87,9 +89,9 @@ To have many types of challenges, you would need to:
     - draft challenges ✅
     - closed challenges ✅
     - edit link to each ✅
-    - statistics page of each
-        - number of participants
-        - number of those with >= 100 species
-        - number of active participants (added species last 7 days)
+    - statistics page of each ✅
+        - number of participants ✅
+        - number of those with >= 100 species ✅
+        - number of active participants (edited participation during last 7 days) ❌
 - Challenge creation page ✅
 - Challenge edit page ✅

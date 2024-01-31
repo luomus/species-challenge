@@ -29,7 +29,7 @@ def make_challenge_html(challenge):
 # Function to get participations of current user to this challenge, excluding trashed participations
 def get_participations(challenge_id):
     with common_db.connection() as conn:
-        query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s AND trashed = 0)"
+        query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s AND trashed = 0"
         params = (challenge_id, g.user_data["id"])
         participations = common_db.select(conn, query, params)
 
