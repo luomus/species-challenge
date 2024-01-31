@@ -65,18 +65,27 @@ To have many types of challenges, you would need to:
 ### Features
 
 - Plan:
+    - Prod deployment
     - Admin role set by custom value from Laji.fi?
 - Test:
     - Automated testing
     - Giving malicious login token
-- Features:
-    - Admin ability to edit any participations
-    - Challenge sort order (int) on front page
+    - Thorough testing by multiple people
+- First production version:
+    - All 3 lists
+    - Adding additional species (only species)
+    - Handling higher taxa
     - Mobile navi
     - Setting challenge start and end dates
-    - Disable selecting date beyon start/end page
-    - Add species names to participation JSON (fi + sci?)
-    - Ability to add additional species
+    - Disable selecting date beyond start/end page
+- Later:
+    - Own data dump download
+    - Admin ability to edit any participations
+    - Challenge sort order (int) for the front page
+    - Chart of species accumulation
+    - Activity stats, e.g. users active during last 7 days
+- Nice:
+    - Admin to see user email
 
 #### Pages
 
@@ -84,11 +93,11 @@ To have many types of challenges, you would need to:
     - open ✅
     - closed ✅
     - link to edit ✅
-    - link to results ❌
+    - link to results ✅
 - Participation creation page ✅
 - Participation edit page ✅
 - Challenge result page ✅
-    - list of species ❌
+    - list of species ✅
     - list of those with >= 100 species / all participants ✅
     - how many % have passed 100 species ✅
 - Admin page ✅
