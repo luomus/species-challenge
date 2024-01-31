@@ -26,10 +26,10 @@ def make_challenge_html(challenge):
     return html
 
 
-# Function to check if current user has already participated in this challenge
-def check_participations(challenge_id):
+# Function to get participations of current user to this challenge, excluding trashed participations
+def get_participations(challenge_id):
     with common_db.connection() as conn:
-        query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s"
+        query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s AND (trashed IS NULL OR trashed = 0)"
         params = (challenge_id, g.user_data["id"])
         participations = common_db.select(conn, query, params)
 
@@ -78,7 +78,7 @@ def main(challenge_id_untrusted):
     # Participation data
     # Logged in user
     if g.user_data:
-        my_participations = check_participations(challenge_id)
+        my_participations = get_participations(challenge_id)
         html["participations_html"] = make_participations_html(my_participations, challenge_id, challenge_data["status"])
 
     # Anonymous user
