@@ -34,6 +34,7 @@ CREATE TABLE `participations` (
   `meta_created_at` datetime NOT NULL,
   `meta_edited_by` varchar(16) NOT NULL, User id.
   `meta_edited_at` datetime NOT NULL
+  `trashed` tinyint(1) NOT NULL DEFAULT 0, Whether the participation has been moved to trash, i.e. deleted (true) or is active (false).
 )
 
 # Flask session variables:
