@@ -203,6 +203,10 @@ def get_participation(challenge_id, participation_id):
     with common_db.connection() as conn:
         query = "SELECT * FROM participations WHERE participation_id = %s AND challenge_id = %s AND meta_created_by = %s"
         participation = common_db.select(conn, query, params)
+
+    # If participation not found with these parameters, return False
+    if not participation:
+        return False
     
     return participation[0]
 
@@ -238,7 +242,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     # Case A: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:
-        print("CASE B")
+        print("CASE A")
 
         # Allow adding participation only if challenge is open
         if challenge["status"] != "open":
@@ -253,7 +257,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     # Case B: User opened an existing participation for editing.
     # Example: http://localhost:8081/osallistuminen/4/6
     if participation_id and not form_data:
-        print("CASE A")
+        print("CASE B")
 
         # Show warning if challenge is closed or draft, but still allow editing.
         if challenge["status"] != "open":
