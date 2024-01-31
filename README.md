@@ -69,6 +69,9 @@ To have many types of challenges, you would need to:
     - Admin ability to edit any participations
     - Challenge sort order (int) on front page
     - Mobile navi
+    - Setting challenge start and end dates
+    - Disable selecting date beyon start/end page
+    - Add species names to participation JSON (fi + sci?)
 
 #### Pages
 

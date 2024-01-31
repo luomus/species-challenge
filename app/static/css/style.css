@@ -91,6 +91,11 @@ a:visited {
     gap: 10px; /* Adds space between items in #login_navi */
 }
 
+#login_navi span {
+    display: inline-block;
+    margin-left: 0.75em;
+}
+
 #login_p {
     font-size: 120%;
 }
