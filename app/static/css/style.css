@@ -126,6 +126,13 @@ h2 {
     border-left: 5px solid #ad301f;
 }
 
+.trashed .challenge,
+.trashed .participation {
+    border-left: 5px solid #666;
+    background-color: #eee;
+    color: #666
+}
+
 .challenge h3,
 .participation h3 {
     margin-top: 0;

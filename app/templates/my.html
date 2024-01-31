@@ -35,6 +35,13 @@
         </div>
     {% endif %}
 
+    {% if html["trashed_participations"] != "" %}
+        <div class="challenges trashed">
+            <h2>Poistetut osallistumiset</h2>
+            {{ html["trashed_participations"]|safe }}
+        </div>
+    {% endif %}
+
 
 
 
