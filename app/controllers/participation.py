@@ -214,7 +214,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     # Default values
     html = dict()
     html["public_selected"] = "selected='selected'"
-    html["trashed_selected"] = "selected='selected'"
+    html["trashed_selected"] = ""
 
     # Get challenge and participation IDs from URL
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
