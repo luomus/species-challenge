@@ -50,6 +50,12 @@ To have many types of challenges, you would need to:
 
 ### Next
 
+- Check http://localhost:8081/osallistuminen/4/6
+    - it has e.g. ahvenvita, whic is not part of species list MX.67601
+        - why does it save it? this is how it should be; save taxa that are not on the basic list
+        - why does it show it on the list? should show at the end
+        - should we version the species lists? work with 
+        - how to show names of additional species? fetch from participation table, api or json?
 - Species names to json, when we get list from the project.
 - List of species observed in the challenge
 

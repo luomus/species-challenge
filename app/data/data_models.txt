@@ -7,7 +7,7 @@ Only admins can create and edit challenges.
 
 CREATE TABLE `challenges` (
   `challenge_id` int(11) NOT NULL,
-  `taxon` varchar(16) NOT NULL, Taxon identifier.
+  `taxon` varchar(16) NOT NULL, Taxon file identifier.
   `year` int(11) DEFAULT NULL,
   `type` varchar(16) NOT NULL, Currently only one allowed value: challenge100.
   `title` varchar(255) NOT NULL, Name of the challenge.

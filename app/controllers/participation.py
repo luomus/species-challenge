@@ -8,7 +8,7 @@ from helpers import common_helpers
 import json
 
 
-def make_taxa_html(taxon_id, taxa_dates_json = None):
+def make_taxa_html(taxon_file_id, taxa_dates_json = None):
     """
     Generates a list of species names and date input fields for a given higher taxon.
 
@@ -19,18 +19,74 @@ def make_taxa_html(taxon_id, taxa_dates_json = None):
     Returns:
         str: The HTML code for the list of species names and date input fields.
     """
-    html = ""
+    basic_taxa_html = ""
+    additional_taxa_html = ""
 
-    taxa_dates = {} # Empty dictionary for new participations
+    # Taxa names and dates form the participation (from database)
+    # Default empty dictionary for new participations
+    taxa_dates = {}
     if taxa_dates_json:
         taxa_dates = json.loads(taxa_dates_json)
+    """
+    taxa_dates sample: 
+    {'MX.37691': '2024-01-11', 'MX.37721': '2024-01-02', 'MX.37717': '2024-01-27', 'MX.37719': '2024-01-28', 'MX.37763': '2024-01-10', 'MX.37771': '2024-01-18', 'MX.4994055': '2024-01-18', 'MX.37752': '2024-01-30', 'MX.40138': '2024-01-30', 'MX.40150': '2024-01-30', 'MX.39201': '2024-01-30', 'MX.4973227': '2024-01-17', 'MX.39827': '2024-01-25', 'MX.39917': '2024-01-30'}
 
-    taxa_names = common_helpers.load_taxon_file(taxon_id)
+    """
 
-    for key, taxon in taxa_names.items():
-        html += f"<li><span>{ taxon['fi'] } (<em>{ taxon['sci'] }</em>)</span> <input type='date' name='taxa:{ key }' value='{ taxa_dates.get(key, '') }'></li>\n"
+    # Basic taxa names of this challenge
+    taxa_names = common_helpers.load_taxon_file(taxon_file_id)
+    """
+    taxa_names sample:
+    {
+        "MX.43922": {
+        "sci": "Pohlia nutans",
+        "fi": "nuokkuvarstasammal",
+        "order": 91164
+        },
+        "MX.43502": {
+        "sci": "Climacium dendroides",
+        "fi": "palmusammal",
+        "order": 91386
+        }
+    }
+    """
 
-    html = f"<ul id='taxa'>\n{ html }</ul>\n"
+    # All taxa names of the higher taxon (e.g. plants)
+    all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
+
+    # Loop taxa_names, i.e. the basic taxa
+    for taxon_id, taxon_data in taxa_names.items():
+        # Add to basic_taxa_html, fill in with date from taxa_dates if found
+        basic_taxa_html += f"""
+            <li>
+                <span>{ taxon_data['fi'] } (<em>{ taxon_data['sci'] }</em>)</span>
+                <input type='date' name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }'>
+            </li>\n"""
+        # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
+        if taxon_id in taxa_dates:
+            del taxa_dates[taxon_id]
+
+    # Loop remaining taxa_dates, i.e. the additional taxa
+    for observed_taxon_id, observed_taxon_date in taxa_dates.items():
+        # Add to additional_taxa_html
+        fi = all_taxa_names[observed_taxon_id]["fi"]
+        sci = all_taxa_names[observed_taxon_id]["sci"]
+        additional_taxa_html += f"""
+            <li>
+                <span>{ fi } (<em>{ sci }</em>)</span>
+                <input type='date' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }'>
+            </li>\n"""
+
+    # Combine into a list
+    html = f"""
+        <ul id='taxa'>\n
+        <li class='list_heading_3'><h3>Peruslajit</h3></li>\n
+            { basic_taxa_html }
+        <li class='list_heading_3'><h3>Lisälajit</h3></li>\n
+            { additional_taxa_html }
+        </ul>\n
+        """
+
     return html
 
 

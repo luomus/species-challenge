@@ -139,31 +139,31 @@ def valid_taxon_qname(input_string):
     return bool(re.match(pattern, input_string))
 
 
-def taxon_file_exists(taxon_qname):
+def taxon_file_exists(taxon_file_id):
     """
-    Checks if a file exists in ./data/{taxon}_taxa.json.
+    Checks if a file exists in ./data/{taxon_file_id}.json.
 
     Args:
-    taxon_qname (str): The taxon QName.
+    taxon_file_id (str): The taxon file id (from database).
 
     Returns:
     bool: True if the file exists, False otherwise.
     """
-    filename = "./data/" + taxon_qname + "_taxa.json"
+    filename = "./data/" + taxon_file_id + ".json"
     return os.path.isfile(filename)
 
 
-def load_taxon_file(taxon_id):
+def load_taxon_file(taxon_file_id):
     """
-    Loads a taxon file from ./data/{taxon}_taxa.json.
+    Loads a taxon file from ./data/{taxon_file_id}.json.
 
     Args:
-    taxon_id (str): The taxon QName.
+    taxon_id (str): The taxon file id (from database).
 
     Returns:
     dict: A dictionary containing the taxon file data.
     """
-    file_path = f"./data/{ taxon_id }_taxa.json"
+    file_path = f"./data/{ taxon_file_id }.json"
     with open(file_path, 'r') as file:
         taxa_names = json.load(file)
 
