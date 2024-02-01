@@ -56,6 +56,9 @@ def make_taxa_html(taxon_file_id, taxa_dates_json = None):
 
     # Loop taxa_names, i.e. the basic taxa
     for taxon_id, taxon_data in taxa_names.items():
+        # Subheadings defined in taxon file 
+        if "heading" in taxon_data:
+            basic_taxa_html += f"<li class='list_heading_4'><h4>{ taxon_data['heading'] }</h4></li>\n"
         # Add to basic_taxa_html, fill in with date from taxa_dates if found
         basic_taxa_html += f"""
             <li>

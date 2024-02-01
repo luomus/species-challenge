@@ -2,7 +2,8 @@
  "MX.43922": {
   "sci": "Pohlia nutans",
   "fi": "nuokkuvarstasammal",
-  "order": 91164
+  "order": 91164,
+  "heading": "Lehtisammalet"
  },
  "MX.43502": {
   "sci": "Climacium dendroides",
@@ -42,7 +43,8 @@
  "MX.44366": {
   "sci": "Marchantia polymorpha",
   "fi": "keuhkosammal",
-  "order": 92362
+  "order": 92362,
+  "heading": "Maksasammalet"
  },
  "MX.44182": {
   "sci": "Radula complanata",
@@ -52,7 +54,8 @@
  "MX.37691": {
   "sci": "Spinulum annotinum",
   "fi": "riidenlieko",
-  "order": 93117
+  "order": 93117,
+  "heading": "Putkilokasvit"
  },
  "MX.37721": {
   "sci": "Equisetum arvense",

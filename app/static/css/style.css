@@ -182,10 +182,6 @@ button:active {
     background-color: #d1ff98;
 }
 
-#taxa tr:nth-child(even) {
-    background-color: brown;
-}
-
 #taxa li span {
     min-width: 18em;
     display: inline-block;
