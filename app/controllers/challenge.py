@@ -93,7 +93,7 @@ def make_taxa_html(participations, taxon_id):
     if not participations:
         return "<p>Yhtään lajia ei ole vielä havaittu.</p>"
     
-    taxon_names = common_helpers.load_taxon_file(taxon_id)
+    taxon_names = common_helpers.load_taxon_file(taxon_id + "_all")
     
     number_of_participations = len(participations)
 
