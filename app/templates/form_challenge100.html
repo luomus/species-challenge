@@ -41,51 +41,53 @@
     <title>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</title>
     <script>
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const listItems = document.querySelectorAll('#taxa li');
-            listItems.forEach(li => {
-                // Update class based on the initial state
-                updateClass(li);
+    // Trash button logic
+    document.addEventListener("DOMContentLoaded", function() {
+        var trashButton = document.getElementById("trash_button");
+        var confirmButton = document.getElementById("confirm_button");
+        var form = document.getElementById("challenge");
+        var trashedSelect = document.getElementById("trashed");
 
-                // Add click event listener
-                li.addEventListener('click', function() {
-                    let dateInput = this.querySelector('input[type="date"]');
-                    if (dateInput && dateInput.value === '') {
-                        dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
-                        updateClass(this);
-                    }
-                });
-            });
+        trashButton.addEventListener("click", function() {
+            confirmButton.style.display = "block"; // Show the confirm button
+            trashButton.style.display = "none"; // Hide the trash button
         });
 
-        function updateClass(li) {
-            let dateInput = li.querySelector('input[type="date"]');
-            if (dateInput && dateInput.value !== '') {
-                li.classList.add('date-filled');
-            } else {
-                li.classList.remove('date-filled');
-            }
+        confirmButton.addEventListener("click", function() {
+            trashedSelect.value = "1"; // Set trashed = 1 (true)
+            form.submit(); // Submit the form
+        });
+    });
+
+    // Taxa date field selection and styles logic
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const listItems = document.querySelectorAll('#taxa li');
+        listItems.forEach(li => {
+            // Update class based on the initial state
+            updateClass(li);
+
+            // Add click event listener
+            li.addEventListener('click', function() {
+                let dateInput = this.querySelector('input[type="date"]');
+                if (dateInput && dateInput.value === '') {
+                    dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
+                    updateClass(this);
+                }
+            });
+        });
+    });
+
+    function updateClass(li) {
+        let dateInput = li.querySelector('input[type="date"]');
+        if (dateInput && dateInput.value !== '') {
+            li.classList.add('date-filled');
+        } else {
+            li.classList.remove('date-filled');
         }
+    }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            var trashButton = document.getElementById("trash_button");
-            var confirmButton = document.getElementById("confirm_button");
-            var form = document.getElementById("challenge");
-            var trashedSelect = document.getElementById("trashed");
-
-            trashButton.addEventListener("click", function() {
-                confirmButton.style.display = "block"; // Show the confirm button
-                trashButton.style.display = "none"; // Hide the trash button
-            });
-
-            confirmButton.addEventListener("click", function() {
-                trashedSelect.value = "1"; // Set trashed = 1 (true)
-                form.submit(); // Submit the form
-            });
-        });
-
-        // Todo: Clear CSS .date-filled when date field is emptied
-        // Code TBD
+    // Todo: Clear CSS .date-filled when date field is emptied
+    // Code TBD
 
     // Autocomplete
     document.addEventListener('DOMContentLoaded', function() {
