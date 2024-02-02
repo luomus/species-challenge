@@ -36,6 +36,10 @@
         .autocomplete-item:hover {
             background-color: #bcffbc;
         }
+
+        #taxa .taxon_name {
+            cursor: pointer;
+        }
     </style>
 
     <title>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</title>
@@ -62,20 +66,27 @@
     // Taxa date field selection and styles logic
     document.addEventListener('DOMContentLoaded', (event) => {
         document.querySelectorAll('#taxa li').forEach(addClickListenerToLi);
+        document.querySelectorAll('#taxa li').forEach(addInputEventListenerToDateInput);
     });
 
     function addClickListenerToLi(li) {
-        // Update class based on the initial state
-        updateClass(li);
 
-        // Add click event listener
-        li.addEventListener('click', function() {
-            let dateInput = this.querySelector('input[type="date"]');
-            if (dateInput && dateInput.value === '') {
-                dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
-                updateClass(this);
-            }
-        });
+        // Find the span with class 'taxon_name' within the li
+        const taxonNameSpan = li.querySelector('.taxon_name');
+
+        if (taxonNameSpan) {
+            // Update class based on the initial state
+            updateClass(li);
+
+            // Add click event listener to the span
+            taxonNameSpan.addEventListener('click', function() {
+                let dateInput = li.querySelector('input[type="date"]');
+                if (dateInput && dateInput.value === '') {
+                    dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
+                    updateClass(li);
+                }
+            });
+        }
     }
 
     function updateClass(li) {
@@ -84,6 +95,30 @@
             li.classList.add('date-filled');
         } else {
             li.classList.remove('date-filled');
+        }
+    }
+
+    // Function to update the class based on the input value
+    function updateClassBasedOnDateInput(input) {
+        const li = input.closest('li'); // Find the closest li ancestor
+        if (input.value !== '') {
+            li.classList.add('date-filled');
+        } else {
+            li.classList.remove('date-filled');
+        }
+    }
+
+    // Function to add event listeners to date input within a specific li
+    function addInputEventListenerToDateInput(li) {
+        const dateInput = li.querySelector('input[type="date"]');
+        if (dateInput) {
+            // Initially update class based on the current state of the input
+            updateClassBasedOnDateInput(dateInput);
+
+            // Add event listener for changes to the input
+            dateInput.addEventListener('input', function() {
+                updateClassBasedOnDateInput(this);
+            });
         }
     }
 
@@ -134,15 +169,16 @@
                                 // Create a new <li> element
                                 const li = document.createElement('li');
                                 li.innerHTML = `
-                                    <span>${item.value} (<em>${item.payload.scientificName}</em>)</span>
+                                    <span class='taxon_name'>${item.value} (<em>${item.payload.scientificName}</em>)</span>
                                     <input type="date" name="taxa:${item.key}" value="">
                                 `;
 
                                 // Append the new <li> to the "taxa" list
                                 taxaList.appendChild(li);
 
-                                // Add click event listener to the newly added <li>
+                                // Add event listeners to the newly added <li>
                                 addClickListenerToLi(li);
+                                addInputEventListenerToDateInput(li);
                             });
                         });
                     })

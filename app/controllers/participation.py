@@ -65,7 +65,7 @@ def make_taxa_html(taxon_file_id, taxa_dates_json = None):
         # Add to basic_taxa_html, fill in with date from taxa_dates if found
         basic_taxa_html += f"""
             <li>
-                <span>{ taxon_data['fi'] } (<em>{ taxon_data['sci'] }</em>)</span>
+                <span class='taxon_name'>{ taxon_data['fi'] } (<em>{ taxon_data['sci'] }</em>)</span>
                 <input type='date' name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }'>
             </li>\n"""
 
@@ -80,7 +80,7 @@ def make_taxa_html(taxon_file_id, taxa_dates_json = None):
         sci = all_taxa_names[observed_taxon_id]["sci"]
         additional_taxa_html += f"""
             <li>
-                <span>{ fi } (<em>{ sci }</em>)</span>
+                <span class='taxon_name'>{ fi } (<em>{ sci }</em>)</span>
                 <input type='date' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }'>
             </li>\n"""
 
