@@ -61,21 +61,22 @@
 
     // Taxa date field selection and styles logic
     document.addEventListener('DOMContentLoaded', (event) => {
-        const listItems = document.querySelectorAll('#taxa li');
-        listItems.forEach(li => {
-            // Update class based on the initial state
-            updateClass(li);
-
-            // Add click event listener
-            li.addEventListener('click', function() {
-                let dateInput = this.querySelector('input[type="date"]');
-                if (dateInput && dateInput.value === '') {
-                    dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
-                    updateClass(this);
-                }
-            });
-        });
+        document.querySelectorAll('#taxa li').forEach(addClickListenerToLi);
     });
+
+    function addClickListenerToLi(li) {
+        // Update class based on the initial state
+        updateClass(li);
+
+        // Add click event listener
+        li.addEventListener('click', function() {
+            let dateInput = this.querySelector('input[type="date"]');
+            if (dateInput && dateInput.value === '') {
+                dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
+                updateClass(this);
+            }
+        });
+    }
 
     function updateClass(li) {
         let dateInput = li.querySelector('input[type="date"]');
@@ -139,6 +140,9 @@
 
                                 // Append the new <li> to the "taxa" list
                                 taxaList.appendChild(li);
+
+                                // Add click event listener to the newly added <li>
+                                addClickListenerToLi(li);
                             });
                         });
                     })
