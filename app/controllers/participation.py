@@ -304,6 +304,8 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     html["challenge"] = challenge
 
+    # Todo: min and max dates from database
+
     # Case A: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:
         print("CASE A")

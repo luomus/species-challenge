@@ -35,8 +35,19 @@ To have many types of challenges, you would need to:
 
 ## Todo
 
-- Add taxon autocomplete dropdown, see ChatGPT
+- Adjust additional species API call: only finnish, only species, colloquial names, match type?
+- Min and max dates instead of year to database
+    - Database structure change, content change and sql dump update
+    - Challenge form update, with date fields
+    - Challenge year validation replacement with min & max validation
+    - Test
+    - Use these when creating date fields on participation form
+        - Existing fields / Python
+        - Empty fields / Python
+        - Additional species fields / js
 - Health check
+    - Fetch unique participation taxa from database (try)
+    - Check that files for all taxa exist
 - Tests with Playwright & Autogen?
 
 ### Decidions to do
