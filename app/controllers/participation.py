@@ -6,6 +6,7 @@ from flask import g, flash
 from helpers import common_db
 from helpers import common_helpers
 import json
+import os
 
 
 def make_taxa_html(taxon_file_id, taxa_dates_json = None):
@@ -56,15 +57,18 @@ def make_taxa_html(taxon_file_id, taxa_dates_json = None):
 
     # Loop taxa_names, i.e. the basic taxa
     for taxon_id, taxon_data in taxa_names.items():
+
         # Subheadings defined in taxon file 
         if "heading" in taxon_data:
             basic_taxa_html += f"<li class='list_heading_4'><h4>{ taxon_data['heading'] }</h4></li>\n"
+
         # Add to basic_taxa_html, fill in with date from taxa_dates if found
         basic_taxa_html += f"""
             <li>
                 <span>{ taxon_data['fi'] } (<em>{ taxon_data['sci'] }</em>)</span>
                 <input type='date' name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }'>
             </li>\n"""
+
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
         if taxon_id in taxa_dates:
             del taxa_dates[taxon_id]
@@ -274,6 +278,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     # Default values
     html = dict()
+    html["finbif_access_token"] = os.environ.get("FINBIF_API_TOKEN")
     html["public_selected"] = "selected='selected'"
     html["trashed_selected"] = ""
 

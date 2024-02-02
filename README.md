@@ -35,8 +35,9 @@ To have many types of challenges, you would need to:
 
 ## Todo
 
-- Test: user observes taxon that doesn't have fi (can happen) name or sci name (should not be possible)
 - Add taxon autocomplete dropdown, see ChatGPT
+- Health check
+- Tests with Playwright & Autogen?
 
 ### Decidions to do
 

@@ -3,8 +3,44 @@
 {% extends "base.html" %}
 
 {% block head %}
+    <style>
+        #autocomplete-container {
+            position: relative;
+            margin-bottom: 10em;
+            margin-left: 10px;
+        }
+
+        #autocomplete-input {
+            width: 30em;
+        }
+
+        #autocomplete-results {
+            font-size: 100%;
+            border: 1px solid #ccc;
+            border-top: none;
+            position: absolute;
+            z-index: 10;
+            width: 25em; /* Adjust based on parent's border */
+            background: #fff;
+            color: #000;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .autocomplete-item {
+            padding: 0.5em;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .autocomplete-item:hover {
+            background-color: #bcffbc;
+        }
+    </style>
+
     <title>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</title>
     <script>
+
         document.addEventListener('DOMContentLoaded', (event) => {
             const listItems = document.querySelectorAll('#taxa li');
             listItems.forEach(li => {
@@ -49,9 +85,68 @@
         });
 
         // Todo: Clear CSS .date-filled when date field is emptied
-        
+        // Code TBD
+
+    // Autocomplete
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('autocomplete-input');
+        const resultsContainer = document.getElementById('autocomplete-results');
+
+        const accessToken = '{{ html["finbif_access_token"] }}';
+        const informalTaxonGroup = 'MVL.343';
+        const endpoint = 'https://api.laji.fi/v0/autocomplete/taxon?limit=5&includePayload=true&lang=fi&informalTaxonGroup=' + informalTaxonGroup + '&excludeNameTypes=MX.hasMisspelledName,MX.hasMisappliedName&access_token=' + accessToken + '&q='
+
+        let timeoutId = null;
+
+        input.addEventListener('input', function() {
+            clearTimeout(timeoutId);
+
+            const query = this.value.trim();
+            if (!query) {
+                resultsContainer.innerHTML = '';
+                return; // Stop if the query is empty
+            }
+
+            timeoutId = setTimeout(() => { // Set a new timeout
+
+                // Fetch data from API
+                fetch(endpoint + encodeURIComponent(query))
+                    .then(response => response.json())
+                    .then(data => {
+                        resultsContainer.innerHTML = ''; // Clear previous results
+
+                        data.forEach(item => {
+                            const div = document.createElement('div');
+                            div.classList.add('autocomplete-item');
+                            div.textContent = item.value + " (" + item.payload.scientificName + ")";
+                            resultsContainer.appendChild(div);
+
+                            div.addEventListener('click', function() {
+                                input.value = ""; // Clear input field
+                                resultsContainer.innerHTML = ''; // Clear results after selection
+
+                                // Find the list with id="taxa"
+                                const taxaList = document.getElementById('taxa');
+
+                                // Create a new <li> element
+                                const li = document.createElement('li');
+                                li.innerHTML = `
+                                    <span>${item.value} (<em>${item.payload.scientificName}</em>)</span>
+                                    <input type="date" name="taxa:${item.key}" value="">
+                                `;
+
+                                // Append the new <li> to the "taxa" list
+                                taxaList.appendChild(li);
+                            });
+                        });
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }, 300); // Wait before calling the API
+        });
+    });
 
     </script>
+
 {% endblock %}
 
 {% block body %}
@@ -107,6 +202,12 @@
         {% endif %}
 
         {{ html['taxa']|safe }}
+
+        <div id="autocomplete-container">
+            <label for="autocomplete-input"><h4>Hae muita lajeja:</h4></label>
+            <input type="text" id="autocomplete-input" placeholder="">
+            <div id="autocomplete-results"></div>
+        </div>
         
     </form>
 
