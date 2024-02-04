@@ -18,6 +18,8 @@ def save_challenge(challenge_id, form_data):
         bool: True if the form data was successfully validated and inserted, False otherwise.
     """
 
+    print("FORM DATA", form_data)
+
     # Current datetime in MySQL format
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -103,12 +105,9 @@ def validate_challenge_data(form_data):
     if not form_data["taxon"]:
         errors += "Taksoni puuttuu. "
     else:
-        if common_helpers.valid_taxon_qname(form_data["taxon"]):
-            # Check if file exists in ./data/{taxon}_taxa.json
-            if not common_helpers.taxon_file_exists(form_data["taxon"]):
-                errors += f"Taksonin { form_data['taxon'] } lajiluetteloa ei löytynyt: valitse toinen taksoni tai pyydä ylläpitäjää lisäämään luettelo. "
-        else:
-            errors += "Anna taksonin MX-tunniste, esim. 'MX.1'. "
+        # Check if file exists in ./data/{taxon}_taxa.json
+        if not common_helpers.taxon_file_exists(form_data["taxon"]):
+            errors += f"Taksonin { form_data['taxon'] } lajiluetteloa ei löytynyt: valitse toinen taksoni tai pyydä ylläpitäjää lisäämään luettelo. "
 
     # Year
     if not form_data["year"]:
