@@ -1,0 +1,15 @@
+# Use the official Python image that already has Node.js installed (required for Playwright)
+FROM mcr.microsoft.com/playwright/python:v1.41.0-jammy
+
+# Set the working directory
+WORKDIR /tests
+
+# Install dependencies
+COPY tests-playwright/requirements.txt /tests/
+RUN pip install -r requirements.txt
+
+# Copy the test scripts
+COPY tests-playwright /tests
+
+# Run the tests (this will be overridden by command in docker-compose.yml)
+CMD ["python", "-m", "pytest", "-v"]

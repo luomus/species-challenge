@@ -46,6 +46,18 @@ services:
       - "8080:80"
     depends_on:
       - db
-      
+
+  playwright:
+    build:
+      context: .
+      dockerfile: Dockerfile.playwright
+    volumes:
+      - ./tests-playwright:/tests
+    depends_on:
+      - web
+    environment:
+      - WEB_URL=http://web:8081
+    command: tail -f /dev/null # keep the container running
+
 volumes:
   mariadb_data:
