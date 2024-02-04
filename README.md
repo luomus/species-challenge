@@ -96,15 +96,22 @@ To have many types of challenges, you would need to:
     - All 3 lists
     - Adding additional species (only species)
     - Handling higher taxa
-    - Mobile navi
+    - Mobile navi & testing, including autocomplete
     - Setting challenge start and end dates
     - Disable selecting date beyond start/end page
+    - Proper login
+    - Fade out flash messages (without page moving upwards)
+    - Logos
+    - Styling with the team
+    - Privacy policy
+    - Warning when navigating away without saving changes
 - Later:
+    - Accessibility
     - Own data dump download
     - Admin ability to edit any participations
     - Challenge sort order (int) for the front page
     - Chart of species accumulation
-    - Activity stats, e.g. users active during last 7 days
+    - Activity stats, e.g. users active during last 7 days, new participations
 - Nice:
     - Admin to see user email
 
