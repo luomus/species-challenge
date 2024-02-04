@@ -131,16 +131,26 @@ def admin_challenge(challenge_id_untrusted = None):
 
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
+    # Debug
+    print("TEMP DEBUG")
+    print('Headers: %s', request.headers)
+    print('Body: %s', request.get_data())
+
+    print("LOGIN: ", person_token_untrusted)
     person_token = common_helpers.clean_token(person_token_untrusted)
 
     # Get user data
     session["token"] = person_token
     session["user_data"] = common_helpers.fetch_finbif_api(f"https://api.laji.fi/v0/person/{ person_token }?access_token=")
+    print("USER DATA: ", session["user_data"])
 
     session["is_admin"] = False
-    if ("MA.admin" in session["user_data"]["role"]):
-        session["is_admin"] = True
+    if "role" in session["user_data"]:
+        if "MA.admin" in session["user_data"]["role"]:
+            session["is_admin"] = True
 
+    print("IS ADMIN: ", session["is_admin"])
+    print("REDIRECTING TO /")
     return redirect("/")
 
 

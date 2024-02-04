@@ -51,6 +51,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.playwright
+    env_file:
+      - playwright.env
     volumes:
       - ./tests-playwright:/tests
     depends_on:

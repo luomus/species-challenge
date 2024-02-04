@@ -4,14 +4,20 @@
 
 - Clone this repository
 - Optionally change development database password to `docker-entrypoint-initdb.d/init_db.sql`
-- Set up environment variables to `.env.` Use `example.env` as a template.
+- Set up environment variables to `.env.` and `playwright.example` Use example files as templates.
 - Build Docker image `docker build -t species-challenge:latest .`
-- Startup with `docker-compose up; docker-compose down;`
+- Startup with `docker-compose up build playwright; docker-compose down;`
 - Set up database using `species_challenge_dev.sql`, e.g. via phpMyAdmin
 
 Site will be visible http://localhost:8081
 
 phpMyAdmin admin UI will be at http://localhost:8080 
+
+## Running tests
+
+- Run the app with `docker-compose up; docker-compose down;`
+- Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
+- Run tests with `python -m pytest -v`. Add `-s` option to the end to see print outputs.
 
 ## Notes
 
@@ -35,21 +41,6 @@ To have many types of challenges, you would need to:
 
 ## Todo
 
-- Adjust additional species API call: only finnish, only species, colloquial names, match type?
-- Min and max dates instead of year to database
-    - Database structure change, content change and sql dump update
-    - Challenge form update, with date fields
-    - Challenge year validation replacement with min & max validation
-    - Test
-    - Use these when creating date fields on participation form
-        - Existing fields / Python
-        - Empty fields / Python
-        - Additional species fields / js
-- Health check
-    - Fetch unique participation taxa from database (try)
-    - Check that files for all taxa exist
-- Tests with Playwright & Autogen?
-
 ### Decidions to do
 
 - Should challenge have a description, or is a link to an external website enough?
@@ -71,30 +62,34 @@ To have many types of challenges, you would need to:
         - why does it show it on the list? should show at the end
         - should we version the species lists? work with 
         - how to show names of additional species? fetch from participation table, api or json?
-- Species names to json, when we get list from the project.
-- List of species observed in the challenge
 
 ### Setup
 
-- Login to dev/prod parametrized through /login
-- Get data system id for dev, test and production? or use intermediate login redirection like on Havistin?
+- Clarify Docker build commands
 - Database sorting/collation settings utf8mb4_swedish_ci
 - Generic exception handling
-- Automate database setup - does OpenShift need this?
 - Set target to 100 species on challenge.py & admin.py
 
 ### Features
 
-- Plan:
+- Plan with the team:
+    - Login
+        - Get data system id for dev, test and production? or use intermediate login redirection like on Havistin?
+        - Login dev/prod parametrized through /login
     - Prod deployment
-    - Admin role set by custom value from Laji.fi?
+        - Automate database setup - does OpenShift need this?
+    - Admin role
+        - Set by custom value from Laji.fi?
 - Test:
-    - Automated testing
+    - Automated testing with Playwright
     - Giving malicious login token
     - Thorough testing by multiple people
 - First production version:
+    - Health check
+        - Fetch unique participation taxa from database (try)
+        - Check that files for all taxa exist
     - All 3 lists
-    - Adding additional species (only species)
+    - Adjust additional species API call: only finnish, only species, colloquial names, match type?
     - Handling higher taxa
     - Mobile navi & testing, including autocomplete
     - Setting challenge start and end dates
@@ -112,8 +107,18 @@ To have many types of challenges, you would need to:
     - Challenge sort order (int) for the front page
     - Chart of species accumulation
     - Activity stats, e.g. users active during last 7 days, new participations
+    - Exclude existing species from the autocomplete? Could exclude all top N species, what to do then?
 - Nice:
     - Admin to see user email
+    - Min and max dates instead of year to database
+        - Database structure change, content change and sql dump update
+        - Challenge form update, with date fields
+        - Challenge year validation replacement with min & max validation
+        - Test
+        - Use these when creating date fields on participation form
+            - Existing fields / Python
+            - Empty fields / Python
+            - Additional species fields / js
 
 #### Pages
 

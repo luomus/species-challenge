@@ -37,8 +37,8 @@ def main():
     html["open_challenges"] = make_challenges_html(get_challenges("open"))
     html["closed_challenges"] = make_challenges_html(get_challenges("closed"))
 
-    print("== home ==")
-    print(g.token)
-    print(g.user_data)
+    print("== Homepage ==")
+    print("Token: ", g.token)
+    print("User data: ", g.user_data)
 
     return html
