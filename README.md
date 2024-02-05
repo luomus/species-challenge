@@ -69,19 +69,17 @@ To have many types of challenges, you would need to:
 - Database sorting/collation settings utf8mb4_swedish_ci
 - Generic exception handling
 - Set target to 100 species on challenge.py & admin.py
+- Deployment to staging & production
+    - Login dev/prod parametrized through /login & env?
+    - Databases
+        - Automate database setup - does OpenShift need this?
+    - Login with system id's
 
 ### Features
 
-- Plan with the team:
-    - Login
-        - Get data system id for dev, test and production? or use intermediate login redirection like on Havistin?
-        - Login dev/prod parametrized through /login
-    - Prod deployment
-        - Automate database setup - does OpenShift need this?
-    - Admin role
-        - Set by custom value from Laji.fi?
 - Test:
     - Automated testing with Playwright
+        - Admin editing challenges
     - Giving malicious login token
     - Thorough testing by multiple people
 - First production version:
