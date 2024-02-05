@@ -90,7 +90,6 @@ To have many types of challenges, you would need to:
         - Check that files for all taxa exist
     - All 3 lists
     - Adjust additional species API call: only finnish, only species, colloquial names, match type?
-    - Handling higher taxa
     - Mobile navi & testing, including autocomplete
     - Setting challenge start and end dates
     - Disable selecting date beyond start/end page
@@ -100,7 +99,9 @@ To have many types of challenges, you would need to:
     - Styling with the team
     - Privacy policy
     - Warning when navigating away without saving changes
+    - Prevent editing species of closed / draft challenge participations
 - Later:
+    - Handling higher taxa
     - Accessibility
     - Own data dump download
     - Admin ability to edit any participations
