@@ -89,9 +89,7 @@ To have many types of challenges, you would need to:
     - All 3 lists
     - Adjust additional species API call: only finnish, only species, colloquial names, match type?
     - Mobile navi & testing, including autocomplete
-    - Logos
     - Styling with the team
-    - Privacy policy
     - Warning when navigating away without saving changes
     - Prevent editing species of closed / draft challenge participations
 - Later:

@@ -257,3 +257,20 @@ table td {
 padding: 10px;
 }
 
+#footer {
+    background-color: #1F74AD;
+    padding: 10px;
+    margin: 2em -10px 2em -10px;
+}
+
+#footer img {
+    height: 50px;
+    width: auto;
+}
+
+#footer a {
+    color: #fff;
+    margin-right: 1em;
+    text-decoration: none;
+    vertical-align: middle;
+}

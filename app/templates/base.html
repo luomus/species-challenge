@@ -49,5 +49,26 @@
         {% endwith %}
 
         {% block body %}{% endblock %}
+
+        <div id="footer">
+            <a href="https://laji.fi">
+                <img src="{{ url_for('static', filename='images/laji.fi_50.png') }}" alt="Laji.fi - Lajitietokeskus">
+            </a>
+            <a href="https://luomus.fi">
+                <img src="{{ url_for('static', filename='images/luomus_50.png') }}" alt="Luonnontieteellien keskusmuseo Luomus">
+            </a>
+            <a href="https://koneensaatio.fi">
+                <img src="{{ url_for('static', filename='images/kone_50.png') }}" alt="Koneen säätiö">
+            </a>
+            <a href="https://laji.fi/about/713">
+                Tietosuojaseloste
+            </a>
+            <a href="https://laji.fi/about/3863">
+                Saavutettavuusseloste
+            </a>
+            <a href="https://github.com/luomus/species-challenge">
+                Lähdekoodi/GitHub
+            </a>
+    </div>
     </body>
 </html>
