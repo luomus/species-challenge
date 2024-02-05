@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         {% block head %}{% endblock %}
         <script>
+            // Fade out flash messages
             document.addEventListener('DOMContentLoaded', (event) => {
               const N = 5; // seconds
             
@@ -19,6 +20,34 @@
                 }
               }, N * 1000);
             });
+
+            // Confirm before leaving the page if form is dirty
+            var formIsDirty = false;
+            document.addEventListener('DOMContentLoaded', function () {
+                var formIsSubmitting = false; 
+                var form = document.querySelector('form');
+
+                form.addEventListener('input', function () {
+                    formIsDirty = true;
+                });
+
+                // Listen for the form submission and update the flag
+                form.addEventListener('submit', function () {
+                    formIsSubmitting = true;
+                });
+
+                window.addEventListener('beforeunload', function (e) {
+                    if (formIsDirty && !formIsSubmitting) {
+                    var confirmationMessage = 'Oletko varma, että haluat poistua lomakkeelta tallentamatta muutoksia?';
+                    
+                    // This is for compatibility with different browsers
+                    (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+                    return confirmationMessage; // Gecko + Webkit, Safari, Chrome etc.
+                    }
+                });
+            });
+</script>
+
             </script>            
     </head>
     <body>
@@ -40,15 +69,17 @@
             </div>
         </div>
 
-        <!-- Show latest flash message, if exists. -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% set category, message = messages[-1] %}
-                <div class="flash {{ category }}">{{ message|safe }}</div>
-            {% endif %}
-        {% endwith %}
+        <div id="content">
+            <!-- Show latest flash message, if exists. -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% set category, message = messages[-1] %}
+                    <div class="flash {{ category }}">{{ message|safe }}</div>
+                {% endif %}
+            {% endwith %}
 
-        {% block body %}{% endblock %}
+            {% block body %}{% endblock %}
+        </div>
 
         <div id="footer">
             <a href="https://laji.fi">

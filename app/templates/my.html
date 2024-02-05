@@ -12,6 +12,8 @@
 
     {% if html["open_participations"] == "" and html["draft_participations"] == "" and html["closed_participations"] == "" %}
         <p>Sinulla ei ole osallistumisia. <a href='/'>Osallistu avoimiin haasteisiin etusivulla</a>!</p>
+    {% else %}
+        <p><a href='/'>Osallistu avoimiin haasteisiin etusivulla</a>!</p>
     {% endif %}
 
     {% if html["open_participations"] != "" %}

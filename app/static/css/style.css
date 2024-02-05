@@ -106,15 +106,26 @@ a:visited {
     font-size: 120%;
 }
 
-h2 {
-    margin-top: 2em;
+#content h2 {
+    margin: 0;
+    padding-top: 1em;
+    clear: both;
+}
+
+.challenges h2,
+.participations h2 {
+    padding-top: 2em;
 }
 
 .challenge,
 .participation {
-    margin: 1em 0 1em 0;
+    margin: 1em 2em 1em 0;
     padding: 1em;
     background-color: #fff;
+    width: 30em;
+    float: left;
+    min-height: 10em;
+    filter: drop-shadow(#aaa 5px 5px 5px);
 }
 
 .open .challenge,
@@ -151,6 +162,11 @@ h2 {
 
 .participation .button {
     margin-left: 1em;
+}
+
+ul h3,
+ul h4 {
+    margin: 0;
 }
 
 /* Buttons */
@@ -261,6 +277,7 @@ padding: 10px;
     background-color: #1F74AD;
     padding: 10px;
     margin: 2em -10px 2em -10px;
+    clear: both;
 }
 
 #footer img {
@@ -273,4 +290,5 @@ padding: 10px;
     margin-right: 1em;
     text-decoration: none;
     vertical-align: middle;
+
 }
