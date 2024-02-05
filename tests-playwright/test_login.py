@@ -12,13 +12,6 @@ def extract_token(url):
     token = query_params.get('token', [None])[0]
     return token
 
-'''
-@pytest.fixture(autouse=True, scope='session')
-def delete_state_file():
-    state_file = 'state.json'
-    os.remove(state_file)
-    yield
-'''
 
 def test_login_and_save_state(browser):
     context = browser.new_context()
@@ -72,6 +65,9 @@ def test_login_and_save_state(browser):
     # Save the authentication state to a file
     context.storage_state(path='state.json')
 
+    # Wait for the state to be saved
+    page.wait_for_timeout(3000)
+
     page.close()
 
 
@@ -79,11 +75,72 @@ def test_own_data(browser):
     context = browser.new_context(storage_state='state.json')
     page = context.new_page()
 
+# Debug helpers
+#    page.on('request', lambda request: print('----> Request URL:', request.url))
+#    page.on('response', lambda response: print(f'      Response URL: {response.url}, Status: {response.status}'))
+
+    # Check own data of the logged in user
     page.goto("http://web:8081")
     assert "Omat osallistumiset" in page.content()
 
     page.goto("http://web:8081/oma")
     assert "<h1>Omat osallistumiset</h1>" in page.content()
+
+
+def test_add_edit_participation(browser):
+    context = browser.new_context(storage_state='state.json')
+    page = context.new_page()
+
+    # Challenge where this person has not participated in
+    page.goto("http://web:8081/haaste/5")
+    assert "Et ole osallistunut tähän haasteeseen" in page.content()
+
+    # Add participation
+    page.click("#add_participation")
+    assert "Osallistuminen haasteeseen Testihaaste" in page.content()
+
+    # Fill in fields
+    page.fill("input[name='name']", "Playwright")
+    page.fill("#place", "Näyttämö")
+
+    # Add taxa
+    page.fill("#MX_43922", "2024-01-01")
+    page.fill("#MX_43502", "2024-01-02")
+
+    # Submit the form
+    page.click("#submit_button")
+
+    # Check that the participation was added
+    page.wait_for_selector(".flash")
+    assert "Osallistumisesi on nyt tallennettu" in page.content()
+    assert "2 lajia" in page.content()
+
+    # Remove taxon
+    page.fill("#MX_43922", "")
+
+    # Submit the form
+    page.click("#submit_button")
+    
+    # Check that the edit was successful
+    page.wait_for_selector(".flash")
+    assert "Osallistumisesi on nyt tallennettu" in page.content()
+    assert "1 lajia" in page.content()
+
+    # Check that field #MX_43922 value is empty
+    assert page.input_value("#MX_43922") == ""
+
+    # Trash the participation
+    page.click("#trash_button")
+    page.click("#confirm_button")
+
+    # Check that trash was successful
+    page.wait_for_selector(".flash")
+    assert "Osallistumisesi on nyt tallennettu" in page.content()
+    assert page.input_value("#trashed") == "1"
+
+    # Check that trashed participation is not visible
+    page.goto("http://web:8081/haaste/5")
+    assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
 
 def test_teardown():

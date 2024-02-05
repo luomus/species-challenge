@@ -49,11 +49,11 @@ def make_participations_html(participations, challenge_id, challenge_status):
     if html:
         html = f"<ul>\n{ html }\n</ul>"
         if challenge_status == "open":
-            html += f"<a href='/osallistuminen/{ challenge_id }' class='button'>Lisää uusi osallistuminen</a></p>"
+            html += f"<a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Lisää uusi osallistuminen</a></p>"
     else:
         html = "<p>Et ole osallistunut tähän haasteeseen.</p>"
         if challenge_status == "open":
-            html += f"<a href='/osallistuminen/{ challenge_id }' class='button'>Osallistu</a></p>"
+            html += f"<a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Osallistu</a></p>"
 
     return html
 

@@ -66,7 +66,7 @@ def make_taxa_html(taxon_file_id, taxa_dates_json = None):
         basic_taxa_html += f"""
             <li>
                 <span class='taxon_name'>{ taxon_data['fi'] } (<em>{ taxon_data['sci'] }</em>)</span>
-                <input type='date' name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }'>
+                <input type='date' id={ taxon_id.replace(".", "_") } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }'>
             </li>\n"""
 
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
@@ -152,7 +152,7 @@ def save_participation(challenge_id, participation_id, form_data):
     )
 
     with common_db.connection() as conn:
-        query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO participations (challenge_id, name, place, taxa_count, taxa_json, trashed, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
 
     return success, id
