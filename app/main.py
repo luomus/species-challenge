@@ -128,7 +128,7 @@ def admin_challenge(challenge_id_untrusted = None):
     
     return render_template("admin_challenge.html", html=html)
     
-
+'''
 @app.route("/login/<string:person_token_untrusted>")
 def login(person_token_untrusted):
     # Debug
@@ -152,14 +152,80 @@ def login(person_token_untrusted):
     print("IS ADMIN: ", session["is_admin"])
     print("REDIRECTING TO /")
     return redirect("/")
-
+'''
 
 @app.route("/login")
 def login_page():
+    person_token_untrusted = request.args.get('token', None)
+
+    # Case A: User is logging in
+    if person_token_untrusted:
+        print("LOGGING IN...")
+
+        session.clear() # Clear any previous session data
+        person_token = common_helpers.clean_token(person_token_untrusted)
+
+        # Get user data
+        user_data_from_api = common_helpers.fetch_lajiauth_api("https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/" + person_token)
+        print("USER DATA: ", user_data_from_api)
+        '''
+        User data is in this format:
+        {
+        'user': {
+            'authSourceId': 'testaaja@example.fi', 
+            'qname': 'MA.123...', 
+            'yearOfBirth': 2000, 
+            'firstJoined': None, 
+            'preferredName': 'Teppo', 
+            'inheritedName': 'Testaaja', 
+            'name': 'Teppo Testaaja', 
+            'email': 'testaaja@example.fi', 
+            'defaultLanguage': None, 
+            'group': None, 
+            'roles': [
+                'MA.speciesChallengeAdmin'
+            ],
+            'organisations': [],
+            'previousEmailAddresses': [],
+            'additionalUserIds': {'VANHA_HATIKKA': ['testaaja']},
+            'address': None
+        },
+        'source': 'LOCAL',
+        'target': 'KE.1521',
+        'next': '',
+        'redirectMethod': 'GET',
+        'permanent': False
+    }
+        '''
+
+        # Case A1: Login failed
+        if "code" in user_data_from_api:
+            print("LOGIN ERROR: ", user_data_from_api)
+            flash("Kirjautuminen epäonnistui. Yritä uudelleen.")
+            return redirect("/login")
+
+        # Case A2: Login successful        
+        session["token"] = person_token
+        session["user_data"] = dict()
+        session["user_data"]["id"] = user_data_from_api["user"]["qname"]
+        session["user_data"]["fullName"] = user_data_from_api["user"]["name"]
+
+        session["is_admin"] = False # default
+        if "roles" in user_data_from_api['user']:
+            if "MA.speciesChallengeAdmin" in user_data_from_api['user']["roles"]:
+                session["is_admin"] = True
+
+        print("IS ADMIN: ", session["is_admin"])
+        print("REDIRECTING TO /")
+        return redirect("/")
+    
+    # Case B: User already logged in
     if g.user_data:
         print(g.user_data)
         flash(f"Olet jo kirjautunut sisään nimellä { g.user_data.get('fullName', '(tunnukseesi ei ole kirjattu nimeä)') }.", "info")
         return redirect("/")
+    
+    # Case C: User not logged in, show login instructions
     else:
         return render_template("login.html")
 
@@ -167,6 +233,9 @@ def login_page():
 @app.route("/logout")
 def logout():
     session.clear()
+
+    # Todo: send DELETE to https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/{token}
+
     return redirect("/")
 
 

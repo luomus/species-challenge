@@ -46,6 +46,41 @@ def fetch_finbif_api(api_url, log = False):
     return data_dict
 
 
+def fetch_lajiauth_api(api_url, log = False):
+    """
+    Fetches data from the FINBIF Laji-Auth API.
+
+    Args:
+    api_url (str): The API URL to fetch data from.
+    log (bool): Optional; If True, logs the URL to stdout. Defaults to False.
+
+    Returns:
+    dict: A dictionary containing the API response data.
+
+    Raises:
+    ConnectionError: If there is an issue connecting to the API.
+    """
+    print("Fetching API: " + api_url, file = sys.stdout)
+
+    if log:
+        print(api_url, file = sys.stdout)
+
+    try:
+        r = requests.get(api_url)
+    except ConnectionError:
+        print("ERROR: laji-auth api error.", file = sys.stdout)
+
+    data_json = r.text
+    data_dict = json.loads(data_json)
+
+    if "status" in data_dict:
+        if 403 == data_dict["status"]:
+            print("ERROR: laji-auth api 403 error.", file = sys.stdout)
+            raise ConnectionError
+
+    return data_dict
+
+
 def clean_token(input_string):
     """
     Validates if a given string contains only alphanumeric characters.
