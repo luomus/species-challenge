@@ -8,10 +8,10 @@
 
 {% block body %}
 
-    <h1>Omat</h1>
+    <h1>Omat osallistumiset</h1>
 
     {% if html["open_participations"] == "" and html["draft_participations"] == "" and html["closed_participations"] == "" %}
-        <p>Sinulla ei ole osallistumisia.</p>
+        <p>Sinulla ei ole osallistumisia. <a href='/'>Osallistu avoimiin haasteisiin etusivulla</a>!</p>
     {% endif %}
 
     {% if html["open_participations"] != "" %}

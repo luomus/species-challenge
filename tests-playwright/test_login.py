@@ -9,19 +9,24 @@ from urllib.parse import urljoin, urlparse, parse_qs
 def extract_token(url):
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
-    token1 = query_params.get('token', [None])[0]
-    return token1
+    token = query_params.get('token', [None])[0]
+    return token
 
+'''
+@pytest.fixture(autouse=True, scope='session')
+def delete_state_file():
+    state_file = 'state.json'
+    os.remove(state_file)
+    yield
+'''
 
-def login_and_save_state(browser):
+def test_login_and_save_state(browser):
     context = browser.new_context()
     page = context.new_page()
 
 # Debug helpers
 #    page.on('request', lambda request: print('----> Request URL:', request.url))
 #    page.on('response', lambda response: print(f'      Response URL: {response.url}, Status: {response.status}'))
-
-#    context.clear_cookies()
 
     lajifi_username = os.environ.get("LAJIFI_USERNAME")
     lajifi_password = os.environ.get("LAJIFI_PASSWORD")
@@ -57,16 +62,15 @@ def login_and_save_state(browser):
     # Step 5: Submit the form
     page.click("button.submit")
 
-    # Issue: Playwright cannot follow redirections, but gets stuck at /login/token.
-    # Workaround: extract token and navigate to /login/token manually.
+    # Issue: Playwright cannot follow redirections, but gets stuck at /login.
+    # Workaround: extract token and navigate to /login manually.
     token = extract_token(page.url)
-    page.goto("http://web:8081/login/" + token)
+    page.goto("http://web:8081/login?token=" + token)
 
     page.wait_for_selector('#logout')
     
     # Save the authentication state to a file
     context.storage_state(path='state.json')
-    print("Login successful")
 
     page.close()
 
@@ -78,21 +82,11 @@ def test_own_data(browser):
     page.goto("http://web:8081")
     assert "Omat osallistumiset" in page.content()
 
+    page.goto("http://web:8081/oma")
+    assert "<h1>Omat osallistumiset</h1>" in page.content()
 
 
-
-
-def main():
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch()
-
-        # Step 1: Login and save state (do this once)
-        login_and_save_state(browser)
-
-        # Step 2: Run your tests (each will load the saved state)
-        test_own_data(browser)
-
-        browser.close()
-
-if __name__ == '__main__':
-    main()
+def test_teardown():
+    state_file = 'state.json'
+    os.remove(state_file)
+    
