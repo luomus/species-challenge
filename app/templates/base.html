@@ -8,6 +8,18 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         {% block head %}{% endblock %}
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+              const N = 5; // seconds
+            
+              setTimeout(() => {
+                const flashDiv = document.querySelector('.flash');
+                if (flashDiv) {
+                  flashDiv.classList.add('fade-out');
+                }
+              }, N * 1000);
+            });
+            </script>            
     </head>
     <body>
         <div id="navi">

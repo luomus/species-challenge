@@ -9,7 +9,7 @@ import json
 import os
 
 
-def make_taxa_html(taxon_file_id, taxa_dates_json = None):
+def make_taxa_html(challenge, taxa_dates_json = None):
     """
     Generates a list of species names and date input fields for a given higher taxon.
 
@@ -20,6 +20,11 @@ def make_taxa_html(taxon_file_id, taxa_dates_json = None):
     Returns:
         str: The HTML code for the list of species names and date input fields.
     """
+
+    taxon_file_id = challenge["taxon"]
+    min_date = f"{ challenge['year'] }-01-01"
+    max_date = f"{ challenge['year'] }-12-31"
+
     basic_taxa_html = ""
     additional_taxa_html = ""
 
@@ -66,7 +71,7 @@ def make_taxa_html(taxon_file_id, taxa_dates_json = None):
         basic_taxa_html += f"""
             <li>
                 <span class='taxon_name'>{ taxon_data['fi'] } (<em>{ taxon_data['sci'] }</em>)</span>
-                <input type='date' id={ taxon_id.replace(".", "_") } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }'>
+                <input type='date' id={ taxon_id.replace(".", "_") } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
             </li>\n"""
 
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
@@ -316,7 +321,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             return {"redirect": True, "url": "/"}
 
         # Setup empty form
-        html['taxa'] = make_taxa_html(challenge["taxon"])
+        html['taxa'] = make_taxa_html(challenge)
         html["data_fields"] = dict()
         return html
     
@@ -337,7 +342,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             flash("Tätä osallistumista ei löytynyt tililtäsi.", "info")
             return {"redirect": True, "url": "/"}
         
-        html['taxa'] = make_taxa_html(challenge["taxon"], participation["taxa_json"])
+        html['taxa'] = make_taxa_html(challenge, participation["taxa_json"])
         html["data_fields"] = participation
 
         # Change default trashed value based on database value
