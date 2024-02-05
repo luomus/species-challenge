@@ -1,6 +1,7 @@
 
 .env
 playwright.env
+tests-playwright/state.json
 
 temp/*
 
