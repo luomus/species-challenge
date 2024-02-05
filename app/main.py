@@ -1,10 +1,11 @@
 # Flask app main file.
 
-from flask import Flask, render_template, redirect, session, g, flash, request
+from flask import Flask, render_template, redirect, session, g, flash, request, send_from_directory
 from functools import wraps
 from datetime import timedelta
 import sys
 import os
+import requests
 
 from helpers import common_helpers
 
@@ -208,10 +209,19 @@ def login_page():
 @app.route("/logout")
 def logout():
     session.clear()
+    url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/" + g.token
+    response = requests.delete(url)
 
-    # Todo: send DELETE to https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/{token}
-
-    return redirect("/")
+    # Checking if the request was successful
+    if response.status_code == 200:
+        flash("Olet kirjautunut ulos.", "info")
+        return redirect("/")
+    else:
+        print('Failed to delete session on Laji-auth.')
+        print('Status code:', response.status_code)
+        print('Response:', response.text)
+        flash("Tietokantavirhe, uloskirjautuminen epäonnistui.", "error")
+        return redirect("/")
 
 
 import controllers.health
@@ -222,3 +232,9 @@ def health():
         return errors, 500
     else:
         return "OK", 200
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+

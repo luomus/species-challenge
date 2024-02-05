@@ -53,7 +53,7 @@ def make_participations_html(participations, challenge_id, challenge_status):
     else:
         html = "<p>Et ole osallistunut tähän haasteeseen.</p>"
         if challenge_status == "open":
-            html += f"<a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Osallistu</a></p>"
+            html += f"<p><a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Osallistu</a></p>"
 
     return html
 
@@ -203,7 +203,7 @@ def main(challenge_id_untrusted):
 
     # Anonymous user
     else:
-        html["participations_html"] = "<a href='/login'>Kirjaudu sisään</a> osallistuaksesi.</p>"
+        html["participations_html"] = "<p><a href='/login'>Kirjaudu sisään</a> osallistuaksesi.</p>"
 
     # Challenge data
     html["challenge"] = challenge_data

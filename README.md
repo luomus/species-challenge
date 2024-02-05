@@ -82,14 +82,15 @@ To have many types of challenges, you would need to:
 - Test:
     - Automated testing with Playwright
         - Admin editing challenges
+        - Logout
     - Giving malicious login token
     - Thorough testing by multiple people
 - First production version:
     - All 3 lists
     - Adjust additional species API call: only finnish, only species, colloquial names, match type?
     - Mobile navi & testing, including autocomplete
-    - Styling with the team
-    - Logout with DELETE
+    - Styling
+    - Prepare for downtime (Thursdays etc.)
 - Later:
     - Prevent editing species of closed / draft challenge participations
     - Spinner to autocomplete
