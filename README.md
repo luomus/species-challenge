@@ -1,5 +1,11 @@
 # 100 Species Challenge Web Service
 
+A web app designed for organizing and participating in wildlife observation challenges, specifically targeting the identification of 100 species. In these challenges, participants aim to observe a hundred different species of plants, fungi, or insects over the course of a year.
+
+Backend application built with Flask. Database on MariaDB. Depends on FinBIF Laji-auth authentication service (Laji.fi). Funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/).
+
+![alt text](./app/static/screencapture.png)
+
 ## Development setup
 
 - Clone this repository
