@@ -214,3 +214,11 @@ def logout():
     return redirect("/")
 
 
+import controllers.health
+@app.route("/health")
+def health():
+    errors = controllers.health.main()
+    if errors:
+        return errors, 500
+    else:
+        return "OK", 200

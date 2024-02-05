@@ -70,6 +70,8 @@ To have many types of challenges, you would need to:
 - Generic exception handling
 - Set target to 100 species on challenge.py & admin.py
 - Deployment to staging & production
+    - Reduce logging
+    - Don't follow files with Gunicorn
     - Login dev/prod parametrized through /login & env?
     - Databases
         - Automate database setup - does OpenShift need this?
@@ -83,16 +85,14 @@ To have many types of challenges, you would need to:
     - Giving malicious login token
     - Thorough testing by multiple people
 - First production version:
-    - Health check
-        - Fetch unique participation taxa from database (try)
-        - Check that files for all taxa exist
     - All 3 lists
     - Adjust additional species API call: only finnish, only species, colloquial names, match type?
     - Mobile navi & testing, including autocomplete
     - Styling with the team
-    - Warning when navigating away without saving changes
-    - Prevent editing species of closed / draft challenge participations
+    - Logout with DELETE
 - Later:
+    - Prevent editing species of closed / draft challenge participations
+    - Spinner to autocomplete
     - Handling higher taxa
     - Accessibility
     - Own data dump download

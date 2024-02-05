@@ -97,7 +97,7 @@ def test_add_edit_participation(browser):
 
     # Add participation
     page.click("#add_participation")
-    assert "Osallistuminen haasteeseen Testihaaste" in page.content()
+    assert "Osallistuminen haasteeseen Sienihaaste" in page.content()
 
     # Fill in fields
     page.fill("input[name='name']", "Playwright")

@@ -199,7 +199,7 @@
     <form name="challenge" id="challenge" class="trashed_{{ html['data_fields'].get('trashed', 'false') }}" action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
     
         <p>
-            <label for="name">Osallistujan nimi tai nimimerkki:</label>
+            <label for="name">Osallistujan nimi tai nimimerkki:</label><br>
             <input 
                 type="text" 
                 id="name" 
@@ -209,7 +209,7 @@
         </p>
 
         <p>
-            <label for="place">Paikka, esim. kunta:</label>
+            <label for="place">Paikka, esim. kunta:</label><br>
             <input 
                 type="text" 
                 id="place" 
@@ -250,7 +250,7 @@
         {{ html['taxa']|safe }}
 
         <div id="autocomplete-container">
-            <label for="autocomplete-input"><h4>Hae muita lajeja:</h4></label>
+            <label for="autocomplete-input"><h4>Lisää muita lajeja:</h4></label>
             <input type="text" id="autocomplete-input" placeholder="">
             <div id="autocomplete-results"></div>
         </div>

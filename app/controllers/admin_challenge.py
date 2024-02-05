@@ -171,7 +171,7 @@ def make_option_field_html(field_name, challenge_data = None):
     # Generate HTML for option fields
     field = schema["controlledVocabularyFields"][field_name]
 
-    html += f"<label for='{field_name}'>{field['label']['fi']}:</label>\n"
+    html += f"<label for='{field_name}'>{field['label']['fi']}:</label><br>\n"
     html += f"<select name='{field_name}' id='{field_name}' required>\n"
     html += "    <option value=''>(valitse)</option>\n"
     for option in field["options"]:
