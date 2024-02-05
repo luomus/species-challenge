@@ -38,11 +38,8 @@
 
                 window.addEventListener('beforeunload', function (e) {
                     if (formIsDirty && !formIsSubmitting) {
-                    var confirmationMessage = 'Oletko varma, että haluat poistua lomakkeelta tallentamatta muutoksia?';
-                    
-                    // This is for compatibility with different browsers
-                    (e || window.event).returnValue = confirmationMessage; // Gecko + IE
-                    return confirmationMessage; // Gecko + Webkit, Safari, Chrome etc.
+                        e.returnValue = 'Tekemiäsi muutoksia ei ole tallennettu.'; // Some content necessary for the dialog to appear
+                        return e.returnValue;
                     }
                 });
             });
@@ -52,7 +49,7 @@
     </head>
     <body>
         <div id="navi">
-            <h2><a href='/'>Haasteet</a></h2>
+            <h2><a href='/'>100 Lajia</a></h2>
             <div id="login_navi">
                 {% if user_data %}
                     <!-- Logged in as {{ user_data['id'] }} -->
