@@ -92,6 +92,7 @@ To have many types of challenges, you would need to:
     - Giving malicious login token
     - Thorough testing by multiple people
 - First production version:
+    - Prevent setting observation date on future
     - All 3 lists
     - Adjust additional species API call: only finnish, only species, colloquial names, match type?
     - Mobile navi & testing, including autocomplete
