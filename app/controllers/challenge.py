@@ -118,7 +118,7 @@ def make_taxa_html(participations, taxon_id):
         html += "<tr>"
         html += f"<td>{ taxon_names[taxon_id]['fi'] } <em>({ taxon_names[taxon_id]['sci'] })</em></td>"
         html += f"<td>{ count }</td>"
-        html += f"<td>{ round(((count / number_of_participations) * 100), 1) } %</td>"
+        html += f"<td>{ str(round(((count / number_of_participations) * 100), 1)).replace('.', ',') } %</td>"
         html += "</tr>"
 
     html += "</table>"
@@ -171,7 +171,7 @@ def make_participant_html(participations):
     target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
     taxa_count_average = round(taxa_count_total / number_of_participants, 1)
 
-    html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ target_taxa_count_reached_percent } % ) on savuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { taxa_count_average } lajia.</p>"
+    html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ str(target_taxa_count_reached_percent).replace('.', ',') } % ) on savuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { str(taxa_count_average).replace('.', ',') } lajia.</p>"
 
     html += table 
     return html
