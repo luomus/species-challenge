@@ -43,8 +43,8 @@ def make_participations_stats_html(participations):
     target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
 
     html = "<div class='stats'>"
-    html += f"{ target_count } lajia saavuttaneiden määrä: <strong>{ target_taxa_count_reached } / { number_of_participants } osallistujaa</strong> ({ target_taxa_count_reached_percent } %)<br>"
-    html += f"Keskimääräinen lajimäärä: { taxa_count_average }"
+    html += f"{ target_count } lajia saavuttaneiden määrä: <strong>{ target_taxa_count_reached } / { number_of_participants } osallistujaa</strong> ({ str(target_taxa_count_reached_percent).replace('.', ',') } %)<br>"
+    html += f"Keskimääräinen lajimäärä: { str(taxa_count_average).replace('.', ',') }"
     html += "</div>"
 
     return html
