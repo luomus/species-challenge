@@ -5,7 +5,9 @@ import json
 import sys
 import os
 import re
+from flask import g
 
+from helpers import common_db
 
 def fetch_finbif_api(api_url, log = False):
     """
@@ -204,3 +206,123 @@ def load_taxon_file(taxon_file_id):
 
     return taxa_names
 
+
+
+def get_challenge(challenge_id):
+    params = (challenge_id,)
+    with common_db.connection() as conn:
+        query = "SELECT * FROM challenges WHERE challenge_id = %s"
+        data = common_db.select(conn, query, params)
+    return data[0]
+
+
+def get_all_participations(challenge_id):
+    with common_db.connection() as conn:
+        query = "SELECT * FROM participations WHERE challenge_id = %s and trashed = 0 ORDER BY taxa_count DESC"
+        params = (challenge_id,)
+        participations = common_db.select(conn, query, params)
+
+    return participations
+
+
+def get_participation(challenge_id, participation_id):
+    """
+    Gets participation data from the database.
+
+    Args:
+        challenge_id (int): The challenge ID.
+        participation_id (int): The participation ID.
+    
+    Returns:
+        dict: The participation data as a dictionary.
+    """
+    params = (participation_id, challenge_id, g.user_data["id"])
+
+    with common_db.connection() as conn:
+        query = "SELECT * FROM participations WHERE participation_id = %s AND challenge_id = %s AND meta_created_by = %s"
+        participation = common_db.select(conn, query, params)
+
+    # If participation not found with these parameters, return False
+    if not participation:
+        return False
+    
+    return participation[0]
+
+
+def make_taxa_html(participations, taxon_id, taxa_json = ""):
+    '''
+    participations -variable contains data like this:
+    [
+        {
+            'participation_id': 5, 
+            'challenge_id': 4, 
+            'name': 
+            'Nimi Merkkinen', 'place': 
+            'Nimismiehenkylä', 'taxa_count': 28, 
+            'taxa_json': '{"MX.37691": "2024-01-30", "MX.37721": "2024-01-30", "MX.37717": "2024-01-17", "MX.37719": "2024-01-25", "MX.37763": "2024-01-01", "MX.37771": "2024-01-30", "MX.4994055": "2024-01-03", "MX.37752": "2024-01-30", "MX.37747": "2024-01-30", "MX.37826": "2024-01-30", "MX.37812": "2024-01-10", "MX.37819": "2024-01-30", "MX.40138": "2024-01-30", "MX.39201": "2024-01-30", "MX.39235": "2024-01-30", "MX.4973227": "2024-01-17", "MX.39887": "2024-01-30", "MX.39917": "2024-01-11", "MX.38279": "2024-01-02", "MX.38598": "2024-01-13", "MX.39052": "2024-01-20", "MX.39038": "2024-01-11", "MX.39465": "2024-01-18", "MX.39673": "2024-01-30", "MX.39967": "2024-01-30", "MX.38301": "2024-01-30", "MX.40632": "2024-01-11", "MX.38843": "2024-01-25"}', 
+            'meta_created_by': 'MA.3', 
+            'meta_created_at': datetime.datetime(2024, 1, 28, 15, 19, 17), 
+            'meta_edited_by': 'MA.3', 
+            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 37, 2), 
+            'trashed': 0
+        },
+        {
+            'participation_id': 6, 
+            'challenge_id': 4, 
+            'name': "André D'Artágnan", 
+            'place': 'Ääkkölä ääkkölärules', 
+            'taxa_count': 14, 
+            'taxa_json': '{"MX.37691": "2024-01-11", "MX.37721": "2024-01-02", "MX.37717": "2024-01-27", "MX.37719": "2024-01-28", "MX.37763": "2024-01-10", "MX.37771": "2024-01-18", "MX.4994055": "2024-01-18", "MX.37752": "2024-01-30", "MX.40138": "2024-01-30", "MX.40150": "2024-01-30", "MX.39201": "2024-01-30", "MX.4973227": "2024-01-17", "MX.39827": "2024-01-25", "MX.39917": "2024-01-30"}', 
+            'meta_created_by': 'MA.3', 
+            'meta_created_at': datetime.datetime(2024, 1, 28, 15, 29, 1), 
+            'meta_edited_by': 'MA.3', 
+            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 34, 47), 
+            'trashed': 0
+        }
+    ]
+    '''
+    if not participations:
+        return "<p>Yhtään lajia ei ole vielä havaittu.</p>"
+    
+    # taxa from json to dict
+    my_taxa = dict()
+    if taxa_json:
+        my_taxa = json.loads(taxa_json)
+    
+    taxon_names = load_taxon_file(taxon_id + "_all")
+    
+    number_of_participations = len(participations)
+
+    taxa_counts = dict()
+    for participation in participations:
+        # Get taxa dict from taxa_json field
+        taxa = json.loads(participation["taxa_json"])
+        
+        for taxon_id, date in taxa.items():
+            if taxon_id not in taxa_counts:
+                taxa_counts[taxon_id] = 0
+            taxa_counts[taxon_id] += 1
+
+    # Sort taxa by count
+    taxa_counts_sorted = sorted(taxa_counts.items(), key=lambda x: x[1], reverse=True)
+    number_of_taxa = len(taxa_counts_sorted)
+
+    html = f"<p>Osallistujat ovat havainneet yhteensä { number_of_taxa } lajia.</p>"
+    html += "<table id='taxa_results'>"
+    html += "<tr><th>Laji</th><th>Havaintoja</th><th>%</th></tr>"
+    for taxon_id, count in taxa_counts_sorted:
+        taxon_observed_class = "not_observed" # default
+        taxon_observed_checkmark = ""
+        if taxon_id in my_taxa:
+            taxon_observed_class = "observed"
+            taxon_observed_checkmark = "✅"
+
+        html += f"<tr class='{ taxon_observed_class }'>"
+        html += f"<td>{ taxon_names[taxon_id]['fi'] } <em>({ taxon_names[taxon_id]['sci'] })</em> { taxon_observed_checkmark }</td>"
+        html += f"<td>{ count }</td>"
+        html += f"<td>{ str(round(((count / number_of_participations) * 100), 1)).replace('.', ',') } %</td>"
+        html += "</tr>"
+
+    html += "</table>"
+    
+    return html

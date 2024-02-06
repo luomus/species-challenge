@@ -82,6 +82,8 @@ To have many types of challenges, you would need to:
     - Databases
         - Automate database setup - does OpenShift need this?
     - Login with system id's
+    - Zabbix
+- Clear unneeded & trashed items from database, store dump to Git 
 
 ### Features
 
@@ -92,10 +94,12 @@ To have many types of challenges, you would need to:
     - Giving malicious login token
     - Thorough testing by multiple people
 - First production version:
+    - My participation stats
+    - Unique page titles
     - Prevent setting observation date on future
-    - All 3 lists
-    - Adjust additional species API call: only finnish, only species, colloquial names, match type?
     - Mobile navi & testing, including autocomplete
+    - All 3 lists
+    - Adjust autocomplete additional species API call: only finnish, only species, colloquial names, match type?
     - Styling
     - Prepare for downtime (Thursdays etc.)
 - Later:

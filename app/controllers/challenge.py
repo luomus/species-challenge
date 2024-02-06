@@ -3,14 +3,6 @@
 from flask import g, flash
 from helpers import common_db
 from helpers import common_helpers
-import json
-
-def get_challenge(challenge_id):
-    params = (challenge_id,)
-    with common_db.connection() as conn:
-        query = "SELECT * FROM challenges WHERE challenge_id = %s"
-        data = common_db.select(conn, query, params)
-    return data[0]
 
 
 def make_challenge_html(challenge):
@@ -32,104 +24,6 @@ def get_my_participations(challenge_id):
     with common_db.connection() as conn:
         query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s AND trashed = 0"
         params = (challenge_id, g.user_data["id"])
-        participations = common_db.select(conn, query, params)
-
-    return participations
-
-
-def make_participations_html(participations, challenge_id, challenge_status):
-    html = ""
-    for participation in participations:
-        html += "<li>"
-        html += "<a href='/osallistuminen/" + str(participation["challenge_id"]) + "/" + str(participation["participation_id"]) + "'>"
-        html += ", ".join([participation["name"], participation["place"]])
-        html += "</a>"
-        html += "</li>"
-
-    if html:
-        html = f"<ul>\n{ html }\n</ul>"
-        if challenge_status == "open":
-            html += f"<a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Lisää uusi osallistuminen</a></p>"
-    else:
-        html = "<p>Et ole osallistunut tähän haasteeseen.</p>"
-        if challenge_status == "open":
-            html += f"<p><a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Osallistu</a></p>"
-
-    return html
-
-
-def make_taxa_html(participations, taxon_id):
-    '''
-    participations -variable contains data like this:
-    [
-        {
-            'participation_id': 5, 
-            'challenge_id': 4, 
-            'name': 
-            'Nimi Merkkinen', 'place': 
-            'Nimismiehenkylä', 'taxa_count': 28, 
-            'taxa_json': '{"MX.37691": "2024-01-30", "MX.37721": "2024-01-30", "MX.37717": "2024-01-17", "MX.37719": "2024-01-25", "MX.37763": "2024-01-01", "MX.37771": "2024-01-30", "MX.4994055": "2024-01-03", "MX.37752": "2024-01-30", "MX.37747": "2024-01-30", "MX.37826": "2024-01-30", "MX.37812": "2024-01-10", "MX.37819": "2024-01-30", "MX.40138": "2024-01-30", "MX.39201": "2024-01-30", "MX.39235": "2024-01-30", "MX.4973227": "2024-01-17", "MX.39887": "2024-01-30", "MX.39917": "2024-01-11", "MX.38279": "2024-01-02", "MX.38598": "2024-01-13", "MX.39052": "2024-01-20", "MX.39038": "2024-01-11", "MX.39465": "2024-01-18", "MX.39673": "2024-01-30", "MX.39967": "2024-01-30", "MX.38301": "2024-01-30", "MX.40632": "2024-01-11", "MX.38843": "2024-01-25"}', 
-            'meta_created_by': 'MA.3', 
-            'meta_created_at': datetime.datetime(2024, 1, 28, 15, 19, 17), 
-            'meta_edited_by': 'MA.3', 
-            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 37, 2), 
-            'trashed': 0
-        },
-        {
-            'participation_id': 6, 
-            'challenge_id': 4, 
-            'name': "André D'Artágnan", 
-            'place': 'Ääkkölä ääkkölärules', 
-            'taxa_count': 14, 
-            'taxa_json': '{"MX.37691": "2024-01-11", "MX.37721": "2024-01-02", "MX.37717": "2024-01-27", "MX.37719": "2024-01-28", "MX.37763": "2024-01-10", "MX.37771": "2024-01-18", "MX.4994055": "2024-01-18", "MX.37752": "2024-01-30", "MX.40138": "2024-01-30", "MX.40150": "2024-01-30", "MX.39201": "2024-01-30", "MX.4973227": "2024-01-17", "MX.39827": "2024-01-25", "MX.39917": "2024-01-30"}', 
-            'meta_created_by': 'MA.3', 
-            'meta_created_at': datetime.datetime(2024, 1, 28, 15, 29, 1), 
-            'meta_edited_by': 'MA.3', 
-            'meta_edited_at': datetime.datetime(2024, 1, 31, 11, 34, 47), 
-            'trashed': 0
-        }
-    ]
-    '''
-    if not participations:
-        return "<p>Yhtään lajia ei ole vielä havaittu.</p>"
-    
-    taxon_names = common_helpers.load_taxon_file(taxon_id + "_all")
-    
-    number_of_participations = len(participations)
-
-    taxa_counts = dict()
-    for participation in participations:
-        # Get taxa dict from taxa_jdon field
-        taxa = json.loads(participation["taxa_json"])
-        
-        for taxon_id, date in taxa.items():
-            if taxon_id not in taxa_counts:
-                taxa_counts[taxon_id] = 0
-            taxa_counts[taxon_id] += 1
-
-    # Sort taxa by count
-    taxa_counts_sorted = sorted(taxa_counts.items(), key=lambda x: x[1], reverse=True)
-    number_of_taxa = len(taxa_counts_sorted)
-
-    html = f"<p>Osallistujat ovat havainneet yhteensä { number_of_taxa } lajia.</p>"
-    html += "<table id='taxa_results'>"
-    html += "<tr><th>Laji</th><th>Havaintoja</th><th>%</th></tr>"
-    for taxon_id, count in taxa_counts_sorted:
-        html += "<tr>"
-        html += f"<td>{ taxon_names[taxon_id]['fi'] } <em>({ taxon_names[taxon_id]['sci'] })</em></td>"
-        html += f"<td>{ count }</td>"
-        html += f"<td>{ str(round(((count / number_of_participations) * 100), 1)).replace('.', ',') } %</td>"
-        html += "</tr>"
-
-    html += "</table>"
-    
-    return html
-
-
-def get_all_participations(challenge_id):
-    with common_db.connection() as conn:
-        query = "SELECT * FROM participations WHERE challenge_id = %s and trashed = 0 ORDER BY taxa_count DESC"
-        params = (challenge_id,)
         participations = common_db.select(conn, query, params)
 
     return participations
@@ -177,6 +71,27 @@ def make_participant_html(participations):
     return html
 
 
+def make_participations_html(participations, challenge_id, challenge_status):
+    html = ""
+    for participation in participations:
+        html += "<li>"
+        html += "<a href='/osallistuminen/" + str(participation["challenge_id"]) + "/" + str(participation["participation_id"]) + "'>"
+        html += ", ".join([participation["name"], participation["place"]])
+        html += "</a>"
+        html += "</li>"
+
+    if html:
+        html = f"<ul>\n{ html }\n</ul>"
+        if challenge_status == "open":
+            html += f"<a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Lisää uusi osallistuminen</a></p>"
+    else:
+        html = "<p>Et ole osallistunut tähän haasteeseen.</p>"
+        if challenge_status == "open":
+            html += f"<p><a href='/osallistuminen/{ challenge_id }' class='button' id='add_participation'>Osallistu</a></p>"
+
+    return html
+
+
 def main(challenge_id_untrusted):
     html = dict()
 
@@ -185,7 +100,7 @@ def main(challenge_id_untrusted):
     if not challenge_id:
         raise ValueError
     
-    challenge_data = get_challenge(challenge_id)
+    challenge_data = common_helpers.get_challenge(challenge_id)
     if not challenge_data:
 #        flash("Tätä haastetta ei löydy.", "info")
         return {"redirect": True, "url": "/"}
@@ -210,9 +125,9 @@ def main(challenge_id_untrusted):
     html["challenge_html"] = make_challenge_html(challenge_data)
 
     # Participation stats
-    participations = get_all_participations(challenge_id)
+    participations = common_helpers.get_all_participations(challenge_id)
     html["participant_html"] = make_participant_html(participations)
 
-    html["taxa_html"] = make_taxa_html(participations, challenge_data["taxon"])
+    html["taxa_html"] = common_helpers.make_taxa_html(participations, challenge_data["taxon"])
 
     return html

@@ -255,30 +255,6 @@ def get_challenge(challenge_id):
     return challenge[0]
 
 
-def get_participation(challenge_id, participation_id):
-    """
-    Gets participation data from the database.
-
-    Args:
-        challenge_id (int): The challenge ID.
-        participation_id (int): The participation ID.
-    
-    Returns:
-        dict: The participation data as a dictionary.
-    """
-    params = (participation_id, challenge_id, g.user_data["id"])
-
-    with common_db.connection() as conn:
-        query = "SELECT * FROM participations WHERE participation_id = %s AND challenge_id = %s AND meta_created_by = %s"
-        participation = common_db.select(conn, query, params)
-
-    # If participation not found with these parameters, return False
-    if not participation:
-        return False
-    
-    return participation[0]
-
-
 def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     # Default values
@@ -335,7 +311,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
             flash("Tämä haaste on suljettu. Et voi muokata havaittuja lajeja.", "info")
 
         # Load participation data from the database with this user.
-        participation = get_participation(challenge_id, participation_id)
+        participation = common_helpers.get_participation(challenge_id, participation_id)
 
         # Check that participation exists.
         if not participation:

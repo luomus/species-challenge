@@ -1,0 +1,19 @@
+<!-- Template for a page that displays a single participation and statistics about it. -->
+
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Species Challenge - Luomus</title>
+{% endblock %}
+
+{% block body %}
+
+<h1>{{ html['challenge_data']['title'] }} &ndash; {{ html['participation_data']['name'] }}, {{ html['participation_data']['place'] }}</h1>
+
+<p><a href="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}">&laquo; Takaisin omaan osallistumiseen</a></p>
+
+<p>Olet havainnut {{ html['participation_data']['taxa_count']|safe }} lajia ✅.</p>
+
+{{ html['taxa_html']|safe }}
+
+{% endblock %}

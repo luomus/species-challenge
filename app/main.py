@@ -114,6 +114,15 @@ def new_participation(challenge_id_untrusted, participation_id_untrusted = None)
     return render_template("form_challenge100.html", html=html)
 
 
+import controllers.participation_stats
+@app.route("/tilasto/<string:challenge_id_untrusted>/<string:participation_id_untrusted>")
+@login_required
+def participation_stats(challenge_id_untrusted, participation_id_untrusted):
+    html = controllers.participation_stats.main(challenge_id_untrusted, participation_id_untrusted)
+
+    return render_template("participation_stats.html", html=html)
+
+
 import controllers.admin_challenge
 @app.route("/admin/haaste", methods=['GET', 'POST'])
 @app.route("/admin/haaste/", methods=['GET', 'POST'])

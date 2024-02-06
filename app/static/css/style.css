@@ -110,7 +110,6 @@ a:visited {
     font-weight: bold;
 }
 
-
 #content h2 {
     margin: 0;
     padding-top: 1em;
@@ -287,6 +286,12 @@ table th {
 table tr:nth-child(odd) {
     background-color: #fff;
 }
+
+
+#taxa_results .observed {
+    background-color: #c3eece;
+}
+
 
 table tr:hover {
     background-color: #ddd;
