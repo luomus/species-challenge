@@ -47,7 +47,7 @@
 
             </script>            
     </head>
-    <body>
+    <body{% block body_attributes %}{% endblock %}>
         <div id="navi">
             <h2><a href='/'>100 Lajia</a></h2>
             <div id="login_navi">
@@ -95,7 +95,7 @@
                 Saavutettavuusseloste
             </a>
             <a href="https://github.com/luomus/species-challenge">
-                Lähdekoodi/GitHub
+                GitHub
             </a>
     </div>
     </body>

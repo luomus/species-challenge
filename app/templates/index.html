@@ -6,18 +6,23 @@
     <title>Species Challenge - Luomus</title>
 {% endblock %}
 
+{% block body_attributes %} id="body_home"{% endblock %}
+
 {% block body %}
 
-    <h1>100 Lajia -haasteet</h1>
+    <div id="hero">
+        <a href="https://luomus.fi"><img src="{{ url_for('static', filename='images/luomus_50.png') }}" alt="Luomus"></a>
+        <h1>Havaitsetko 100 lajia vuodessa?</h1>
+    </div>
 
     <p>
         Täällä voi osallistua 100 lajia -haasteeseen kolmessa eliöryhmässä: kasvit, sienet ja hyönteiset. Haasteessa kansalaiset yrittävät havaita sata kasvi-, sieni- tai hyönteislajia vuoden aikana. Samalla haaste toimii kampanjana levittää yleistä tietoa luonnon monimuotoisuudesta esimerkkilajien avulla sekä kannustaa lajintuntemustaitojen oppimiseen.
     </p>
 
     {% if g.user_data %}
-        <h3><a href="/oma">Omat osallistumiset</a></h3>
+        <h3 class="strong_link"><a href="/oma">Omat osallistumiset</a></h3>
     {% else %}
-        <h3><a href="/login">Kirjaudu sisään</a> osallistuaksesi haasteisiin ja nähdäksesi omat osallistumisesi.</h3>
+        <h3 class="strong_link"><a href="/login">Kirjaudu sisään</a> osallistuaksesi haasteisiin ja nähdäksesi omat osallistumisesi.</h3>
     {% endif %}
 
     <div class="challenges open">

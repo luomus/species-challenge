@@ -31,7 +31,7 @@ def get_my_participations(challenge_id):
 
 def make_participant_html(participations):
     if not participations:
-        return "<p>Kukaan ei ole vielä osallistunut tähän haasteeseen.</p>"
+        return "<p>Kukaan ei ole vielä osallistunut tähän haasteeseen. Oletko ensimmäinen?</p>"
 
     html = ""
     table = ""
@@ -65,7 +65,7 @@ def make_participant_html(participations):
     target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
     taxa_count_average = round(taxa_count_total / number_of_participants, 1)
 
-    html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ str(target_taxa_count_reached_percent).replace('.', ',') } % ) on savuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { str(taxa_count_average).replace('.', ',') } lajia.</p>"
+    html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ str(target_taxa_count_reached_percent).replace('.', ',') } %) on saavuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { str(taxa_count_average).replace('.', ',') } lajia.</p>"
 
     html += table 
     return html

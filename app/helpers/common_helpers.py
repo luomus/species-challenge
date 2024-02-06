@@ -282,7 +282,7 @@ def make_taxa_html(participations, taxon_id, taxa_json = ""):
     ]
     '''
     if not participations:
-        return "<p>Yhtään lajia ei ole vielä havaittu.</p>"
+        return "<p>Yhtään lajia ei ole vielä havaittu. Löydätkö ensimmäisen lajin?</p>"
     
     # taxa from json to dict
     my_taxa = dict()
@@ -326,3 +326,4 @@ def make_taxa_html(participations, taxon_id, taxa_json = ""):
     html += "</table>"
     
     return html
+

@@ -11,9 +11,9 @@
     <h1>Omat osallistumiset</h1>
 
     {% if html["open_participations"] == "" and html["draft_participations"] == "" and html["closed_participations"] == "" %}
-        <p>Sinulla ei ole osallistumisia. <a href='/'>Osallistu avoimiin haasteisiin etusivulla</a>!</p>
+    <h3 class="strong_link">Et ole vielä osallistunut. <a href='/'>Tutustu avoimiin haasteisiin etusivulla!</a></h3>
     {% else %}
-        <p><a href='/'>Osallistu avoimiin haasteisiin etusivulla</a>!</p>
+        <h3 class="strong_link"><a href='/'>Osallistu uusiin haasteisiin etusivulla.</a></h3>
     {% endif %}
 
     {% if html["open_participations"] != "" %}
@@ -43,9 +43,5 @@
             {{ html["trashed_participations"]|safe }}
         </div>
     {% endif %}
-
-
-
-
 
 {% endblock %}
