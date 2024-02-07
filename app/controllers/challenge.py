@@ -46,11 +46,13 @@ def make_participant_html(participations):
     # Table of participants: name, place, taxon_count
     for participation in participations:
         sparkles = ""
+        name_shown = ""
         if participation["taxa_count"] >= target_count:
             sparkles = "✨"
+            name_shown = participation['name']
 
         table += "<tr>"
-        table += f"<td>{ participation['name'] }</td>"
+        table += f"<td>{ name_shown }</td>"
         table += f"<td>{ participation['place'] }</td>"
         table += f"<td>{ participation['taxa_count'] } { sparkles }</td>"
         table += "</tr>"
@@ -66,6 +68,7 @@ def make_participant_html(participations):
     taxa_count_average = round(taxa_count_total / number_of_participants, 1)
 
     html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ str(target_taxa_count_reached_percent).replace('.', ',') } %) on saavuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { str(taxa_count_average).replace('.', ',') } lajia.</p>"
+    html += f"<p>Osallistujien nimet tulevat näkyviin, kun he ovat havainneet 100 lajia.</p></p>"
 
     html += table 
     return html

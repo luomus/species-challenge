@@ -10,14 +10,21 @@
 
     {{ html["challenge_html"]|safe }}
 
-    <h2>Osallistumiseni</h2>
-    {{ html["participations_html"]|safe }}
+    <div id="challenge_mine">
+        <h2>Osallistumiseni</h2>
+        {{ html["participations_html"]|safe }}
+    </div>
 
-    <h2>Havaitut lajit</h2>
-    {{ html["taxa_html"]|safe }}
-
-    <h2>Osallistujat</h2>
-    {{ html["participant_html"]|safe }}
+    <div id="challenge_results_container">
+        <div id="challenge_species">
+            <h2>Havaitut lajit</h2>
+            {{ html["taxa_html"]|safe }}
+        </div>
+        <div id="challenge_participants">
+            <h2>Osallistujat</h2>
+            {{ html["participant_html"]|safe }}
+        </div>
+    </div>
 
 
 {% endblock %}

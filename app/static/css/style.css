@@ -229,6 +229,28 @@ a:visited {
     margin-bottom: 0;
 }
 
+#challenge_mine {
+    background-color: #fff;
+    padding: 0 1em 0.5em 1em;
+    border-radius: 10px;
+}
+
+#challenge_mine h2 {
+    margin: 0;
+}
+
+#challenge_results_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+#challenge_results_container div {
+    flex: 1;
+    min-width: 27em;
+    padding-right: 1em;
+
+}
+
 .participation .button {
     margin-left: 1em;
 }
