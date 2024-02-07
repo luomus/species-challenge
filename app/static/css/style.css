@@ -39,7 +39,6 @@ a:visited {
     border: 2px solid #92cae4;
     margin: 1em 0.5em 0 0.5em 0;
     padding: 0.5em;
-
     background-color: #d5edf8;
     border-color: #92cae4;
     color: #205791;
@@ -75,6 +74,14 @@ a:visited {
     height: 1.3em;
     z-index: 100;
     box-shadow: #000 0 0 5px;
+}
+
+#hero {
+    display: none;
+}
+
+#body_home #hero {
+    display: block;
 }
 
 #hero {

@@ -66,6 +66,12 @@
         </div>
 
         <div id="content">
+
+            <div id="hero">
+                <a href="https://luomus.fi"><img src="{{ url_for('static', filename='images/luomus_50.png') }}" alt="Luomus"></a>
+                <h1>Havaitsetko 100 lajia vuodessa?</h1>
+            </div>
+
             <!-- Show latest flash message, if exists. -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
