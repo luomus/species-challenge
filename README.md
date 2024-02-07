@@ -85,7 +85,6 @@ phpMyAdmin admin UI will be at http://localhost:8080
     - Thorough testing by multiple people
 - First production version:
     - My participation stats & chart
-    - Unique page titles
     - Mobile navi & testing, including autocomplete
     - All 3 lists
     - Adjust autocomplete additional species API call: only finnish, only species, colloquial names, match type?

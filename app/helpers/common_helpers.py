@@ -326,4 +326,3 @@ def make_taxa_html(participations, taxon_id, taxa_json = ""):
     html += "</table>"
     
     return html
-

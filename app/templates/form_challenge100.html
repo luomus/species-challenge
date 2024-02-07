@@ -42,7 +42,7 @@
         }
     </style>
 
-    <title>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</title>
+    <title>Osallistuminen: {{ html['challenge']['title'] }} - 100 lajia</title>
     <script>
 
     // Trash button logic
@@ -194,12 +194,26 @@
 
     <h1>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</h1>
 
-    <p><a href="/haaste/{{ html["challenge_id"] }}">Takaisin tämän haasteen etusivulle</a> &#x2022; <a href="/tilasto/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Tilastoja tästä osallistumisesta</a></p>
+    <p id="subnavi"><a href="/haaste/{{ html["challenge_id"] }}">Takaisin tämän haasteen etusivulle</a> &#x2022; <a href="/tilasto/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Tilastoja tästä osallistumisesta</a></p>
 
     <form name="challenge" id="challenge" class="trashed_{{ html['data_fields'].get('trashed', 'false') }}" action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
-    
+
+        <!-- Trash button -->
+        <div id="trash">
+            <div id="trashed_formfield">
+                <label for="trashed">Osallistumisen tila:</label>
+                <select id="trashed" name="trashed">
+                    <option value="0" {{ html['public_selected'] }}>Julkinen</option>
+                    <option value="1" {{ html['trashed_selected'] }}>Poistettu</option>
+                </select>
+            </div>
+
+            <button type="button" id="trash_button">Poista tämä osallistuminen</button>
+            <button type="button" id="confirm_button">Olen varma: Poista osallistuminen</button>
+        </div>
+
         <p>
-            <label for="name">Osallistujan nimi tai nimimerkki:</label><br>
+            <label for="name">Osallistujan nimi tai nimimerkki (pakollinen):</label><br>
             <input 
                 type="text" 
                 id="name" 
@@ -215,24 +229,10 @@
                 id="place" 
                 name="place" 
                 value="{{ html['data_fields'].get('place', '') }}" 
-            required>
+            >
         </p>
 
-        <!-- Trash button -->
-        <div id="trash">
-            <div id="trashed_formfield">
-                <label for="trashed">Osallistumisen tila:</label>
-                <select id="trashed" name="trashed">
-                    <option value="0" {{ html['public_selected'] }}>Julkinen</option>
-                    <option value="1" {{ html['trashed_selected'] }}>Poistettu</option>
-                </select>
-            </div>
-
-            <button type="button" id="trash_button">Poista osallistuminen</button>
-            <button type="button" id="confirm_button">Olen varma: Poista osallistuminen</button>
-        </div>
-
-        <p>
+        <p id="submit_container">
             <button type="submit" id="submit_button">Tallenna osallistuminen</button>
         </p>
 
@@ -240,9 +240,9 @@
             <!-- Empty form -->
         {% else %}
             {% if html['data_fields']['taxa_count'] == 0 %}
-                <h3>Et ole tallentanut vielä yhtään lajia.</h3>
+                <h3 id="taxon_count_heading">Et ole tallentanut vielä yhtään lajia.</h3>
             {% else %}
-                <h3>{{ html['data_fields']['taxa_count'] }} lajia</h3>
+                <h3 id="taxon_count_heading">{{ html['data_fields']['taxa_count'] }} lajia</h3>
             {% endif %}
         {% endif %}
 
@@ -254,7 +254,7 @@
             <input type="text" id="autocomplete-input" placeholder="">
             <div id="autocomplete-results"></div>
         </div>
-        
+   
     </form>
 
 {% endblock %}

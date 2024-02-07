@@ -202,14 +202,11 @@ def validate_participation_data(form_data):
         errors += "osallistujan nimi puuttuu. "
     else:
         if len(form_data["name"]) > 120:
-            errors += "osallistujan nimi on liian pitkä, maksimi 120 merkkiä. "
+            errors += "osallistujan nimi on liian pitkä, enintään 120 merkkiä. "
 
     # Place
-    if not form_data["place"]:
-        errors += "paikka puuttuu. "
-    else:
-        if len(form_data["place"]) > 120:
-            errors += "paikka on liian pitkä, maksimi 120 merkkiä. "
+    if len(form_data["place"]) > 120:
+        errors += "paikannimi on liian pitkä, enintään 120 merkkiä. "
 
     # Sanitize field values
     form_data["name"] = common_helpers.sanitize_name(form_data["name"].strip())

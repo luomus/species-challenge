@@ -20,7 +20,7 @@
 }
 
 body {
-    background-color: #f6f6f5;
+    background-color: #F0F0F4;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -72,6 +72,7 @@ a:visited {
     top: 0;
     left: 0;
     width: calc(100% - 2em);
+    height: 1.3em;
     z-index: 100;
     box-shadow: #000 0 0 5px;
 }
@@ -234,6 +235,14 @@ ul h4 {
     margin: 0;
 }
 
+#taxon_count_heading {
+    margin-left: 0.5em;
+}
+
+#subnavi {
+    margin-bottom: 1.5em;
+    font-weight: bold;
+}
 textarea#description {
     width: 30em;
     height: 10em;
@@ -279,12 +288,20 @@ button:active {
     display: inline-block;
 }
 
+#submit_container {
+    position: sticky;
+    top: 3.3em;
+    padding: 0.8em 0 0.8em 0;
+    background-color: #F0F0F4;
+}
+
 #trash {
     float: right;
     width: 20em;
     height: 4em;
     position: relative;
     background-color: #ffcccc;
+    background-color: #F0F0F4;
     border-radius: 5px;
     padding: 0.5em;
 }
@@ -335,11 +352,9 @@ table tr:nth-child(odd) {
     background-color: #fff;
 }
 
-
 #taxa_results .observed {
     background-color: #c3eece;
 }
-
 
 table tr:hover {
     background-color: #ddd;
