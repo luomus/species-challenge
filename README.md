@@ -47,19 +47,6 @@ To have many types of challenges, you would need to:
 
 ## Todo
 
-### Decidions to do
-
-- Should challenge have a description, or is a link to an external website enough?
-    - No: simpler
-    - Yes: description could also include a logo, if it allows html.
-- Should challenge have a start and end date?
-    - No, if there is description which can include this. 
-    - Yes, if we want to validate that observation dates are within this limit.
-- Do we need a login info page, or is it enough to just link to login page?
-- Subheadings to species list? e.g. Lehtisammalet
-- Non-species to the list? E.g. voikukat
-    - Yes.
-
 ### Next
 
 - Check http://localhost:8081/osallistuminen/4/6
@@ -94,9 +81,9 @@ To have many types of challenges, you would need to:
     - Giving malicious login token
     - Thorough testing by multiple people
 - First production version:
-    - My participation stats
+    - My participation stats & chart
     - Unique page titles
-    - Prevent setting observation date on future
+    - Prevent setting observation date to future
     - Mobile navi & testing, including autocomplete
     - All 3 lists
     - Adjust autocomplete additional species API call: only finnish, only species, colloquial names, match type?
