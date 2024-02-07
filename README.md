@@ -88,7 +88,6 @@ phpMyAdmin admin UI will be at http://localhost:8080
     - All 3 lists
     - Adjust autocomplete additional species API call: only finnish, only species, colloquial names, match type?
     - Styling
-    - Prepare for downtime (Thursdays etc.)
 - Later:
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
     - Prevent editing species of closed / draft challenge participations

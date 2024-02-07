@@ -8,6 +8,8 @@ import os
 import requests
 
 from helpers import common_helpers
+from helpers.common_db import DatabaseConnectionError
+
 
 print("\n-------------- species-challenge --------------\n", file = sys.stdout)
 
@@ -56,9 +58,17 @@ def before_request():
 def inject_user_data():
     return dict(user_data=g.user_data, is_admin=g.is_admin)
 
+# This doesn't catch the DatabaseConnectionError, so commented out
+
+@app.errorhandler(DatabaseConnectionError)
+def handle_db_connection_error(error):
+    return "<h3>Huoltokatko</h3><p>Palvelussa on katko joka kuukauden ensimmäinen torstai klo 8-10. Muista katkoista pyritään tiedottamaan <a href='https://laji.fi/'>Laji.fi-portaalissa</a>.</p> {}".format(error), 502
+
+
 @app.errorhandler(500)
 def internal_error(error):
-    return "<h4>Anteeksi, tapahtui virhe! Palaa takaisin selaimen takaisin/back -nappia painamalla.</h4> {}".format(error), 500
+    return "<h3>Anteeksi, tapahtui virhe!</h3><p>Palaa takaisin selaimen takaisin/back -nappia painamalla.</p> {}".format(error), 500
+
 
 # ----------------------------------------
 # Controllers

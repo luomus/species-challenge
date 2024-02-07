@@ -5,6 +5,11 @@ from contextlib import contextmanager
 import os
 
 
+class DatabaseConnectionError(Exception):
+    """Custom exception for database connection errors."""
+    pass
+
+
 def none_to_empty_string(row):
     return ["" if column is None else column for column in row]
 
@@ -22,11 +27,18 @@ def connection():
     password = os.environ.get("MYSQL_PASSWORD")
     host = "db"
     port = 3306
-    conn = mysql.connector.connect(user=user, password=password, host=host, port=port, database=database)
+    conn = None
     try:
-        yield conn
+        conn = mysql.connector.connect(user=user, password=password, host=host, port=port, database=database)
+        if conn:
+            yield conn
+    except mysql.connector.Error as e:
+        print("Database connection error:", e)
+        raise DatabaseConnectionError("Database connection error") from e
     finally:
-        conn.close()
+        # Close only if has opened successfully
+        if conn:
+            conn.close()
 
 
 def select(conn, query, params = None):
