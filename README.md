@@ -82,6 +82,7 @@ phpMyAdmin admin UI will be at http://localhost:8080
         - Admin editing challenges
         - Logout
     - Giving malicious login token
+    - Giving incorrect numeric challenge & participation id's -> redirect with flash
     - Thorough testing by multiple people
 - First production version:
     - Mobile navi & testing, including autocomplete
