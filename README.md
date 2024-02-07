@@ -86,13 +86,13 @@ phpMyAdmin admin UI will be at http://localhost:8080
 - First production version:
     - My participation stats & chart
     - Unique page titles
-    - Prevent setting observation date to future
     - Mobile navi & testing, including autocomplete
     - All 3 lists
     - Adjust autocomplete additional species API call: only finnish, only species, colloquial names, match type?
     - Styling
     - Prepare for downtime (Thursdays etc.)
 - Later:
+    - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
     - Prevent editing species of closed / draft challenge participations
     - Spinner to autocomplete
     - Handling higher taxa
