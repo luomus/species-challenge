@@ -27,22 +27,25 @@ phpMyAdmin admin UI will be at http://localhost:8080
 
 ## Notes
 
-Login to dev at
-https://login.laji.fi/login?target=KE.781&redirectMethod=GET&locale=fi&next=sc_dev
+- The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages.
+    - If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name. Better solution wpould be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
 
-To have many types of challenges, you would need to:
 
-- define types
-- when loading participation edit form, load the challenge data to see the type
-    - router calls a helper, passes this data also to method
-- on router, select template based on the type
-    - template includes additional fields (no rendering same field differently, that would create complexity)
-- on method, select type-specific validator (using a function that passes the validator) to validate participation data
-- this way form template and validator make sure the data is always ok.
-- data structure need to be defined in three places
-    - database: new fields
-    - form: new fields and UI
-    - validator: field values
+#### Future: To have a new challenge type, you would need to:
+
+- Define new types to data/challenge_vocabulary.json
+- When loading participation edit form, load the challenge data to see the type
+    - Router calls a helper, passes this data also to method
+- On router, select template based on the type
+    - Template includes additional fields (no rendering same field differently, that would create complexity)
+- On method, select type-specific validator (using a function that passes the validator) to validate participation data
+- This way form template and validator make sure the data is always ok.
+- SQL inset & update queries need to be duplicated or automated.
+- So data structure need to be defined in four places
+    - Database: new fields
+    - Form: new fields and UI
+    - Validator: field values
+    - Database query: fields and values
 
 
 ## Todo
