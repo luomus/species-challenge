@@ -78,6 +78,28 @@ phpMyAdmin admin UI will be at http://localhost:8080
     - Zabbix
 - Clear unneeded & trashed items from database, store dump to Git 
 
+#### Challenges:
+
+INSECTS
+include
+MVL.232
+
+exclude
+MVL.234
+MVL.236
+MVL.38
+MVL.235
+
+FUNGI
+MVL.235
+
+PLANTAE
+MVL.343 putkilokasvit
+MVL.23 sammalet
+MVL.541 näkinparstaislevät
+MVL.542 punalevät
+MVL.543 viherlevät
+
 ### Features
 
 - Test:
