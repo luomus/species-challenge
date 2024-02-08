@@ -27,6 +27,9 @@ phpMyAdmin admin UI will be at http://localhost:8080
 
 ## Notes
 
+- Setting up new challenge
+    - Provide list of basic taxa to `app/data/`, e.g. `MX.37601_2024.json` or use one of the existing ones.
+    - Privide list of all taxa from that group `app/data/`, e.g. `MX.37601_2024_all.json` or use one of the existing ones.
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages.
     - If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name. Better solution wpould be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
 
@@ -85,12 +88,10 @@ phpMyAdmin admin UI will be at http://localhost:8080
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
     - Thorough testing by multiple people
 - First production version:
+    - Taxa as a dropdown, or perhaps validate (so not accidentally have _all file defined here, or _all file missing)
+    - Autocomplete informal groups from database
     - Mobile navi & testing, including autocomplete
     - All 3 lists
-    - Adjust autocomplete additional species API call: only finnish, only species, colloquial names, match type?
-        - Filter out taxa that are not on the local species list, or make the system work with also taxa that are not on the list.
-    - Autocomplete informal groups from database
-    - Styling
 - Later:
     - Remove button (dull red X?) to participation form taxon list
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 

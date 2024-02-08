@@ -129,6 +129,8 @@
         const resultsContainer = document.getElementById('autocomplete-results');
 
         const accessToken = '{{ html["finbif_access_token"] }}';
+
+        // Todo: get from database
         const informalTaxonGroup = 'MVL.343';
         const endpoint = 'https://api.laji.fi/v0/autocomplete/taxon?limit=5&includePayload=true&lang=fi&informalTaxonGroup=' + informalTaxonGroup + '&excludeNameTypes=MX.hasMisspelledName,MX.hasMisappliedName&onlySpecies=true&onlyFinnish=true&access_token=' + accessToken + '&q='
 
