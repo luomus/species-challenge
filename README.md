@@ -92,6 +92,7 @@ phpMyAdmin admin UI will be at http://localhost:8080
     - Autocomplete informal groups from database
     - Styling
 - Later:
+    - Remove button (dull red X?) to participation form taxon list
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
     - Prevent editing species of closed / draft challenge participations
     - Spinner to autocomplete
