@@ -187,7 +187,13 @@ def taxon_file_exists(taxon_file_id):
     bool: True if the file exists, False otherwise.
     """
     filename = "./data/" + taxon_file_id + ".json"
-    return os.path.isfile(filename)
+    basic_file = os.path.isfile(filename)
+    filename = "./data/" + taxon_file_id + "_all.json"
+    additional_file = os.path.isfile(filename)
+
+    if basic_file and additional_file:
+        return True
+    return False
 
 
 def load_taxon_file(taxon_file_id):
