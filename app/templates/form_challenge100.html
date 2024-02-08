@@ -130,7 +130,7 @@
 
         const accessToken = '{{ html["finbif_access_token"] }}';
         const informalTaxonGroup = 'MVL.343';
-        const endpoint = 'https://api.laji.fi/v0/autocomplete/taxon?limit=5&includePayload=true&lang=fi&informalTaxonGroup=' + informalTaxonGroup + '&excludeNameTypes=MX.hasMisspelledName,MX.hasMisappliedName&access_token=' + accessToken + '&q='
+        const endpoint = 'https://api.laji.fi/v0/autocomplete/taxon?limit=5&includePayload=true&lang=fi&informalTaxonGroup=' + informalTaxonGroup + '&excludeNameTypes=MX.hasMisspelledName,MX.hasMisappliedName&onlySpecies=true&onlyFinnish=true&access_token=' + accessToken + '&q='
 
         let timeoutId = null;
 
@@ -152,6 +152,14 @@
                         resultsContainer.innerHTML = ''; // Clear previous results
 
                         data.forEach(item => {
+                            console.log(item); // Debugging
+
+                            // API doesn't support excluding subspecies, variations etc, so we need to filter them out here
+                            // if item.payload.taxonRankId is not MX.species, skip this item
+                            if (item.payload.taxonRankId !== 'MX.species') {
+                                return;
+                            }
+
                             const div = document.createElement('div');
                             div.classList.add('autocomplete-item');
                             div.textContent = item.value + " (" + item.payload.scientificName + ")";
