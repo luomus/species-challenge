@@ -66,8 +66,6 @@ phpMyAdmin admin UI will be at http://localhost:8080
 
 - Clarify Docker build commands
 - Database sorting/collation settings utf8mb4_swedish_ci
-- Generic exception handling
-- Set target to 100 species on challenge.py & admin.py
 - Deployment to staging & production
     - Reduce logging
     - Don't follow files with Gunicorn
@@ -77,6 +75,7 @@ phpMyAdmin admin UI will be at http://localhost:8080
     - Login with system id's
     - Zabbix
 - Clear unneeded & trashed items from database, store dump to Git 
+- Setup species lists (basic & advanced) with clear names, and matching with taxon autocomplete.
 
 #### Challenges:
 
@@ -110,8 +109,6 @@ MVL.543 viherlevät
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
     - Thorough testing by multiple people
 - First production version:
-    - Taxa as a dropdown, or perhaps validate (so not accidentally have _all file defined here, or _all file missing)
-    - Autocomplete informal groups from database
     - Mobile navi & testing, including autocomplete
     - All 3 lists
 - Later:

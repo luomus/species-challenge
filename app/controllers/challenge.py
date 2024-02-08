@@ -39,22 +39,20 @@ def make_participant_html(participations):
     table += "<table id='participant_results'>"
     table += "<tr><th>Osallistuja</th><th>Paikka</th><th>Lajimäärä</th></tr>"
 
-    target_count = 10
+    target_count = 100
     target_taxa_count_reached = 0
     taxa_count_total = 0
 
     # Table of participants: name, place, taxon_count
     for participation in participations:
-        sparkles = ""
         name_shown = ""
         if participation["taxa_count"] >= target_count:
-            sparkles = "✨"
             name_shown = participation['name']
 
         table += "<tr>"
         table += f"<td>{ name_shown }</td>"
         table += f"<td>{ participation['place'] }</td>"
-        table += f"<td>{ participation['taxa_count'] } { sparkles }</td>"
+        table += f"<td>{ participation['taxa_count'] }</td>"
         table += "</tr>"
 
         taxa_count_total = taxa_count_total + participation["taxa_count"]

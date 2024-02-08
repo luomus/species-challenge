@@ -30,7 +30,7 @@ def make_participations_stats_html(participations):
     number_of_participants = len(participations)
 
     # Count number of participants that have N or more taxa_count, and count average taxa_count
-    target_count = 10
+    target_count = 100
     target_taxa_count_reached = 0
     taxa_count_total = 0
 

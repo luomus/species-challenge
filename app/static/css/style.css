@@ -52,11 +52,6 @@ button:active {
 
 /* FLASH MESSAGES */
 
-.fade-out {
-    transition: opacity 1s ease-out;
-    opacity: 0;
-}
-
 .flash {
     border: 2px solid #92cae4;
     margin: 1em 0.5em 0 0.5em 0;
@@ -74,13 +69,21 @@ button:active {
 
 .success {
     background-color: #e9ffd9;
-    border-color: #a6ca8a;
+    border-color: rgb(149, 211, 102);
     color: #3e7800;
 }
 
 .info {
     /* Use default styles */
 }
+
+.fade-out {
+    transition: 1s ease-out;
+    background-color: #eee;
+    border-color: #999;
+    color: #555;
+}
+
 
 /* NAVIGATION */
 
