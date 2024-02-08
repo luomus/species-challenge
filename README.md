@@ -88,6 +88,8 @@ phpMyAdmin admin UI will be at http://localhost:8080
     - Mobile navi & testing, including autocomplete
     - All 3 lists
     - Adjust autocomplete additional species API call: only finnish, only species, colloquial names, match type?
+        - Filter out taxa that are not on the local species list, or make the system work with also taxa that are not on the list.
+    - Autocomplete informal groups from database
     - Styling
 - Later:
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 

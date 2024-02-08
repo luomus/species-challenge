@@ -104,6 +104,7 @@ def test_add_edit_participation(browser):
     page.fill("#place", "Näyttämö")
 
     # Add taxa
+    # Todo: click taxon name to add it to the form
     page.fill("#MX_43922", "2024-01-01")
     page.fill("#MX_43502", "2024-01-02")
 

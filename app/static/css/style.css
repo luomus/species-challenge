@@ -29,7 +29,29 @@ a:visited {
     color: #1F74AD;
 }
 
-/* Flash messages */
+/* Buttons */
+a.button,
+button {
+    background-color: #eee;
+    border: 1px solid #999;
+    border-radius: 5px;
+    color: #000;
+    display: inline-block;
+    padding: 0.3em 0.4em;
+    text-decoration: none;
+    margin-right: 1em;
+    font-size: 100%;
+
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%)
+}
+
+a.button:active,
+button:active {
+    transform: translateY(2px);
+}
+
+/* FLASH MESSAGES */
+
 .fade-out {
     transition: opacity 1s ease-out;
     opacity: 0;
@@ -60,6 +82,8 @@ a:visited {
     /* Use default styles */
 }
 
+/* NAVIGATION */
+
 #navi {
     background-color: #1F74AD; /* Laji.fi darker blue */
     color: #f1f1f1;
@@ -75,6 +99,73 @@ a:visited {
     z-index: 100;
     box-shadow: #000 0 0 5px;
 }
+
+#navi h2 {
+    font-size: 120%;
+    display: inline;
+    text-transform: uppercase;  
+    margin: 0;
+    letter-spacing: 0.1rem;
+}
+
+#navi h2 a {
+    text-decoration: none;
+}
+
+#navi a,
+#navi a:link
+#navi a:visited
+#navi a:active
+{
+    color: #fff;
+}
+
+#login_navi {
+    text-align: right;
+    display: flex;
+    gap: 10px; /* Adds space between items in #login_navi */
+}
+
+#login_navi span {
+    display: inline-block;
+    margin-left: 0.75em;
+}
+
+#login_p {
+    font-size: 120%;
+}
+
+#admin {
+    font-weight: bold;
+}
+
+#subnavi {
+    margin-bottom: 1.5em;
+    font-weight: bold;
+}
+
+#footer {
+    background-color: #1F74AD;
+    padding: 10px;
+    margin: 2em 0 0 -10px;
+    clear: both;
+    width: calc(100% - 2px);
+}
+
+#footer img {
+    height: 50px;
+    width: auto;
+}
+
+#footer a {
+    color: #fff;
+    margin-right: 1em;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* FRONTPAGE */
 
 #hero {
     display: none;
@@ -126,45 +217,7 @@ a:visited {
     padding-left: 0.2em;
 }
 
-#navi h2 {
-    font-size: 120%;
-    display: inline;
-    text-transform: uppercase;  
-    margin: 0;
-    letter-spacing: 0.1rem;
-}
-
-#navi h2 a {
-    text-decoration: none;
-}
-
-#navi a,
-#navi a:link
-#navi a:visited
-#navi a:active
-{
-    color: #fff;
-}
-
-#login_navi {
-    text-align: right;
-    display: flex;
-    gap: 10px; /* Adds space between items in #login_navi */
-}
-
-#login_navi span {
-    display: inline-block;
-    margin-left: 0.75em;
-}
-
-#login_p {
-    font-size: 120%;
-}
-
-#admin {
-    font-weight: bold;
-}
-
+/* LAYOUT */
 
 #content h2 {
     margin: 0;
@@ -268,34 +321,9 @@ ul h4 {
     margin-left: 0.5em;
 }
 
-#subnavi {
-    margin-bottom: 1.5em;
-    font-weight: bold;
-}
 textarea#description {
     width: 30em;
     height: 10em;
-}
-
-/* Buttons */
-a.button,
-button {
-    background-color: #eee;
-    border: 1px solid #999;
-    border-radius: 5px;
-    color: #000;
-    display: inline-block;
-    padding: 0.3em 0.4em;
-    text-decoration: none;
-    margin-right: 1em;
-    font-size: 100%;
-
-    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%)
-}
-
-a.button:active,
-button:active {
-    transform: translateY(2px);
 }
 
 #taxa {
@@ -362,7 +390,8 @@ button:active {
 }
 
 
-/* General Table Styling */
+/* TABLES */
+
 table {
     border-collapse: collapse;
     margin-top: 1.5em;
@@ -391,25 +420,4 @@ table tr:hover {
 
 table td {
 padding: 10px;
-}
-
-#footer {
-    background-color: #1F74AD;
-    padding: 10px;
-    margin: 2em 0 0 -10px;
-    clear: both;
-    width: calc(100% - 2px);
-}
-
-#footer img {
-    height: 50px;
-    width: auto;
-}
-
-#footer a {
-    color: #fff;
-    margin-right: 1em;
-    text-decoration: none;
-    display: inline-block;
-    vertical-align: middle;
 }
