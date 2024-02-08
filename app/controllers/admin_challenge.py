@@ -29,6 +29,7 @@ def save_challenge(challenge_id, form_data):
         print("CASE 1")
         params = (
             form_data["taxon"],
+            form_data["autocomplete"],
             form_data["year"],
             form_data["type"],
             form_data["title"],
@@ -40,7 +41,7 @@ def save_challenge(challenge_id, form_data):
         )
 
         with common_db.connection() as conn:
-            query = "UPDATE challenges SET taxon = %s, year = %s, type = %s, title = %s, status = %s, description = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
+            query = "UPDATE challenges SET taxon = %s, autocomplete = %s, year = %s, type = %s, title = %s, status = %s, description = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
             success, _ = common_db.transaction(conn, query, params)
 
         # Return success and existing challenge ID
@@ -52,6 +53,7 @@ def save_challenge(challenge_id, form_data):
     print(form_data)
     params = (
         form_data["taxon"],
+        form_data["autocomplete"],
         form_data["year"],
         form_data["type"],
         form_data["title"],
@@ -66,7 +68,7 @@ def save_challenge(challenge_id, form_data):
     print("PARAMS CASE 2:", params)
 
     with common_db.connection() as conn:
-        query = "INSERT INTO challenges (taxon, year, type, title, status, description, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO challenges (taxon, autocomplete, year, type, title, status, description, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
 
     # Return success and new challenge ID returned by the database
@@ -94,8 +96,8 @@ def validate_challenge_data(form_data):
     if not form_data["title"]:
         errors += "Haasteen nimi puuttuu. "
     else:
-        if len(form_data["title"]) > 240:
-            errors += "Haasteen nimi on liian pitkä, maksimi 240 merkkiä. "
+        if len(form_data["title"]) > 250:
+            errors += "Haasteen nimi on liian pitkä, maksimi 250 merkkiä. "
 
     # Description
     if len(form_data["description"]) > 2000:
@@ -108,6 +110,10 @@ def validate_challenge_data(form_data):
         # Check if file exists in ./data/{taxon}_taxa.json
         if not common_helpers.taxon_file_exists(form_data["taxon"]):
             errors += f"Taksonin { form_data['taxon'] } lajiluetteloa ei löytynyt: valitse toinen taksoni tai pyydä ylläpitäjää lisäämään luettelo. "
+
+    # Autocomplete
+    if len(form_data["autocomplete"]) > 250:
+        errors += "autocomplete on liian pitkä, maksimi 250 merkkiä. "
 
     # Year
     if not form_data["year"]:
@@ -255,4 +261,4 @@ def main(challenge_id_untrusted = None, form_data = None):
         # Database error
         print("CASE C2 FAIL")
         raise Exception("Error saving challenge to database.")
-    
+  

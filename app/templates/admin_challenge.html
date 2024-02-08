@@ -39,13 +39,23 @@
         </p>
 
         <p>
-            <label for="title">Taksonin tunniste (MX...):</label><br>
+            <label for="title">Taksonitiedoston tunniste (esim. MX.1_2024):</label><br>
             <input 
                 type="text" 
                 id="taxon" 
                 name="taxon" 
                 value="{{ html['data_fields'].get('taxon', '') }}"
             required>
+        </p>
+
+        <p>
+            <label for="title">Autocomplete-parametrit:</label><br>
+            <input 
+                type="text" 
+                id="autocomplete" 
+                name="autocomplete" 
+                value="{{ html['data_fields'].get('autocomplete', '') }}"
+            >
         </p>
 
         <p>

@@ -91,7 +91,7 @@ MVL.38
 MVL.235
 
 FUNGI
-MVL.235
+MVL.233
 
 PLANTAE
 MVL.343 putkilokasvit
