@@ -182,15 +182,12 @@ button:active {
     background-color: #204100;
     padding: 10px;
     margin: 0 -10px 1em -10px;
-    height: 15em;
-    max-height: 25vh;
+    height: 20em;
+    max-height: 30vh;
     min-height: 4em;
     color: #fff;
     /* image stretched to fit the div */
-    background-image: url("/static/images/hero-0.jpg");
-    background-image: url("/static/images/hero-1.jpg");
-    background-image: url("/static/images/hero-center.jpg");
-    background-image: url("/static/images/hero-3.jpg");
+    background-image: url("/static/images/hero.jpg");
     background-size: cover;
     background-position: center;
     box-shadow: #999 0 0 5px;
@@ -228,6 +225,10 @@ button:active {
     clear: both;
 }
 
+#aftercontent {
+    clear: both;
+}
+
 .challenges h2,
 .participations h2 {
     padding-top: 2em;
@@ -238,9 +239,9 @@ button:active {
     margin: 1em 2em 1em 0;
     padding: 1em;
     background-color: #fff;
-    width: 30em;
+    width: 26em;
     float: left;
-    min-height: 10em;
+    min-height: 8em;
     box-shadow: #ccc 4px 4px 4px;
 }
 

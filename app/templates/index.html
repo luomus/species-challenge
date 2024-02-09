@@ -25,9 +25,11 @@
         {{ html["open_challenges"]|safe }}
     </div>
 
-    <div class="challenges closed">
-        <h2>Suljetut haasteet</h2>
-        {{ html["closed_challenges"]|safe }}
-    </div>
+    {% if html["closed_challenges"] %}
+        <div class="challenges closed">
+            <h2>Suljetut haasteet</h2>
+            {{ html["closed_challenges"]|safe }}
+        </div>
+    {% endif %}
     
 {% endblock %}
