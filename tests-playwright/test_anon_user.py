@@ -8,33 +8,34 @@ def test_anon_user(browser):
 
     # Access pages that are publicly available
     page.goto("http://web:8081")
-    assert front_page_text in page.content()
+    assert "Kirjaudu sisään" in page.content()
 
-    page.goto("http://web:8081/haaste/4")
-    assert "Nimi Merkkinen" in page.content()
+    page.click("text=Sienihaaste 2024 Playwright")
+    assert "Playwright-paikka" in page.content()
     assert "Osallistujat ovat havainneet yhteensä" in page.content()
 
     # Access pages that require login
     # Access own participations page
     page.goto("http://web:8081/oma")
     assert "Kirjaudu ensin sisään" in page.content()
-    # Redirect to front page
     assert front_page_text in page.content()
+
+    # Access a participation
+    page.goto("http://web:8081/tilasto/5/35")
+    assert "Kirjaudu ensin sisään" in page.content()
+    assert front_page_text in page.content()    
 
     # Access admin page
     page.goto("http://web:8081/admin")
-    # Redirect to front page
     assert front_page_text in page.content()
 
     # Edit a challenge
-    page.goto("http://web:8081/admin/haaste/4")
-    # Redirect to front page
+    page.goto("http://web:8081/admin/haaste/5")
     assert front_page_text in page.content()
 
     # Edit a participation
-    page.goto("http://web:8081/osallistuminen/4/5")
+    page.goto("http://web:8081/osallistuminen/5/35")
     assert "Kirjaudu ensin sisään" in page.content()
-    # Redirect to front page
     assert front_page_text in page.content()
 
     page.close()

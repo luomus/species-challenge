@@ -14,6 +14,9 @@ def main(challenge_id_untrusted, participation_id_untrusted):
     participations = common_helpers.get_all_participations(challenge_id)
 
     participation_data = common_helpers.get_participation(challenge_id, participation_id)
+    if not participation_data:
+        # Not participation of this user
+        return {"redirect": True, "url": "/"}
 
     html["taxa_html"] = common_helpers.make_taxa_html(participations, challenge_data["taxon"], participation_data["taxa_json"])
 

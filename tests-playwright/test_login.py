@@ -91,10 +91,16 @@ def test_add_edit_participation(browser):
     context = browser.new_context(storage_state='state.json')
     page = context.new_page()
 
+    front_page_text = "Havaitsetko 100 lajia"
+
+    # ----------------------------------------------
+    # Access general pages
     # Challenge where this person has not participated in
     page.goto("http://web:8081/haaste/5")
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
+    # ----------------------------------------------
+    # Access own participation
     # Add participation
     page.click("#add_participation")
     assert "Osallistuminen haasteeseen Sienihaaste" in page.content()
@@ -104,9 +110,8 @@ def test_add_edit_participation(browser):
     page.fill("#place", "Näyttämö")
 
     # Add taxa
-    # Todo: click taxon name to add it to the form
-    page.fill("#MX_43922", "2024-01-01")
-    page.fill("#MX_43502", "2024-01-02")
+    page.fill("#MX_43922", "2024-01-01") # Add by filling in the field
+    page.click("#MX_43502_name") # Add by clicking the taxon name
 
     # Submit the form
     page.click("#submit_button")
@@ -115,6 +120,13 @@ def test_add_edit_participation(browser):
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert "2 lajia" in page.content()
+
+    # Access own stats
+    page.click("text=Tilastoja tästä osallistumisesta")
+    assert "Olet havainnut 2 lajia" in page.content()
+
+    # Back to editing the participation
+    page.click("#subnavi a")
 
     # Remove taxon
     page.fill("#MX_43922", "")
@@ -142,6 +154,16 @@ def test_add_edit_participation(browser):
     # Check that trashed participation is not visible
     page.goto("http://web:8081/haaste/5")
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
+
+    # ----------------------------------------------
+    # Access content with no rights to access
+    # Access a participation by someone else
+    # This should redirect to front page without a flash message
+    page.goto("http://web:8081/tilasto/5/35")
+    page.wait_for_selector('#body_home')
+    assert front_page_text in page.content() 
+   
+
 
 
 def test_teardown():

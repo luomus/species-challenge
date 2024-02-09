@@ -126,6 +126,9 @@ import controllers.participation_stats
 def participation_stats(challenge_id_untrusted, participation_id_untrusted):
     html = controllers.participation_stats.main(challenge_id_untrusted, participation_id_untrusted)
 
+    if html.get('redirect'):
+        return redirect(html['url'])
+
     return render_template("participation_stats.html", html=html)
 
 
