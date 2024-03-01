@@ -12,6 +12,10 @@ RUN apt-get update && \
     apt-get install -y gcc && \
     pip install --upgrade pip
 
+# Copy requirements and install dependencies
+COPY requirements.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
 # Prepare the application directory (with appropriate permissions for OpenShift)
 RUN mkdir -p /usr/src/app
 
