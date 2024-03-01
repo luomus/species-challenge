@@ -12,7 +12,7 @@ RUN apt-get update && \
     pip install --upgrade pip
 
 # Prepare the application directory (with appropriate permissions for OpenShift)
-RUN mkdir -p /usr/src/app && \
+RUN mkdir -p /usr/src/app
 
 # Copy the app and adjust permissions for OpenShift
 COPY ./app /usr/src/app
