@@ -2,8 +2,8 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim-buster
 
-# Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
+ENV FLASK_DEBUG 0
 
 # Install necessary packages
 RUN apt-get update && \
