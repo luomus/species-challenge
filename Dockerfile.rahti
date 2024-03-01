@@ -21,9 +21,6 @@ COPY ./app /usr/src/app
 RUN chgrp -R 0 /usr/src/app && \
     chmod -R g=u /usr/src/app
 
-# Copy the app using the non-root user
-COPY --chown=myuser:myuser ./app /usr/src/app
-
 # Final setup
 EXPOSE 8081
 WORKDIR /usr/src/app
