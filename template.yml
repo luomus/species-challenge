@@ -14,7 +14,7 @@ parameters:
     value: mariadb
   - name: DB_IMAGE
     required: true
-    value: quay.io/centos7/mariadb-103-centos7
+    value: quay.io/centos7/mariadb-105-centos7
   - name: DB_PORT
     required: true
     value: "3306"
