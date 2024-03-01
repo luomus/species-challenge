@@ -18,9 +18,11 @@ set +a
 
 BRANCH=$(git symbolic-ref --short -q HEAD)
 
+# If not in main, assume dev
 if [ "$BRANCH" != "main" ]; then
 
 HOST=$HOST_DEV
+MYSQL_PASSWORD=$MYSQL_PASSWORD_DEV
 
 fi
 
@@ -65,5 +67,8 @@ fi
 oc process -f $f \
 -p BRANCH=$BRANCH \
 -p HOST=$HOST \
+-p MYSQL_PASSWORD=$MYSQL_PASSWORD \
+-p MYSQL_USER=$MYSQL_USER \
+-p MYSQL_DATABASE=$MYSQL_DATABASE \
 | jq $ITEM
 

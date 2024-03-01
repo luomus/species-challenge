@@ -1,0 +1,32 @@
+
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim-buster
+
+# Allow statements and log messages to immediately appear in the Knative logs
+ENV PYTHONUNBUFFERED True
+
+# Install necessary packages
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y gcc && \
+    pip install --upgrade pip
+
+# Prepare the application directory (with appropriate permissions for OpenShift)
+RUN mkdir -p /usr/src/app && \
+    chgrp -R 0 /usr/src/app && \
+    chmod -R g=u /usr/src/app
+
+# Copy the app and adjust permissions for OpenShift
+COPY ./app /usr/src/app
+RUN chgrp -R 0 /usr/src/app && \
+    chmod -R g=u /usr/src/app
+
+# Copy the app using the non-root user
+COPY --chown=myuser:myuser ./app /usr/src/app
+
+# Final setup
+EXPOSE 8081
+WORKDIR /usr/src/app
+USER myuser
+
+ENTRYPOINT ["gunicorn", "--chdir", "/usr/src/app", "main:app", "-w", "2", "--threads", "2", "-b", "0.0.0.0:8081"]
