@@ -25,7 +25,7 @@ def connection():
     database = os.environ.get("MYSQL_DATABASE")
     user = os.environ.get("MYSQL_USER")
     password = os.environ.get("MYSQL_PASSWORD")
-    host = "db"
+    host = os.environ.get("MYSQL_HOST")
     port = 3306
     conn = None
     try:
