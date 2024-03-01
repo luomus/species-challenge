@@ -25,6 +25,13 @@ phpMyAdmin admin UI will be at http://localhost:8080
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
 - Run tests with `python -m pytest -v`. Add `-s` option to the end to see print outputs.
 
+## OpenShift setup
+
+Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump does not work. You need to create the dump on the command line:
+
+    mariadb-dump --user=USERNAME --password --lock-tables --databases DATABASENAME > ./species-challenge.sql
+
+
 ## Notes
 
 - Setting up new challenge
