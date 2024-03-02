@@ -30,6 +30,8 @@ parameters:
     required: true
   - name: HOST
     required: true
+  - name: ITSYSTEM
+    required: true
   - name: GITHUB_SECRET
     required: true
     generate: expression
@@ -112,6 +114,8 @@ objects:
             value: ${MYSQL_PASSWORD}
           - name: MYSQL_HOST
             value: ${DB}-${BRANCH}
+          - name: ITSYSTEM
+            value: ${ITSYSTEM}
           - name: FINBIF_API_TOKEN
             value: ${FINBIF_API_TOKEN}
           - name: FLASK_SECRET_KEY
