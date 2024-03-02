@@ -75,12 +75,8 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 - Database sorting/collation settings utf8mb4_swedish_ci
 - Deployment to staging & production
     - Reduce logging
-    - Don't follow files with Gunicorn
-    - Login dev/prod parametrized through /login & env?
-    - Databases
-        - Automate database setup - does OpenShift need this?
-    - Login with system id's
-    - Zabbix
+    - Production database
+    - Zabbix for prod
 - Clear unneeded & trashed items from database, store dump to Git 
 - Setup species lists (basic & advanced) with clear names, and matching with taxon autocomplete.
 
