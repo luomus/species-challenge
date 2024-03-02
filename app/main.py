@@ -233,7 +233,7 @@ def login_page():
         elif "KE.1741" == itsystem_id:
             login_url = "https://login.laji.fi/login?target=KE.1741&redirectMethod=GET&locale=fi&next="
 
-        return render_template("login.html", login_url)
+        return render_template("login.html", login_url=login_url)
 
 
 @app.route("/logout")
