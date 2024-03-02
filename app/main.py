@@ -222,6 +222,17 @@ def login_page():
     # Case C: User not logged in, show login instructions
     else:
         itsystem_id = os.environ.get("ITSYSTEM_LOCALHOST")
+        print(itsystem_id)
+        # Localhost
+        if "KE.1521" == itsystem_id:
+            login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
+        # Dev/staging
+        elif "KE.1522" == itsystem_id:
+            login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1522&redirectMethod=GET&locale=fi&next="
+        # Production
+        elif "KE.1741" == itsystem_id:
+            login_url = "https://login.laji.fi/login?target=KE.1741&redirectMethod=GET&locale=fi&next="
+
         return render_template("login.html")
 
 
