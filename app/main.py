@@ -221,7 +221,7 @@ def login_page():
     
     # Case C: User not logged in, show login instructions
     else:
-        itsystem_id = os.environ.get("ITSYSTEM_LOCALHOST")
+        itsystem_id = os.environ.get("ITSYSTEM")
         print(itsystem_id)
         # Localhost
         if "KE.1521" == itsystem_id:
