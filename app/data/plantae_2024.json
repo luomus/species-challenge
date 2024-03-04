@@ -203,9 +203,9 @@
   "order": 96397
  },
  "MX.42419": {
-    "sci": "Taraxacum",
-    "fi": "voikukat",
-    "order": 96399
+  "sci": "Taraxacum",
+  "fi": "voikukat",
+  "order": 96399
  },
  "MX.39823": {
   "sci": "Tripleurospermum inodorum",
@@ -539,7 +539,7 @@
  },
  "MX.38590": {
   "sci": "Populus tremula",
-  "fi": "metsähaapa",
+  "fi": "mets\u00e4haapa",
   "order": 101529
  },
  "MX.38563": {

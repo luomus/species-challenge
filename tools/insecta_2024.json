@@ -1,0 +1,757 @@
+{
+ "MX.194730": {
+  "sci": "Acanthocinus aedilis",
+  "fin": "sarvijaakko",
+  "order": 21983
+ },
+ "MX.62446": {
+  "sci": "Acronicta alni",
+  "fin": "lepp\u00e4iltay\u00f6kk\u00f6nen",
+  "order": 27761
+ },
+ "MX.62461": {
+  "sci": "Acronicta rumicis",
+  "fin": "pilkkuiltay\u00f6kk\u00f6nen",
+  "order": 27772
+ },
+ "MX.41": {
+  "sci": "Aeshna grandis",
+  "fin": "ruskoukonkorento",
+  "order": 520
+ },
+ "MX.194738": {
+  "sci": "Agapanthia villosoviridescens",
+  "fin": "h\u00e4rmej\u00e4\u00e4r\u00e4",
+  "order": 21992
+ },
+ "MX.195789": {
+  "sci": "Agelastica alni",
+  "fin": "id\u00e4nlehtikuoriainen",
+  "order": 22312
+ },
+ "MX.60914": {
+  "sci": "Aglais io",
+  "fin": "neitoperhonen",
+  "order": 26278
+ },
+ "MX.60916": {
+  "sci": "Aglais urticae",
+  "fin": "nokkosperhonen",
+  "order": 26279
+ },
+ "MX.61449": {
+  "sci": "Aglia tau",
+  "fin": "nastakehr\u00e4\u00e4j\u00e4",
+  "order": 27364
+ },
+ "MX.59274": {
+  "sci": "Agonopterix heracliana",
+  "fin": "koiranputkilattakoi",
+  "order": 25496
+ },
+ "MX.191863": {
+  "sci": "Amphimallon solstitiale",
+  "fin": "juhannusturilas",
+  "order": 19322
+ },
+ "MX.204808": {
+  "sci": "Andrena cineraria",
+  "fin": "hohtomaamehil\u00e4inen",
+  "order": 14957
+ },
+ "MX.204778": {
+  "sci": "Andrena clarkella",
+  "fin": "raitamaamehil\u00e4inen",
+  "order": 14926
+ },
+ "MX.204837": {
+  "sci": "Andrena haemorrhoa",
+  "fin": "verimaamehil\u00e4inen",
+  "order": 14987
+ },
+ "MX.204812": {
+  "sci": "Andrena vaga",
+  "fin": "pajukkomaamehil\u00e4inen",
+  "order": 14961
+ },
+ "MX.192205": {
+  "sci": "Anoplotrupes stercorosus",
+  "fin": "mets\u00e4sitti\u00e4inen",
+  "order": 18862
+ },
+ "MX.204585": {
+  "sci": "Anthidium manicatum",
+  "fin": "sein\u00e4huopamehil\u00e4inen",
+  "order": 15106
+ },
+ "MX.60767": {
+  "sci": "Anthocharis cardamines",
+  "fin": "auroraperhonen",
+  "order": 26205
+ },
+ "MX.60970": {
+  "sci": "Aphantopus hyperantus",
+  "fin": "tesmaperhonen",
+  "order": 26329
+ },
+ "MX.204772": {
+  "sci": "Apis mellifera",
+  "fin": "tarhamehil\u00e4inen",
+  "order": 15209
+ },
+ "MX.195509": {
+  "sci": "Apoderus coryli",
+  "fin": "lep\u00e4nk\u00e4\u00e4r\u00f6k\u00e4rs\u00e4k\u00e4s",
+  "order": 22674
+ },
+ "MX.60908": {
+  "sci": "Araschnia levana",
+  "fin": "karttaperhonen",
+  "order": 26273
+ },
+ "MX.60876": {
+  "sci": "Argynnis paphia",
+  "fin": "keisarinviitta",
+  "order": 26260
+ },
+ "MX.204728": {
+  "sci": "Bombus hortorum",
+  "fin": "tarhakimalainen",
+  "order": 15234
+ },
+ "MX.204748": {
+  "sci": "Bombus hypnorum",
+  "fin": "kartanokimalainen",
+  "order": 15249
+ },
+ "MX.204767": {
+  "sci": "Bombus lapidarius",
+  "fin": "kivikkokimalainen",
+  "order": 15236
+ },
+ "MX.204750": {
+  "sci": "Bombus lapponicus",
+  "fin": "lapinkimalainen",
+  "order": 15251
+ },
+ "MX.204741": {
+  "sci": "Bombus pascuorum",
+  "fin": "peltokimalainen",
+  "order": 15260
+ },
+ "MX.204752": {
+  "sci": "Bombus pratorum",
+  "fin": "pensaskimalainen",
+  "order": 15253
+ },
+ "MX.204736": {
+  "sci": "Bombus rupestris",
+  "fin": "kivikkoloiskimalainen",
+  "order": 15245
+ },
+ "MX.204725": {
+  "sci": "Bombus subterraneus",
+  "fin": "maakimalainen",
+  "order": 15256
+ },
+ "MX.204744": {
+  "sci": "Bombus sylvarum",
+  "fin": "ketokimalainen",
+  "order": 15263
+ },
+ "MX.204745": {
+  "sci": "Bombus veteranus",
+  "fin": "hevoskimalainen",
+  "order": 15264
+ },
+ "MX.276592": {
+  "sci": "Bombylius major",
+  "fin": "isokimalaisk\u00e4rp\u00e4nen",
+  "order": 32040
+ },
+ "MX.290402": {
+  "sci": "Boreus westwoodi",
+  "fin": "lumikorento",
+  "order": 28479
+ },
+ "MX.195032": {
+  "sci": "Brachyta interrogationis",
+  "fin": "juomuj\u00e4\u00e4r\u00e4",
+  "order": 21783
+ },
+ "MX.60811": {
+  "sci": "Callophrys rubi",
+  "fin": "kangasperhonen",
+  "order": 26406
+ },
+ "MX.5": {
+  "sci": "Calopteryx splendens",
+  "fin": "immenkorento",
+  "order": 486
+ },
+ "MX.6": {
+  "sci": "Calopteryx virgo",
+  "fin": "neidonkorento",
+  "order": 487
+ },
+ "MX.204291": {
+  "sci": "Camponotus herculeanus",
+  "fin": "mets\u00e4hevosmuurahainen",
+  "order": 14564
+ },
+ "MX.192454": {
+  "sci": "Cantharis obscura",
+  "fin": "tummasylkikuoriainen",
+  "order": 19912
+ },
+ "MX.188520": {
+  "sci": "Carabus nemoralis",
+  "fin": "puistokiit\u00e4j\u00e4inen",
+  "order": 15812
+ },
+ "MX.230523": {
+  "sci": "Carpocoris purpureipennis",
+  "fin": "kuparilude",
+  "order": 3993
+ },
+ "MX.60830": {
+  "sci": "Celastrina argiolus",
+  "fin": "paatsamasinisiipi",
+  "order": 26361
+ },
+ "MX.191896": {
+  "sci": "Cetonia aurata",
+  "fin": "kultakuoriainen",
+  "order": 19361
+ },
+ "MX.230525": {
+  "sci": "Chlorochroa juniperina",
+  "fin": "katajalude",
+  "order": 3999
+ },
+ "MX.230526": {
+  "sci": "Chlorochroa pinicola",
+  "fin": "m\u00e4ntylude",
+  "order": 4000
+ },
+ "MX.204030": {
+  "sci": "Chrysis fulgida",
+  "fin": "kolokultiainen",
+  "order": 14290
+ },
+ "MX.195657": {
+  "sci": "Chrysolina fastuosa",
+  "fin": "peippikuoriainen",
+  "order": 22201
+ },
+ "MX.195663": {
+  "sci": "Chrysolina staphylaea",
+  "fin": "pimperikuoriainen",
+  "order": 22205
+ },
+ "MX.195719": {
+  "sci": "Chrysomela vigintipunctata",
+  "fin": "t\u00e4pl\u00e4lehtikuoriainen",
+  "order": 22252
+ },
+ "MX.290384": {
+  "sci": "Chrysoperla carnea",
+  "fin": "pihaharsokorento",
+  "order": 15442
+ },
+ "MX.188496": {
+  "sci": "Cicindela campestris",
+  "fin": "kentt\u00e4kiit\u00e4j\u00e4inen",
+  "order": 15790
+ },
+ "MX.188494": {
+  "sci": "Cicindela hybrida",
+  "fin": "hietikkokiit\u00e4j\u00e4inen",
+  "order": 15788
+ },
+ "MX.286552": {
+  "sci": "Cimbex femoratus",
+  "fin": "ukkonuijapisti\u00e4inen",
+  "order": 4708
+ },
+ "MX.194855": {
+  "sci": "Clytra quadripunctata",
+  "fin": "muurahaisp\u00e4\u00e4kk\u00f6",
+  "order": 22116
+ },
+ "MX.194380": {
+  "sci": "Coccinella septempunctata",
+  "fin": "seitsenpistepirkko",
+  "order": 21002
+ },
+ "MX.204382": {
+  "sci": "Colletes cunicularius",
+  "fin": "kev\u00e4tiskosmehil\u00e4inen",
+  "order": 15064
+ },
+ "MX.278296": {
+  "sci": "Conops quadrifasciatus",
+  "fin": NaN,
+  "order": 41020
+ },
+ "MX.230457": {
+  "sci": "Coreus marginatus",
+  "fin": "pallelude",
+  "order": 3908
+ },
+ "MX.230422": {
+  "sci": "Corizus hyoscyami",
+  "fin": "verilude",
+  "order": 3871
+ },
+ "MX.192956": {
+  "sci": "Ctenicera pectinicornis",
+  "fin": "kampasepp\u00e4",
+  "order": 19743
+ },
+ "MX.231622": {
+  "sci": "Ctenolepisma longicaudata",
+  "fin": "paperitoukka",
+  "order": 466
+ },
+ "MX.43178": {
+  "sci": "Decticus verrucivorus",
+  "fin": "niittyhepokatti",
+  "order": 802
+ },
+ "MX.61492": {
+  "sci": "Deilephila elpenor",
+  "fin": "horsmakiit\u00e4j\u00e4",
+  "order": 27400
+ },
+ "MX.192556": {
+  "sci": "Dermestes lardarius",
+  "fin": "vy\u00f6ihrakuorianen",
+  "order": 20003
+ },
+ "MX.318404": {
+  "sci": "Diplolepis rosae",
+  "fin": "takku\u00e4k\u00e4m\u00e4pisti\u00e4inen",
+  "order": 11322
+ },
+ "MX.230528": {
+  "sci": "Dolycoris baccarum",
+  "fin": "marjalude",
+  "order": 4002
+ },
+ "MX.206470": {
+  "sci": "Ectobius lapponicus",
+  "fin": "lapintorakka",
+  "order": 925
+ },
+ "MX.206471": {
+  "sci": "Ectobius sylvestris",
+  "fin": "mets\u00e4torakka",
+  "order": 926
+ },
+ "MX.58629": {
+  "sci": "Ectoedemia argyropeza",
+  "fin": "impik\u00e4\u00e4pi\u00f6koi",
+  "order": 24362
+ },
+ "MX.276708": {
+  "sci": "Empis borealis",
+  "fin": NaN,
+  "order": 33214
+ },
+ "MX.194245": {
+  "sci": "Endomychus coccineus",
+  "fin": "pirkkosieni\u00e4inen",
+  "order": 20879
+ },
+ "MX.206494": {
+  "sci": "Ephemera vulgata",
+  "fin": "isosurviainen",
+  "order": 688
+ },
+ "MX.277936": {
+  "sci": "Episyrphus balteatus",
+  "fin": "parvikirvari",
+  "order": 33710
+ },
+ "MX.60930": {
+  "sci": "Euphydryas iduna",
+  "fin": "lapinverkkoperhonen",
+  "order": 26291
+ },
+ "MX.230555": {
+  "sci": "Eurydema oleracea",
+  "fin": "kaalilude",
+  "order": 4038
+ },
+ "MX.206454": {
+  "sci": "Forficula auricularia",
+  "fin": "isopihtih\u00e4nt\u00e4",
+  "order": 713
+ },
+ "MX.230323": {
+  "sci": "Gastrodes abietum",
+  "fin": "kuusenk\u00e4pylude",
+  "order": 3767
+ },
+ "MX.230324": {
+  "sci": "Gastrodes grossipes",
+  "fin": "ruostek\u00e4pylude",
+  "order": 3768
+ },
+ "MX.61504": {
+  "sci": "Geometra papilionaria",
+  "fin": "isomittari",
+  "order": 27297
+ },
+ "MX.60794": {
+  "sci": "Gonepteryx rhamni",
+  "fin": "sitruunaperhonen",
+  "order": 26232
+ },
+ "MX.230561": {
+  "sci": "Graphosoma italicum",
+  "fin": "pyjamalude",
+  "order": 4047
+ },
+ "MX.58541": {
+  "sci": "Hepialus humuli",
+  "fin": "humalaperhonen",
+  "order": 24222
+ },
+ "MX.61487": {
+  "sci": "Hyles gallii",
+  "fin": "matarakiit\u00e4j\u00e4",
+  "order": 27397
+ },
+ "MX.196272": {
+  "sci": "Hylobius abietis",
+  "fin": "tukkimiehent\u00e4i",
+  "order": 23421
+ },
+ "MX.61603": {
+  "sci": "Hypomecis atomaria",
+  "fin": "mets\u00e4mittari",
+  "order": 27184
+ },
+ "MX.230275": {
+  "sci": "Kleidocerys resedae",
+  "fin": "kalvolude",
+  "order": 3716
+ },
+ "MX.195242": {
+  "sci": "Lagria hirta",
+  "fin": "niittymartikas",
+  "order": 21408
+ },
+ "MX.192436": {
+  "sci": "Lampyris noctiluca",
+  "fin": "kiiltomato",
+  "order": 19896
+ },
+ "MX.204298": {
+  "sci": "Lasius niger",
+  "fin": "pihamauriainen",
+  "order": 14598
+ },
+ "MX.231375": {
+  "sci": "Lepisma saccharinum",
+  "fin": "sokeritoukka",
+  "order": 460
+ },
+ "MX.195093": {
+  "sci": "Leptura quadrifasciata",
+  "fin": "nelivy\u00f6j\u00e4\u00e4r\u00e4",
+  "order": 21812
+ },
+ "MX.281757": {
+  "sci": "Lipoptena cervi",
+  "fin": "hirvik\u00e4rp\u00e4nen",
+  "order": 35155
+ },
+ "MX.196317": {
+  "sci": "Lixus iridis",
+  "fin": "putkik\u00e4rs\u00e4k\u00e4s",
+  "order": 23072
+ },
+ "MX.60821": {
+  "sci": "Lycaena hippothoe",
+  "fin": "ketokultasiipi",
+  "order": 26403
+ },
+ "MX.60816": {
+  "sci": "Lycaena phlaeas",
+  "fin": "pikkukultasiipi",
+  "order": 26396
+ },
+ "MX.230260": {
+  "sci": "Lygaeus equestris",
+  "fin": "ritarilude",
+  "order": 3691
+ },
+ "MX.192433": {
+  "sci": "Lygistopterus sanguineus",
+  "fin": "rusokuoriainen",
+  "order": 19893
+ },
+ "MX.61418": {
+  "sci": "Macrothylacia rubi",
+  "fin": "hein\u00e4hukka",
+  "order": 27336
+ },
+ "MX.194645": {
+  "sci": "Meloe violaceus",
+  "fin": "sinitoukoh\u00e4rk\u00e4",
+  "order": 21610
+ },
+ "MX.191867": {
+  "sci": "Melolontha hippocastani",
+  "fin": "kes\u00e4turilas",
+  "order": 19327
+ },
+ "MX.43183": {
+  "sci": "Metrioptera brachyptera",
+  "fin": "kanervat\u00f6p\u00f6katti",
+  "order": 806
+ },
+ "MX.204225": {
+  "sci": "Mutilla europaea",
+  "fin": "miekkapisti\u00e4inen",
+  "order": 14543
+ },
+ "MX.229596": {
+  "sci": "Nepa cinerea",
+  "fin": "vesiskorpioni",
+  "order": 2985
+ },
+ "MX.189613": {
+  "sci": "Nicrophorus investigator",
+  "fin": "tutkijaturkkilo",
+  "order": 16977
+ },
+ "MX.189616": {
+  "sci": "Nicrophorus vespilloides",
+  "fin": "pikkuturkkilo",
+  "order": 16979
+ },
+ "MX.60920": {
+  "sci": "Nymphalis antiopa",
+  "fin": "suruvaippa",
+  "order": 26282
+ },
+ "MX.60755": {
+  "sci": "Ochlodes sylvanus",
+  "fin": "piippopaksup\u00e4\u00e4",
+  "order": 26196
+ },
+ "MX.194622": {
+  "sci": "Oedemera virescens",
+  "fin": "viherpaksureisi",
+  "order": 21590
+ },
+ "MX.189591": {
+  "sci": "Oiceoptoma thoracicum",
+  "fin": "punaselk\u00e4haiskiainen",
+  "order": 16958
+ },
+ "MX.204626": {
+  "sci": "Osmia bicornis",
+  "fin": "rusomuurarimehil\u00e4inen",
+  "order": 15196
+ },
+ "MX.230533": {
+  "sci": "Palomena prasina",
+  "fin": "viherlude",
+  "order": 4006
+ },
+ "MX.290395": {
+  "sci": "Panorpa communis",
+  "fin": "vy\u00f6skorpionikorento",
+  "order": 28472
+ },
+ "MX.290396": {
+  "sci": "Panorpa vulgaris",
+  "fin": "tummavy\u00f6skorpionikorento",
+  "order": 28473
+ },
+ "MX.60730": {
+  "sci": "Papilio machaon",
+  "fin": "ritariperhonen",
+  "order": 26171
+ },
+ "MX.230544": {
+  "sci": "Pentatoma rufipes",
+  "fin": "h\u00e4rk\u00e4lude",
+  "order": 4022
+ },
+ "MX.229021": {
+  "sci": "Philaenus spumarius",
+  "fin": "sylkikaskas",
+  "order": 2944
+ },
+ "MX.62281": {
+  "sci": "Phragmatobia fuliginosa",
+  "fin": "ruostesiipi",
+  "order": 27537
+ },
+ "MX.60778": {
+  "sci": "Pieris napi",
+  "fin": "lanttuperhonen",
+  "order": 26216
+ },
+ "MX.60777": {
+  "sci": "Pieris rapae",
+  "fin": "naurisperhonen",
+  "order": 26215
+ },
+ "MX.43207": {
+  "sci": "Podisma pedestris",
+  "fin": "kangassirkka",
+  "order": 854
+ },
+ "MX.60925": {
+  "sci": "Polygonia c-album",
+  "fin": "herukkaperhonen",
+  "order": 26288
+ },
+ "MX.191904": {
+  "sci": "Protaetia cuprea",
+  "fin": "kuparikuoriainen",
+  "order": 19366
+ },
+ "MX.194338": {
+  "sci": "Psyllobora vigintiduopunctata",
+  "fin": "ahopirkko",
+  "order": 20963
+ },
+ "MX.195025": {
+  "sci": "Rhagium inquisitor",
+  "fin": "havukantoj\u00e4\u00e4r\u00e4",
+  "order": 21770
+ },
+ "MX.195024": {
+  "sci": "Rhagium mordax",
+  "fin": "lehtikantoj\u00e4\u00e4r\u00e4",
+  "order": 21769
+ },
+ "MX.230369": {
+  "sci": "Rhyparochromus pini",
+  "fin": "mets\u00e4ruutulude",
+  "order": 3816
+ },
+ "MX.43182": {
+  "sci": "Roeseliana roeselii",
+  "fin": "hein\u00e4t\u00f6p\u00f6katti",
+  "order": 809
+ },
+ "MX.61453": {
+  "sci": "Saturnia pavonia",
+  "fin": "pikkuriikinkukkokehr\u00e4\u00e4j\u00e4",
+  "order": 27367
+ },
+ "MX.192977": {
+  "sci": "Selatosomus cruciatus",
+  "fin": "ristisepp\u00e4",
+  "order": 19765
+ },
+ "MX.231865": {
+  "sci": "Semblis phalaenoides",
+  "fin": "jatulisirvik\u00e4s",
+  "order": 23992
+ },
+ "MX.278234": {
+  "sci": "Sericomyia silentis",
+  "fin": "keltaper\u00e4luhtanen",
+  "order": 34203
+ },
+ "MX.61473": {
+  "sci": "Sphinx ligustri",
+  "fin": "syreenikiit\u00e4j\u00e4",
+  "order": 27380
+ },
+ "MX.195071": {
+  "sci": "Stictoleptura rubra",
+  "fin": "rusokukkaj\u00e4\u00e4r\u00e4",
+  "order": 21826
+ },
+ "MX.281433": {
+  "sci": "Tachina grossa",
+  "fin": "j\u00e4ttisiilik\u00e4rp\u00e4nen",
+  "order": 35515
+ },
+ "MX.43176": {
+  "sci": "Tettigonia cantans",
+  "fin": "id\u00e4nhepokatti",
+  "order": 799
+ },
+ "MX.43175": {
+  "sci": "Tettigonia viridissima",
+  "fin": "lehtohepokatti",
+  "order": 798
+ },
+ "MX.60749": {
+  "sci": "Thymelicus lineola",
+  "fin": "lauhahiipij\u00e4",
+  "order": 26189
+ },
+ "MX.191919": {
+  "sci": "Trichius fasciatus",
+  "fin": "kimalaiskuoriainen",
+  "order": 19379
+ },
+ "MX.288967": {
+  "sci": "Urocerus gigas",
+  "fin": "j\u00e4ttipuupisti\u00e4inen",
+  "order": 5627
+ },
+ "MX.278569": {
+  "sci": "Urophora cardui",
+  "fin": "aaltok\u00e4rp\u00e4nen",
+  "order": 40604
+ },
+ "MX.60910": {
+  "sci": "Vanessa atalanta",
+  "fin": "amiraali",
+  "order": 26275
+ },
+ "MX.204118": {
+  "sci": "Vespula germanica",
+  "fin": "saksanampiainen",
+  "order": 14415
+ },
+ "MX.204122": {
+  "sci": "Vespula rufa",
+  "fin": "puna-ampiainen",
+  "order": 14419
+ },
+ "MX.204119": {
+  "sci": "Vespula vulgaris",
+  "fin": "piha-ampiainen",
+  "order": 14416
+ },
+ "MX.278237": {
+  "sci": "Volucella bombylans",
+  "fin": "kimalaisvieras",
+  "order": 34207
+ },
+ "MX.278238": {
+  "sci": "Volucella inanis",
+  "fin": "vaapsasvieras",
+  "order": 34209
+ },
+ "MX.278239": {
+  "sci": "Volucella pellucens",
+  "fin": "ampiaisvieras",
+  "order": 34210
+ },
+ "MX.58998": {
+  "sci": "Yponomeuta evonymella",
+  "fin": "tuomenkehr\u00e4\u00e4j\u00e4koi",
+  "order": 24619
+ },
+ "MX.59989": {
+  "sci": "Zygaena exulans",
+  "fin": "tunturipunat\u00e4pl\u00e4",
+  "order": 25369
+ }
+}

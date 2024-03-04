@@ -73,10 +73,13 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             basic_taxa_html += f"<li class='list_heading_4'><h4>{ taxon_data['heading'] }</h4></li>\n"
 
         # Add to basic_taxa_html, fill in with date from taxa_dates if found
+        id_html = taxon_id.replace(".", "_")
+        fin_html = taxon_data.get("fin", "")
+        sci_html = taxon_data.get("sci", "")
         basic_taxa_html += f"""
             <li>
-                <span class='taxon_name' id='{ taxon_id.replace(".", "_") }_name'>{ taxon_data['fi'] } (<em>{ taxon_data['sci'] }</em>)</span>
-                <input type='date' id={ taxon_id.replace(".", "_") } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
+                <span class='taxon_name' id='{ id_html }_name'>{ fin_html } (<em>{ sci_html }</em>)</span>
+                <input type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
             </li>\n"""
 
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html

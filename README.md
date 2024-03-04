@@ -13,7 +13,7 @@ Backend application built with Flask. Database on MariaDB. Depends on FinBIF Laj
 - Set up environment variables to `.env.` and `playwright.example` Use example files as templates.
 - Build Docker image `docker build -t species-challenge:latest .`
 - Startup with `docker-compose up build playwright; docker-compose down;`
-- Set up database using `species_challenge_dev.sql`, e.g. via phpMyAdmin
+- Set up database using `sql/species_challenge_dev.sql`, e.g. via phpMyAdmin
 
 Site will be visible http://localhost:8081
 
@@ -77,30 +77,11 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Reduce logging
     - Production database
     - Zabbix for prod
+- Replicas
+- Backup to Allas
 - Clear unneeded & trashed items from database, store dump to Git 
 - Setup species lists (basic & advanced) with clear names, and matching with taxon autocomplete.
 
-#### Challenges:
-
-INSECTS
-include
-MVL.232
-
-exclude
-MVL.234
-MVL.236
-MVL.38
-MVL.235
-
-FUNGI
-MVL.233
-
-PLANTAE
-MVL.343 putkilokasvit
-MVL.23 sammalet
-MVL.541 näkinparstaislevät
-MVL.542 punalevät
-MVL.543 viherlevät
 
 ### Features
 
