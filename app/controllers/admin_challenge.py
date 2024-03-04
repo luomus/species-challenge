@@ -246,6 +246,8 @@ def main(challenge_id_untrusted = None, form_data = None):
         if errors:
             print("CASE C1")
             flash(errors, "error")
+            html["status_field_html"] = make_option_field_html("status", form_data)
+            html["type_field_html"] = make_option_field_html("type", form_data)
             html["data_fields"] = form_data
             return html
         
