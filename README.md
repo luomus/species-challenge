@@ -94,7 +94,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Thorough testing by multiple people
 - First production version:
     - Mobile navi & testing, including autocomplete
-    - All 3 lists
 - Later:
     - Remove button (dull red X?) to participation form taxon list
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 

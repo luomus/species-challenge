@@ -202,6 +202,11 @@
 
 {% block body %}
 
+
+    {% if html['participation']['trashed'] == 1 %}
+        <div class="info flash">Olet merkinnyt tämän osallistumisen poistetuksi, joten muut eivät näe sitä. (Voit palauttaa sen näkyville muuttamalla osallistumisen tilan julkiseksi ja tallentamalla.)</div>
+    {% endif %}
+
     <h1>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</h1>
 
     <p id="subnavi"><a href="/haaste/{{ html["challenge_id"] }}">&laquo; Takaisin tämän haasteen etusivulle</a> &#x2022; <a href="/tilasto/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Tilastoja tästä osallistumisesta</a></p>

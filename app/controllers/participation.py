@@ -325,6 +325,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
         # Load participation data from the database with this user.
         participation = common_helpers.get_participation(challenge_id, participation_id)
+        html['participation'] = participation
 
         # Check that participation exists.
         if not participation:
@@ -372,4 +373,4 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Database error or trying to edit someone else's participation
         print("CASE C2 FAIL")
         raise Exception("Error saving participation to database.")
-    
+
