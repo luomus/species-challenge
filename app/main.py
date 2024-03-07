@@ -147,6 +147,14 @@ def admin_challenge(challenge_id_untrusted = None):
     
     return render_template("admin_challenge.html", html=html)
 
+'''
+import controllers.admin_contacts
+@app.route("/admin/yhteys/<string:challenge_id_untrusted>")
+@admin_required
+def admin_contacts(challenge_id_untrusted = None):
+    html = controllers.admin_contacts.main(challenge_id_untrusted)
+    return render_template("admin_contacts.html", html=html)
+'''
 
 @app.route("/login")
 def login_page():
