@@ -78,7 +78,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         sci_html = taxon_data.get("sci", "")
         basic_taxa_html += f"""
             <li>
-                <span class='taxon_name' id='{ id_html }_name'>{ fin_html } (<em>{ sci_html }</em>)</span>
+                <span class='taxon_name' id='{ id_html }_name'>{ fin_html.capitalize() } (<em>{ sci_html }</em>)</span>
                 <input type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
             </li>\n"""
 
