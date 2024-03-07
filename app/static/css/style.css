@@ -29,26 +29,6 @@ a:visited {
     color: #1F74AD;
 }
 
-/* Buttons */
-a.button,
-button {
-    background-color: #eee;
-    border: 1px solid #999;
-    border-radius: 5px;
-    color: #000;
-    display: inline-block;
-    padding: 0.3em 0.4em;
-    text-decoration: none;
-    margin-right: 1em;
-    font-size: 100%;
-
-    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%)
-}
-
-a.button:active,
-button:active {
-    transform: translateY(2px);
-}
 
 /* FLASH MESSAGES */
 
@@ -356,6 +336,27 @@ textarea#description {
     background-color: #F0F0F4;
 }
 
+
+/* Buttons */
+a.button,
+button {
+    border: 1px solid #1F74AD;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    padding: 0.3em 0.4em;
+    text-decoration: none;
+    margin-right: 1em;
+    font-size: 100%;
+
+    background-image: linear-gradient(to top, #1F74AD 0%, #348fcc 80%, #348fcc 100%)
+}
+
+a.button:active,
+button:active {
+    transform: translateY(2px);
+}
+
 #trash {
     float: right;
     width: 20em;
@@ -368,8 +369,8 @@ textarea#description {
 }
 
 #trash #trash_button {
-    background-color: #ffcccc;
-    background-image: linear-gradient(to top, #ffa7a7 0%, #ffcccc 80%, #ffd8d8 100%)
+    border: 1px solid #9f6c6c;
+    background-image: linear-gradient(to top, #dc6464 0%, #f3acac 80%, #ffd8d8 100%)
 }
 
 #trash #confirm_button {
