@@ -202,8 +202,8 @@
 
 {% block body %}
 
-
-    {% if html['participation']['trashed'] == 1 %}
+    <!-- First check if participation exists and if 'trashed' key exists and equals 1 -->
+    {% if html.get('participation', {}).get('trashed') == 1 %}
         <div class="info flash">Olet merkinnyt tämän osallistumisen poistetuksi, joten muut eivät näe sitä. (Voit palauttaa sen näkyville muuttamalla osallistumisen tilan julkiseksi ja tallentamalla.)</div>
     {% endif %}
 
