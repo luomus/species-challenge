@@ -207,7 +207,7 @@
         <div class="info flash">Olet merkinnyt tämän osallistumisen poistetuksi, joten muut eivät näe sitä. (Voit palauttaa sen näkyville muuttamalla osallistumisen tilan julkiseksi ja tallentamalla.)</div>
     {% endif %}
 
-    <h1>Osallistuminen haasteeseen {{ html['challenge']['title'] }}</h1>
+    <h1>Osallistuminen: {{ html['challenge']['title'] }}</h1>
 
     <p id="subnavi"><a href="/haaste/{{ html["challenge_id"] }}">&laquo; Takaisin tämän haasteen etusivulle</a> &#x2022; <a href="/tilasto/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Tilastoja tästä osallistumisesta</a></p>
 
@@ -238,7 +238,7 @@
         </p>
 
         <p>
-            <label for="place">Paikka, esim. kunta:</label><br>
+            <label for="place">Paikka, esim. kunta tai kylä (vapaaehtoinen):</label><br>
             <input 
                 type="text" 
                 id="place" 
@@ -250,6 +250,8 @@
         <p id="submit_container">
             <button type="submit" id="submit_button">Tallenna osallistuminen</button>
         </p>
+
+        <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla kalenteri-ikonia ja valitsemalla tyhjennä/clear.)</p>
 
         {% if 'taxa_count' not in html['data_fields'] %}
             <!-- Empty form -->
@@ -265,6 +267,7 @@
         {{ html['taxa']|safe }}
 
         <div id="autocomplete-container">
+            <p>Muista merkitä havaintopäivämäärä myös lisälajeille.</p>
             <label for="autocomplete-input"><h4>Lisää muita lajeja:</h4></label>
             <input type="text" id="autocomplete-input" placeholder="">
             <div id="autocomplete-results"></div>
