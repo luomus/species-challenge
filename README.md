@@ -71,6 +71,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Setup
 
+- Domain names
 - Clarify Docker build commands
 - Database sorting/collation settings utf8mb4_swedish_ci
 - Deployment to staging & production
