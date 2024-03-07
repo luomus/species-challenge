@@ -80,6 +80,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             <li>
                 <span class='taxon_name' id='{ id_html }_name'>{ fin_html.capitalize() } (<em>{ sci_html }</em>)</span>
                 <input type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
+                <a href='https://laji.fi/taxon/{ taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa: { fin_html }'>i</a>
             </li>\n"""
 
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
@@ -103,6 +104,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             <li>
                 <span class='taxon_name'>{ fi } (<em>{ sci }</em>)</span>
                 <input type='date' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }'>
+                <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa: { fi }'>i</a>
             </li>\n"""
 
     # Combine into a list
@@ -116,6 +118,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         """
 
     return html
+
 
 
 def save_participation(challenge_id, participation_id, form_data):

@@ -336,6 +336,16 @@ textarea#description {
     background-color: #F0F0F4;
 }
 
+.taxon_info {
+    background-color: #fff;
+    padding: 0 7px;
+    color: #1F74AD !important;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #777;
+    margin-left: 0.5em;
+    font-weight: bold;
+}
 
 /* Buttons */
 a.button,

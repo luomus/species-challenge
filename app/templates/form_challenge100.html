@@ -178,7 +178,8 @@
                                 const li = document.createElement('li');
                                 li.innerHTML = `
                                     <span class='taxon_name'>${item.value} (<em>${item.payload.scientificName}</em>)</span>
-                                    <input type="date" name="taxa:${item.key}" value="">
+                                    <input type="date" name='taxa:${item.key}' value="">
+                                    <a href='https://laji.fi/taxon/${item.key}' target='_blank' class='taxon_info' title='Lisätietoa: ${item.value}'>i</a>
                                 `;
 
                                 // Append the new <li> to the "taxa" list
