@@ -43,26 +43,40 @@
                     }
                 });
             });
+
+
+
+            function openNav() {
+    var navigation = document.getElementById("login_navi");
+    if (navigation.className === "active") {
+        navigation.className = "";
+    } else {
+        navigation.className = "active";
+    }
+}
+
+            
         </script>
            
     </head>
     <body{% block body_attributes %}{% endblock %}>
-        <div id="navi">
+        <div id="navi" class="nav-container">
             <h2><a href='/'>100 Lajia</a></h2>
-            <div id="login_navi">
+            <ul id="login_navi">
                 {% if user_data %}
                     <!-- Logged in as {{ user_data['id'] }} -->
-                    <span id="user_info">{{ user_data['fullName'] }}</span>
-                    <span id="my"><a href="/oma">Omat osallistumiset</a></span>
+                    <li id="user_info">{{ user_data['fullName'] }}</li>
+                    <li id="my"><a href="/oma">Omat osallistumiset</a></li>
                     {% if is_admin %}
-                        <span id="admin"><a href='/admin'>Admin</a></span>
+                        <li id="admin"><a href='/admin'>Admin</a></li>
                     {% endif %}
-                    <span id="logout"><a href="/logout">Kirjaudu ulos</a></span>
+                    <li id="logout"><a href="/logout">Kirjaudu ulos</a></li>
                 {% else %}
                     <!-- Not logged in -->
-                    <span id="login"><a href="/login">Kirjaudu sisään</a></span>
+                    <li id="login"><a href="/login">Kirjaudu sisään</a></li>
                 {% endif %}
-            </div>
+            </ul>
+            <span id="hamburger-menu"><a href="javascript:void(0);" onclick="openNav()">MENU</a></span>
         </div>
 
         <div id="content">
