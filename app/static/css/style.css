@@ -146,22 +146,27 @@ a:visited {
 
     }
 
-
-    #hamburger-menu {
-        display: block;
+    .hamburger-menu {
+        display: inline-block;
         cursor: pointer;
     }
-
-    #hamburger-menu a,
-    #hamburger-menu a:link,
-    #hamburger-menu a:visited,
-    #hamburger-menu a:active {
-        color: #fff;
+      
+    .hamburger-menu .line {
+        width: 30px; /* Width of the lines */
+        height: 3px; /* Height of the lines */
+        background-color: #fff; /* Color of the lines */
+        margin: 5px 0; /* Spacing between the lines */
+        border-radius: 30%;
     }
+
+    #hero a {
+        display: none;
+    }
+
 }
 
 
-
+  
 
 
 
