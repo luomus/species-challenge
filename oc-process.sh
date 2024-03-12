@@ -59,6 +59,10 @@ elif [ $i = "route" ]; then
 
 ITEM=".items[7]"
 
+elif [ $i = "job" ]; then
+
+ITEM=".items[8]"
+
 else
 
   ITEM=""
@@ -74,5 +78,7 @@ oc process -f $f \
 -p FINBIF_API_TOKEN=$FINBIF_API_TOKEN \
 -p FLASK_SECRET_KEY=$FLASK_SECRET_KEY \
 -p ITSYSTEM=$ITSYSTEM \
+-p RCLONE_ACCESS_KEY_ID=$RCLONE_ACCESS_KEY_ID \
+-p RCLONE_SECRET_ACCESS_KEY=$RCLONE_SECRET_ACCESS_KEY \
 | jq $ITEM
 
