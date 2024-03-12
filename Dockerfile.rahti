@@ -8,7 +8,7 @@ ENV FLASK_DEBUG 0
 # Install necessary packages
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y gcc && \
+    apt-get install -y gcc mariadb-client rclone && \
     pip install --upgrade pip
 
 # Copy requirements and install dependencies
