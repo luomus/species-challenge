@@ -156,7 +156,7 @@ a:visited {
         height: 3px; /* Height of the lines */
         background-color: #fff; /* Color of the lines */
         margin: 5px 0; /* Spacing between the lines */
-        border-radius: 30%;
+        border-radius: 20%;
     }
 
     #hero a {
@@ -164,11 +164,6 @@ a:visited {
     }
 
 }
-
-
-  
-
-
 
 
 #login_p {
@@ -182,6 +177,11 @@ a:visited {
 #subnavi {
     margin-bottom: 1.5em;
     font-weight: bold;
+}
+
+#subnavi a {
+    margin-right: 1em;
+    white-space: nowrap;
 }
 
 #footer {

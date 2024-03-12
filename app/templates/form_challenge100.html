@@ -210,7 +210,12 @@
 
     <h1>Osallistuminen: {{ html['challenge']['title'] }}</h1>
 
-    <p id="subnavi"><a href="/haaste/{{ html["challenge_id"] }}">&laquo; Takaisin tämän haasteen etusivulle</a> &#x2022; <a href="/tilasto/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Tilastoja tästä osallistumisesta</a></p>
+    <p id="subnavi">
+        <a href="/haaste/{{ html["challenge_id"] }}">&laquo; Takaisin tämän haasteen etusivulle</a>
+        {% if html['participation'] %}
+            <a href="/tilasto/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Tilastoja tästä osallistumisesta</a>
+        {% endif %}
+    </p>
 
     <form name="challenge" id="challenge" class="trashed_{{ html['data_fields'].get('trashed', 'false') }}" action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
 
