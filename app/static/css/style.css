@@ -195,6 +195,7 @@ a:visited {
 #footer img {
     height: 50px;
     width: auto;
+    margin-bottom: 0.5em;
 }
 
 #footer a {
@@ -276,7 +277,7 @@ a:visited {
     margin: 1em 2em 1em 0;
     padding: 1em;
     background-color: #fff;
-    width: 26em;
+    max-width: 26em;
     float: left;
     min-height: 8em;
     box-shadow: #ccc 4px 4px 4px;
@@ -284,7 +285,6 @@ a:visited {
 
 .challenge img {
     float: right;
-    margin-top: -3em;
 }
 
 #challenge_info img {
