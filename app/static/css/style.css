@@ -340,9 +340,7 @@ a:visited {
   
 #challenge_results_container div {
     flex: 1;
-    min-width: 27em;
     padding-right: 1em;
-
 }
 
 .participation .button {

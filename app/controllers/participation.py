@@ -376,3 +376,4 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Database error or trying to edit someone else's participation
         print("CASE C2 FAIL")
         raise Exception("Error saving participation to database.")
+
