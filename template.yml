@@ -32,6 +32,22 @@ parameters:
     required: true
   - name: ITSYSTEM
     required: true
+  - name: JOB_CMD
+    required: true
+    value: '["/usr/src/app/backup.sh"]'
+  - name: JOB_SCHEDULE
+    required: true
+    value: "0 0 * * 0"
+  - name: JOB_LIMIT
+    required: true
+    value: "7"
+  - name: JOB_CONCURRENCY
+    required: true
+    value: "Forbid"
+  - name: RCLONE_ACCESS_KEY_ID
+    required: true
+  - name: RCLONE_SECRET_ACCESS_KEY
+    required: true
   - name: GITHUB_SECRET
     required: true
     generate: expression
@@ -238,4 +254,39 @@ objects:
       kind: Service
       name: ${APP}-${BRANCH}
     wildcardPolicy: None
-
+- kind: CronJob
+  apiVersion: batch/v1beta1
+  metadata:
+    name: ${APP}-${BRANCH}
+  spec:
+    schedule: ${JOB_SCHEDULE}
+    concurrencyPolicy: ${JOB_CONCURRENCY}
+    successfulJobsHistoryLimit: ${{JOB_LIMIT}}
+    failedJobsHistoryLimit: ${{JOB_LIMIT}}
+    jobTemplate:
+      spec:
+        template:
+          metadata:
+            labels:
+              app: ${APP}
+          spec:
+            containers:
+            - name: ${APP}-${BRANCH}
+              image: ${APP}-${BRANCH}:latest
+              command: ${{JOB_CMD}}
+              env:
+              - name: RCLONE_CONFIG_DEFAULT_ACCESS_KEY_ID
+                value: ${RCLONE_ACCESS_KEY_ID}
+              - name: RCLONE_CONFIG_DEFAULT_SECRET_ACCESS_KEY
+                value: ${RCLONE_SECRET_ACCESS_KEY}
+              - name: MYSQL_DATABASE
+                value: ${MYSQL_DATABASE}
+              - name: MYSQL_USER
+                value: ${MYSQL_USER}
+              - name: MYSQL_PASSWORD
+                value: ${MYSQL_PASSWORD}
+              - name: MYSQL_HOST
+                value: ${DB}-${BRANCH}
+              - name: BRANCH
+                value: ${BRANCH}
+            restartPolicy: Never
