@@ -160,6 +160,21 @@ def admin_contacts(challenge_id_untrusted = None):
 def login_page():
     person_token_untrusted = request.args.get('token', None)
 
+    itsystem_id = os.environ.get("ITSYSTEM")
+    print(itsystem_id)
+    # Localhost
+    if "KE.1521" == itsystem_id:
+        login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
+        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+    # Dev/staging
+    elif "KE.1522" == itsystem_id:
+        login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1522&redirectMethod=GET&locale=fi&next="
+        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+    # Production
+    elif "KE.1741" == itsystem_id:
+        login_url = "https://login.laji.fi/login?target=KE.1741&redirectMethod=GET&locale=fi&next="
+        api_url = "https://login.laji.fi/laji-auth/token/"
+
     # Case A: User is logging in
     if person_token_untrusted:
         print("LOGGING IN...")
@@ -168,7 +183,7 @@ def login_page():
         person_token = common_helpers.clean_token(person_token_untrusted)
 
         # Get user data
-        user_data_from_api = common_helpers.fetch_lajiauth_api("https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/" + person_token)
+        user_data_from_api = common_helpers.fetch_lajiauth_api(api_url + person_token)
         print("USER DATA: ", user_data_from_api)
         '''
         User data is in this format:
@@ -229,18 +244,6 @@ def login_page():
     
     # Case C: User not logged in, show login instructions
     else:
-        itsystem_id = os.environ.get("ITSYSTEM")
-        print(itsystem_id)
-        # Localhost
-        if "KE.1521" == itsystem_id:
-            login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
-        # Dev/staging
-        elif "KE.1522" == itsystem_id:
-            login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1522&redirectMethod=GET&locale=fi&next="
-        # Production
-        elif "KE.1741" == itsystem_id:
-            login_url = "https://login.laji.fi/login?target=KE.1741&redirectMethod=GET&locale=fi&next="
-
         return render_template("login.html", login_url=login_url)
 
 
