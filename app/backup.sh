@@ -2,7 +2,7 @@
 
 TIMESTAMP=$(date '+%Y%m%d%H%M%S')
 
-mariadb-dump --host=$MYSQL_HOST --user=$MYSQL_USER --password=$MYSQL_PASSWORD --databases $MYSQL_DATABASE | gzip > /usr/src/app/backup-$TIMESTAMP-$BRANCH.sql.gz
+mysqldump --host=$MYSQL_HOST --user=$MYSQL_USER --password=$MYSQL_PASSWORD --databases $MYSQL_DATABASE | gzip > /usr/src/app/backup-$TIMESTAMP-$BRANCH.sql.gz
 
 echo "Copying data to object store [$TIMESTAMP]\n"
 
