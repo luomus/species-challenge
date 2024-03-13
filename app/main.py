@@ -161,7 +161,6 @@ def login_page():
     person_token_untrusted = request.args.get('token', None)
 
     itsystem_id = os.environ.get("ITSYSTEM")
-    print(itsystem_id)
     # Localhost
     if "KE.1521" == itsystem_id:
         login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
@@ -233,7 +232,6 @@ def login_page():
                 session["is_admin"] = True
 
         print("IS ADMIN: ", session["is_admin"])
-        print("REDIRECTING TO /")
         return redirect("/")
     
     # Case B: User already logged in
@@ -250,7 +248,19 @@ def login_page():
 @app.route("/logout")
 def logout():
     session.clear()
-    url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/" + g.token
+
+    itsystem_id = os.environ.get("ITSYSTEM")
+    # Localhost
+    if "KE.1521" == itsystem_id:
+        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+    # Dev/staging
+    elif "KE.1522" == itsystem_id:
+        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+    # Production
+    elif "KE.1741" == itsystem_id:
+        api_url = "https://login.laji.fi/laji-auth/token/"
+
+    url = api_url + g.token
     response = requests.delete(url)
 
     # Checking if the request was successful
