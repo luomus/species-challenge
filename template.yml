@@ -37,7 +37,7 @@ parameters:
     value: '["/usr/src/app/backup.sh"]'
   - name: JOB_SCHEDULE
     required: true
-    value: "0 0 * * 0"
+    value: "0 23 * * *"
   - name: JOB_LIMIT
     required: true
     value: "7"
