@@ -18,6 +18,18 @@ parameters:
   - name: DB_PORT
     required: true
     value: "3306"
+  - name: DB_HEALTHCHECK
+    required: true
+    value: '[
+      "sh",
+      "-c",
+      "mysql
+        --host=0.0.0.0
+        --user=$MYSQL_USER
+        --password=$MYSQL_PASSWORD
+        --database=$MYSQL_DATABASE
+        -e \"SELECT 1\""
+    ]'
   - name: MYSQL_DATABASE
     required: true
   - name: MYSQL_USER
@@ -140,18 +152,18 @@ objects:
             value: ${BRANCH}
           ports:
           - containerPort: ${{APP_PORT}}
-#          livenessProbe:
-#            httpGet:
-#              path: ?????????????????????????????????????????????????????????
-#              port: ${{APP_PORT}}
-#            failureThreshold: 5
-#            periodSeconds: 30
-#          readinessProbe:
-#            httpGet:
-#              path: ?????????????????????????????????????????????????????????
-#              port: ${{APP_PORT}}
-#            initialDelaySeconds: 5
-#            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: ${{APP_PORT}}
+            failureThreshold: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: ${{APP_PORT}}
+            initialDelaySeconds: 30
+            periodSeconds: 5
     triggers:
     - type: ConfigChange
     - type: ImageChange
@@ -189,16 +201,16 @@ objects:
             name: ${DB}-${BRANCH}
           ports:
             - containerPort: ${{DB_PORT}}
-#          livenessProbe:
-#            exec:
-#              command: ????????????????????????????????????????????????????
-#            failureThreshold: 5
-#            periodSeconds: 30
-#          readinessProbe:
-#            httpGet:
-#              command: ????????????????????????????????????????????????????
-#            initialDelaySeconds: 5
-#            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command: ${{DB_HEALTHCHECK}}
+            failureThreshold: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              command: ${{DB_HEALTHCHECK}}
+            initialDelaySeconds: 5
+            periodSeconds: 5
           env:
           - name: MYSQL_DATABASE
             value: ${MYSQL_DATABASE}
