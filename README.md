@@ -71,6 +71,8 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Setup
 
+- Stress testing
+- Navi color on prod vs dev vs localhost
 - Version numbering?
 - More robust error handling and restart? Try with triggering syntax error.
 - Clarify Docker build commands
