@@ -32,13 +32,8 @@ def make_challenges_html(challenges):
 
 def main():
     html = dict()
-    html["hello"] = "Hoi "
 
     html["open_challenges"] = make_challenges_html(get_challenges("open"))
     html["closed_challenges"] = make_challenges_html(get_challenges("closed"))
-
-    print("== Homepage ==")
-    print("Token: ", g.token)
-    print("User data: ", g.user_data)
 
     return html
