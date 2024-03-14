@@ -71,18 +71,14 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Setup
 
-- Domain names
+- Version numbering?
+- More robust error handling and restart? Try with triggering syntax error.
 - Clarify Docker build commands
-- Database sorting/collation settings utf8mb4_swedish_ci
-- Deployment to staging & production
-    - Reduce logging
-    - Production database
-    - Zabbix for prod
-- Replicas
-- Backup to Allas
-- Clear unneeded & trashed items from database, store dump to Git 
+- Database sorting/collation settings utf8mb4_swedish_ci?
+- Reduce logging
+- Zabbix for prod
+- Backup monitoring
 - Setup species lists (basic & advanced) with clear names, and matching with taxon autocomplete.
-
 
 ### Features
 
@@ -94,7 +90,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
     - Thorough testing by multiple people
 - First production version:
-    - Mobile navi & testing, including autocomplete
+    - Taxon autocomplete field on challenge?
 - Later:
     - Remove button (dull red X?) to participation form taxon list
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 

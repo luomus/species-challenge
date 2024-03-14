@@ -26,6 +26,17 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days = 10)
 # ----------------------------------------
 # Setup
 
+def get_version_info():
+    itsystem = os.environ.get("ITSYSTEM")
+    if itsystem == "KE.1521":
+        return "localhost"
+    elif itsystem == "KE.1522":
+        return "development"
+    elif itsystem == "KE.1741":
+        return "production"
+    else:
+        return "localhost"
+
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -53,10 +64,13 @@ def before_request():
     g.user_data = session.get("user_data", None)
     g.is_admin = session.get("is_admin", None)
 
-# Make user data available for templates
+    # Make itsystem_id available for controllers
+    g.itsystem_name = get_version_info()
+
+# Make data available for templates
 @app.context_processor
-def inject_user_data():
-    return dict(user_data=g.user_data, is_admin=g.is_admin)
+def inject_data():
+    return dict(user_data=g.user_data, is_admin=g.is_admin, itsystem_name=g.itsystem_name)
 
 @app.errorhandler(DatabaseConnectionError)
 def handle_db_connection_error(error):
@@ -160,17 +174,13 @@ def admin_contacts(challenge_id_untrusted = None):
 def login_page():
     person_token_untrusted = request.args.get('token', None)
 
-    itsystem_id = os.environ.get("ITSYSTEM")
-    # Localhost
-    if "KE.1521" == itsystem_id:
+    if "localhost" == g.itsystem_name:
         login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
         api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
-    # Dev/staging
-    elif "KE.1522" == itsystem_id:
+    elif "development" == g.itsystem_name:
         login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1522&redirectMethod=GET&locale=fi&next="
         api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
-    # Production
-    elif "KE.1741" == itsystem_id:
+    elif "production" == g.itsystem_name:
         login_url = "https://login.laji.fi/login?target=KE.1741&redirectMethod=GET&locale=fi&next="
         api_url = "https://login.laji.fi/laji-auth/token/"
 
@@ -249,15 +259,11 @@ def login_page():
 def logout():
     session.clear()
 
-    itsystem_id = os.environ.get("ITSYSTEM")
-    # Localhost
-    if "KE.1521" == itsystem_id:
+    if "localhost" == g.itsystem_name:
         api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
-    # Dev/staging
-    elif "KE.1522" == itsystem_id:
+    elif "development" == g.itsystem_name:
         api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
-    # Production
-    elif "KE.1741" == itsystem_id:
+    elif "production" == g.itsystem_name:
         api_url = "https://login.laji.fi/laji-auth/token/"
 
     url = api_url + g.token

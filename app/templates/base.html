@@ -44,19 +44,20 @@
                 });
             });
 
-
-
             function openNav() {
-    var navigation = document.getElementById("login_navi");
-    if (navigation.className === "active") {
-        navigation.className = "";
-    } else {
-        navigation.className = "active";
-    }
-}
-
+                var navigation = document.getElementById("login_navi");
+                if (navigation.className === "active") {
+                    navigation.className = "";
+                } else {
+                    navigation.className = "active";
+                }
+            }
             
         </script>
+        <!-- {{ itsystem_name }} -->
+        {% if "production" == itsystem_name %}
+            <script defer data-domain="100lajia.luomus.fi" src="https://plausible.io/js/script.js"></script>
+        {% endif %}
            
     </head>
     <body{% block body_attributes %}{% endblock %}>
