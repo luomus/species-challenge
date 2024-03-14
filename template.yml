@@ -136,6 +136,8 @@ objects:
             value: ${FINBIF_API_TOKEN}
           - name: FLASK_SECRET_KEY
             value: ${FLASK_SECRET_KEY}
+          - name: BRANCH
+            value: ${BRANCH}
           ports:
           - containerPort: ${{APP_PORT}}
 #          livenessProbe:
