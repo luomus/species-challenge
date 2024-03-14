@@ -55,7 +55,7 @@
             
         </script>
         <!-- {{ itsystem_name }} -->
-        {% if "production" == itsystem_name %}
+        {% if "production" == itsystem_name and False == is_admin %} 
             <script defer data-domain="100lajia.luomus.fi" src="https://plausible.io/js/script.js"></script>
         {% endif %}
            
