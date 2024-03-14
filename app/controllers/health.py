@@ -20,7 +20,6 @@ def main():
 
     # Check that the taxon files exist
     for element in challenge_taxa:
-        print(element["taxon"])
 
         # Check that the taxon file exists
         if not common_helpers.taxon_file_exists(element["taxon"]):

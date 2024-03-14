@@ -276,13 +276,18 @@ def logout():
 
 
 import controllers.health
-@app.route("/health")
-def health():
+@app.route("/health/database")
+def health_database():
     errors = controllers.health.main()
     if errors:
         return errors, 500
     else:
         return "OK", 200
+
+
+@app.route("/health")
+def health():
+    return "OK", 200
 
 
 @app.route('/favicon.ico')
