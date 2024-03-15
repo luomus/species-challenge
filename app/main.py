@@ -1,6 +1,8 @@
 # Flask app main file.
 
 from flask import Flask, render_template, redirect, session, g, flash, request, send_from_directory
+from flask_caching import Cache
+
 from functools import wraps
 from datetime import timedelta
 import sys
@@ -14,6 +16,15 @@ from helpers.common_db import DatabaseConnectionError
 print("\n-------------- species-challenge --------------\n", file = sys.stdout)
 
 app = Flask(__name__)
+
+config = {
+    "DEBUG": True,
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 60
+}
+
+app.config.from_mapping(config)
+cache = Cache(app)
 
 # Get secret key from environment variables, stop if not found.
 secret_key = os.environ.get("FLASK_SECRET_KEY")
@@ -85,6 +96,7 @@ def internal_error(error):
 
 import controllers.index
 @app.route("/")
+@cache.cached(timeout=60)
 def root():
     html = controllers.index.main()
     return render_template("index.html", html=html)

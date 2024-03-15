@@ -1,6 +1,6 @@
 Flask == 3.0.*
+Flask-Caching == 2.1.*
 Werkzeug == 3.0.*
 requests == 2.31.* 
-Flask-Caching == 1.10.*
 gunicorn == 21.2.*
 mysql-connector-python == 8.3.*
