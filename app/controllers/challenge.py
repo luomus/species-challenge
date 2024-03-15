@@ -100,7 +100,9 @@ def main(challenge_id_untrusted):
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
     if not challenge_id:
         raise ValueError
-    
+
+    print("Log: ", challenge_id)
+
     challenge_data = common_helpers.get_challenge(challenge_id)
     if not challenge_data:
 #        flash("Tätä haastetta ei löydy.", "info")
