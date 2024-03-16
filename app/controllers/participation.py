@@ -138,7 +138,7 @@ def save_participation(challenge_id, participation_id, form_data):
     # CASE 1: Edit existing participation
     # Update form data in the database
     if participation_id:
-        print("CASE 1: UPDATE")
+#        print("CASE 1: UPDATE")
         params = (
             form_data["name"],
             form_data["place"],
@@ -161,7 +161,7 @@ def save_participation(challenge_id, participation_id, form_data):
 
     # CASE 2: Insert new participation
     # Insert form data into the database
-    print("CASE 2: INSERT")
+#    print("CASE 2: INSERT")
     params = (
         challenge_id,
         form_data["name"],
@@ -238,10 +238,14 @@ def validate_participation_data(form_data):
         if not common_helpers.is_yyyy_mm_dd(value):
             del taxa_data[key]
 
-    # 4) Calculate number of species
+    # 4) Add trashed if not present
+    if "trashed" not in form_data:
+        form_data["trashed"] = False
+
+    # 5) Calculate number of species
     form_data["taxa_count"] = len(taxa_data)
 
-    # 5) Convert to JSON string (for database JSON field) where dates are YYYY-MM-DD
+    # 6) Convert to JSON string (for database JSON field) where dates are YYYY-MM-DD
     # Note: form_data still has the original taxon data
     form_data["taxa_json"] = json.dumps(taxa_data)
 
@@ -295,7 +299,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     # CASE X: Challenge cannot be found or participation is closed
     if not challenge:
-        print("CASE X")
+#        print("CASE X")
         flash("Haastetta ei löytynyt.", "info")
         return {"redirect": True, "url": "/"}
 
@@ -305,7 +309,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     # Case A: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:
-        print("CASE A")
+#        print("CASE A")
 
         # Allow adding participation only if challenge is open
         if challenge["status"] != "open":
@@ -320,7 +324,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     # Case B: User opened an existing participation for editing.
     # Example: http://localhost:8081/osallistuminen/4/6
     if participation_id and not form_data:
-        print("CASE B")
+#        print("CASE B")
 
         # Show warning if challenge is closed or draft, but still allow editing.
         if challenge["status"] != "open":
@@ -347,32 +351,30 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     # Case C: User has submitted participation data. Validate and insert to database.
     if form_data:
-        print("CASE C")
+#        print("CASE C")
 
         # Convert to normal dictionary for sanitization
         form_data = form_data.to_dict()
-
-        print(form_data) # Debug
 
         errors, form_data = validate_participation_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
-            print("CASE C1")
+#            print("CASE C1")
             flash(errors, "error")
 
             html["data_fields"] = form_data
             return html
         
         # Case C2: No errors found. Insert to database and redirect to participation page.
-        print("CASE C2")
+#        print("CASE C2")
         success, id = save_participation(challenge_id, participation_id, form_data)
 
         if success:
-            print("CASE C2 SUCCESS")
+#            print("CASE C2 SUCCESS")
             flash("Osallistumisesi on nyt tallennettu.", "success")
             return {"redirect": True, "url": f"/osallistuminen/{ challenge_id }/{ id }"}
 
         # Database error or trying to edit someone else's participation
-        print("CASE C2 FAIL")
+#        print("CASE C2 FAIL")
         raise Exception("Error saving participation to database.")
