@@ -62,6 +62,10 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
+- Autocomplete from local file
+- Check styles
+    - uniform widths for blocks
+    - trash button
 - Check http://localhost:8081/osallistuminen/4/6
     - it has e.g. ahvenvita, whic is not part of species list MX.67601
         - why does it save it? this is how it should be; save taxa that are not on the basic list

@@ -104,66 +104,6 @@ a:visited {
 }
 
 
-@media screen and (min-width: 769px) {
-
-
-
-    #login_navi {
-        text-align: right;
-        display: flex;
-        gap: 10px;
-        list-style-type: none;
-    }
-
-    #hamburger-menu {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-
-    #login_navi {
-        display: none;
-        width: 100%;
-        background-color: #16669b;
-        list-style-type: none;
-        margin-left: 0;
-        padding-left: 0;
-    }
-
-    #login_navi.active {
-        display: block;
-        position: absolute;
-        top: 2.3em;
-        left: 0;
-    }
-
-    #login_navi li {
-        padding: 0.7em;
-    }
-
-    #login_navi li a {
-        padding: 0.3em 1em 0.3em 0;
-    }
-
-    .hamburger-menu {
-        display: inline-block;
-        cursor: pointer;
-    }
-      
-    .hamburger-menu .line {
-        width: 30px; /* Width of the lines */
-        height: 3px; /* Height of the lines */
-        background-color: #fff; /* Color of the lines */
-        margin: 5px 0; /* Spacing between the lines */
-        border-radius: 20%;
-    }
-
-    #hero a {
-        display: none;
-    }
-
-}
 
 
 #login_p {
@@ -278,7 +218,6 @@ a:visited {
     margin: 1em 2em 1em 0;
     padding: 1em;
     background-color: #fff;
-    max-width: 26em;
     float: left;
     min-height: 8em;
     box-shadow: #ccc 4px 4px 4px;
@@ -359,7 +298,6 @@ a:visited {
 }
 
 .participation .button {
-    margin-left: 1em;
 }
 
 #add_participation {
@@ -512,4 +450,75 @@ table tr:hover {
 
 table td {
 padding: 10px;
+}
+
+
+@media screen and (min-width: 769px) {
+
+    #login_navi {
+        text-align: right;
+        display: flex;
+        gap: 10px;
+        list-style-type: none;
+    }
+
+    #hamburger-menu {
+        display: none;
+    }
+
+    .challenge,
+    .participation {
+        width: 26em;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+
+    #login_navi {
+        display: none;
+        width: 100%;
+        background-color: #16669b;
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    #login_navi.active {
+        display: block;
+        position: absolute;
+        top: 2.3em;
+        left: 0;
+    }
+
+    #login_navi li {
+        padding: 0.7em;
+    }
+
+    #login_navi li a {
+        padding: 0.3em 1em 0.3em 0;
+    }
+
+    .hamburger-menu {
+        display: inline-block;
+        cursor: pointer;
+    }
+      
+    .hamburger-menu .line {
+        width: 30px; /* Width of the lines */
+        height: 3px; /* Height of the lines */
+        background-color: #fff; /* Color of the lines */
+        margin: 5px 0; /* Spacing between the lines */
+        border-radius: 20%;
+    }
+
+    #hero a {
+        display: none;
+    }
+
+    .challenge,
+    .participation {
+        width: 80%;
+    }
+    
 }
