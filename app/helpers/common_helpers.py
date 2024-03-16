@@ -23,11 +23,11 @@ def fetch_finbif_api(api_url, log = False):
     Raises:
     ConnectionError: If there is an issue connecting to the API.
     """
-    if "access_token=" not in api_url:
-        print("WARNING: access_token param is missing from your url!", file = sys.stdout)
+#    if "access_token=" not in api_url:
+#        print("WARNING: access_token param is missing from your url!", file = sys.stdout)
 
     api_url = api_url + os.environ.get('FINBIF_API_TOKEN')
-    print("Fetching API: " + api_url, file = sys.stdout)
+#    print("Fetching API: " + api_url, file = sys.stdout)
 
     if log:
         print(api_url, file = sys.stdout)
@@ -62,7 +62,7 @@ def fetch_lajiauth_api(api_url, log = False):
     Raises:
     ConnectionError: If there is an issue connecting to the API.
     """
-    print("Fetching API: " + api_url, file = sys.stdout)
+#    print("Fetching API: " + api_url, file = sys.stdout)
 
     if log:
         print(api_url, file = sys.stdout)

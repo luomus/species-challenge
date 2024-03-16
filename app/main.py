@@ -8,12 +8,13 @@ from datetime import timedelta
 import sys
 import os
 import requests
+from datetime import datetime
 
 from helpers import common_helpers
 from helpers.common_db import DatabaseConnectionError
 
-
 print("\n-------------- species-challenge --------------\n", file = sys.stdout)
+print("Started", datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "UTC", file = sys.stdout)
 
 app = Flask(__name__)
 
@@ -200,14 +201,14 @@ def login_page():
 
     # Case A: User is logging in
     if person_token_untrusted:
-        print("LOGGING IN...")
+#        print("LOGGING IN...")
 
         session.clear() # Clear any previous session data
         person_token = common_helpers.clean_token(person_token_untrusted)
 
         # Get user data
         user_data_from_api = common_helpers.fetch_lajiauth_api(api_url + person_token)
-        print("USER DATA: ", user_data_from_api)
+#        print("USER DATA: ", user_data_from_api)
         '''
         User data is in this format:
         {
@@ -240,7 +241,7 @@ def login_page():
 
         # Case A1: Login failed
         if "code" in user_data_from_api:
-            print("LOGIN ERROR: ", user_data_from_api)
+#            print("LOGIN ERROR: ", user_data_from_api)
             flash("Kirjautuminen epäonnistui. Yritä uudelleen.")
             return redirect("/login")
 
@@ -255,12 +256,12 @@ def login_page():
             if "MA.speciesChallengeAdmin" in user_data_from_api['user']["roles"]:
                 session["is_admin"] = True
 
-        print("IS ADMIN: ", session["is_admin"])
+#        print("IS ADMIN: ", session["is_admin"])
         return redirect("/")
     
     # Case B: User already logged in
     if g.user_data:
-        print(g.user_data)
+#        print(g.user_data)
         flash(f"Olet jo kirjautunut sisään nimellä { g.user_data.get('fullName', '(tunnukseesi ei ole kirjattu nimeä)') }.", "info")
         return redirect("/")
     
@@ -288,9 +289,9 @@ def logout():
         flash("Olet kirjautunut ulos.", "info")
         return redirect("/")
     else:
-        print('Failed to delete session on Laji-auth.')
-        print('Status code:', response.status_code)
-        print('Response:', response.text)
+#        print('Failed to delete session on Laji-auth.')
+#        print('Status code:', response.status_code)
+#        print('Response:', response.text)
         flash("Tietokantavirhe, uloskirjautuminen epäonnistui.", "error")
         return redirect("/")
 
