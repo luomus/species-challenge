@@ -92,19 +92,19 @@ def make_taxa_html(challenge, taxa_dates_json = None):
 
         # Add to additional_taxa_html
         # Check if taxon exists in all_taxa_names. Might not if it has been added to Laji.fi after the taxon list on this app has been set up.
-        fi = "" # default
+        fin = "" # default
         sci = observed_taxon_id # default
         if observed_taxon_id in all_taxa_names:
             sci = all_taxa_names[observed_taxon_id]["sci"]
             # Finnish name might not exist
-            if "fi" in all_taxa_names[observed_taxon_id]:
-                fi = all_taxa_names[observed_taxon_id]["fi"]
+            if "fin" in all_taxa_names[observed_taxon_id]:
+                fin = all_taxa_names[observed_taxon_id]["fin"]
     
         additional_taxa_html += f"""
             <li>
-                <span class='taxon_name'>{ fi } (<em>{ sci }</em>)</span>
+                <span class='taxon_name'>{ fin.capitalize() } (<em>{ sci }</em>)</span>
                 <input type='date' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }'>
-                <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa: { fi }'>i</a>
+                <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa: { fin }'>i</a>
             </li>\n"""
 
     # Combine into a list
