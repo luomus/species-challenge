@@ -124,76 +124,58 @@
     }
 
     // Autocomplete
+    // Preload species data
+    let speciesData = {};
+    fetch("/static/taxa/{{ html['challenge']['taxon'] }}_all.json")
+        .then(response => response.json())
+        .then(data => speciesData = data);
+
     document.addEventListener('DOMContentLoaded', function() {
         const input = document.getElementById('autocomplete-input');
         const resultsContainer = document.getElementById('autocomplete-results');
-
-        const accessToken = '{{ html["finbif_access_token"] }}';
-
-        // Todo: get from database
-        const informalTaxonGroup = '{{ html["challenge"]["autocomplete"] }}';
-        const endpoint = 'https://api.laji.fi/v0/autocomplete/taxon?limit=5&includePayload=true&lang=fi&informalTaxonGroup=' + informalTaxonGroup + '&excludeNameTypes=MX.hasMisspelledName,MX.hasMisappliedName&onlySpecies=true&onlyFinnish=true&access_token=' + accessToken + '&q='
-
+        
         let timeoutId = null;
 
         input.addEventListener('input', function() {
             clearTimeout(timeoutId);
 
-            const query = this.value.trim();
-            if (!query) {
-                resultsContainer.innerHTML = '';
-                return; // Stop if the query is empty
-            }
+            const query = this.value.trim().toLowerCase();
+            resultsContainer.innerHTML = ''; // Clear previous results
 
-            timeoutId = setTimeout(() => { // Set a new timeout
+            if (!query) return; // Stop if the query is empty
 
-                // Fetch data from API
-                fetch(endpoint + encodeURIComponent(query))
-                    .then(response => response.json())
-                    .then(data => {
-                        resultsContainer.innerHTML = ''; // Clear previous results
+            timeoutId = setTimeout(() => {
+                const matchedSpecies = Object.entries(speciesData)
+                    .filter(([id, {fin, sci}]) => fin.toLowerCase().includes(query) || sci.toLowerCase().includes(query))
+                    .slice(0, 5); // Get the first 5 matches
 
-                        data.forEach(item => {
-                            console.log(item); // Debugging
+                matchedSpecies.forEach(([id, {fin, sci}]) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${fin} (${sci})`;
+                    li.classList.add('autocomplete-item');
 
-                            // API doesn't support excluding subspecies, variations etc, so we need to filter them out here
-                            // if item.payload.taxonRankId is not MX.species, skip this item
-                            if (item.payload.taxonRankId !== 'MX.species') {
-                                return;
-                            }
+                    li.addEventListener('click', () => {
+                        const taxaList = document.getElementById('taxa');
+                        const newLi = document.createElement('li');
+                        newLi.innerHTML = `
+                                    <span class='taxon_name'>${fin} (<em>${sci}</em>)</span>
+                                    <input type="date" name='taxa:${id}' value="">
+                                    <a href='https://laji.fi/taxon/${id}' target='_blank' class='taxon_info' title='Lisätietoa: ${fin}'>i</a>
+                                `
+                        taxaList.appendChild(newLi);
+                        formIsDirty = true;
 
-                            const div = document.createElement('div');
-                            div.classList.add('autocomplete-item');
-                            div.textContent = item.value + " (" + item.payload.scientificName + ")";
-                            resultsContainer.appendChild(div);
+                        // Add event listeners to the newly added <li>
+                        addClickListenerToLi(newLi);
+                        addInputEventListenerToDateInput(newLi);
 
-                            div.addEventListener('click', function() {
-                                input.value = ""; // Clear input field
-                                resultsContainer.innerHTML = ''; // Clear results after selection
+                        input.value = ""; // Clear input field
+                        resultsContainer.innerHTML = ''; // Clear results after selection
+                    });
 
-                                // Find the list with id="taxa"
-                                const taxaList = document.getElementById('taxa');
-
-                                // Create a new <li> element
-                                const li = document.createElement('li');
-                                li.innerHTML = `
-                                    <span class='taxon_name'>${item.value} (<em>${item.payload.scientificName}</em>)</span>
-                                    <input type="date" name='taxa:${item.key}' value="">
-                                    <a href='https://laji.fi/taxon/${item.key}' target='_blank' class='taxon_info' title='Lisätietoa: ${item.value}'>i</a>
-                                `;
-
-                                // Append the new <li> to the "taxa" list
-                                taxaList.appendChild(li);
-                                formIsDirty = true;
-
-                                // Add event listeners to the newly added <li>
-                                addClickListenerToLi(li);
-                                addInputEventListenerToDateInput(li);
-                            });
-                        });
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            }, 300); // Wait before calling the API
+                    resultsContainer.appendChild(li);
+                });
+            }, 300); // Wait 300 ms before processing the input
         });
     });
 

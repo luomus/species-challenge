@@ -369,7 +369,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Case C2: No errors found. Insert to database and redirect to participation page.
 #        print("CASE C2")
         success, id = save_participation(challenge_id, participation_id, form_data)
-
         if success:
 #            print("CASE C2 SUCCESS")
             flash("Osallistumisesi on nyt tallennettu.", "success")
