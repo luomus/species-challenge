@@ -324,17 +324,17 @@ def make_taxa_html(participations, taxon_id, taxa_json = ""):
             taxon_observed_checkmark = "✅"
 
         # Check if taxon exists in all_taxa_names. Might not if it has been added to Laji.fi after the taxon list on this app has been set up.
-        fi = "" # default
+        fin = "" # default
         sci = taxon_id # default
         if taxon_id in taxon_names:
             sci = taxon_names[taxon_id]["sci"]
             # Finnish name might not exist
-            if "fi" in taxon_names[taxon_id]:
-                fi = taxon_names[taxon_id]["fi"]
+            if "fin" in taxon_names[taxon_id]:
+                fin = taxon_names[taxon_id]["fin"].capitalize()
 
 
         html += f"<tr class='{ taxon_observed_class }'>"
-        html += f"<td>{ fi } <em>({ sci })</em> { taxon_observed_checkmark }</td>"
+        html += f"<td>{ fin } <em>({ sci })</em> { taxon_observed_checkmark }</td>"
         html += f"<td>{ count }</td>"
         html += f"<td>{ str(round(((count / number_of_participations) * 100), 1)).replace('.', ',') } %</td>"
         html += "</tr>"
