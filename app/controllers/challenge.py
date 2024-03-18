@@ -37,7 +37,12 @@ def make_participant_html(participations):
     table = ""
 
     table += "<table id='participant_results'>"
-    table += "<tr><th>Osallistuja</th><th>Paikka</th><th>Lajimäärä</th></tr>"
+    table += "<tr><th>Osallistuja</th><th>Paikka</th><th>Lajimäärä</th>"
+    if g.is_admin:
+        table += "<th>Käyttäjä</th>"
+        table += "<th>Lisätty</th>"
+        table += "<th>Muokattu</th>"
+    table += "</tr>"
 
     target_count = 100
     target_taxa_count_reached = 0
@@ -46,13 +51,17 @@ def make_participant_html(participations):
     # Table of participants: name, place, taxon_count
     for participation in participations:
         name_shown = ""
-        if participation["taxa_count"] >= target_count:
+        if participation["taxa_count"] >= target_count or g.is_admin:
             name_shown = participation['name']
 
         table += "<tr>"
         table += f"<td>{ name_shown }</td>"
         table += f"<td>{ participation['place'] }</td>"
         table += f"<td>{ participation['taxa_count'] }</td>"
+        if g.is_admin:
+            table += f"<td><a href='https://triplestore.luomus.fi/editor/{ participation['meta_created_by'] }' target='_blank'>{ participation['meta_created_by'] }</a></td>"
+            table += f"<td>{ participation['meta_created_at'] }</td>"
+            table += f"<td>{ participation['meta_edited_at'] }</td>"
         table += "</tr>"
 
         taxa_count_total = taxa_count_total + participation["taxa_count"]
@@ -62,11 +71,15 @@ def make_participant_html(participations):
     table += "</table>"
 
     number_of_participants = len(participations)
-    target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
-    taxa_count_average = round(taxa_count_total / number_of_participants, 1)
+    target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100)
+    taxa_count_average = round(taxa_count_total / number_of_participants)
 
-    html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ str(target_taxa_count_reached_percent).replace('.', ',') } %) on saavuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { str(taxa_count_average).replace('.', ',') } lajia.</p>"
-    html += f"<p>Osallistujien nimet tulevat näkyviin, kun he ovat havainneet 100 lajia.</p></p>"
+    html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ str(target_taxa_count_reached_percent) } %) on saavuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { str(taxa_count_average) } lajia.</p>"
+
+    if g.is_admin:
+        html += f"<p>Ylläpitäjänä näet kaikkien nimet ja osallistumisten lisäys- ja muokkausajat. Muut näkevät vain vähintään { target_count } havainneiden nimet ilman aikoja.</p></p>"
+    else:
+        html += f"<p>Osallistujien nimet tulevat näkyviin, kun he ovat havainneet { target_count } lajia.</p></p>"
 
     html += table 
     return html
