@@ -2,7 +2,8 @@
  "MX.65529": {
   "sci": "Chrysothrix chlorina",
   "fin": "varjorikkij\u00e4k\u00e4l\u00e4",
-  "order": 76957
+  "order": 76957,
+  "heading": "Jäkälät"
  },
  "MX.67017": {
   "sci": "Chaenotheca",
@@ -252,7 +253,8 @@
  "MX.237062": {
   "sci": "Helvella lacunosa coll.",
   "fin": "mustam\u00f6rskyryhm\u00e4",
-  "order": 81572
+  "order": 81572,
+  "heading": "Kotelosienet"
  },
  "MX.5076303": {
   "sci": "Gyromitra infula coll.",
@@ -262,7 +264,8 @@
  "MX.71896": {
   "sci": "Agaricus sylvicola",
   "fin": "kuusiherkkusieni",
-  "order": 83306
+  "order": 83306,
+  "heading": "Helttasienet"
  },
  "MX.73304": {
   "sci": "Chlorophyllum olivieri",
@@ -372,7 +375,8 @@
  "MX.235909": {
   "sci": "Lycoperdon perlatum",
   "fin": "k\u00e4ns\u00e4tuhkelo",
-  "order": 85112
+  "order": 85112,
+  "heading": "Kupusienet"
  },
  "MX.234802": {
   "sci": "Bovista nigrescens",
@@ -452,7 +456,8 @@
  "MX.72563": {
   "sci": "Boletus edulis",
   "fin": "herkkutatti",
-  "order": 86974
+  "order": 86974,
+  "heading": "Tatit"
  },
  "MX.71909": {
   "sci": "Boletus pinophilus",
@@ -552,7 +557,8 @@
  "MX.236269": {
   "sci": "Ramaria boreimaxima",
   "fin": "tuhtihaarakas",
-  "order": 87410
+  "order": 87410,
+  "heading": "Haarakkaat"
  },
  "MX.206058": {
   "sci": "Inonotus obliquus",
@@ -587,7 +593,8 @@
  "MX.205394": {
   "sci": "Albatrellus confluens",
   "fin": "typ\u00e4sk\u00e4\u00e4p\u00e4",
-  "order": 88264
+  "order": 88264,
+  "heading": "Kääväkkäät"
  },
  "MX.205395": {
   "sci": "Albatrellus ovinus",
@@ -747,6 +754,7 @@
  "MX.205509": {
   "sci": "Calocera viscosa",
   "fin": "keltasarvikka",
-  "order": 89003
+  "order": 89003,
+  "heading": "Hyytelösienet"
  }
 }
