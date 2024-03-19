@@ -142,12 +142,12 @@ a:visited {
     margin: 2em 0 0 -10px;
     clear: both;
     width: calc(100% - 2px);
+    vertical-align: middle;
 }
 
 #footer img {
     height: 50px;
     width: auto;
-    margin-bottom: 0.5em;
 }
 
 #footer a {
@@ -243,7 +243,8 @@ a:visited {
 }
 
 #challenge_info img {
-    display: none;
+    float: right;
+    margin-top: -1em;
 }
 
 .open .challenge,

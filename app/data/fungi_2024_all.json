@@ -32422,5 +32422,65 @@
  "MX.5076674": {
   "sci": "Syzygites megalocarpus",
   "fin": "storm\u00f6gel (sv)"
- }
+ },
+ "MX.67017": {
+  "sci": "Chaenotheca",
+  "fin": "neulaj\u00e4k\u00e4l\u00e4t"
+ },
+ "MX.67190": {
+    "sci": "Lecanora",
+    "fin": "kehr\u00e4j\u00e4k\u00e4l\u00e4t"
+   },
+   "MX.67279": {
+    "sci": "Bryoria",
+    "fin": "lupot"
+   },
+   "MX.67212": {
+    "sci": "Usnea",
+    "fin": "naavat"
+   },
+   "MX.67052": {
+    "sci": "Stereocaulon",
+    "fin": "tinaj\u00e4k\u00e4l\u00e4t"
+   },
+   "MX.237062": {
+    "sci": "Helvella lacunosa coll.",
+    "fin": "mustam\u00f6rskyryhm\u00e4"
+   },
+   "MX.5076303": {
+    "sci": "Gyromitra infula coll.",
+    "fin": "piispanhiipparyhm\u00e4"
+   },
+   "MX.5019989": {
+    "sci": "Cortinarius sanguineus coll.",
+    "fin": "veriseitikkiryhm\u00e4"
+   },
+   "MX.72871": {
+    "sci": "Cortinarius semisanguineus coll.",
+    "fin": "verihelttaseitikkiryhm\u00e4"
+   },
+   "MX.69690": {
+    "sci": "Armillaria",
+    "fin": "mesisienet"
+   },
+   "MX.5102924": {
+    "sci": "Leccinum versipelle group.",
+    "fin": "punikkitatit"
+   },
+   "MX.72524": {
+    "sci": "Paxillus involutus coll.",
+    "fin": "pulkkosieniryhm\u00e4"
+   },
+   "MX.205986": {
+    "sci": "Hydnum rufescens coll.",
+    "fin": "rusko-orakasryhm\u00e4"
+   },
+   "MX.5080324": {
+    "sci": "Hydnellum peckii/ferrugineum",
+    "fin": "karvas-/ruosteorakas"
+   },
+   "MX.5102921": {
+    "sci": "Sarcodon imbricatus/squamosus",
+    "fin": "suomuorakasryhm\u00e4"
+   }
 }

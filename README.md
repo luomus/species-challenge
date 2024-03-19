@@ -35,8 +35,8 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 ## Notes
 
 - Setting up new challenge
-    - Provide list of basic taxa to `app/data/`, e.g. `MX.37601_2024.json` or use one of the existing ones.
-    - Privide list of all taxa from that group `app/data/`, e.g. `MX.37601_2024_all.json` or use one of the existing ones.
+    - Provide list of basic taxa to `app/data/`, e.g. `plantae_2024.json` or use one of the existing ones.
+    - Provide list of all allowed taxa to `app/data/` (for backend) and `statix/taxa/` (for frontend autocomplete), e.g. `plantae_2024_all.json`. This should contain all taxa that the basic list above contains, icnluding non-species.
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages.
     - If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name. Better solution wpould be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
 
