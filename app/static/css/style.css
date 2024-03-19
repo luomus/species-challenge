@@ -169,7 +169,7 @@ a:visited {
 }
 
 #hero {
-    background-color: #204100;
+    background-color: #aabe65; /* hero-photo */
     padding: 10px;
     margin: 0 -10px 1em -10px;
     height: 20em;
@@ -177,7 +177,7 @@ a:visited {
     min-height: 4em;
     color: #fff;
     /* image stretched to fit the div */
-    background-image: url("/static/images/hero.jpg");
+    background-image: url("/static/images/hero-photo.jpg");
     background-size: cover;
     background-position: center;
     box-shadow: #999 0 0 5px;
