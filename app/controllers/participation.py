@@ -213,22 +213,24 @@ def validate_participation_data(form_data):
     if not form_data["name"]:
         errors += "osallistujan nimi puuttuu. "
     else:
+        form_data["name"] = common_helpers.sanitize_name(form_data["name"].strip())
         if len(form_data["name"]) > 120:
             errors += "osallistujan nimi on liian pitkä, enintään 120 merkkiä. "
 
     # Place
-    if len(form_data["place"]) > 120:
-        errors += "paikannimi on liian pitkä, enintään 120 merkkiä. "
-
-    # Sanitize field values
-    form_data["name"] = common_helpers.sanitize_name(form_data["name"].strip())
-    form_data["place"] = common_helpers.sanitize_name(form_data["place"].strip())
+    if "place" in form_data:
+        form_data["place"] = common_helpers.sanitize_name(form_data["place"].strip())
+        if len(form_data["place"]) > 120:
+            errors += "paikannimi on liian pitkä, enintään 120 merkkiä. "
+    else:
+        form_data["place"] = ""
 
     # Handle taxon data
     # 1) Extract taxon data from form data
     taxa_data = taxa_to_dict(form_data)
 
     # 2) Remove empty values
+    # Todo: is this needed anymore?
     taxa_data = {k: v for k, v in taxa_data.items() if v}
     
     # 3) Remove values that are not YYYY-MM-DD dates
@@ -351,8 +353,11 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     if form_data:
 #        print("CASE C")
 
-        # Convert to normal dictionary for sanitization
-        form_data = form_data.to_dict()
+        # Convert to dict removing empty fields.
+        # Empty taxon fields need to be removed so that if user adds a basic taxon using additional taxa ui, it won't be removed when the raw data is converted to dict using to_dict(), which allows only one value per key (i.e. throws away the value from additional taxa ui).
+        # Note that optional empty fields like "place" need to be put back to the form data - this is donw at validation step.
+        # Todo: Maybe instead remove only empty taxon fields here?
+        form_data = {key: value for key, value in form_data.items(multi=True) if value}
 
         errors, form_data = validate_participation_data(form_data)
 

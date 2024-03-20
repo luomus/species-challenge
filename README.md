@@ -63,6 +63,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 ### Next
 
 * Trim whitespace from MX codes, both on read and write
+* Use API for autocomplete? Would allow sorting results based on abundance, so e.g. "pihlaja" would return pihalaja and note rare species. But could lead to conflicts with existing data, if taxonomy changes?
 
 ### Setup
 
@@ -70,7 +71,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 - More robust error handling and restart? Try with triggering syntax error.
 - Clarify Docker build commands
 - Database sorting/collation settings utf8mb4_swedish_ci?
-- Zabbix for prod
 - Backup monitoring
 
 ### Features todo
