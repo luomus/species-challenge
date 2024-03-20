@@ -157,9 +157,17 @@
                     li.addEventListener('click', () => {
                         const taxaList = document.getElementById('taxa');
                         const newLi = document.createElement('li');
+                        
+                        const min = "{{ html['challenge']['year'] }}-01-01";
+                        let max = "{{ html['challenge']['year'] }}-12-31";
+                        // If max date is in future, make it today instead
+                        if (max > new Date().toISOString().split('T')[0]) {
+                            max = new Date().toISOString().split('T')[0];
+                        }
+
                         newLi.innerHTML = `
                                     <span class='taxon_name'>${fin} (<em>${sci}</em>)</span>
-                                    <input type="date" name='taxa:${id}' value="" min="{{ html['challenge']['year'] }}-01-01" max="{{ html['challenge']['year'] }}-12-31">
+                                    <input type="date" name='taxa:${id}' value="" min="${min}" max="${max}">
                                     <a href='https://laji.fi/taxon/${id}' target='_blank' class='taxon_info' title='Lisätietoa: ${fin}'>i</a>
                                 `
                         taxaList.appendChild(newLi);

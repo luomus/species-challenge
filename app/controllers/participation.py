@@ -76,7 +76,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         sci_html = taxon_data.get("sci", "")
         basic_taxa_html += f"""
             <li>
-                <span class='taxon_name' id='{ id_html }_name'>{ fin_html.capitalize() } (<em>{ sci_html }</em>)</span>
+                <span class='taxon_name' id='{ id_html }_id'>{ fin_html.capitalize() } (<em>{ sci_html }</em>)</span>
                 <input type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
                 <a href='https://laji.fi/taxon/{ taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa: { fin_html }'>i</a>
             </li>\n"""
@@ -101,7 +101,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         additional_taxa_html += f"""
             <li>
                 <span class='taxon_name'>{ fin.capitalize() } (<em>{ sci }</em>)</span>
-                <input type='date' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }'>
+                <input type='date' id='{ id_html }_id_additional' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }' min='{ min_date }' max='{ max_date }'>
                 <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa: { fin }'>i</a>
             </li>\n"""
 
