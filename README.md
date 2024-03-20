@@ -62,31 +62,17 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
-- Autocomplete from local file
-- Check styles
-    - uniform widths for blocks
-    - trash button
-- Check http://localhost:8081/osallistuminen/4/6
-    - it has e.g. ahvenvita, whic is not part of species list MX.67601
-        - why does it save it? this is how it should be; save taxa that are not on the basic list
-        - why does it show it on the list? should show at the end
-        - should we version the species lists? work with 
-        - how to show names of additional species? fetch from participation table, api or json?
 
 ### Setup
 
-- Stress testing
-- Navi color on prod vs dev vs localhost
 - Version numbering?
 - More robust error handling and restart? Try with triggering syntax error.
 - Clarify Docker build commands
 - Database sorting/collation settings utf8mb4_swedish_ci?
-- Reduce logging
 - Zabbix for prod
 - Backup monitoring
-- Setup species lists (basic & advanced) with clear names, and matching with taxon autocomplete.
 
-### Features
+### Features todo
 
 - Test:
     - Automated testing with Playwright
