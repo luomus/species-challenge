@@ -88,7 +88,7 @@
         "sci": "Gomphidius glutinosus",
         "fin": "limanuljaska"
     },
-    "MX.71759 ": {
+    "MX.71759": {
         "sci": "Hygrocybe conica",
         "fin": "kartiovahakas"
     },
@@ -319,7 +319,7 @@
         "sci": "Hydnellum aurantiacum",
         "fin": "oranssiorakas"
     },
-    " MX.5080324 ": {
+    "MX.5080324": {
         "sci": "Hydnellum peckii/ferrugineum",
         "fin": "karvas-/ruosteorakas"
     },
@@ -423,7 +423,7 @@
     },
     "MX.65186": {
         "sci": "Anaptychia ciliaris",
-        "fin": "puistoripsijäkälä"
+        "fin": ""
     },
     "MX.65195": {
         "sci": "Arctoparmelia centrifuga",

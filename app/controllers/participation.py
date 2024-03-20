@@ -71,7 +71,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             basic_taxa_html += f"<li class='list_heading_4'><h4>{ taxon_data['heading'] }</h4></li>\n"
 
         # Add to basic_taxa_html, fill in with date from taxa_dates if found
-        id_html = taxon_id.replace(".", "_")
+        id_html = taxon_id.replace(".", "_").replace(" ", "")
         fin_html = taxon_data.get("fin", "")
         sci_html = taxon_data.get("sci", "")
         basic_taxa_html += f"""

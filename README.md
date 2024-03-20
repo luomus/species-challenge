@@ -62,6 +62,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
+* Trim whitespace from MX codes, both on read and write
 
 ### Setup
 
