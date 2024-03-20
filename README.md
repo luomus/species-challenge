@@ -80,15 +80,11 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
         - Logout
     - Giving malicious login token
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
-    - Thorough testing by multiple people
-- First production version:
-    - Taxon autocomplete field on challenge?
 - Later:
+    - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Remove button (dull red X?) to participation form taxon list
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
     - Prevent editing species of closed / draft challenge participations
-    - Spinner to autocomplete
-    - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Accessibility
     - Own data dump download
     - Admin ability to edit any participations
@@ -97,7 +93,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Activity stats, e.g. users active during last 7 days, new participations
     - Exclude existing species from the autocomplete? Could exclude all top N species, what to do then?
 - Nice:
-    - Admin to see user email
     - Min and max dates instead of year to database
         - Database structure change, content change and sql dump update
         - Challenge form update, with date fields
