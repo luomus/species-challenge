@@ -51,13 +51,11 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     {
         "MX.43922": {
         "sci": "Pohlia nutans",
-        "fi": "nuokkuvarstasammal",
-        "order": 91164
+        "fi": "nuokkuvarstasammal"
         },
         "MX.43502": {
         "sci": "Climacium dendroides",
-        "fi": "palmusammal",
-        "order": 91386
+        "fi": "palmusammal"
         }
     }
     """
