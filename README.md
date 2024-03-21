@@ -62,6 +62,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
+* Page titles
 * Trim whitespace from MX codes, both on read and write
 * Use API for autocomplete? Would allow sorting results based on abundance, so e.g. "pihlaja" would return pihalaja and note rare species. But could lead to conflicts with existing data, if taxonomy changes?
 
