@@ -55,7 +55,7 @@
   "sci": "Spinulum annotinum",
   "fin": "riidenlieko",
   "order": 93117,
-  "heading": "Putkilokasvit"
+  "heading": "Putkilokasvit, itiökasvit"
  },
  "MX.37721": {
   "sci": "Equisetum arvense",
@@ -95,7 +95,8 @@
  "MX.37826": {
   "sci": "Juniperus communis",
   "fin": "kataja",
-  "order": 93809
+  "order": 93809,
+  "heading": "Putkilokasvit, siemenkasvit"
  },
  "MX.37812": {
   "sci": "Picea abies",
