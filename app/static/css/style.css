@@ -539,6 +539,10 @@ padding: 10px;
         border-radius: 20%;
     }
 
+    #body_login .hamburger-menu {
+        display: none;
+    }
+
     #hero a {
         display: none;
     }

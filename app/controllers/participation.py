@@ -210,7 +210,7 @@ def validate_participation_data(form_data):
     errors = ""
 
     # Name
-    if not form_data["name"]:
+    if not "name" in form_data:
         errors += "osallistujan nimi puuttuu. "
     else:
         form_data["name"] = common_helpers.sanitize_name(form_data["name"].strip())

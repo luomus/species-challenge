@@ -249,7 +249,7 @@
             <button type="submit" id="submit_button">Tallenna osallistuminen</button>
         </p>
 
-        <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla kalenteri-ikonia ja valitsemalla tyhjennä/clear.)</p>
+        <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla kalenteri-ikonia ja valitsemalla tyhjennä/nollaa/clear.)</p>
 
         {% if 'taxa_count' not in html['data_fields'] %}
             <!-- Empty form -->
@@ -265,10 +265,10 @@
         {{ html['taxa']|safe }}
 
         <div id="autocomplete-container">
-            <p>Muista merkitä havaintopäivämäärä myös lisälajeille.</p>
             <label for="autocomplete-input"><h4>Lisää muita lajeja:</h4></label>
             <input type="text" id="autocomplete-input" placeholder="">
             <div id="autocomplete-results"></div>
+            <p>Voit lisätä tässä havaintoja myös peruslajeista. Muista merkitä havaintopäivämäärä kaikille.</p>
         </div>
    
     </form>

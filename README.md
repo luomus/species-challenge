@@ -62,9 +62,11 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
-* Page titles
+* If user removes name and then trashes the participation, some data disappears.
+    * Should removal be completely different procedure, that only UPDATES trashed = 1, and does not UPDATE anything else?
 * Trim whitespace from MX codes, both on read and write
 * Use API for autocomplete? Would allow sorting results based on abundance, so e.g. "pihlaja" would return pihalaja and note rare species. But could lead to conflicts with existing data, if taxonomy changes?
+* On Safari, scroll date errors in view: https://chat.openai.com/share/cf043643-8b07-4394-b10e-30a383d54479
 
 ### Setup
 
@@ -83,6 +85,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Giving malicious login token
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
 - Later:
+    - If challenge is draft, stats page shows confusing information: http://localhost:8081/tilasto/4/49
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Remove button (dull red X?) to participation form taxon list
     - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
