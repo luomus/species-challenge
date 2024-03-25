@@ -337,6 +337,8 @@ textarea#description {
 #taxa {
     margin-left: 0;
     padding-left: 0;
+    background-color: #fff;
+    border-radius: 10px;
 }
 
 #taxa li {

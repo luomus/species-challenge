@@ -124,15 +124,14 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     # Combine into a list
     html = f"""
         <ul id='taxa'>\n
-        <li class='list_heading_3'><h3>Peruslajit</h3></li>\n
-            { basic_taxa_html }
-        <li class='list_heading_3'><h3>Lisälajit</h3></li>\n
+        <li class='list_heading_3'><h3>Peruslistan ulkopuoliset lajit:</h3></li>\n
             { additional_taxa_html }
+        <li class='list_heading_3'><h3>Peruslistan lajit:</h3></li>\n
+            { basic_taxa_html }
         </ul>\n
         """
 
     return html
-
 
 
 def save_participation(challenge_id, participation_id, form_data):
@@ -396,4 +395,3 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Database error or trying to edit someone else's participation
 #        print("CASE C2 FAIL")
         raise Exception("Error saving participation to database.")
-

@@ -6,7 +6,6 @@
     <style>
         #autocomplete-container {
             position: relative;
-            margin-bottom: 10em;
             margin-left: 10px;
         }
 
@@ -171,7 +170,8 @@
                                     <input type="date" name='taxa:${id}' value="" min="${min}" max="${max}">
                                     <a href='https://laji.fi/taxon/${id}' target='_blank' class='taxon_info' title='Lisätietoa: ${fin}'>i</a>
                                 `
-                        taxaList.appendChild(newLi);
+//                        taxaList.appendChild(newLi); // Append to end of list
+                        taxaList.prepend(newLi); // Append to beginning of list
                         formIsDirty = true;
 
                         // Add event listeners to the newly added <li>
@@ -250,8 +250,6 @@
             <button type="submit" id="submit_button">Tallenna osallistuminen</button>
         </p>
 
-        <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla kalenteri-ikonia ja valitsemalla tyhjennä/nollaa/clear.)</p>
-
         {% if 'taxa_count' not in html['data_fields'] %}
             <!-- Empty form -->
         {% else %}
@@ -262,16 +260,17 @@
             {% endif %}
         {% endif %}
 
+        <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla kalenteri-ikonia ja valitsemalla tyhjennä/nollaa/clear.)</p>
+
+        <div id="autocomplete-container">
+            <label for="autocomplete-input"><h4>Hae lajia tai lisää listan ulkopuolisia lajeja:</h4></label>
+            <input type="text" id="autocomplete-input" placeholder="">
+            <div id="autocomplete-results"></div>
+            <p>Voit lisätä tällä haulla havaintoja myös peruslistan ulkopuolisista. Muista merkitä havaintopäivämäärä kaikille.</p>
+        </div>
 
         {{ html['taxa']|safe }}
 
-        <div id="autocomplete-container">
-            <label for="autocomplete-input"><h4>Lisää muita lajeja:</h4></label>
-            <input type="text" id="autocomplete-input" placeholder="">
-            <div id="autocomplete-results"></div>
-            <p>Voit lisätä tässä havaintoja myös peruslajeista. Muista merkitä havaintopäivämäärä kaikille.</p>
-        </div>
-   
     </form>
 
 {% endblock %}
