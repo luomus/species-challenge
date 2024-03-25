@@ -146,12 +146,12 @@
 
             timeoutId = setTimeout(() => {
                 const matchedSpecies = Object.entries(speciesData)
-                    .filter(([id, {fin, sci}]) => fin.toLowerCase().includes(query) || sci.toLowerCase().includes(query))
+                    .filter(([id, {fin, sci, swe}]) => fin.toLowerCase().includes(query) || sci.toLowerCase().includes(query))
                     .slice(0, 5); // Get the first 5 matches
 
-                matchedSpecies.forEach(([id, {fin, sci}]) => {
+                matchedSpecies.forEach(([id, {fin, sci, swe}]) => {
                     const li = document.createElement('li');
-                    li.textContent = `${fin} (${sci})`;
+                    li.textContent = `${fin} ${swe} (${sci})`; // Todo: comma between fin and swe
                     li.classList.add('autocomplete-item');
 
                     li.addEventListener('click', () => {
@@ -165,8 +165,9 @@
                             max = new Date().toISOString().split('T')[0];
                         }
 
+                        // Todo: comma between fin and swe
                         newLi.innerHTML = `
-                                    <span class='taxon_name'>${fin} (<em>${sci}</em>)</span>
+                                    <span class='taxon_name'>${fin} ${swe} (<em>${sci}</em>)</span>
                                     <input type="date" name='taxa:${id}' value="" min="${min}" max="${max}">
                                     <a href='https://laji.fi/taxon/${id}' target='_blank' class='taxon_info' title='Lisätietoa: ${fin}'>i</a>
                                 `

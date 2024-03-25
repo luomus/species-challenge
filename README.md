@@ -67,6 +67,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 * Trim whitespace from MX codes, both on read and write
 * Use API for autocomplete? Would allow sorting results based on abundance, so e.g. "pihlaja" would return pihalaja and note rare species. But could lead to conflicts with existing data, if taxonomy changes?
 * On Safari, scroll date errors in view: https://chat.openai.com/share/cf043643-8b07-4394-b10e-30a383d54479
+* On safari, autocomplete shows list bullets
 
 ### Setup
 

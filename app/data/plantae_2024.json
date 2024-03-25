@@ -3,754 +3,904 @@
   "sci": "Pohlia nutans",
   "fin": "nuokkuvarstasammal",
   "order": 91164,
-  "heading": "Lehtisammalet"
+  "heading": "Lehtisammalet",
+  "swe": "vanlig nickmossa"
  },
  "MX.43502": {
   "sci": "Climacium dendroides",
   "fin": "palmusammal",
-  "order": 91386
+  "order": 91386,
+  "swe": "palmmossa"
  },
  "MX.43983": {
   "sci": "Hylocomiadelphus triquetrus",
-  "fin": "mets\u00e4liekosammal",
-  "order": 91417
+  "fin": "metsäliekosammal",
+  "order": 91417,
+  "swe": "kransmossa"
  },
  "MX.43668": {
   "sci": "Hylocomium splendens",
-  "fin": "mets\u00e4kerrossammal",
-  "order": 91422
+  "fin": "metsäkerrossammal",
+  "order": 91422,
+  "swe": "husmossa"
  },
  "MX.43901": {
   "sci": "Pleurozium schreberi",
-  "fin": "sein\u00e4sammal",
-  "order": 91425
+  "fin": "seinäsammal",
+  "order": 91425,
+  "swe": "väggmossa"
  },
  "MX.43956": {
   "sci": "Ptilium crista-castrensis",
   "fin": "sulkasammal",
-  "order": 91607
+  "order": 91607,
+  "swe": "kammossa"
  },
  "MX.43803": {
   "sci": "Atrichum undulatum",
-  "fin": "isomyyr\u00e4nsammal",
-  "order": 92281
+  "fin": "isomyyränsammal",
+  "order": 92281,
+  "swe": "vågig sågmossa"
  },
  "MX.43933": {
   "sci": "Polytrichum commune",
   "fin": "korpikarhunsammal",
-  "order": 92299
+  "order": 92299,
+  "swe": "vanlig björnmossa"
  },
  "MX.44366": {
   "sci": "Marchantia polymorpha",
   "fin": "keuhkosammal",
   "order": 92362,
-  "heading": "Maksasammalet"
+  "heading": "Maksasammalet",
+  "swe": "lungmossa"
  },
  "MX.44182": {
   "sci": "Radula complanata",
   "fin": "haapasuomusammal",
-  "order": 93004
+  "order": 93004,
+  "swe": "samboradula"
  },
  "MX.37691": {
   "sci": "Spinulum annotinum",
   "fin": "riidenlieko",
   "order": 93117,
-  "heading": "Putkilokasvit, itiökasvit"
+  "heading": "Putkilokasvit, itiökasvit",
+  "swe": "revlummer"
  },
  "MX.37721": {
   "sci": "Equisetum arvense",
   "fin": "peltokorte",
-  "order": 93157
+  "order": 93157,
+  "swe": "åkerfräken"
  },
  "MX.37717": {
   "sci": "Equisetum fluviatile",
-  "fin": "j\u00e4rvikorte",
-  "order": 93164
+  "fin": "järvikorte",
+  "order": 93164,
+  "swe": "sjöfräken"
  },
  "MX.37719": {
   "sci": "Equisetum sylvaticum",
-  "fin": "mets\u00e4korte",
-  "order": 93178
+  "fin": "metsäkorte",
+  "order": 93178,
+  "swe": "skogsfräken"
  },
  "MX.37763": {
   "sci": "Athyrium felix-femina",
   "fin": "soreahiirenporras",
-  "order": 93460
+  "order": 93460,
+  "swe": "majbräken"
  },
  "MX.37771": {
   "sci": "Gymnocarpium dryopteris",
-  "fin": "mets\u00e4imarre",
-  "order": 93493
+  "fin": "metsäimarre",
+  "order": 93493,
+  "swe": "ekbräken"
  },
  "MX.37752": {
   "sci": "Dryopteris carthusiana",
-  "fin": "mets\u00e4alvejuuri",
-  "order": 93533
+  "fin": "metsäalvejuuri",
+  "order": 93533,
+  "swe": "skogsbräken"
  },
  "MX.37796": {
   "sci": "Polypodium vulgare",
   "fin": "pohjankallioimarre",
-  "order": 93605
+  "order": 93605,
+  "swe": "stensöta"
  },
  "MX.37826": {
   "sci": "Juniperus communis",
   "fin": "kataja",
   "order": 93809,
-  "heading": "Putkilokasvit, siemenkasvit"
+  "heading": "Putkilokasvit, siemenkasvit",
+  "swe": "en"
  },
  "MX.37812": {
   "sci": "Picea abies",
-  "fin": "mets\u00e4kuusi",
-  "order": 93939
+  "fin": "metsäkuusi",
+  "order": 93939,
+  "swe": "gran"
  },
  "MX.37819": {
   "sci": "Pinus sylvestris",
-  "fin": "mets\u00e4m\u00e4nty",
-  "order": 94013
+  "fin": "metsämänty",
+  "order": 94013,
+  "swe": "tall"
  },
  "MX.40092": {
   "sci": "Calla palustris",
   "fin": "vehka",
-  "order": 94099
+  "order": 94099,
+  "swe": "missne"
  },
  "MX.39201": {
   "sci": "Aegopodium podagraria",
   "fin": "vuohenputki",
-  "order": 94241
+  "order": 94241,
+  "swe": "kirskål"
  },
  "MX.39235": {
   "sci": "Angelica sylvestris",
   "fin": "karhunputki",
-  "order": 94273
+  "order": 94273,
+  "swe": "strätta"
  },
  "MX.39185": {
   "sci": "Anthriscus sylvestris",
   "fin": "koiranputki",
-  "order": 94279
+  "order": 94279,
+  "swe": "hundkäx"
  },
  "MX.39970": {
   "sci": "Convallaria majalis",
   "fin": "kielo",
-  "order": 94864
+  "order": 94864,
+  "swe": "liljekonvalj"
  },
  "MX.39976": {
   "sci": "Maianthemum bifolium",
   "fin": "oravanmarja",
-  "order": 94920
+  "order": 94920,
+  "swe": "ekorrbär"
  },
  "MX.39974": {
   "sci": "Polygonatum odoratum",
   "fin": "kalliokielo",
-  "order": 94960
+  "order": 94960,
+  "swe": "getrams"
  },
  "MX.39812": {
   "sci": "Achillea millefolium",
-  "fin": "siank\u00e4rs\u00e4m\u00f6",
-  "order": 95416
+  "fin": "siankärsämö",
+  "order": 95416,
+  "swe": "röllika"
  },
  "MX.39809": {
   "sci": "Achillea ptarmica",
-  "fin": "ojak\u00e4rs\u00e4m\u00f6",
-  "order": 95424
+  "fin": "ojakärsämö",
+  "order": 95424,
+  "swe": "nysört"
  },
  "MX.39761": {
   "sci": "Antennaria dioica",
-  "fin": "ahokissank\u00e4p\u00e4l\u00e4",
-  "order": 95474
+  "fin": "ahokissankäpälä",
+  "order": 95474,
+  "swe": "kattfot"
  },
  "MX.39871": {
   "sci": "Arctium tomentosum",
   "fin": "seittitakiainen",
-  "order": 95502
+  "order": 95502,
+  "swe": "ullkardborre"
  },
  "MX.39835": {
   "sci": "Artemisia vulgaris",
   "fin": "pujo",
-  "order": 95584
+  "order": 95584,
+  "swe": "gråbo"
  },
  "MX.39890": {
   "sci": "Cirsium arvense",
   "fin": "pelto-ohdake",
-  "order": 95713
+  "order": 95713,
+  "swe": "åkertistel"
  },
  "MX.39887": {
   "sci": "Cirsium heterophyllum",
   "fin": "huopaohdake",
-  "order": 95721
+  "order": 95721,
+  "swe": "brudborste"
  },
  "MX.39833": {
   "sci": "Leucanthemum vulgare",
-  "fin": "ahop\u00e4iv\u00e4nkakkara",
-  "order": 96123
+  "fin": "ahopäivänkakkara",
+  "order": 96123,
+  "swe": "prästkrage"
  },
  "MX.39827": {
   "sci": "Matricaria discoidea",
   "fin": "pihasaunio",
-  "order": 96152
+  "order": 96152,
+  "swe": "gatkamomill"
  },
  "MX.39917": {
   "sci": "Scorzoneroides autumnalis",
   "fin": "syysmaitiainen",
-  "order": 96272
+  "order": 96272,
+  "swe": "höstfibbla"
  },
  "MX.39727": {
   "sci": "Solidago virgaurea",
   "fin": "kultapiisku",
-  "order": 96335
+  "order": 96335,
+  "swe": "gullris"
  },
  "MX.39830": {
   "sci": "Tanacetum vulgare",
   "fin": "pietaryrtti",
-  "order": 96397
+  "order": 96397,
+  "swe": "renfana"
  },
  "MX.42419": {
   "sci": "Taraxacum",
   "fin": "voikukat",
-  "order": 96399
+  "order": 96399,
+  "swe": "maskrosor"
  },
  "MX.39823": {
   "sci": "Tripleurospermum inodorum",
   "fin": "peltosaunio",
-  "order": 96590
+  "order": 96590,
+  "swe": "baldersbrå"
  },
  "MX.39847": {
   "sci": "Tussilago farfara",
   "fin": "leskenlehti",
-  "order": 96600
+  "order": 96600,
+  "swe": "hästhov"
  },
  "MX.39703": {
   "sci": "Campanula patula",
   "fin": "harakankello",
-  "order": 96647
+  "order": 96647,
+  "swe": "ängsklocka"
  },
  "MX.39711": {
   "sci": "Campanula rotundifolia",
   "fin": "kissankello",
-  "order": 96656
+  "order": 96656,
+  "swe": "liten blåklocka"
  },
  "MX.39328": {
   "sci": "Menyanthes trifoliata",
   "fin": "raate",
-  "order": 96712
+  "order": 96712,
+  "swe": "vattenklöver"
  },
  "MX.39402": {
   "sci": "Echium vulgare",
   "fin": "neidonkieli",
-  "order": 96775
+  "order": 96775,
+  "swe": "blåeld"
  },
  "MX.38364": {
   "sci": "Alliaria petiolata",
   "fin": "litulaukka",
-  "order": 96887
+  "order": 96887,
+  "swe": "löktrav"
  },
  "MX.38387": {
   "sci": "Barbarea vulgaris",
   "fin": "peltokanankaali",
-  "order": 96921
+  "order": 96921,
+  "swe": "sommargyllen"
  },
  "MX.38073": {
   "sci": "Cerastium fontanum",
-  "fin": "nurmih\u00e4rkki",
-  "order": 97633
+  "fin": "nurmihärkki",
+  "order": 97633,
+  "swe": "hönsarv"
  },
  "MX.38131": {
   "sci": "Silene dioica",
   "fin": "puna-ailakki",
-  "order": 97787
+  "order": 97787,
+  "swe": "rödblära"
  },
  "MX.38055": {
   "sci": "Stellaria graminea",
-  "fin": "hein\u00e4t\u00e4htim\u00f6",
-  "order": 97838
+  "fin": "heinätähtimö",
+  "order": 97838,
+  "swe": "grässtjärnblomma"
  },
  "MX.38048": {
   "sci": "Stellaria media",
-  "fin": "pihat\u00e4htim\u00f6",
-  "order": 97844
+  "fin": "pihatähtimö",
+  "order": 97844,
+  "swe": "våtarv"
  },
  "MX.38780": {
   "sci": "Drosera rotundifolia",
-  "fin": "py\u00f6re\u00e4lehtikihokki",
-  "order": 97875
+  "fin": "pyöreälehtikihokki",
+  "order": 97875,
+  "swe": "rundsileshår"
  },
  "MX.38217": {
   "sci": "Polygonium aviculare",
   "fin": "pihatatar",
-  "order": 98007
+  "order": 98007,
+  "swe": "stor trampört"
  },
  "MX.38279": {
   "sci": "Rumex acetosa",
-  "fin": "niittysuolahein\u00e4",
-  "order": 98035
+  "fin": "niittysuolaheinä",
+  "order": 98035,
+  "swe": "ängssyra"
  },
  "MX.38285": {
   "sci": "Rumex acetosella",
-  "fin": "ahosuolahein\u00e4",
-  "order": 98039
+  "fin": "ahosuolaheinä",
+  "order": 98039,
+  "swe": "bergsyra"
  },
  "MX.38263": {
   "sci": "Rumex longifolius",
   "fin": "hevonhierakka",
-  "order": 98080
+  "order": 98080,
+  "swe": "gårdsskräppa"
  },
  "MX.39166": {
   "sci": "Cornus suecica",
   "fin": "ruohokanukka",
-  "order": 98252
+  "order": 98252,
+  "swe": "hönsbär"
  },
  "MX.39336": {
   "sci": "Sambucus racemosa",
   "fin": "terttuselja",
-  "order": 98466
+  "order": 98466,
+  "swe": "druvfläder"
  },
  "MX.39368": {
   "sci": "Knautia arvensis",
   "fin": "ketoruusuruoho",
-  "order": 98513
+  "order": 98513,
+  "swe": "åkervädd"
  },
  "MX.39343": {
   "sci": "Linnaea borealis",
   "fin": "vanamo",
-  "order": 98518
+  "order": 98518,
+  "swe": "linnea"
  },
  "MX.39347": {
   "sci": "Lonicera xylosteum",
   "fin": "lehtokuusama",
-  "order": 98580
+  "order": 98580,
+  "swe": "skogstry"
  },
  "MX.39358": {
   "sci": "Valeriana officinalis",
   "fin": "rohtovirmajuuri",
-  "order": 98611
+  "order": 98611,
+  "swe": "läkevänderot"
  },
  "MX.39158": {
   "sci": "Impatiens glandulifera",
-  "fin": "j\u00e4ttipalsami",
-  "order": 98654
+  "fin": "jättipalsami",
+  "order": 98654,
+  "swe": "jättebalsamin"
  },
  "MX.38614": {
   "sci": "Andromeda polifolia",
   "fin": "suokukka",
-  "order": 98689
+  "order": 98689,
+  "swe": "rosling"
  },
  "MX.38598": {
   "sci": "Calluna vulgaris",
   "fin": "kanerva",
-  "order": 98699
+  "order": 98699,
+  "swe": "ljung"
  },
  "MX.38646": {
   "sci": "Empetrum nigrum",
   "fin": "variksenmarja",
-  "order": 98709
+  "order": 98709,
+  "swe": "kråkbär"
  },
  "MX.38634": {
   "sci": "Orthilia secunda",
   "fin": "nuokkutalvikki",
-  "order": 98752
+  "order": 98752,
+  "swe": "björkpyrola"
  },
  "MX.38626": {
   "sci": "Pyrola minor",
   "fin": "pikkutalvikki",
-  "order": 98760
+  "order": 98760,
+  "swe": "klotpyrola"
  },
  "MX.38605": {
   "sci": "Rhododendron tomentosum",
   "fin": "suopursu",
-  "order": 98855
+  "order": 98855,
+  "swe": "skvattram"
  },
  "MX.38622": {
   "sci": "Vaccinium myrtillus",
   "fin": "mustikka",
-  "order": 98903
+  "order": 98903,
+  "swe": "blåbär"
  },
  "MX.38618": {
   "sci": "Vaccinium oxycoccos",
   "fin": "isokarpalo",
-  "order": 98906
+  "order": 98906,
+  "swe": "tranbär"
  },
  "MX.38621": {
   "sci": "Vaccinium uliginosum",
   "fin": "juolukka",
-  "order": 98911
+  "order": 98911,
+  "swe": "odon"
  },
  "MX.38620": {
   "sci": "Vaccinium vitis-idaea",
   "fin": "puolukka",
-  "order": 98914
+  "order": 98914,
+  "swe": "lingon"
  },
  "MX.38676": {
   "sci": "Lysimachia europaea",
-  "fin": "mets\u00e4t\u00e4hti",
-  "order": 98987
+  "fin": "metsätähti",
+  "order": 98987,
+  "swe": "skogsstjärna"
  },
  "MX.38674": {
   "sci": "Lysimachia thyrsiflora",
   "fin": "terttualpi",
-  "order": 98995
+  "order": 98995,
+  "swe": "topplösa"
  },
  "MX.38670": {
   "sci": "Lysimachia vulgaris",
   "fin": "ranta-alpi",
-  "order": 98996
+  "order": 98996,
+  "swe": "strandlysing"
  },
  "MX.39002": {
   "sci": "Lathyrus pratensis",
-  "fin": "niittyn\u00e4tkelm\u00e4",
-  "order": 99332
+  "fin": "niittynätkelmä",
+  "order": 99332,
+  "swe": "gulvial"
  },
  "MX.38950": {
   "sci": "Lupinus polyphyllus",
   "fin": "komealupiini",
-  "order": 99369
+  "order": 99369,
+  "swe": "blomsterlupin"
  },
  "MX.39047": {
   "sci": "Trifolium aureum",
   "fin": "kelta-apila",
-  "order": 99512
+  "order": 99512,
+  "swe": "gullklöver"
  },
  "MX.39052": {
   "sci": "Trifolium pratense",
   "fin": "puna-apila",
-  "order": 99530
+  "order": 99530,
+  "swe": "rödklöver"
  },
  "MX.39038": {
   "sci": "Trifolium repens",
   "fin": "valkoapila",
-  "order": 99535
+  "order": 99535,
+  "swe": "vitklöver"
  },
  "MX.39046": {
   "sci": "Trifolium spadiceum",
   "fin": "musta-apila",
-  "order": 99542
+  "order": 99542,
+  "swe": "brunklöver"
  },
  "MX.38972": {
   "sci": "Vicia cracca",
   "fin": "hiirenvirna",
-  "order": 99578
+  "order": 99578,
+  "swe": "kråkvicker"
  },
  "MX.38008": {
   "sci": "Alnus glutinosa",
-  "fin": "tervalepp\u00e4",
-  "order": 99635
+  "fin": "tervaleppä",
+  "order": 99635,
+  "swe": "klibbal"
  },
  "MX.38010": {
   "sci": "Alnus incana",
-  "fin": "harmaalepp\u00e4",
-  "order": 99641
+  "fin": "harmaaleppä",
+  "order": 99641,
+  "swe": "gråal"
  },
  "MX.37993": {
   "sci": "Betula pendula",
   "fin": "rauduskoivu",
-  "order": 99671
+  "order": 99671,
+  "swe": "vårtbjörk"
  },
  "MX.37999": {
   "sci": "Betula pubescens",
   "fin": "hieskoivu",
-  "order": 99678
+  "order": 99678,
+  "swe": "glasbjörk"
  },
  "MX.38016": {
   "sci": "Corylus avellana",
-  "fin": "p\u00e4hkin\u00e4pensas",
-  "order": 99693
+  "fin": "pähkinäpensas",
+  "order": 99693,
+  "swe": "hassel"
  },
  "MX.37990": {
   "sci": "Quercus robur",
-  "fin": "mets\u00e4tammi",
-  "order": 99734
+  "fin": "metsätammi",
+  "order": 99734,
+  "swe": "skogsek"
  },
  "MX.39288": {
   "sci": "Galium palustre",
   "fin": "rantamatara",
-  "order": 99958
+  "order": 99958,
+  "swe": "vattenmåra"
  },
  "MX.39287": {
   "sci": "Galium uliginosum",
   "fin": "luhtamatara",
-  "order": 99971
+  "order": 99971,
+  "swe": "sumpmåra"
  },
  "MX.39292": {
   "sci": "Galium verum",
   "fin": "keltamatara",
-  "order": 99972
+  "order": 99972,
+  "swe": "gulmåra"
  },
  "MX.39138": {
   "sci": "Geranium sylvaticum",
-  "fin": "mets\u00e4kurjenpolvi",
-  "order": 100070
+  "fin": "metsäkurjenpolvi",
+  "order": 100070,
+  "swe": "midsommarblomster"
  },
  "MX.39465": {
   "sci": "Galeopsis bifida",
   "fin": "peltopillike",
-  "order": 100276
+  "order": 100276,
+  "swe": "toppdån"
  },
  "MX.39493": {
   "sci": "Glechoma hederacea",
   "fin": "maahumala",
-  "order": 100284
+  "order": 100284,
+  "swe": "jordreva"
  },
  "MX.39500": {
   "sci": "Prunella vulgaris",
   "fin": "niittyhumala",
-  "order": 100410
+  "order": 100410,
+  "swe": "brunört"
  },
  "MX.39331": {
   "sci": "Fraxinus excelsior",
   "fin": "lehtosaarni",
-  "order": 100555
+  "order": 100555,
+  "swe": "ask"
  },
  "MX.39633": {
   "sci": "Melampyrum pratense",
   "fin": "kangasmaitikka",
-  "order": 100676
+  "order": 100676,
+  "swe": "ängskovall"
  },
  "MX.39632": {
   "sci": "Melampyrum sylvaticum",
-  "fin": "mets\u00e4maitikka",
-  "order": 100679
+  "fin": "metsämaitikka",
+  "order": 100679,
+  "swe": "skogskovall"
  },
  "MX.39661": {
   "sci": "Pedicularis lapponica",
   "fin": "lapinkuusio",
-  "order": 100699
+  "order": 100699,
+  "swe": "lappspira"
  },
  "MX.39663": {
   "sci": "Rhinanthus minor",
   "fin": "pikkulaukku",
-  "order": 100719
+  "order": 100719,
+  "swe": "ängsskallra"
  },
  "MX.39589": {
   "sci": "Linaria vulgaris",
   "fin": "keltakannusruoho",
-  "order": 100810
+  "order": 100810,
+  "swe": "gulsporre"
  },
  "MX.39673": {
   "sci": "Plantago major",
   "fin": "piharatamo",
-  "order": 100842
+  "order": 100842,
+  "swe": "groblad"
  },
  "MX.39609": {
   "sci": "Veronica chamaedrys",
-  "fin": "nurmit\u00e4dyke",
-  "order": 100871
+  "fin": "nurmitädyke",
+  "order": 100871,
+  "swe": "teveronika"
  },
  "MX.39608": {
   "sci": "Veronica officinalis",
-  "fin": "rohtot\u00e4dyke",
-  "order": 100889
+  "fin": "rohtotädyke",
+  "order": 100889,
+  "swe": "ärenpris"
  },
  "MX.38590": {
   "sci": "Populus tremula",
-  "fin": "mets\u00e4haapa",
-  "order": 101529
+  "fin": "metsähaapa",
+  "order": 101529,
+  "swe": "asp"
  },
  "MX.38563": {
   "sci": "Salix caprea",
   "fin": "raita",
-  "order": 101582
+  "order": 101582,
+  "swe": "sälg"
  },
  "MX.38338": {
   "sci": "Viola arvensis",
   "fin": "pelto-orvokki",
-  "order": 101746
+  "order": 101746,
+  "swe": "åkerviol"
  },
  "MX.38331": {
   "sci": "Viola palustris",
   "fin": "suo-orvokki",
-  "order": 101782
+  "order": 101782,
+  "swe": "kärrviol"
  },
  "MX.38321": {
   "sci": "Viola riviniana",
-  "fin": "mets\u00e4orvokki",
-  "order": 101787
+  "fin": "metsäorvokki",
+  "order": 101787,
+  "swe": "skogsviol"
  },
  "MX.38336": {
   "sci": "Viola tricolor",
   "fin": "keto-orvokki",
-  "order": 101797
+  "order": 101797,
+  "swe": "styvmorsviol"
  },
  "MX.38686": {
   "sci": "Tilia cordata",
-  "fin": "mets\u00e4lehmus",
-  "order": 101962
+  "fin": "metsälehmus",
+  "order": 101962,
+  "swe": "skogslind"
  },
  "MX.38715": {
   "sci": "Daphne mezereum",
-  "fin": "n\u00e4si\u00e4",
-  "order": 101986
+  "fin": "näsiä",
+  "order": 101986,
+  "swe": "tibast"
  },
  "MX.39079": {
   "sci": "Lythrum salicaria",
   "fin": "rantakukka",
-  "order": 102044
+  "order": 102044,
+  "swe": "fackelblomster"
  },
  "MX.39088": {
   "sci": "Chamaenerion angustifolium",
   "fin": "maitohorsma",
-  "order": 102109
+  "order": 102109,
+  "swe": "mjölke"
  },
  "MX.39105": {
   "sci": "Epilobium palustre",
   "fin": "suohorsma",
-  "order": 102171
+  "order": 102171,
+  "swe": "kärrdunört"
  },
  "MX.39130": {
   "sci": "Oxalis acetosella",
-  "fin": "k\u00e4enkaali",
-  "order": 102270
+  "fin": "käenkaali",
+  "order": 102270,
+  "swe": "harsyra"
  },
  "MX.40258": {
   "sci": "Eriophorum angustifolium",
   "fin": "luhtavilla",
-  "order": 102693
+  "order": 102693,
+  "swe": "ängsull"
  },
  "MX.40261": {
   "sci": "Eriophorum vaginatum",
   "fin": "tupasvilla",
-  "order": 102702
+  "order": 102702,
+  "swe": "tuvull"
  },
  "MX.40196": {
   "sci": "Juncus filiformis",
-  "fin": "jouhivihvil\u00e4",
-  "order": 102764
+  "fin": "jouhivihvilä",
+  "order": 102764,
+  "swe": "trådtåg"
  },
  "MX.40505": {
   "sci": "Melica nutans",
-  "fin": "nuokkuhelmikk\u00e4",
-  "order": 103215
+  "fin": "nuokkuhelmikkä",
+  "order": 103215,
+  "swe": "bergslok"
  },
  "MX.40639": {
   "sci": "Phragmites australis",
-  "fin": "j\u00e4rviruoko",
-  "order": 103280
+  "fin": "järviruoko",
+  "order": 103280,
+  "swe": "vass"
  },
  "MX.40188": {
   "sci": "Typha latifolia",
-  "fin": "leve\u00e4osmank\u00e4\u00e4mi",
-  "order": 103447
+  "fin": "leveäosmankäämi",
+  "order": 103447,
+  "swe": "bredkaveldun"
  },
  "MX.37962": {
   "sci": "Chelidonium majus",
   "fin": "keltamo",
-  "order": 103563
+  "order": 103563,
+  "swe": "skelört"
  },
  "MX.37859": {
   "sci": "Actaea spicata",
   "fin": "mustakonnanmarja",
-  "order": 103677
+  "order": 103677,
+  "swe": "svart trolldruva"
  },
  "MX.37879": {
   "sci": "Anemone nemorosa",
   "fin": "valkovuokko",
-  "order": 103689
+  "order": 103689,
+  "swe": "vitsippa"
  },
  "MX.37863": {
   "sci": "Caltha palustris",
   "fin": "rentukka",
-  "order": 103724
+  "order": 103724,
+  "swe": "kabbleka"
  },
  "MX.37924": {
   "sci": "Ficaria verna",
   "fin": "mukulaleinikki",
-  "order": 103809
+  "order": 103809,
+  "swe": "svalört"
  },
  "MX.37890": {
   "sci": "Hepatica nobilis",
   "fin": "sinivuokko",
-  "order": 103825
+  "order": 103825,
+  "swe": "blåsippa"
  },
  "MX.37897": {
   "sci": "Ranunculus acris",
   "fin": "niittyleinikki",
-  "order": 103868
+  "order": 103868,
+  "swe": "smörblomma"
  },
  "MX.37922": {
   "sci": "Ranunculus glacialis",
-  "fin": "j\u00e4\u00e4leinikki",
-  "order": 104218
+  "fin": "jääleinikki",
+  "order": 104218,
+  "swe": "isranunkel"
  },
  "MX.37896": {
   "sci": "Ranunculus repens",
-  "fin": "r\u00f6nsyleinikki",
-  "order": 104239
+  "fin": "rönsyleinikki",
+  "order": 104239,
+  "swe": "revsmörblomma"
  },
  "MX.38844": {
   "sci": "Argentina anserina",
   "fin": "ketohanhikki",
-  "order": 104440
+  "order": 104440,
+  "swe": "gåsört"
  },
  "MX.38832": {
   "sci": "Dryas octopetala",
   "fin": "tunturilapinvuokko",
-  "order": 104541
+  "order": 104541,
+  "swe": "fjällsippa"
  },
  "MX.38795": {
   "sci": "Filipendula ulmaria",
   "fin": "mesiangervo",
-  "order": 104554
+  "order": 104554,
+  "swe": "älggräs"
  },
  "MX.38869": {
   "sci": "Fragaria vesca",
   "fin": "ahomansikka",
-  "order": 104567
+  "order": 104567,
+  "swe": "smultron"
  },
  "MX.38834": {
   "sci": "Geum rivale",
   "fin": "ojakellukka",
-  "order": 104587
+  "order": 104587,
+  "swe": "humleblomster"
  },
  "MX.38863": {
   "sci": "Potentilla erecta",
-  "fin": "r\u00e4tv\u00e4n\u00e4",
-  "order": 104758
+  "fin": "rätvänä",
+  "order": 104758,
+  "swe": "blodrot"
  },
  "MX.38939": {
   "sci": "Prunus padus",
   "fin": "lehtotuomi",
-  "order": 104865
+  "order": 104865,
+  "swe": "hägg"
  },
  "MX.38815": {
   "sci": "Rosa rugosa",
   "fin": "kurtturuusu",
-  "order": 105027
+  "order": 105027,
+  "swe": "vresros"
  },
  "MX.38799": {
   "sci": "Rubus arcticus",
   "fin": "mesimarja",
-  "order": 105090
+  "order": 105090,
+  "swe": "åkerbär"
  },
  "MX.38797": {
   "sci": "Rubus chamaemorus",
   "fin": "muurain",
-  "order": 105105
+  "order": 105105,
+  "swe": "hjortron"
  },
  "MX.38804": {
   "sci": "Rubus idaeus",
   "fin": "vadelma",
-  "order": 105113
+  "order": 105113,
+  "swe": "skogshallon"
  },
  "MX.38802": {
   "sci": "Rubus saxatilis",
   "fin": "lillukka",
-  "order": 105149
+  "order": 105149,
+  "swe": "stenbär"
  },
  "MX.38910": {
   "sci": "Sorbus aucuparia",
   "fin": "pihlaja",
-  "order": 105195
+  "order": 105195,
+  "swe": "rönn"
  },
  "MX.37984": {
   "sci": "Urtica dioica",
   "fin": "isonokkonen",
-  "order": 105319
+  "order": 105319,
+  "swe": "brännässla"
  },
  "MX.39122": {
   "sci": "Acer platanoides",
-  "fin": "mets\u00e4vaahtera",
-  "order": 105485
+  "fin": "metsävaahtera",
+  "order": 105485,
+  "swe": "skogslönn"
  },
  "MX.38750": {
   "sci": "Sedum acre",
   "fin": "keltamaksaruoho",
-  "order": 105675
+  "order": 105675,
+  "swe": "gul fetknopp"
  }
 }
