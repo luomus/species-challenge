@@ -51,11 +51,13 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     {
         "MX.43922": {
         "sci": "Pohlia nutans",
-        "fi": "nuokkuvarstasammal"
+        "fi": "nuokkuvarstasammal",
+        "swe": "vanlig nickmossa"
         },
         "MX.43502": {
         "sci": "Climacium dendroides",
-        "fi": "palmusammal"
+        "fi": "palmusammal",
+        "swe": "palmmossa"
         }
     }
     """
@@ -64,6 +66,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
 
 #    print("ALL TAXA NAMES: ", all_taxa_names)
+    # Todo: refactoring
 
     # Loop taxa_names, i.e. the basic taxa
     for taxon_id, taxon_data in taxa_names.items():
@@ -108,8 +111,8 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             if "swe" in all_taxa_names[observed_taxon_id]:
                 swe = all_taxa_names[observed_taxon_id]["swe"]
 
-            if swe_html:
-                swe_html = f", { swe_html }"
+            if swe:
+                swe = f", { swe }"
     
         additional_taxa_html += f"""
             <li>
@@ -393,3 +396,4 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Database error or trying to edit someone else's participation
 #        print("CASE C2 FAIL")
         raise Exception("Error saving participation to database.")
+
