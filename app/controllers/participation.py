@@ -107,7 +107,6 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         # Check if taxon exists in all_taxa_names. Might not if 
         # A) It has been added to Laji.fi after the taxon list on this app has been set up (if using API for autocomplete)
         # B) basic and all taxon files are not in sync (if using files for autocomplete)
-        id_html = observed_taxon_id.replace(".", "_").replace(" ", "")
         fin = "" # default
         swe = "" # default
         sci = observed_taxon_id # default
