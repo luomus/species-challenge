@@ -9,6 +9,21 @@ import json
 import os
 
 
+def make_species_html(id, fin, swe, sci, min_date, max_date, date):
+    id_html = id.replace(".", "_").replace(" ", "")
+    if swe:
+        swe = f", { swe }"  
+
+    html = f"""
+        <li>
+            <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
+            <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ id }' value='{ date }' min='{ min_date }' max='{ max_date }'>
+            <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
+            <a href='https://laji.fi/taxon/{ id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
+        </li>\n"""
+    return html
+
+
 def make_taxa_html(challenge, taxa_dates_json = None):
     """
     Generates a list of species names and date input fields for a given higher taxon.
@@ -30,9 +45,6 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     if max_date > datetime.datetime.now().strftime("%Y-%m-%d"):
         max_date = datetime.datetime.now().strftime("%Y-%m-%d")
 
-    basic_taxa_html = ""
-    additional_taxa_html = ""
-
     # Taxa names and dates form the participation (from database)
     # Default empty dictionary for new participations
     taxa_dates = {}
@@ -44,10 +56,10 @@ def make_taxa_html(challenge, taxa_dates_json = None):
 
     """
 
-    # Basic taxa names of this challenge
-    taxa_names = common_helpers.load_taxon_file(taxon_file_id)
+    # Load basic taxa names of this challenge
+    basic_taxa_names = common_helpers.load_taxon_file(taxon_file_id)
     """
-    taxa_names sample:
+    basic_taxa_names sample:
     {
         "MX.43922": {
         "sci": "Pohlia nutans",
@@ -62,50 +74,46 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     }
     """
 
-    # All taxa names of the higher taxon (e.g. plants)
+    # Load all taxa names of the higher taxon (e.g. plants)
     all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
 
-#    print("ALL TAXA NAMES: ", all_taxa_names)
-    # Todo: refactoring
+    # Setup two html strings
+    basic_taxa_html = ""
+    additional_taxa_html = ""
 
-    # Loop taxa_names, i.e. the basic taxa
-    for taxon_id, taxon_data in taxa_names.items():
+    # 1) Loop all basic_taxa_names
+    for taxon_id, taxon_data in basic_taxa_names.items():
 
         # Subheadings defined in taxon file 
         if "heading" in taxon_data:
             basic_taxa_html += f"<li class='list_heading_4'><h4>{ taxon_data['heading'] }</h4></li>\n"
 
         # Add to basic_taxa_html, fill in with date from taxa_dates if found
-        id_html = taxon_id.replace(".", "_").replace(" ", "")
-        fin_html = taxon_data.get("fin", "")
-        swe_html = taxon_data.get("swe", "")
-        if swe_html:
-            swe_html = f", { swe_html }"
-        sci_html = taxon_data.get("sci", "")
-        basic_taxa_html += f"""
-            <li>
-                <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin_html.capitalize() }{ swe_html } (<em>{ sci_html }</em>)</span>
-                <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
-                <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
-                <a href='https://laji.fi/taxon/{ taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
-            </li>\n"""
+        fin = taxon_data.get("fin", "")
+        swe = taxon_data.get("swe", "")
+        sci = taxon_data.get("sci", "")
+
+        basic_taxa_html += make_species_html(taxon_id, fin, swe, sci, min_date, max_date, taxa_dates.get(taxon_id, ''))
 
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
         if taxon_id in taxa_dates:
             del taxa_dates[taxon_id]
 
 
-    # Loop remaining taxa_dates, i.e. the additional taxa
+    # 2) Loop remaining taxa_dates, i.e. the additional taxa user has observed
     for observed_taxon_id, observed_taxon_date in taxa_dates.items():
 
         # Add to additional_taxa_html
-        # Check if taxon exists in all_taxa_names. Might not if it has been added to Laji.fi after the taxon list on this app has been set up.
+        # Check if taxon exists in all_taxa_names. Might not if 
+        # A) It has been added to Laji.fi after the taxon list on this app has been set up (if using API for autocomplete)
+        # B) basic and all taxon files are not in sync (if using files for autocomplete)
         id_html = observed_taxon_id.replace(".", "_").replace(" ", "")
         fin = "" # default
         swe = "" # default
         sci = observed_taxon_id # default
         if observed_taxon_id in all_taxa_names:
             sci = all_taxa_names[observed_taxon_id]["sci"]
+
             # Finnish name might not exist
             if "fin" in all_taxa_names[observed_taxon_id]:
                 fin = all_taxa_names[observed_taxon_id]["fin"]
@@ -113,22 +121,8 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             # Swedish name might not exist
             if "swe" in all_taxa_names[observed_taxon_id]:
                 swe = all_taxa_names[observed_taxon_id]["swe"]
-
-            if swe:
-                swe = f", { swe }"
     
-        '''
-        <span class='taxon_name'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
-        <input type='date' id='{ id_html }_id_additional' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }' min='{ min_date }' max='{ max_date }'>
-        <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
-        '''
-        additional_taxa_html += f"""
-            <li>
-                <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
-                <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }' min='{ min_date }' max='{ max_date }'>
-                <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
-                <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
-            </li>\n"""
+        additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date)
 
     # Combine into a list
     html = f"""
