@@ -53,6 +53,8 @@ def make_participant_html(participations):
         name_shown = ""
         if participation["taxa_count"] >= target_count or g.is_admin:
             name_shown = participation['name']
+        elif g.user_data["id"] == participation["meta_created_by"]:
+            name_shown = f"{ participation['name'] } (sinä)"
 
         table += "<tr>"
         table += f"<td>{ name_shown }</td>"
