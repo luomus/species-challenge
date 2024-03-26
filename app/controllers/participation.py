@@ -84,8 +84,9 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         sci_html = taxon_data.get("sci", "")
         basic_taxa_html += f"""
             <li>
-                <span class='taxon_name' id='{ id_html }_id'>{ fin_html.capitalize() }{ swe_html } (<em>{ sci_html }</em>)</span>
-                <input type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
+                <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin_html.capitalize() }{ swe_html } (<em>{ sci_html }</em>)</span>
+                <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
+                <span class='clear_date' id='clear-{ id_html }' title='Poista havaintopäivä'>❌</span>
                 <a href='https://laji.fi/taxon/{ taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
             </li>\n"""
 

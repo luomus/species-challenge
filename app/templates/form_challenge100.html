@@ -166,8 +166,9 @@
 
                         // Todo: comma between fin and swe only when both exist
                         newLi.innerHTML = `
-                                    <span class='taxon_name'>${fin}, ${swe} (<em>${sci}</em>)</span>
-                                    <input type="date" name='taxa:${id}' value="" min="${min}" max="${max}">
+                                    <span class='taxon_name' title='Merkitse havaintopäivä tälle lajille'>${fin}, ${swe} (<em>${sci}</em>)</span>
+                                    <input title='Valitse havaintopäivä tälle lajille' type="date" name='taxa:${id}' value="" min="${min}" max="${max}">
+                                    <span class='clear_date' id='clear-${id}' title='Poista havaintopäivä'>❌</span>
                                     <a href='https://laji.fi/taxon/${id}' target='_blank' class='taxon_info' title='Lisätietoa: ${fin}'>i</a>
                                 `
 //                        taxaList.appendChild(newLi); // Append to end of list

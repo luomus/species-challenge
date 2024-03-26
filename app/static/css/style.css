@@ -352,7 +352,7 @@ textarea#description {
     background-color: #d1ff98;
 }
 
-#taxa li span {
+#taxa .taxon_name {
     min-width: 18em;
     display: inline-block;
 }
@@ -373,6 +373,11 @@ textarea#description {
     box-shadow: 1px 1px 3px #777;
     margin-left: 0.5em;
     font-weight: bold;
+}
+
+.clear_date {
+    margin: 0 0.1em 0 0.5em;
+    cursor: pointer;
 }
 
 #challenge #name,
