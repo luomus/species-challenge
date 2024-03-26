@@ -66,6 +66,7 @@
     document.addEventListener('DOMContentLoaded', (event) => {
         document.querySelectorAll('#taxa li').forEach(addClickListenerToLi);
         document.querySelectorAll('#taxa li').forEach(addInputEventListenerToDateInput);
+        document.querySelectorAll('#taxa li').forEach(addClearDateListenerToLi);
     });
 
     function addClickListenerToLi(li) {
@@ -122,6 +123,24 @@
         }
     }
 
+    // Clear date button logic, needed for Safari
+    function addClearDateListenerToLi(liElement) {
+        // Find the .clear_date element within the passed liElement
+        const clearButton = liElement.querySelector('.clear_date');
+        if (clearButton) {
+            clearButton.addEventListener('click', function() {
+                // Using the data-clear-for attribute to find the input to clear
+                const inputId = this.getAttribute('data-clear-for');
+                const dateInput = document.getElementById(inputId);
+                if (dateInput) {
+                    dateInput.value = ''; // Clear the input value
+                    // Remove the 'date-filled' class from the parent <li>
+                    liElement.classList.remove('date-filled');
+                }
+            });
+        }
+    }
+
     // Autocomplete
     // Preload species data
     let speciesData = {};
@@ -167,8 +186,8 @@
                         // Todo: comma between fin and swe only when both exist
                         newLi.innerHTML = `
                                     <span class='taxon_name' title='Merkitse havaintopäivä tälle lajille'>${fin}, ${swe} (<em>${sci}</em>)</span>
-                                    <input title='Valitse havaintopäivä tälle lajille' type="date" name='taxa:${id}' value="" min="${min}" max="${max}">
-                                    <span class='clear_date' id='clear-${id}' title='Poista havaintopäivä'>❌</span>
+                                    <input title='Valitse havaintopäivä tälle lajille' type="date" id="${id}" name='taxa:${id}' value="" min="${min}" max="${max}">
+                                    <span class='clear_date' data-clear-for="${id}" title='Poista havaintopäivä'>❌</span>
                                     <a href='https://laji.fi/taxon/${id}' target='_blank' class='taxon_info' title='Lisätietoa: ${fin}'>i</a>
                                 `
 //                        taxaList.appendChild(newLi); // Append to end of list
@@ -178,6 +197,7 @@
                         // Add event listeners to the newly added <li>
                         addClickListenerToLi(newLi);
                         addInputEventListenerToDateInput(newLi);
+                        addClearDateListenerToLi(newLi);
 
                         input.value = ""; // Clear input field
                         resultsContainer.innerHTML = ''; // Clear results after selection

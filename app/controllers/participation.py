@@ -86,7 +86,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             <li>
                 <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin_html.capitalize() }{ swe_html } (<em>{ sci_html }</em>)</span>
                 <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ taxon_id }' value='{ taxa_dates.get(taxon_id, '') }' min='{ min_date }' max='{ max_date }'>
-                <span class='clear_date' id='clear-{ id_html }' title='Poista havaintopäivä'>❌</span>
+                <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
                 <a href='https://laji.fi/taxon/{ taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
             </li>\n"""
 
@@ -94,11 +94,13 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         if taxon_id in taxa_dates:
             del taxa_dates[taxon_id]
 
+
     # Loop remaining taxa_dates, i.e. the additional taxa
     for observed_taxon_id, observed_taxon_date in taxa_dates.items():
 
         # Add to additional_taxa_html
         # Check if taxon exists in all_taxa_names. Might not if it has been added to Laji.fi after the taxon list on this app has been set up.
+        id_html = observed_taxon_id.replace(".", "_").replace(" ", "")
         fin = "" # default
         swe = "" # default
         sci = observed_taxon_id # default
@@ -115,10 +117,16 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             if swe:
                 swe = f", { swe }"
     
+        '''
+        <span class='taxon_name'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
+        <input type='date' id='{ id_html }_id_additional' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }' min='{ min_date }' max='{ max_date }'>
+        <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
+        '''
         additional_taxa_html += f"""
             <li>
-                <span class='taxon_name'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
-                <input type='date' id='{ id_html }_id_additional' name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }' min='{ min_date }' max='{ max_date }'>
+                <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
+                <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ observed_taxon_id }' value='{ observed_taxon_date }' min='{ min_date }' max='{ max_date }'>
+                <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
                 <a href='https://laji.fi/taxon/{ observed_taxon_id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
             </li>\n"""
 

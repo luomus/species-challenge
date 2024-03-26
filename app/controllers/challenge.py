@@ -87,6 +87,7 @@ def make_participant_html(participations):
     return html
 
 
+
 def make_participations_html(participations, challenge_id, challenge_status):
     html = ""
     for participation in participations:
