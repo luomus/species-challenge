@@ -371,12 +371,12 @@ textarea#description {
     text-decoration: none;
     border-radius: 10px;
     box-shadow: 1px 1px 3px #777;
-    margin-left: 0.5em;
+    margin-left: 0.8em;
     font-weight: bold;
 }
 
 .clear_date {
-    margin: 0 0.1em 0 0.5em;
+    margin: 0 0.1em 0 0.8em;
     cursor: pointer;
 }
 
