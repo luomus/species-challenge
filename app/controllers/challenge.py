@@ -51,10 +51,14 @@ def make_participant_html(participations):
     # Table of participants: name, place, taxon_count
     for participation in participations:
         name_shown = ""
+
+        # Show name if user has reached target count or is admin
         if participation["taxa_count"] >= target_count or g.is_admin:
             name_shown = participation['name']
-        elif g.user_data["id"] == participation["meta_created_by"]:
-            name_shown = f"{ participation['name'] } (sinä)"
+        # Show name if user is logged in and is the creator of the participation
+        elif g.user_data:
+            if g.user_data["id"] == participation["meta_created_by"]:
+                name_shown = f"{ participation['name'] } (sinä)"
 
         table += "<tr>"
         table += f"<td>{ name_shown }</td>"
