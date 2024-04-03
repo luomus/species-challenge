@@ -362,6 +362,7 @@ textarea#description {
     top: 3.3em;
     padding: 0.8em 0 0.8em 0;
     background-color: #F0F0F4;
+    z-index: 50;
 }
 
 .taxon_info {
@@ -386,6 +387,11 @@ textarea#description {
 }
 
 /* Buttons */
+
+button, a.button {
+    z-index: 100;
+}
+
 a.button,
 button {
     border: 1px solid #1F74AD;
