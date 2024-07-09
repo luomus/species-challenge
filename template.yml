@@ -9,12 +9,24 @@ parameters:
   - name: APP_PORT
     required: true
     value: "8081"
+  - name: HEALTH
+    required: true
+    value: /health
+  - name: LIVENESS_PERIOD
+    required: true
+    value: "30"
+  - name: FAILURE_THRESHOLD
+    required: true
+    value: "10"
+  - name: READINESS_PERIOD
+    required: true
+    value: "5"
   - name: DB
     required: true
     value: mariadb
   - name: DB_IMAGE
     required: true
-    value: quay.io/centos7/mariadb-105-centos7
+    value: quay.io/fedora/mariadb-105
   - name: DB_PORT
     required: true
     value: "3306"
@@ -60,10 +72,6 @@ parameters:
     required: true
   - name: RCLONE_SECRET_ACCESS_KEY
     required: true
-  - name: GITHUB_SECRET
-    required: true
-    generate: expression
-    from: "[a-zA-Z0-9]{64}"
 metadata:
   name: ${APP}
 objects:
@@ -72,49 +80,35 @@ objects:
   metadata:
    name: ${DB}-${BRANCH}
   spec:
-    storageClassName: "standard-rwo"
+    storageClassName: "standard-csi"
     accessModes:
     - ReadWriteOnce
-    persistentVolumeReclaimPolicy: Retain
     resources:
       requests:
         storage: "20Gi"
-- kind: ImageStream
+- kind: ConfigMap
   apiVersion: v1
   metadata:
     name: ${APP}-${BRANCH}
-    labels:
-      app: ${APP}
-  spec:
-    lookupPolicy:
-      local: true
-- kind: BuildConfig
+  data:
+    branch: ${BRANCH}
+    db_port: ${DB_PORT}
+    app_port: ${APP_PORT}
+    mysql_database: ${MYSQL_DATABASE}
+    mysql_user: ${MYSQL_USER}
+- kind: Secret
   apiVersion: v1
   metadata:
     name: ${APP}-${BRANCH}
-    labels:
-      app: ${APP}
-  spec:
-    output:
-      to:
-        kind: ImageStreamTag
-        name: ${APP}-${BRANCH}:latest
-    source:
-      type: Git
-      git:
-        uri: https://github.com/luomus/${APP}.git
-        ref: ${BRANCH}
-    strategy:
-      dockerStrategy:
-        dockerfilePath: Dockerfile.rahti
-      type: Docker
-    triggers:
-    - type: ConfigChange
-    - type: GitHub
-      github:
-        secret: ${GITHUB_SECRET}
-- kind: DeploymentConfig
-  apiVersion: v1
+  type: Opaque
+  data:
+    finbif_api_token: ${FINBIF_API_TOKEN}
+    mysql_password: ${MYSQL_PASSWORD}
+    flask_secret_key: ${FLASK_SECRET_KEY}
+    rclone_access_key_id: ${RCLONE_ACCESS_KEY_ID}
+    rclone_secret_access_key: ${RCLONE_SECRET_ACCESS_KEY} 
+- kind: Deployment
+  apiVersion: apps/v1
   metadata:
     name: ${APP}-${BRANCH}
     labels:
@@ -122,60 +116,77 @@ objects:
   spec:
     replicas: 1
     selector:
-      app: ${APP}
-      deploymentconfig: ${APP}-${BRANCH}
+      matchLabels:
+        app: ${APP}
+    strategy:
+      type: RollingUpdate
     template:
       metadata:
         labels:
           app: ${APP}
-          deploymentconfig: ${APP}-${BRANCH}
+          branch: ${BRANCH}
+          port: ${APP_PORT}
       spec:
         containers:
-        - image: ${APP}-${BRANCH}:latest
+        - image: ghcr.io/luomus/${APP}:${BRANCH}
+          imagePullPolicy: Always
           name: ${APP}-${BRANCH}
           env:
           - name: MYSQL_DATABASE
-            value: ${MYSQL_DATABASE}
+            valueFrom:
+              configMapKeyRef:
+                name: ${APP}-${BRANCH}
+                key: mysql_database
           - name: MYSQL_USER
-            value: ${MYSQL_USER}
+            valueFrom:
+              configMapKeyRef:
+                name: ${APP}-${BRANCH}
+                key: mysql_user
           - name: MYSQL_PASSWORD
-            value: ${MYSQL_PASSWORD}
+            valueFrom:
+              secretKeyRef:
+                name: ${APP}-${BRANCH}
+                key: mysql_password
           - name: MYSQL_HOST
             value: ${DB}-${BRANCH}
           - name: ITSYSTEM
             value: ${ITSYSTEM}
           - name: FINBIF_API_TOKEN
-            value: ${FINBIF_API_TOKEN}
+            valueFrom:
+              secretKeyRef:
+                name: ${APP}-${BRANCH}
+                key: finbif_api_token
           - name: FLASK_SECRET_KEY
-            value: ${FLASK_SECRET_KEY}
+            valueFrom:
+              secretKeyRef:
+                name: ${APP}-${BRANCH}
+                key: flask_secret_key
           - name: BRANCH
-            value: ${BRANCH}
+            valueFrom:
+              configMapKeyRef:
+                name: ${APP}-${BRANCH}
+                key: branch
           ports:
           - containerPort: ${{APP_PORT}}
+          startupProbe:
+            httpGet:
+              path: ${HEALTH}
+              port: ${{APP_PORT}}
+            failureThreshold: ${{FAILURE_THRESHOLD}}
+            periodSeconds: ${{LIVENESS_PERIOD}}
           livenessProbe:
             httpGet:
-              path: /health
+              path: ${HEALTH}
               port: ${{APP_PORT}}
-            failureThreshold: 5
-            periodSeconds: 30
+            failureThreshold: ${{FAILURE_THRESHOLD}}
+            periodSeconds: ${{LIVENESS_PERIOD}}
           readinessProbe:
             httpGet:
-              path: /
+              path: ${HEALTH}
               port: ${{APP_PORT}}
-            initialDelaySeconds: 30
-            periodSeconds: 5
-    triggers:
-    - type: ConfigChange
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-        - ${APP}-${BRANCH}
-        from:
-          kind: ImageStreamTag
-          name: ${APP}-${BRANCH}:latest   
-- kind: DeploymentConfig
-  apiVersion: v1
+            periodSeconds: ${{READINESS_PERIOD}}
+- kind: Deployment
+  apiVersion: apps/v1
   metadata:
     name: ${DB}-${BRANCH}
     labels:
@@ -183,47 +194,60 @@ objects:
   spec:
     replicas: 1
     selector:
-      app: ${APP}
-      deploymentconfig: ${DB}-${BRANCH}
+      matchLabels:
+        app: ${APP}
     strategy:
       type: Recreate
     template:
       metadata:
         labels:
           app: ${APP}
-          deploymentconfig: ${DB}-${BRANCH}
+          branch: ${BRANCH}
+          port: ${DB_PORT}
       spec:
         containers:
         - image: ${DB_IMAGE}
+          imagePullPolicy: Always
           name: ${DB}-${BRANCH}
           volumeMounts:
           - mountPath: /var/lib/mysql/data
             name: ${DB}-${BRANCH}
           ports:
             - containerPort: ${{DB_PORT}}
+          startupProbe:
+            exec:
+              command: ${{DB_HEALTHCHECK}}
+            failureThreshold: ${{FAILURE_THRESHOLD}}
+            periodSeconds: ${{LIVENESS_PERIOD}}
           livenessProbe:
             exec:
               command: ${{DB_HEALTHCHECK}}
-            failureThreshold: 5
-            periodSeconds: 30
+            failureThreshold: ${{FAILURE_THRESHOLD}}
+            periodSeconds: ${{LIVENESS_PERIOD}}
           readinessProbe:
-            httpGet:
+            exec:
               command: ${{DB_HEALTHCHECK}}
-            initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: ${{READINESS_PERIOD}}
           env:
           - name: MYSQL_DATABASE
-            value: ${MYSQL_DATABASE}
+            valueFrom:
+              configMapKeyRef:
+                name: ${APP}-${BRANCH}
+                key: mysql_database
           - name: MYSQL_USER
-            value: ${MYSQL_USER}
+            valueFrom:
+              configMapKeyRef:
+                name: ${APP}-${BRANCH}
+                key: mysql_user
           - name: MYSQL_PASSWORD
-            value: ${MYSQL_PASSWORD}
+            valueFrom:
+              secretKeyRef:
+                name: ${APP}-${BRANCH}
+                key: mysql_password
         volumes:
         - name: ${DB}-${BRANCH}
           persistentVolumeClaim:
             claimName: ${DB}-${BRANCH}
-    triggers:
-    - type: ConfigChange
 - kind: Service
   apiVersion: v1
   metadata:
@@ -237,7 +261,8 @@ objects:
       targetPort: ${{APP_PORT}}
     selector:
       app: ${APP}
-      deploymentconfig: ${APP}-${BRANCH}
+      branch: ${BRANCH}
+      port: ${APP_PORT}
 - kind: Service
   apiVersion: v1
   metadata:
@@ -251,7 +276,8 @@ objects:
       targetPort: ${{DB_PORT}}
     selector:
       app: ${APP}
-      deploymentconfig: ${DB}-${BRANCH}
+      branch: ${BRANCH}
+      port: ${DB_PORT}
 - kind: Route
   apiVersion: v1
   metadata:
@@ -263,13 +289,12 @@ objects:
     port:
       targetPort: ${{APP_PORT}}
     tls:
-      termination: edge
+      insecureEdgeTerminationPolicy: Redirect
     to:
       kind: Service
       name: ${APP}-${BRANCH}
-    wildcardPolicy: None
 - kind: CronJob
-  apiVersion: batch/v1beta1
+  apiVersion: batch/v1
   metadata:
     name: ${APP}-${BRANCH}
   spec:
@@ -286,21 +311,40 @@ objects:
           spec:
             containers:
             - name: ${APP}-${BRANCH}
-              image: ${APP}-${BRANCH}:latest
+              image: ghcr.io/luomus/${APP}:${BRANCH}
+              imagePullPolicy: Always
               command: ${{JOB_CMD}}
               env:
               - name: RCLONE_CONFIG_DEFAULT_ACCESS_KEY_ID
-                value: ${RCLONE_ACCESS_KEY_ID}
+                valueFrom:
+                  secretKeyRef:
+                    name: ${APP}-${BRANCH}
+                    key: rclone_access_key_id
               - name: RCLONE_CONFIG_DEFAULT_SECRET_ACCESS_KEY
-                value: ${RCLONE_SECRET_ACCESS_KEY}
+                valueFrom:
+                  secretKeyRef:
+                    name: ${APP}-${BRANCH}
+                    key: rclone_secret_access_key
               - name: MYSQL_DATABASE
-                value: ${MYSQL_DATABASE}
+                valueFrom:
+                  configMapKeyRef:
+                    name: ${APP}-${BRANCH}
+                    key: mysql_database
               - name: MYSQL_USER
-                value: ${MYSQL_USER}
+                valueFrom:
+                  configMapKeyRef:
+                    name: ${APP}-${BRANCH}
+                    key: mysql_user
               - name: MYSQL_PASSWORD
-                value: ${MYSQL_PASSWORD}
+                valueFrom:
+                  secretKeyRef:
+                    name: ${APP}-${BRANCH}
+                    key: mysql_password
               - name: MYSQL_HOST
                 value: ${DB}-${BRANCH}
               - name: BRANCH
-                value: ${BRANCH}
+                valueFrom:
+                  configMapKeyRef:
+                    name: ${APP}-${BRANCH}
+                    key: branch
             restartPolicy: Never
