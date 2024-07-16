@@ -8,12 +8,17 @@ Backend application built with Flask. Database on MariaDB. Depends on FinBIF Laj
 
 ## Development setup
 
-- Clone this repository
+- Clone this repository `git clone ...`
+- Switch to dev branch `git checkout dev`
 - Optionally change development database password to `docker-entrypoint-initdb.d/init_db.sql`
 - Set up environment variables to `.env.` and `playwright.example` Use example files as templates.
 - Build Docker image `docker build -t species-challenge:latest .`
-- Startup with `docker-compose up build playwright; docker-compose down;`
-- Set up database using `sql/species_challenge_dev.sql`, e.g. via phpMyAdmin
+- Startup with one of these commands:
+    - With Playwright: `docker-compose up build playwright; docker-compose down;`
+    - Without Playwright: `docker-compose up; docker-compose down;`
+- Set up database:
+    - phpMyAdmin is available at http://localhost:8080
+    - Import file from ´./sql/species_challenge_dev.sql´
 
 Site will be visible http://localhost:8081
 

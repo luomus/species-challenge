@@ -20,7 +20,7 @@
 --
 
 
-USE `species_challenge_rahti`;
+USE `species_challenge_dev`;
 
 --
 -- Table structure for table `challenges`
