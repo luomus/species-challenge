@@ -26,7 +26,7 @@ def get_my_participations(challenge_id):
         params = (challenge_id, g.user_data["id"])
         participations = common_db.select(conn, query, params)
 
-    return participations
+    return participations 
 
 
 def make_participant_html(participations):
@@ -76,9 +76,16 @@ def make_participant_html(participations):
     
     table += "</table>"
 
-    number_of_participants = len(participations)
-    target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100)
-    taxa_count_average = round(taxa_count_total / number_of_participants)
+    number_of_participants = common_helpers.get_participant_count(participations, target_count)
+
+    # Avoid division by zero
+    if number_of_participants > 0:
+        taxa_count_average = round(taxa_count_total / number_of_participants, 1)
+        target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
+    else:
+        taxa_count_average = 0
+        target_taxa_count_reached_percent = 0
+
 
     html += f"<p>Haasteessa on { number_of_participants } osallistujaa, joista { target_taxa_count_reached } ({ str(target_taxa_count_reached_percent) } %) on saavuttanut tavoitteen ({ target_count } lajia). Keskimäärin osallistujat ovat havainneet { str(taxa_count_average) } lajia.</p>"
 

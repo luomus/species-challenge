@@ -2,6 +2,7 @@
 
 from flask import g
 from helpers import common_db
+from helpers import common_helpers
 import datetime
 
 def get_challenges(status):
@@ -27,20 +28,25 @@ def make_participations_stats_html(participations):
      [{'participation_id': 6, 'challenge_id': 4, 'name': "André D'Artágnan", 'place': 'Ääkkölä ääkkölärules', 'taxa_count': 13, 'taxa_json': '{"MX.37691": "2024-01-11", "MX.37721": "2024-01-02", "MX.37717": "2024-01-27", "MX.37719": "2024-01-28", "MX.37763": "2024-01-10", "MX.37771": "2024-01-18", "MX.37752": "2024-01-30", "MX.40138": "2024-01-30", "MX.40150": "2024-01-30", "MX.39201": "2024-01-30", "MX.4973227": "2024-01-17", "MX.39827": "2024-01-25", "MX.39917": "2024-01-30"}', 'meta_created_by': 'MA.3', 'meta_created_at': datetime.datetime(2024, 1, 28, 15, 29, 1), 'meta_edited_by': 'MA.3', 'meta_edited_at': datetime.datetime(2024, 1, 31, 8, 5, 20), 'trashed': 0}, {'participation_id': 8, 'challenge_id': 4, 'name': 'Foo', 'place': 'Bar', 'taxa_count': 0, 'taxa_json': '{}', 'meta_created_by': 'MA.3', 'meta_created_at': datetime.datetime(2024, 1, 30, 15, 48, 29), 'meta_edited_by': 'MA.3', 'meta_edited_at': datetime.datetime(2024, 1, 30, 15, 48, 29), 'trashed': 0}]
     '''
 
-    number_of_participants = len(participations)
-
     # Count number of participants that have N or more taxa_count, and count average taxa_count
     target_count = 100
     target_taxa_count_reached = 0
     taxa_count_total = 0
+
+    number_of_participants = common_helpers.get_participant_count(participations, target_count)
 
     for participation in participations:
         if participation.get("taxa_count", 0) >= target_count:
             target_taxa_count_reached += 1
         taxa_count_total += participation["taxa_count"]
 
-    taxa_count_average = round(taxa_count_total / number_of_participants, 1)
-    target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
+    # Avoid division by zero
+    if number_of_participants > 0:
+        taxa_count_average = round(taxa_count_total / number_of_participants, 1)
+        target_taxa_count_reached_percent = round(target_taxa_count_reached / number_of_participants * 100, 1)
+    else:
+        taxa_count_average = 0
+        target_taxa_count_reached_percent = 0
 
     html = "<div class='stats'>"
     html += f"{ target_count } lajia saavuttaneiden määrä: <strong>{ target_taxa_count_reached } / { number_of_participants } osallistujaa</strong> ({ str(target_taxa_count_reached_percent).replace('.', ',') } %)<br>"
