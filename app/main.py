@@ -267,8 +267,6 @@ def login_page():
 
 @app.route("/logout")
 def logout():
-    session.clear()
-
     if "localhost" == g.itsystem_name:
         api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
     elif "development" == g.itsystem_name:
@@ -281,6 +279,7 @@ def logout():
 
     # Checking if the request was successful
     if response.status_code == 200:
+        session.clear()
         flash("Olet kirjautunut ulos.", "info")
         return redirect("/")
     else:
