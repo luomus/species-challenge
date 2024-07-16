@@ -179,16 +179,18 @@ def login_page():
     if "localhost" == g.itsystem_name:
         login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
         api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+        target = "KE.1521"
     elif "development" == g.itsystem_name:
         login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1522&redirectMethod=GET&locale=fi&next="
         api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+        target = "KE.1522"
     elif "production" == g.itsystem_name:
         login_url = "https://login.laji.fi/login?target=KE.1741&redirectMethod=GET&locale=fi&next="
         api_url = "https://login.laji.fi/laji-auth/token/"
+        target = "KE.1741"
 
     # Case A: User is logging in
     if person_token_untrusted:
-#        print("LOGGING IN...")
 
         session.clear() # Clear any previous session data
         person_token = common_helpers.clean_token(person_token_untrusted)
@@ -228,11 +230,17 @@ def login_page():
 
         # Case A1: Login failed
         if "code" in user_data_from_api:
-#            print("LOGIN ERROR: ", user_data_from_api)
+            print("Login error: ", user_data_from_api)
+            flash("Kirjautuminen epäonnistui. Yritä uudelleen.")
+            return redirect("/login")
+        
+        # Case A2: Target is incorrect
+        if target != user_data_from_api["target"]:
+            print("Incorrect target error: ", target, user_data_from_api)
             flash("Kirjautuminen epäonnistui. Yritä uudelleen.")
             return redirect("/login")
 
-        # Case A2: Login successful        
+        # Case A3: Login successful        
         session["token"] = person_token
         session["user_data"] = dict()
         session["user_data"]["id"] = user_data_from_api["user"]["qname"]
