@@ -479,6 +479,15 @@ padding: 10px;
 }
 
 
+.anchor_link {
+    margin-top: 2em;
+    margin-left: 0;
+    padding-left: 0;
+}
+.anchor_link li {
+    list-style-type: none;
+}
+
 @media screen and (min-width: 769px) {
 
     #login_navi {
