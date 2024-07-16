@@ -93,19 +93,18 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
         - Logout
     - Giving malicious login token
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
-- Later:
-    - If challenge is draft, stats page shows confusing information: http://localhost:8081/tilasto/4/49
+- For 2025:
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
-    - Remove button (dull red X?) to participation form taxon list
-    - Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
     - Prevent editing species of closed / draft challenge participations
     - Accessibility
+    - Maybe: Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
+    - Challenge sort order (int) for the front page - larger number shown on top
+- Later:
+    - Move login_url, api_url, target id yms. konfiguraatiotiedostoon
     - Own data dump download
     - Admin ability to edit any participations
-    - Challenge sort order (int) for the front page
     - My participation species accumulation chart
     - Activity stats, e.g. users active during last 7 days, new participations
-    - Exclude existing species from the autocomplete? Could exclude all top N species, what to do then?
 - Nice:
     - Min and max dates instead of year to database
         - Database structure change, content change and sql dump update
