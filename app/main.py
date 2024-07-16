@@ -1,7 +1,6 @@
 # Flask app main file.
 
 from flask import Flask, render_template, redirect, session, g, flash, request, send_from_directory
-from flask_caching import Cache
 
 from functools import wraps
 from datetime import timedelta
@@ -17,18 +16,6 @@ print("\n-------------- species-challenge --------------\n", file = sys.stdout)
 print("Started", datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "UTC", file = sys.stdout)
 
 app = Flask(__name__)
-
-# Cache setup
-'''
-config = {
-    "DEBUG": False,
-    "CACHE_TYPE": "SimpleCache",
-    "CACHE_DEFAULT_TIMEOUT": 60
-}
-
-app.config.from_mapping(config)
-cache = Cache(app)
-'''
 
 # Get secret key from environment variables, stop if not found.
 secret_key = os.environ.get("FLASK_SECRET_KEY")

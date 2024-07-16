@@ -313,9 +313,6 @@ a:visited {
     padding-right: 1em;
 }
 
-.participation .button {
-}
-
 #add_participation {
     margin: 0.7em 0 0 2em;
 }
@@ -509,6 +506,10 @@ padding: 10px;
         list-style-type: none;
         display: inline;
         margin-right: 1em;
+    }
+
+    .only_mobi {
+        display: none;
     }
     
 }
