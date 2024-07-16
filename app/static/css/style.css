@@ -445,6 +445,18 @@ button:active {
     display: none;
 }
 
+.anchor_link {
+    margin-top: 2em;
+    margin-left: 0;
+    padding-left: 0;
+}
+.anchor_link li {
+    list-style-type: none;
+}
+
+.no_additional_taxa {
+    color: #777;
+}
 
 /* TABLES */
 
@@ -478,19 +490,6 @@ table td {
 padding: 10px;
 }
 
-
-.anchor_link {
-    margin-top: 2em;
-    margin-left: 0;
-    padding-left: 0;
-}
-.anchor_link li {
-    list-style-type: none;
-}
-
-.no_additional_taxa {
-    color: #777;
-}
 
 @media screen and (min-width: 769px) {
 
