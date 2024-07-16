@@ -77,9 +77,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     # Load all taxa names of the higher taxon (e.g. plants)
     all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
 
-    # Setup two html strings
     basic_taxa_html = ""
-    additional_taxa_html = ""
 
     # 1) Loop all basic_taxa_names
     for taxon_id, taxon_data in basic_taxa_names.items():
@@ -101,6 +99,14 @@ def make_taxa_html(challenge, taxa_dates_json = None):
 
 
     # 2) Loop remaining taxa_dates, i.e. the additional taxa user has observed
+    
+    # If taxa_dates is empty, set message text
+    if not taxa_dates:
+        additional_taxa_html = "<li class='no_additional_taxa'>Ei peruslistan ulkopuolisia lajeja.</li>\n"
+    else:
+        additional_taxa_html = ""
+        print(taxa_dates)
+
     for observed_taxon_id, observed_taxon_date in taxa_dates.items():
 
         # Add to additional_taxa_html

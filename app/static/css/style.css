@@ -488,6 +488,10 @@ padding: 10px;
     list-style-type: none;
 }
 
+.no_additional_taxa {
+    color: #777;
+}
+
 @media screen and (min-width: 769px) {
 
     #login_navi {
