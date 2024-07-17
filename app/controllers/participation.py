@@ -382,13 +382,18 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Todo: Maybe instead remove only empty taxon fields here?
         form_data = {key: value for key, value in form_data.items(multi=True) if value}
 
+        print(form_data)
+
+        # First check that form is fully received by checking that field form_completed has value "ready"
+        if "form_completed" not in form_data or form_data["form_completed"] != "ready":
+            raise Exception("Received incomplete data from browser.")
+
         errors, form_data = validate_participation_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
 #            print("CASE C1")
             flash(errors, "error")
-
             html["data_fields"] = form_data
             return html
         

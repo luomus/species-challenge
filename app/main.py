@@ -80,7 +80,7 @@ def handle_db_connection_error(error):
 
 @app.errorhandler(500)
 def internal_error(error):
-    return "<h3>Anteeksi, tapahtui virhe!</h3><p>Palaa takaisin selaimen takaisin/back -nappia painamalla.</p> {}".format(error), 500
+    return "<h3>Anteeksi, tapahtui virhe!</h3><p>Palaa takaisin selaimen takaisin/back -nappia painamalla ja kokeile hetken kuluttua uudelleen.</p> {}".format(error), 500
 
 # ----------------------------------------
 # Controllers
