@@ -104,9 +104,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Accessibility
     - Challenge sort order (int) for the front page - larger number shown on top
 - School challenge:
-    - Start date and end date instead of year (replace settings on challenge, modify form & validations)
-        - Sql dump update
-
     - No additional taxa (setting to challenge, modify form)
 - Later / nice:
     - Move login_url, api_url, target id yms. konfiguraatiotiedostoon
