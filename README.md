@@ -47,7 +47,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Allow more flexibility, e.g. having only few higher taxa in addition to species
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages, and has limitations based on browser.
     - If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name (i.e. dates that are in 2024). Better solution would be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
-- When challenge is in draft or closed state, we need to allow editing participation data excluding species, because deleting or anonymizing depends on that.
+- When challenge is in draft or closed state, editing it still needs to be possible, e.g. to anonymize or trash it. Therefore only editing species list is disabled by setting the date fields disabled, and not enabling  Javascript to change them either.
 
 #### Future: To have a new challenge type, you would need to:
 
@@ -88,7 +88,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 - Version numbering?
 - More robust error handling and restart? Try with triggering syntax error.
-- Clarify Docker build commands
 - Database sorting/collation settings utf8mb4_swedish_ci?
 - Backup monitoring
 
@@ -102,26 +101,17 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
 - For 2025:
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
-    - Prevent editing species of closed / draft challenge participations
     - Accessibility
-    - Maybe: Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
     - Challenge sort order (int) for the front page - larger number shown on top
 - School challenge:
     - Start date and end date instead of year (replace settings on challenge, modify form & validations)
+        - Sql dump update
+
     - No additional taxa (setting to challenge, modify form)
-- Later:
+- Later / nice:
     - Move login_url, api_url, target id yms. konfiguraatiotiedostoon
     - Own data dump download
     - Admin ability to edit any participations
     - My participation species accumulation chart
     - Activity stats, e.g. users active during last 7 days, new participations
-- Nice:
-    - Min and max dates instead of year to database
-        - Database structure change, content change and sql dump update
-        - Challenge form update, with date fields
-        - Challenge year validation replacement with min & max validation
-        - Test
-        - Use these when creating date fields on participation form
-            - Existing fields / Python
-            - Empty fields / Python
-            - Additional species fields / js
+    - Maybe: Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
