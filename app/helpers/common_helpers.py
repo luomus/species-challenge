@@ -369,7 +369,14 @@ def get_participant_count(participations, target_count):
 
     return count
 
-# Function to convert date YYYY-MM-DD to Finnish date format, without leading zeroes
-def date_to_fi(date):
-    date_parts = date.split("-")
-    return f"{ int(date_parts[2]) }.{ int(date_parts[1]) }.{ date_parts[0] }"
+# Function to format a pair of dates to Finnish date format
+def date_to_fi(date_begin, date_end):
+    date_begin_parts = date_begin.split("-")
+    date_end_parts = date_end.split("-")
+
+    # Check if whole year
+    if date_begin_parts[1] == "01" and date_begin_parts[2] == "01" and date_end_parts[1] == "12" and date_end_parts[2] == "31":
+        return f"koko vuosi { date_begin_parts[0] }"
+
+    # Else return formatted date range
+    return f"{ date_begin_parts[2] }.{ date_begin_parts[1] }.{ date_begin_parts[0] } &ndash; { date_end_parts[2] }.{ date_end_parts[1] }.{ date_end_parts[0] }"
