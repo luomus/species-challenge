@@ -47,7 +47,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Allow more flexibility, e.g. having only few higher taxa in addition to species
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages, and has limitations based on browser.
     - If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name (i.e. dates that are in 2024). Better solution would be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
-
+- When challenge is in draft or closed state, we need to allow editing participation data excluding species, because deleting or anonymizing depends on that.
 
 #### Future: To have a new challenge type, you would need to:
 
@@ -78,10 +78,9 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
-* If user removes name and then trashes the participation, some data disappears.
+* If user removes name and then trashes the participation, saving fails, and some data disappears.
     * Should removal be completely different procedure, that only UPDATES trashed = 1, and does not UPDATE anything else?
 * Trim whitespace from MX codes, both on read and write
-* Use API for autocomplete? Would allow sorting results based on abundance, so e.g. "pihlaja" would return pihalaja and note rare species. But could lead to conflicts with existing data, if taxonomy changes?
 * On Safari, scroll date errors in view: https://chat.openai.com/share/cf043643-8b07-4394-b10e-30a383d54479
 * On safari, autocomplete shows list bullets
 

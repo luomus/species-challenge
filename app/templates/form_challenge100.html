@@ -62,12 +62,15 @@
         });
     });
 
-    // Taxa date field selection and styles logic
-    document.addEventListener('DOMContentLoaded', (event) => {
-        document.querySelectorAll('#taxa li').forEach(addClickListenerToLi);
-        document.querySelectorAll('#taxa li').forEach(addInputEventListenerToDateInput);
-        document.querySelectorAll('#taxa li').forEach(addClearDateListenerToLi);
-    });
+    // Taxa date field selection and clearing logic
+    // Don't apply listeners if form is disabled
+    if ('{{ html['disabled'] }}' != 'disabled') {
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('#taxa li').forEach(addClickListenerToLi);
+            document.querySelectorAll('#taxa li').forEach(addInputEventListenerToDateInput);
+            document.querySelectorAll('#taxa li').forEach(addClearDateListenerToLi);
+        });
+    }
 
     function addClickListenerToLi(li) {
 
@@ -123,7 +126,7 @@
         }
     }
 
-    // Clear date button logic, needed for Safari
+    // Clear date button logic, button needed for Safari
     function addClearDateListenerToLi(liElement) {
         // Find the .clear_date element within the passed liElement
         const clearButton = liElement.querySelector('.clear_date');
@@ -176,8 +179,8 @@
                         const taxaList = document.getElementById('taxa');
                         const newLi = document.createElement('li');
                         
-                        const min = html['challenge']['_date_begin'];
-                        let max = html['challenge']['date_end'];
+                        const min = {{ html['challenge']['date_begin'] }};
+                        let max = {{ html['challenge']['date_end'] }};
                         // If max date is in future, make it today instead
                         if (max > new Date().toISOString().split('T')[0]) {
                             max = new Date().toISOString().split('T')[0];
@@ -267,9 +270,6 @@
             >
         </p>
 
-        <!-- Hidden form field -->
-        <input type="hidden" name="form_completed" value="ready">
-
         <p id="submit_container">
             <button type="submit" id="submit_button">Tallenna osallistuminen</button>
         </p>
@@ -284,16 +284,24 @@
             {% endif %}
         {% endif %}
 
-        <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla ❌)</p>
+        <!-- If form is disabled, don't print this -->
+        {% if html['disabled'] != 'disabled' %}
+            <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla ❌)</p>
 
-        <div id="autocomplete-container">
-            <label for="autocomplete-input"><h4>Hae lajia tai lisää listan ulkopuolisia lajeja:</h4></label>
-            <input type="text" id="autocomplete-input" placeholder="">
-            <div id="autocomplete-results"></div>
-            <p>Voit lisätä tällä haulla havaintoja myös peruslistan ulkopuolisista lajeista. Muista merkitä havaintopäivämäärä kaikille.</p>
-        </div>
+            <div id="autocomplete-container">
+                <label for="autocomplete-input"><h4>Hae lajia tai lisää listan ulkopuolisia lajeja:</h4></label>
+                <input type="text" id="autocomplete-input" placeholder="">
+                <div id="autocomplete-results"></div>
+                <p>Voit lisätä tällä haulla havaintoja myös peruslistan ulkopuolisista lajeista. Muista merkitä havaintopäivämäärä kaikille.</p>
+            </div>
+        {% endif %}
 
+        <fieldset {{ html['disabled'] }}>
         {{ html['taxa']|safe }}
+        </fieldset>
+
+        <!-- Hidden form field -->
+        <input type="hidden" name="form_completed" value="ready">
 
     </form>
 

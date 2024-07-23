@@ -383,6 +383,12 @@ textarea#description {
     width: 20em;
 }
 
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
 /* Buttons */
 
 button, a.button {

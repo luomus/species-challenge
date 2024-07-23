@@ -10,6 +10,7 @@ import os
 
 
 def make_species_html(id, fin, swe, sci, min_date, max_date, date):
+
     id_html = id.replace(".", "_").replace(" ", "")
     if swe:
         swe = f", { swe }"  
@@ -22,6 +23,7 @@ def make_species_html(id, fin, swe, sci, min_date, max_date, date):
             <a href='https://laji.fi/taxon/{ id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
         </li>\n"""
     return html
+
 
 
 def make_taxa_html(challenge, taxa_dates_json = None):
@@ -303,6 +305,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     # Default values
     html = dict()
     html["finbif_access_token"] = os.environ.get("FINBIF_API_TOKEN")
+    html['disabled'] = ""
     html["public_selected"] = "selected='selected'"
     html["trashed_selected"] = ""
 
@@ -327,8 +330,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         return {"redirect": True, "url": "/"}
 
     html["challenge"] = challenge
-
-    # Todo: min and max dates from database
+    print(challenge)
 
     # Case A: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:
@@ -349,9 +351,10 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     if participation_id and not form_data:
 #        print("CASE B")
 
-        # Show warning if challenge is closed or draft, but still allow editing.
+        # Show warning if challenge is closed or draft, and disable form editing.
         if challenge["status"] != "open":
             flash("Tämä haaste on suljettu. Et voi muokata havaittuja lajeja.", "info")
+            html['disabled'] = "disabled"
 
         # Load participation data from the database with this user.
         participation = common_helpers.get_participation(challenge_id, participation_id)
@@ -381,8 +384,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Note that optional empty fields like "place" need to be put back to the form data - this is donw at validation step.
         # Todo: Maybe instead remove only empty taxon fields here?
         form_data = {key: value for key, value in form_data.items(multi=True) if value}
-
-        print(form_data)
 
         # First check that form is fully received by checking that field form_completed has value "ready"
         if "form_completed" not in form_data or form_data["form_completed"] != "ready":
