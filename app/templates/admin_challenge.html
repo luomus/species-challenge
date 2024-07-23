@@ -59,12 +59,22 @@
         </p>
 
         <p>
-            <label for="year">Vuosi:</label><br>
+            <label for="date_begin">Alkupäivä:</label><br>
             <input 
-                type="text" 
-                id="year" 
-                name="year" 
-                value="{{ html['data_fields'].get('year', '') }}"
+                type="date" 
+                id="date_begin" 
+                name="date_begin" 
+                value="{{ html['data_fields'].get('date_begin', '') }}"
+            required>
+        </p>
+
+        <p>
+            <label for="date_end">Loppupäivä:</label><br>
+            <input 
+                type="date" 
+                id="date_end" 
+                name="date_end" 
+                value="{{ html['data_fields'].get('date_end', '') }}"
             required>
         </p>
 

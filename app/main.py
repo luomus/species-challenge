@@ -204,7 +204,6 @@ def login_page():
         'user': {
             'authSourceId': 'testaaja@example.fi', 
             'qname': 'MA.123...', 
-            'yearOfBirth': 2000, 
             'firstJoined': None, 
             'preferredName': 'Teppo', 
             'inheritedName': 'Testaaja', 

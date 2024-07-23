@@ -65,8 +65,16 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Validator: field values
     - Database query: fields and values
 
-
 ## Todo
+
+### Changes for v 2.0
+
+- Update code to staging
+- Add new fields to database:
+  ALTER TABLE `challenges` ADD `date_begin` VARCHAR(10) NULL AFTER `year`, ADD `date_end` VARCHAR(10) NULL AFTER `date_begin`;
+- Remove old fields from database:
+  ALTER TABLE `challenges` DROP `year`;
+- Add begin and end date to all challenges
 
 ### Next
 
@@ -99,6 +107,9 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Accessibility
     - Maybe: Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
     - Challenge sort order (int) for the front page - larger number shown on top
+- School challenge:
+    - Start date and end date instead of year (replace settings on challenge, modify form & validations)
+    - No additional taxa (setting to challenge, modify form)
 - Later:
     - Move login_url, api_url, target id yms. konfiguraatiotiedostoon
     - Own data dump download

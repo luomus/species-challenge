@@ -10,6 +10,8 @@ def make_challenge_html(challenge):
 
     html += "<h1>" + challenge["title"] + "</h1>"
     html += "<p>" + str(challenge["description"]) + "</p>"
+    html += "<p>Osallistumisaika: " + common_helpers.date_to_fi(challenge["date_begin"]) + " &ndash; " + common_helpers.date_to_fi(challenge["date_end"]) + "</p>"
+
     if challenge["status"] == "open":
         html += "<p><strong>Tämä haaste on avoinna, tervetuloa osallistumaan!</strong></p>"
     if challenge["status"] == "closed":

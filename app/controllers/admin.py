@@ -8,7 +8,7 @@ import datetime
 def get_challenges(status):
     params = (status,)
     with common_db.connection() as conn:
-        query = "SELECT * FROM challenges WHERE status = %s ORDER BY year ASC"
+        query = "SELECT * FROM challenges WHERE status = %s ORDER BY date_begin ASC"
         data = common_db.select(conn, query, params)
     return data
 

@@ -39,8 +39,8 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     taxon_file_id = challenge["taxon"]
 
     # Min and max dates for date input fields
-    min_date = f"{ challenge['year'] }-01-01"
-    max_date = f"{ challenge['year'] }-12-31"
+    min_date = challenge['date_begin']
+    max_date = challenge['date_end']
     # However, if max_date is in the future, make it today instead
     if max_date > datetime.datetime.now().strftime("%Y-%m-%d"):
         max_date = datetime.datetime.now().strftime("%Y-%m-%d")

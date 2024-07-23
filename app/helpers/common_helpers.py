@@ -367,4 +367,9 @@ def get_participant_count(participations, target_count):
         if participation["taxa_count"] >= limit:
             count += 1
 
-    return count   
+    return count
+
+# Function to convert date YYYY-MM-DD to Finnish date format, without leading zeroes
+def date_to_fi(date):
+    date_parts = date.split("-")
+    return f"{ int(date_parts[2]) }.{ int(date_parts[1]) }.{ date_parts[0] }"

@@ -30,7 +30,8 @@ def save_challenge(challenge_id, form_data):
         params = (
             form_data["taxon"],
             form_data["autocomplete"],
-            form_data["year"],
+            form_data["date_begin"],
+            form_data["date_end"],
             form_data["type"],
             form_data["title"],
             form_data["status"],
@@ -41,7 +42,7 @@ def save_challenge(challenge_id, form_data):
         )
 
         with common_db.connection() as conn:
-            query = "UPDATE challenges SET taxon = %s, autocomplete = %s, year = %s, type = %s, title = %s, status = %s, description = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
+            query = "UPDATE challenges SET taxon = %s, autocomplete = %s, date_begin = %s, date_end = %s, type = %s, title = %s, status = %s, description = %s, meta_edited_by = %s, meta_edited_at = %s WHERE challenge_id = %s"
             success, _ = common_db.transaction(conn, query, params)
 
         # Return success and existing challenge ID
@@ -54,7 +55,8 @@ def save_challenge(challenge_id, form_data):
     params = (
         form_data["taxon"],
         form_data["autocomplete"],
-        form_data["year"],
+        form_data["date_begin"],
+        form_data["date_end"],
         form_data["type"],
         form_data["title"],
         form_data["status"],
@@ -68,7 +70,7 @@ def save_challenge(challenge_id, form_data):
     print("PARAMS CASE 2:", params)
 
     with common_db.connection() as conn:
-        query = "INSERT INTO challenges (taxon, autocomplete, year, type, title, status, description, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO challenges (taxon, autocomplete, date_begin, date_end, type, title, status, description, meta_created_by, meta_created_at, meta_edited_by, meta_edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         success, id = common_db.transaction(conn, query, params)
 
     # Return success and new challenge ID returned by the database
@@ -115,12 +117,14 @@ def validate_challenge_data(form_data):
     if len(form_data["autocomplete"]) > 250:
         errors += "autocomplete on liian pitkä, maksimi 250 merkkiä. "
 
-    # Year
-    if not form_data["year"]:
-        errors += "Vuosi puuttuu. "
-    # Check that year is a number
-    if not common_helpers.is_year(form_data["year"]):
-        errors += "Vuoden pitää olla numero. "
+    # Todo: Remove is_year helper function, when no longer needed
+
+    # Begin and end date
+    if not form_data["date_begin"]:
+        errors += "Alkupäivä puuttuu. "
+
+    if not form_data["date_end"]:
+        errors += "Loppupäivä puuttuu. "
 
     # Sanitize field values
     form_data["title"] = common_helpers.sanitize_name(form_data["title"].strip())
@@ -239,6 +243,8 @@ def main(challenge_id_untrusted = None, form_data = None):
 
         # Convert to normal dictionary for sanitization
         form_data = form_data.to_dict()
+
+        print("DEBUG FORM DATA", form_data)
 
         errors, form_data = validate_challenge_data(form_data)
 
