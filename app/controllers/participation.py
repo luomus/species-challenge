@@ -100,46 +100,56 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             del taxa_dates[taxon_id]
 
 
-    # 2) Loop remaining taxa_dates, i.e. the additional taxa user has observed
+    # 2) If standard challenge, loop remaining taxa_dates, i.e. the additional taxa user has observed
     
-    # If taxa_dates is empty, set message text
-    if not taxa_dates:
-        additional_taxa_html = "<li class='no_additional_taxa'>Ei peruslistan ulkopuolisia lajeja.</li>\n"
+    if "challenge100" == challenge["type"]:
+        # If taxa_dates is empty, set message text
+        if not taxa_dates:
+            additional_taxa_html = "<li class='no_additional_taxa'>Ei peruslistan ulkopuolisia lajeja.</li>\n"
+        else:
+            additional_taxa_html = ""
+            print(taxa_dates)
+
+        for observed_taxon_id, observed_taxon_date in taxa_dates.items():
+
+            # Add to additional_taxa_html
+            # Check if taxon exists in all_taxa_names. Might not if 
+            # A) It has been added to Laji.fi after the taxon list on this app has been set up (if using API for autocomplete)
+            # B) basic and all taxon files are not in sync (if using files for autocomplete)
+            fin = "" # default
+            swe = "" # default
+            sci = observed_taxon_id # default
+            if observed_taxon_id in all_taxa_names:
+                sci = all_taxa_names[observed_taxon_id]["sci"]
+
+                # Finnish name might not exist
+                if "fin" in all_taxa_names[observed_taxon_id]:
+                    fin = all_taxa_names[observed_taxon_id]["fin"]
+        
+                # Swedish name might not exist
+                if "swe" in all_taxa_names[observed_taxon_id]:
+                    swe = all_taxa_names[observed_taxon_id]["swe"]
+        
+            additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date)
+
+        # Combine into a list
+        html = f"""
+            <ul id='taxa'>\n
+            <li class='list_heading_3'><h3>Peruslistan ulkopuoliset lajit:</h3></li>\n
+                { additional_taxa_html }
+            <li class='list_heading_3'><h3>Peruslistan lajit:</h3></li>\n
+                { basic_taxa_html }
+            </ul>\n
+            """
     else:
-        additional_taxa_html = ""
-        print(taxa_dates)
+        # Combine into a list
+        html = f"""
+            <ul id='taxa'>\n
+            <li class='list_heading_3'><h3>Lajit:</h3></li>\n
+                { basic_taxa_html }
+            </ul>\n
+            """        
 
-    for observed_taxon_id, observed_taxon_date in taxa_dates.items():
-
-        # Add to additional_taxa_html
-        # Check if taxon exists in all_taxa_names. Might not if 
-        # A) It has been added to Laji.fi after the taxon list on this app has been set up (if using API for autocomplete)
-        # B) basic and all taxon files are not in sync (if using files for autocomplete)
-        fin = "" # default
-        swe = "" # default
-        sci = observed_taxon_id # default
-        if observed_taxon_id in all_taxa_names:
-            sci = all_taxa_names[observed_taxon_id]["sci"]
-
-            # Finnish name might not exist
-            if "fin" in all_taxa_names[observed_taxon_id]:
-                fin = all_taxa_names[observed_taxon_id]["fin"]
-    
-            # Swedish name might not exist
-            if "swe" in all_taxa_names[observed_taxon_id]:
-                swe = all_taxa_names[observed_taxon_id]["swe"]
-    
-        additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date)
-
-    # Combine into a list
-    html = f"""
-        <ul id='taxa'>\n
-        <li class='list_heading_3'><h3>Peruslistan ulkopuoliset lajit:</h3></li>\n
-            { additional_taxa_html }
-        <li class='list_heading_3'><h3>Peruslistan lajit:</h3></li>\n
-            { basic_taxa_html }
-        </ul>\n
-        """
 
     return html
 
@@ -322,6 +332,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
 
     # Get challenge data to see that it exists and if it is draft/open/closed.
     challenge = get_challenge(challenge_id)
+    print(challenge)
 
     # CASE X: Challenge cannot be found or participation is closed
     if not challenge:
@@ -330,7 +341,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         return {"redirect": True, "url": "/"}
 
     html["challenge"] = challenge
-    print(challenge)
 
     # Case A: User opened an empty form for submitting a new participation.
     if not participation_id and not form_data:

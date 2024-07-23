@@ -9,7 +9,13 @@
                 {
                     "key": "challenge100",
                     "label": {
-                        "fi": "100 lajia -haaste"
+                        "fi": "Yleinen 100 lajia -haaste"
+                    }
+                },
+                {
+                    "key": "school100",
+                    "label": {
+                        "fi": "Koulujen 100 lajia -haaste"
                     }
                 }
             ]

@@ -218,6 +218,8 @@
 
 {% block body %}
 
+    <!-- Challenge type: {{ html['challenge']['type'] }} -->
+
     <!-- First check if participation exists and if 'trashed' key exists and equals 1 -->
     {% if html.get('participation', {}).get('trashed') == 1 %}
         <div class="info flash">Olet merkinnyt tämän osallistumisen poistetuksi, joten muut eivät näe sitä. (Voit palauttaa sen näkyville muuttamalla osallistumisen tilan julkiseksi ja tallentamalla.)</div>
@@ -261,7 +263,7 @@
         </p>
 
         <p>
-            <label for="place">Paikka (vapaaehtoinen): Haasteeseen osallistumisin tärkein havainnointipaikka, esim. kunta ja kylä. Haasteen havaintoja voi tehdä tämän paikan ulkopuolelta. Eri paikannimillä voit toteuttaa haastetta myös useammalta paikalta.</label><br>
+            <label for="place">Paikka (vapaaehtoinen): Haasteeseen osallistumisen tärkein havainnointipaikka, esim. kunta ja/tai paikannimi. Haasteen havaintoja voi tehdä myös tämän paikan ulkopuolelta. Voit halutessasi osallistua haasteeseen myös useammalta paikalta.</label><br>
             <input 
                 type="text" 
                 id="place" 
@@ -284,10 +286,13 @@
             {% endif %}
         {% endif %}
 
-        <!-- If form is disabled, don't print this -->
+        <!-- Show instructions only if form is enabled -->
         {% if html['disabled'] != 'disabled' %}
             <p>Merkitse havaitsemillesi lajeille havaintopäivämäärä klikkaamalla lajinimeä tai päivämääräkenttää. (Poista havaintopäivämäärä klikkamalla ❌)</p>
+        {% endif %}
 
+        <!-- Show autocomplete only if form is enabled, and this is standard challenge -->
+        {% if html['disabled'] != 'disabled' and html['challenge']['type'] == 'challenge100' %}
             <div id="autocomplete-container">
                 <label for="autocomplete-input"><h4>Hae lajia tai lisää listan ulkopuolisia lajeja:</h4></label>
                 <input type="text" id="autocomplete-input" placeholder="">

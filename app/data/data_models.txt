@@ -10,7 +10,7 @@ CREATE TABLE `challenges` (
   `taxon` varchar(16) NOT NULL, Taxon file identifier.
   `date_begin` varchar(10) DEFAULT NULL,
   `date_end` varchar(10) DEFAULT NULL,
-  `type` varchar(16) NOT NULL, Currently only one allowed value: challenge100.
+  `type` varchar(16) NOT NULL.
   `title` varchar(255) NOT NULL, Name of the challenge.
   `status` varchar(8) NOT NULL, Allowed values: draft, open, closed.
   `description` varchar(2048) DEFAULT NULL,

@@ -42,11 +42,11 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 - Setting up new challenge
     - Provide list of basic taxa to `app/data/`, e.g. `plantae_2024.json` or use one of the existing ones.
     - Provide list of all allowed taxa to `app/data/` (for backend) and `static/taxa/` (for frontend autocomplete), e.g. `plantae_2024_all.json`. This must contain all taxa that the basic list above contains, icnluding non-species.
-- Challenge has field for autocomplete-parameters, but these are not currently used. Instead autocomplete uses static file as described above. This is to 
+- Challenges-table has field for autocomplete-parameters, but these are not currently used. Instead autocomplete uses static file as described above. This is to 
     - Make it faster than API calls (nearly instantaneous)
     - Allow more flexibility, e.g. having only few higher taxa in addition to species
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages, and has limitations based on browser.
-    - If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name (i.e. dates that are in 2024). Better solution would be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
+    - TODO: If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name (i.e. dates that are in 2024). Better solution would be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
 - When challenge is in draft or closed state, editing it still needs to be possible, e.g. to anonymize or trash it. Therefore only editing species list is disabled by setting the date fields disabled, and not enabling  Javascript to change them either.
 
 #### Future: To have a new challenge type, you would need to:
@@ -103,8 +103,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Accessibility
     - Challenge sort order (int) for the front page - larger number shown on top
-- School challenge:
-    - No additional taxa (setting to challenge, modify form)
 - Later / nice:
     - Move login_url, api_url, target id yms. konfiguraatiotiedostoon
     - Own data dump download
