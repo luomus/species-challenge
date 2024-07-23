@@ -117,8 +117,6 @@ def validate_challenge_data(form_data):
     if len(form_data["autocomplete"]) > 250:
         errors += "autocomplete on liian pitkä, maksimi 250 merkkiä. "
 
-    # Todo: Remove is_year helper function, when no longer needed
-
     # Begin and end date
     if not form_data["date_begin"]:
         errors += "Alkupäivä puuttuu. "

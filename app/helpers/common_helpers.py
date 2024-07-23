@@ -146,21 +146,6 @@ def is_yyyy_mm_dd(input_string):
     return bool(pattern.match(input_string))
 
 
-def is_year(input_string):
-    """
-    Validates if a given string is a valid year in YYYY format.
-
-    Args:
-    input_string (str): The string to validate.
-
-    Returns:
-    bool: True if the input_string is a valid year in YYYY format,
-    False otherwise.
-    """
-    pattern = re.compile(r'^\d{4}$')
-    return bool(pattern.match(input_string))
-
-
 def valid_taxon_qname(input_string):
     """
     Validates if a given string is a valid taxon QName.
