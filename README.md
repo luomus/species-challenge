@@ -46,7 +46,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Make it faster than API calls (nearly instantaneous)
     - Allow more flexibility, e.g. having only few higher taxa in addition to species
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages, and has limitations based on browser.
-    - TODO: If a challenge for 2025 is published in 2024, users have to clear dates which they might have added by clicking the species name (i.e. dates that are in 2024). Better solution would be to edit the Javascript so that it wont add today's date if it's outside the allowed range.
 - When challenge is in draft or closed state, editing it still needs to be possible, e.g. to anonymize or trash it. Therefore only editing species list is disabled by setting the date fields disabled, and not enabling  Javascript to change them either.
 
 #### Future: To have a new challenge type, you would need to:
@@ -104,6 +103,8 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Accessibility
     - Challenge sort order (int) for the front page - larger number shown on top
 - Later / nice:
+    - Show challenge days also on participation form (in case challenge is open, but challenge period has not yet started)
+    - If today is not within date begin and end, don't update taxon datw by clicking taxon name (now updates, but browser validation then prevents saving)
     - Move login_url, api_url, target id yms. konfiguraatiotiedostoon
     - Own data dump download
     - Admin ability to edit any participations
