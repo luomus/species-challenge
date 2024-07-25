@@ -106,8 +106,8 @@ def test_add_edit_participation(browser):
     assert "Osallistuminen: Sienihaaste" in page.content()
 
     # Fill in fields
-    page.fill("input[name='name']", "Playwright")
-    page.fill("#place", "Näyttämö")
+    page.fill("input[name='name']", "Playwright-nimi")
+    page.fill("#place", "Playwright-paikka")
 
     # Add taxa in different ways
     page.fill("#MX_71896", "2024-01-01") # Add by filling in the field
@@ -121,6 +121,8 @@ def test_add_edit_participation(browser):
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert "3 lajia" in page.content()
+    assert "Playwright-nimi" in page.content()
+    assert "Playwright-paikka" in page.content()
 
     # Access own stats
     page.click("text=Tilastoja tästä osallistumisesta")
@@ -167,14 +169,39 @@ def test_access_forbidden(browser):
 
     # ----------------------------------------------
     # Access content with no rights to access
-    # Access a participation by someone else, which should redirect to front page without a flash message
-    page.goto("http://web:8081/tilasto/5/35")
+    # Access a participation page by someone else, which should redirect to front page
+    page.goto("http://web:8081/osallistuminen/5/35")
     page.wait_for_selector('#body_home')
     assert front_page_text in page.content() 
    
+    # Access a stats page by someone else, which should redirect to front page
+    page.goto("http://web:8081/tilasto/5/35")
+    page.wait_for_selector('#body_home')
+    assert front_page_text in page.content() 
 
-def test_teardown():
+    # Access admin main page, which should redirect to front page
+    page.goto("http://web:8081/admin")
+    page.wait_for_selector('#body_home')
+    assert front_page_text in page.content() 
+
+    # Access participation edit page, which should redirect to front page
+    page.goto("http://web:8081/admin/haaste/5")
+    page.wait_for_selector('#body_home')
+    assert front_page_text in page.content() 
+
+
+def test_teardown(browser):
     state_file = 'state.json'
+    context = browser.new_context(storage_state='state.json')
+    page = context.new_page()
+
+    # Click logout, which should redirect to front page with logout flash message
+    page.goto("http://web:8081/oma")
+    page.click("#logout a")
+    print(page.url)
+    page.wait_for_selector('#body_home')
+    assert "Olet kirjautunut ulos." in page.content() 
+
     os.remove(state_file)
     
 
