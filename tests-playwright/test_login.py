@@ -13,6 +13,7 @@ def extract_token(url):
     return token
 
 
+# Login ans save login state
 def test_login_and_save_state(browser):
     context = browser.new_context()
     page = context.new_page()
@@ -72,6 +73,7 @@ def test_login_and_save_state(browser):
     page.close()
 
 
+# Access pages as logged in user
 def test_own_data(browser):
     context = browser.new_context(storage_state='state.json')
     page = context.new_page()
@@ -89,19 +91,18 @@ def test_own_data(browser):
     assert "<h1>Omat osallistumiset</h1>" in page.content()
     assert "Teppo Playwright" in page.content()
 
-
-def test_add_edit_participation(browser):
-    context = browser.new_context(storage_state='state.json')
-    page = context.new_page()
-
-    # ----------------------------------------------
     # Access challenge this person hasn't participated in 
     page.goto("http://web:8081/haaste/5")
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
-    # ----------------------------------------------
-    # Set up own participation
+
+# Set up and edit new participation
+def test_add_edit_participation(browser):
+    context = browser.new_context(storage_state='state.json')
+    page = context.new_page()
+
     # Access participation adding page
+    page.goto("http://web:8081/haaste/5")
     page.click("#add_participation")
     assert "Osallistuminen: Sienihaaste" in page.content()
 
@@ -161,14 +162,13 @@ def test_add_edit_participation(browser):
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
 
+# Access content with no rights to access
 def test_access_forbidden(browser):
     context = browser.new_context(storage_state='state.json')
     page = context.new_page()
 
     front_page_text = "Havaitsetko 100 lajia"
 
-    # ----------------------------------------------
-    # Access content with no rights to access
     # Access a participation page by someone else, which should redirect to front page
     page.goto("http://web:8081/osallistuminen/5/35")
     page.wait_for_selector('#body_home')
@@ -190,6 +190,7 @@ def test_access_forbidden(browser):
     assert front_page_text in page.content() 
 
 
+# Logout and tear down state
 def test_teardown(browser):
     state_file = 'state.json'
     context = browser.new_context(storage_state='state.json')

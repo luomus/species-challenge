@@ -204,7 +204,10 @@ def get_challenge(challenge_id):
     with common_db.connection() as conn:
         query = "SELECT * FROM challenges WHERE challenge_id = %s"
         data = common_db.select(conn, query, params)
-    return data[0]
+
+    if data:
+        return data[0]
+    return {}
 
 
 def get_all_participations(challenge_id):

@@ -95,7 +95,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 - Test:
     - Automated testing with Playwright
         - Admin editing challenges
-        - Logout
     - Giving malicious login token
     - Giving incorrect numeric challenge & participation id's -> redirect with flash
 - For 2025:
