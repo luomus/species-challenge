@@ -210,3 +210,11 @@ def test_teardown(browser):
     os.remove(state_file)
     
 
+# Non-real token
+def test_token(browser):
+    context = browser.new_context()
+    page = context.new_page()
+
+    page.goto("http://web:8081/login?token=nonrealtoken")
+    page.wait_for_selector('body')
+    assert "Kirjautuminen epäonnistui" in page.content() 
