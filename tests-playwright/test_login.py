@@ -7,7 +7,6 @@ import os
 from urllib.parse import urljoin, urlparse, parse_qs
 
 def extract_token(url):
-    print(url)
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
     token = query_params.get('token', [None])[0]
@@ -81,23 +80,22 @@ def test_own_data(browser):
 #    page.on('request', lambda request: print('----> Request URL:', request.url))
 #    page.on('response', lambda response: print(f'      Response URL: {response.url}, Status: {response.status}'))
 
-    # Check own data of the logged in user
+    # Access front page, which should have link to own participations
     page.goto("http://web:8081")
     assert "Omat osallistumiset" in page.content()
 
+    # Access own participations page, which should have test participation
     page.goto("http://web:8081/oma")
     assert "<h1>Omat osallistumiset</h1>" in page.content()
+    assert "Teppo Playwright" in page.content()
 
 
 def test_add_edit_participation(browser):
     context = browser.new_context(storage_state='state.json')
     page = context.new_page()
 
-    front_page_text = "Havaitsetko 100 lajia"
-
     # ----------------------------------------------
-    # Access general pages
-    # Challenge where this person has not participated in
+    # Access challenge this person hasn't participated in 
     page.goto("http://web:8081/haaste/5")
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
@@ -111,27 +109,29 @@ def test_add_edit_participation(browser):
     page.fill("input[name='name']", "Playwright")
     page.fill("#place", "Näyttämö")
 
-    # Add taxa
-    page.fill("#MX_71896", "2024-06-01") # Add by filling in the field
+    # Add taxa in different ways
+    page.fill("#MX_71896", "2024-01-01") # Add by filling in the field
+    page.fill("#MX_71663", "2024-06-01") # Add by filling in the field
     page.click("#MX_73304_id") # Add by clicking the taxon name
 
     # Submit the form
     page.click("#submit_button")
 
-    # Check that the participation was added
+    # Check that the participation was added and contains exactly 3 taxa, which were added above
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
-    assert "2 lajia" in page.content()
+    assert "3 lajia" in page.content()
 
     # Access own stats
     page.click("text=Tilastoja tästä osallistumisesta")
-    assert "Olet havainnut 2 lajia" in page.content()
+    assert "Olet havainnut 3 lajia" in page.content()
 
     # Back to editing the participation
     page.click("#subnavi a")
 
-    # Remove taxon
-    page.fill("#MX_73304", "")
+    # Remove taxon in different ways
+    page.fill("#MX_71896", "") # Editing field directly
+    page.click('span.clear_date[data-clear-for="MX_71663"]') # Clicking the clear button
 
     # Submit the form
     page.click("#submit_button")
@@ -141,8 +141,9 @@ def test_add_edit_participation(browser):
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert "1 lajia" in page.content()
 
-    # Check that field #MX_73304 value is empty
-    assert page.input_value("#MX_73304") == ""
+    # Check that cleared fields are empty
+    assert page.input_value("#MX_71896") == ""
+    assert page.input_value("#MX_71663") == ""
 
     # Trash the participation
     page.click("#trash_button")
@@ -157,10 +158,16 @@ def test_add_edit_participation(browser):
     page.goto("http://web:8081/haaste/5")
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
+
+def test_access_forbidden(browser):
+    context = browser.new_context(storage_state='state.json')
+    page = context.new_page()
+
+    front_page_text = "Havaitsetko 100 lajia"
+
     # ----------------------------------------------
     # Access content with no rights to access
-    # Access a participation by someone else
-    # This should redirect to front page without a flash message
+    # Access a participation by someone else, which should redirect to front page without a flash message
     page.goto("http://web:8081/tilasto/5/35")
     page.wait_for_selector('#body_home')
     assert front_page_text in page.content() 
