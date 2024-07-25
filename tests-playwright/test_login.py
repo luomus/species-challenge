@@ -95,6 +95,10 @@ def test_own_data(browser):
     page.goto("http://web:8081/haaste/5")
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
+    # Access challenge this person hasn't participated in 
+    page.goto("http://web:8081/osallistuminen/4/99")
+    assert "Tätä osallistumista ei löytynyt tililtäsi" in page.content()
+
 
 # Set up and edit new participation
 def test_add_edit_participation(browser):

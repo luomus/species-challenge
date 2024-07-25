@@ -96,7 +96,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Automated testing with Playwright
         - Admin editing challenges
     - Giving malicious login token
-    - Giving incorrect numeric challenge & participation id's -> redirect with flash
 - For 2025:
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Accessibility

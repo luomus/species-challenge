@@ -19,6 +19,7 @@ def test_anon_public_pages(browser):
     # Access a challenge that doesn't exist, which should redirect to front page
     page.goto("http://web:8081/haaste/99")
     assert front_page_text in page.content()
+    
 
 # Access pages that require login
 def test_anon_restricted_pages(browser):
