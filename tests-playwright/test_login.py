@@ -7,6 +7,7 @@ import os
 from urllib.parse import urljoin, urlparse, parse_qs
 
 def extract_token(url):
+    print(url)
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
     token = query_params.get('token', [None])[0]
@@ -26,8 +27,8 @@ def test_login_and_save_state(browser):
 
     page.goto("http://web:8081")
     
-    # Step 1: Navigate to the login page
-    login_link_locator = page.locator('span#login a')
+    # Step 1: Find link and navigate to the login page
+    login_link_locator = page.locator('li#login a')
     login_link_href = login_link_locator.get_attribute('href')
 
     page.goto("http://web:8081" + login_link_href)
@@ -49,20 +50,21 @@ def test_login_and_save_state(browser):
 
     # Step 4: Fill in the login form
     page.wait_for_selector('input[name="password"]')
+
     page.fill("input[name='email']", lajifi_username)
     page.fill("input[name='password']", lajifi_password)
     
     # Step 5: Submit the form
     page.click("button.submit")
 
-    # Issue: Playwright cannot follow redirections, but gets stuck at /login.
+    # Issue: Playwright cannot follow these login redirections, but gets stuck at /login.
     # Workaround: extract token and navigate to /login manually.
     token = extract_token(page.url)
     page.goto("http://web:8081/login?token=" + token)
 
     page.wait_for_selector('#logout')
-    
-    # Save the authentication state to a file
+
+    # Save the authentication state to a file (/tests-playgright/state.json)
     context.storage_state(path='state.json')
 
     # Wait for the state to be saved
@@ -100,18 +102,18 @@ def test_add_edit_participation(browser):
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
     # ----------------------------------------------
-    # Access own participation
-    # Add participation
+    # Set up own participation
+    # Access participation adding page
     page.click("#add_participation")
-    assert "Osallistuminen haasteeseen Sienihaaste" in page.content()
+    assert "Osallistuminen: Sienihaaste" in page.content()
 
     # Fill in fields
     page.fill("input[name='name']", "Playwright")
     page.fill("#place", "Näyttämö")
 
     # Add taxa
-    page.fill("#MX_43922", "2024-01-01") # Add by filling in the field
-    page.click("#MX_43502_name") # Add by clicking the taxon name
+    page.fill("#MX_71896", "2024-06-01") # Add by filling in the field
+    page.click("#MX_73304_id") # Add by clicking the taxon name
 
     # Submit the form
     page.click("#submit_button")
@@ -129,7 +131,7 @@ def test_add_edit_participation(browser):
     page.click("#subnavi a")
 
     # Remove taxon
-    page.fill("#MX_43922", "")
+    page.fill("#MX_73304", "")
 
     # Submit the form
     page.click("#submit_button")
@@ -139,8 +141,8 @@ def test_add_edit_participation(browser):
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert "1 lajia" in page.content()
 
-    # Check that field #MX_43922 value is empty
-    assert page.input_value("#MX_43922") == ""
+    # Check that field #MX_73304 value is empty
+    assert page.input_value("#MX_73304") == ""
 
     # Trash the participation
     page.click("#trash_button")
@@ -164,9 +166,8 @@ def test_add_edit_participation(browser):
     assert front_page_text in page.content() 
    
 
-
-
 def test_teardown():
     state_file = 'state.json'
     os.remove(state_file)
     
+

@@ -26,7 +26,7 @@ def save_challenge(challenge_id, form_data):
     # CASE 1: Edit existing challenge
     # Update form data in the database
     if challenge_id:
-        print("CASE 1")
+        # print("CASE 1")
         params = (
             form_data["taxon"],
             form_data["autocomplete"],
@@ -206,7 +206,7 @@ def main(challenge_id_untrusted = None, form_data = None):
 
     # CASE A: Adding a new challenge with an empty form.
     if not challenge_id and not form_data:
-        print("CASE A")
+        # print("CASE A")
         # Setup empty form
         html["status_field_html"] = make_option_field_html("status")
         html["type_field_html"] = make_option_field_html("type")
@@ -218,7 +218,7 @@ def main(challenge_id_untrusted = None, form_data = None):
 
     # CASE B: Challenge id given, but it does not exist in the database.
     if not challenge and not form_data:
-        print("CASE B")
+        # print("CASE B")
         flash("Haastetta ei löytynyt.", "info")
         return {"redirect": True, "url": "/admin"}
 
@@ -226,7 +226,7 @@ def main(challenge_id_untrusted = None, form_data = None):
     # Challenge found from the database
     # Example: http://localhost:8081/osallistuminen/4
     if challenge and not form_data:
-        print("CASE C")
+        # print("CASE C")
 
         # Setup form with data
         html["status_field_html"] = make_option_field_html("status", challenge)
@@ -237,18 +237,16 @@ def main(challenge_id_untrusted = None, form_data = None):
     
     # Case D: User has submitted challenge data. Validate and insert to database.
     if form_data:
-        print("CASE D")
+        # print("CASE D")
 
         # Convert to normal dictionary for sanitization
         form_data = form_data.to_dict()
-
-        print("DEBUG FORM DATA", form_data)
 
         errors, form_data = validate_challenge_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
-            print("CASE C1")
+            # print("CASE C1")
             flash(errors, "error")
             html["status_field_html"] = make_option_field_html("status", form_data)
             html["type_field_html"] = make_option_field_html("type", form_data)
@@ -256,15 +254,15 @@ def main(challenge_id_untrusted = None, form_data = None):
             return html
         
         # Case C2: No errors found. Insert to database and redirect to participation page.
-        print("CASE C2")
+        # print("CASE C2")
         success, id = save_challenge(challenge_id, form_data)
 
         if success:
-            print("CASE C2 SUCCESS")
+            # print("CASE C2 SUCCESS")
             flash("Haaste on nyt tallennettu.", "success")
             return {"redirect": True, "url": f"/admin/haaste/{ id }"}
 
         # Database error
-        print("CASE C2 FAIL")
+        # print("CASE C2 FAIL")
         raise Exception("Error saving challenge to database.")
   

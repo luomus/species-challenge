@@ -1,5 +1,5 @@
 # Use the official Python image that already has Node.js installed (required for Playwright)
-FROM mcr.microsoft.com/playwright/python:v1.41.0-jammy
+FROM mcr.microsoft.com/playwright/python:v1.45.0-jammy
 
 # Set the working directory
 WORKDIR /tests
