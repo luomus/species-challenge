@@ -158,6 +158,6 @@ def main(challenge_id_untrusted):
     participations = common_helpers.get_all_participations(challenge_id)
     html["participant_html"] = make_participant_html(participations)
 
-    html["taxa_html"] = common_helpers.make_taxa_html(participations, challenge_data["taxon"])
+    html["taxa_html"] = common_helpers.make_taxa_html(participations, challenge_data)
 
     return html

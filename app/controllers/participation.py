@@ -76,8 +76,14 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     }
     """
 
-    # Load all taxa names of the higher taxon (e.g. plants)
-    all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
+    # Ordinary challenger: all taxa file 
+    if challenge["type"] == "challenge100":
+        all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
+    # School challenge: only basic taxa file
+    elif challenge["type"] == "school100":
+        all_taxa_names = common_helpers.load_taxon_file(taxon_file_id)
+    else:
+        raise Exception("Unknown challenge type.")
 
     basic_taxa_html = ""
 

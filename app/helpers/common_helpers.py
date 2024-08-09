@@ -170,13 +170,13 @@ def taxon_file_exists(taxon_file_id):
 
     Returns:
     bool: True if the file exists, False otherwise.
+
+    Todo: This only checks basic file, because additional file is not alwats used. Should check both when they are needed
     """
     filename = "./data/" + taxon_file_id + ".json"
     basic_file = os.path.isfile(filename)
-    filename = "./data/" + taxon_file_id + "_all.json"
-    additional_file = os.path.isfile(filename)
 
-    if basic_file and additional_file:
+    if basic_file:
         return True
     return False
 
@@ -243,7 +243,9 @@ def get_participation(challenge_id, participation_id):
     return participation[0]
 
 
-def make_taxa_html(participations, taxon_id, taxa_json = ""):
+def make_taxa_html(participations, challenge_data, taxa_json = ""):
+    taxon_id = challenge_data["taxon"]
+    print(challenge_data)
     '''
     participations -variable contains data like this:
     [
@@ -280,10 +282,19 @@ def make_taxa_html(participations, taxon_id, taxa_json = ""):
     
     # taxa from json to dict
     my_taxa = dict()
+
+    # If participant has own taxa, load them here
     if taxa_json:
         my_taxa = json.loads(taxa_json)
-    
-    taxon_names = load_taxon_file(taxon_id + "_all")
+
+    # Ordinary challenger: all taxa file    
+    if challenge_data["type"] == "challenge100":
+        taxon_names = load_taxon_file(taxon_id + "_all")
+    # School challenge: only basic taxa file
+    elif challenge_data["type"] == "school100":
+        taxon_names = load_taxon_file(taxon_id)
+    else:
+        raise ValueError("Unknown challenge type")
     
     number_of_participations = len(participations)
 

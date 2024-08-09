@@ -1,0 +1,1260 @@
+{
+ "MX.60910": {
+  "fin": "amiraali",
+  "swe": "amiral",
+  "sci": "Vanessa atalanta",
+  "heading": "Hy\u00f6nteiset ja h\u00e4m\u00e4h\u00e4kkiel\u00e4imet"
+ },
+ "MX.204051": {
+  "fin": "ampiaiset",
+  "swe": "getingar",
+  "sci": "Vespidae"
+ },
+ "MX.60767": {
+  "fin": "auroraperhonen",
+  "swe": "aurorafj\u00e4ril",
+  "sci": "Anthocharis cardamines"
+ },
+ "MX.43204": {
+  "fin": "hein\u00e4sirkat",
+  "swe": "gr\u00e4shoppor",
+  "sci": "Acrididae"
+ },
+ "MX.43169": {
+  "fin": "hepokatit",
+  "swe": "v\u00e5rtbitare\u00a0",
+  "sci": "Tettigoniidae"
+ },
+ "MX.60925": {
+  "fin": "herukkaperhonen",
+  "swe": "vinb\u00e4rsfuks",
+  "sci": "Polygonia c-album"
+ },
+ "MX.281757": {
+  "fin": "hirvik\u00e4rp\u00e4nen",
+  "swe": "\u00e4lgfluga",
+  "sci": "Lipoptena cervi"
+ },
+ "MX.60870": {
+  "fin": "hopeat\u00e4pl\u00e4t",
+  "swe": "p\u00e4rlemorfj\u00e4rilar",
+  "sci": "Argynnini"
+ },
+ "MX.253661": {
+  "fin": "hyttyset",
+  "swe": "stickmyggor",
+  "sci": "Culicidae"
+ },
+ "MX.206454": {
+  "fin": "isopihtih\u00e4nt\u00e4",
+  "swe": "st\u00f6rre tvestj\u00e4rt",
+  "sci": "Forficula auricularia"
+ },
+ "MX.230555": {
+  "fin": "kaalilude",
+  "swe": "rapssugare",
+  "sci": "Eurydema oleracea"
+ },
+ "MX.60811": {
+  "fin": "kangasperhonen",
+  "swe": "gr\u00f6nsnabbvinge",
+  "sci": "Callophrys rubi"
+ },
+ "MX.5077970": {
+  "fin": "kartanokimalaisen kaltaiset",
+  "swe": "hushumla liknande arter",
+  "sci": ""
+ },
+ "MX.60908": {
+  "fin": "karttaperhonen",
+  "swe": "kartfj\u00e4ril",
+  "sci": "Araschnia levana"
+ },
+ "MX.204324": {
+  "fin": "kekomuurahaiset",
+  "swe": "stackmyror",
+  "sci": "Formica (Formica)"
+ },
+ "MX.192436": {
+  "fin": "kiiltomato",
+  "swe": "lysmask",
+  "sci": "Lampyris noctiluca"
+ },
+ "MX.191919": {
+  "fin": "kimalaiskuoriainen",
+  "swe": "humlebagge",
+  "sci": "Trichius fasciatus"
+ },
+ "MX.5077969": {
+  "fin": "kivikkokimalaisen kaltaiset",
+  "swe": "stenhumla liknande arter",
+  "sci": ""
+ },
+ "MX.60813": {
+  "fin": "kultasiivet",
+  "swe": "guldvingar",
+  "sci": "Lycaena"
+ },
+ "MX.60778": {
+  "fin": "lanttuperhonen",
+  "swe": "rapsfj\u00e4ril",
+  "sci": "Pieris napi"
+ },
+ "MX.60749": {
+  "fin": "lauhahiipij\u00e4",
+  "swe": "mindre t\u00e5telsmygare",
+  "sci": "Thymelicus lineola"
+ },
+ "MX.70199": {
+  "fin": "lukit",
+  "swe": "lockespindlar",
+  "sci": "Opiliones"
+ },
+ "MX.253659": {
+  "fin": "m\u00e4k\u00e4r\u00e4t",
+  "swe": "knott",
+  "sci": "Simuliidae"
+ },
+ "MX.5077966": {
+  "fin": "mantukimalaisen kaltaiset",
+  "swe": "ljus jordhumla liknande arter",
+  "sci": ""
+ },
+ "MX.192205": {
+  "fin": "mets\u00e4sitti\u00e4inen",
+  "swe": "skogstordyvel",
+  "sci": "Anoplotrupes stercorosus"
+ },
+ "MX.60914": {
+  "fin": "neitoperhonen",
+  "swe": "p\u00e5f\u00e5gel\u00f6ga",
+  "sci": "Aglais io"
+ },
+ "MX.195093": {
+  "fin": "nelivy\u00f6j\u00e4\u00e4r\u00e4",
+  "swe": "fyrbandad blombock",
+  "sci": "Leptura quadrifasciata"
+ },
+ "MX.60916": {
+  "fin": "nokkosperhonen",
+  "swe": "n\u00e4sselfj\u00e4ril",
+  "sci": "Aglais urticae"
+ },
+ "MX.60911": {
+  "fin": "ohdakeperhonen",
+  "swe": "tistelfj\u00e4ril",
+  "sci": "Vanessa cardui"
+ },
+ "MX.5077971": {
+  "fin": "peltokimalaisen kaltaiset",
+  "swe": "\u00e5kerhumla liknande arter",
+  "sci": ""
+ },
+ "MX.290384": {
+  "fin": "pihaharsokorento",
+  "swe": "guld\u00f6gonsl\u00e4nda",
+  "sci": "Chrysoperla carnea"
+ },
+ "MX.60755": {
+  "fin": "piippopaksup\u00e4\u00e4",
+  "swe": "\u00e4ngssmygare",
+  "sci": "Ochlodes sylvanus"
+ },
+ "MX.196317": {
+  "fin": "putkik\u00e4rs\u00e4k\u00e4s",
+  "swe": "hundk\u00e4xvivel",
+  "sci": "Lixus iridis"
+ },
+ "MX.202370": {
+  "fin": "puutiainen",
+  "swe": "vanlig f\u00e4sting",
+  "sci": "Ixodes ricinus"
+ },
+ "MX.230561": {
+  "fin": "pyjamalude",
+  "swe": "strimlus",
+  "sci": "Graphosoma italicum"
+ },
+ "MX.201925": {
+  "fin": "rantah\u00e4m\u00e4h\u00e4kki",
+  "swe": "",
+  "sci": "Dolomedes fimbriatus"
+ },
+ "MX.60730": {
+  "fin": "ritariperhonen",
+  "swe": "makaonfj\u00e4ril",
+  "sci": "Papilio machaon"
+ },
+ "MX.194730": {
+  "fin": "sarvijaakko",
+  "swe": "timmerman",
+  "sci": "Acanthocinus aedilis"
+ },
+ "MX.194380": {
+  "fin": "seitsenpistepirkko",
+  "swe": "sjuprickig nyckelpiga",
+  "sci": "Coccinella septempunctata"
+ },
+ "MX.60822": {
+  "fin": "sinisiivet",
+  "swe": "bl\u00e5vingar",
+  "sci": "Polyommatini"
+ },
+ "MX.60794": {
+  "fin": "sitruunaperhonen",
+  "swe": "citronfj\u00e4ril",
+  "sci": "Gonepteryx rhamni"
+ },
+ "MX.231375": {
+  "fin": "sokeritoukka",
+  "swe": "silverfisk",
+  "sci": "Lepisma saccharinum"
+ },
+ "MX.1": {
+  "fin": "sudenkorennot",
+  "swe": "trollsl\u00e4ndor",
+  "sci": "Odonata"
+ },
+ "MX.60791": {
+  "fin": "suokeltaperhonen",
+  "swe": "svavelgul h\u00f6fj\u00e4ril",
+  "sci": "Colias palaeno"
+ },
+ "MX.60920": {
+  "fin": "suruvaippa",
+  "swe": "sorgmantel",
+  "sci": "Nymphalis antiopa"
+ },
+ "MX.204772": {
+  "fin": "tarhamehil\u00e4inen",
+  "swe": "honungsbi",
+  "sci": "Apis mellifera"
+ },
+ "MX.60970": {
+  "fin": "tesmaperhonen",
+  "swe": "luktgr\u00e4sfj\u00e4ril",
+  "sci": "Aphantopus hyperantus"
+ },
+ "MX.53675": {
+  "fin": "torakat",
+  "swe": "kackerlackor",
+  "sci": "Blattodea"
+ },
+ "MX.58998": {
+  "fin": "tuomenkehr\u00e4\u00e4j\u00e4koi",
+  "swe": "h\u00e4ggspinnmal",
+  "sci": "Yponomeuta evonymella"
+ },
+ "MX.189609": {
+  "fin": "turkkilot",
+  "swe": "d\u00f6dgr\u00e4vare",
+  "sci": "Nicrophorus"
+ },
+ "MX.229690": {
+  "fin": "vesimittarit",
+  "swe": "",
+  "sci": "Gerridae"
+ },
+ "MX.230533": {
+  "fin": "viherlude",
+  "swe": "gr\u00f6n b\u00e4rfis",
+  "sci": "Palomena prasina"
+ },
+ "MX.53219": {
+  "fin": "ahven",
+  "swe": "abborre",
+  "sci": "Perca fluviatilis",
+  "heading": "Kalat"
+ },
+ "MX.53118": {
+  "fin": "hauki",
+  "swe": "g\u00e4dda",
+  "sci": "Esox lucius"
+ },
+ "MX.53198": {
+  "fin": "kolmipiikki",
+  "swe": "storspigg",
+  "sci": "Gasterosteus aculeatus"
+ },
+ "MX.53145": {
+  "fin": "s\u00e4rki",
+  "swe": "m\u00f6rt",
+  "sci": "Rutilus rutilus"
+ },
+ "MX.39761": {
+  "fin": "ahokissank\u00e4p\u00e4l\u00e4",
+  "swe": "kattfot",
+  "sci": "Antennaria dioica",
+  "heading": "Kasvit ja lev\u00e4t"
+ },
+ "MX.38869": {
+  "fin": "ahomansikka",
+  "swe": "smultron",
+  "sci": "Fragaria vesca"
+ },
+ "MX.39833": {
+  "fin": "ahop\u00e4iv\u00e4nkakkara",
+  "swe": "pr\u00e4stkrage",
+  "sci": "Leucanthemum vulgare"
+ },
+ "MX.37999": {
+  "fin": "hieskoivu",
+  "swe": "glasbj\u00f6rk",
+  "sci": "Betula pubescens"
+ },
+ "MX.38972": {
+  "fin": "hiirenvirna",
+  "swe": "kr\u00e5kvicker",
+  "sci": "Vicia cracca"
+ },
+ "MX.39959": {
+  "fin": "huopavoikeltano",
+  "swe": "gr\u00e5fibbla",
+  "sci": "Pilosella officinarum"
+ },
+ "MX.37984": {
+  "fin": "isonokkonen",
+  "swe": "br\u00e4nn\u00e4ssla",
+  "sci": "Urtica dioica"
+ },
+ "MX.40639": {
+  "fin": "j\u00e4rviruoko",
+  "swe": "vass",
+  "sci": "Phragmites australis"
+ },
+ "MX.39158": {
+  "fin": "j\u00e4ttipalsami",
+  "swe": "j\u00e4ttebalsamin",
+  "sci": "Impatiens glandulifera"
+ },
+ "MX.39130": {
+  "fin": "k\u00e4enkaali",
+  "swe": "harsyra",
+  "sci": "Oxalis acetosella"
+ },
+ "MX.38598": {
+  "fin": "kanerva",
+  "swe": "ljung",
+  "sci": "Calluna vulgaris"
+ },
+ "MX.37826": {
+  "fin": "kataja",
+  "swe": "en",
+  "sci": "Juniperus communis"
+ },
+ "MX.39589": {
+  "fin": "keltakannusruoho",
+  "swe": "gulsporre",
+  "sci": "Linaria vulgaris"
+ },
+ "MX.39292": {
+  "fin": "keltamatara",
+  "swe": "gulm\u00e5ra",
+  "sci": "Galium verum"
+ },
+ "MX.37962": {
+  "fin": "keltamo",
+  "swe": "skel\u00f6rt",
+  "sci": "Chelidonium majus"
+ },
+ "MX.38844": {
+  "fin": "ketohanhikki",
+  "swe": "g\u00e5s\u00f6rt",
+  "sci": "Argentina anserina"
+ },
+ "MX.38150": {
+  "fin": "ketoneilikka",
+  "swe": "backnejlika",
+  "sci": "Dianthus deltoides"
+ },
+ "MX.39368": {
+  "fin": "ketoruusuruoho",
+  "swe": "\u00e5kerv\u00e4dd",
+  "sci": "Knautia arvensis"
+ },
+ "MX.39970": {
+  "fin": "kielo",
+  "swe": "liljekonvalj",
+  "sci": "Convallaria majalis"
+ },
+ "MX.39711": {
+  "fin": "kissankello",
+  "swe": "liten bl\u00e5klocka",
+  "sci": "Campanula rotundifolia"
+ },
+ "MX.40488": {
+  "fin": "koiranhein\u00e4",
+  "swe": "hund\u00e4xing",
+  "sci": "Dactylis glomerata"
+ },
+ "MX.39185": {
+  "fin": "koiranputki",
+  "swe": "hundk\u00e4x",
+  "sci": "Anthriscus sylvestris"
+ },
+ "MX.38950": {
+  "fin": "komealupiini",
+  "swe": "blomsterlupin",
+  "sci": "Lupinus polyphyllus"
+ },
+ "MX.37713": {
+  "fin": "kortteet",
+  "swe": "fr\u00e4knar",
+  "sci": "Equisetum"
+ },
+ "MX.37857": {
+  "fin": "kullero",
+  "swe": "sm\u00f6rbollar",
+  "sci": "Trollius europaeus"
+ },
+ "MX.39727": {
+  "fin": "kultapiisku",
+  "swe": "gullris",
+  "sci": "Solidago virgaurea"
+ },
+ "MX.38815": {
+  "fin": "kurtturuusu",
+  "swe": "vresros",
+  "sci": "Rosa rugosa"
+ },
+ "MX.38836": {
+  "fin": "kyl\u00e4kellukka",
+  "swe": "nejlikrot\u00a0",
+  "sci": "Geum urbanum"
+ },
+ "MX.43979": {
+  "fin": "lehtoruusukesammal",
+  "swe": "rosmossa",
+  "sci": "Rhodobryum roseum"
+ },
+ "MX.39847": {
+  "fin": "leskenlehti",
+  "swe": "h\u00e4sthov",
+  "sci": "Tussilago farfara"
+ },
+ "MX.37683": {
+  "fin": "liekokasvit",
+  "swe": "lummerv\u00e4xter",
+  "sci": "Lycopodiaceae"
+ },
+ "MX.39088": {
+  "fin": "maitohorsma",
+  "swe": "mj\u00f6lke",
+  "sci": "Chamaenerion angustifolium"
+ },
+ "MX.38795": {
+  "fin": "mesiangervo",
+  "swe": "\u00e4lggr\u00e4s",
+  "sci": "Filipendula ulmaria"
+ },
+ "MX.38590": {
+  "fin": "mets\u00e4haapa",
+  "swe": "asp",
+  "sci": "Populus tremula"
+ },
+ "MX.43668": {
+  "fin": "mets\u00e4kerrossammal",
+  "swe": "husmossa",
+  "sci": "Hylocomium splendens"
+ },
+ "MX.37812": {
+  "fin": "mets\u00e4kuusi",
+  "swe": "gran",
+  "sci": "Picea abies"
+ },
+ "MX.37819": {
+  "fin": "mets\u00e4m\u00e4nty",
+  "swe": "tall",
+  "sci": "Pinus sylvestris"
+ },
+ "MX.38676": {
+  "fin": "mets\u00e4t\u00e4hti",
+  "swe": "skogsstj\u00e4rna",
+  "sci": "Lysimachia europaea"
+ },
+ "MX.37990": {
+  "fin": "mets\u00e4tammi",
+  "swe": "skogsek",
+  "sci": "Quercus robur"
+ },
+ "MX.39122": {
+  "fin": "mets\u00e4vaahtera",
+  "swe": "skogsl\u00f6nn",
+  "sci": "Acer platanoides"
+ },
+ "MX.38622": {
+  "fin": "mustikka",
+  "swe": "bl\u00e5b\u00e4r",
+  "sci": "Vaccinium myrtillus"
+ },
+ "MX.38797": {
+  "fin": "muurain",
+  "swe": "hjortron",
+  "sci": "Rubus chamaemorus"
+ },
+ "MX.39500": {
+  "fin": "niittyhumala",
+  "swe": "brun\u00f6rt",
+  "sci": "Prunella vulgaris"
+ },
+ "MX.39809": {
+  "fin": "ojak\u00e4rs\u00e4m\u00f6",
+  "swe": "nys\u00f6rt",
+  "sci": "Achillea ptarmica"
+ },
+ "MX.38834": {
+  "fin": "ojakellukka",
+  "swe": "humleblomster",
+  "sci": "Geum rivale"
+ },
+ "MX.39976": {
+  "fin": "oravanmarja",
+  "swe": "ekorrb\u00e4r",
+  "sci": "Maianthemum bifolium"
+ },
+ "MX.40187": {
+  "fin": "osmank\u00e4\u00e4mit",
+  "swe": "kaveldun",
+  "sci": "Typha"
+ },
+ "MX.43502": {
+  "fin": "palmusammal",
+  "swe": "palmmossa",
+  "sci": "Climacium dendroides"
+ },
+ "MX.38804": {
+  "fin": "vadelma",
+  "swe": "skogshallon",
+  "sci": "Rubus idaeus"
+ },
+ "MX.39823": {
+  "fin": "peltosaunio",
+  "swe": "baldersbr\u00e5\u00a0",
+  "sci": "Tripleurospermum inodorum"
+ },
+ "MX.39830": {
+  "fin": "pietaryrtti",
+  "swe": "renfana",
+  "sci": "Tanacetum vulgare"
+ },
+ "MX.39673": {
+  "fin": "piharatamo",
+  "swe": "groblad",
+  "sci": "Plantago major"
+ },
+ "MX.39827": {
+  "fin": "pihasaunio",
+  "swe": "gatkamomill",
+  "sci": "Matricaria discoidea"
+ },
+ "MX.38048": {
+  "fin": "pihat\u00e4htim\u00f6",
+  "swe": "v\u00e5tarv",
+  "sci": "Stellaria media"
+ },
+ "MX.4972544": {
+  "fin": "pihatatar (pihatatarryhm\u00e4)",
+  "swe": "",
+  "sci": "Polygonum aviculare -ryhm\u00e4"
+ },
+ "MX.38910": {
+  "fin": "pihlaja",
+  "swe": "r\u00f6nn",
+  "sci": "Sorbus aucuparia"
+ },
+ "MX.39835": {
+  "fin": "pujo",
+  "swe": "gr\u00e5bo",
+  "sci": "Artemisia vulgaris"
+ },
+ "MX.38131": {
+  "fin": "puna-ailakki",
+  "swe": "r\u00f6dbl\u00e4ra",
+  "sci": "Silene dioica"
+ },
+ "MX.38620": {
+  "fin": "puolukka",
+  "swe": "lingon",
+  "sci": "Vaccinium vitis-idaea"
+ },
+ "MX.38563": {
+  "fin": "raita",
+  "swe": "s\u00e4lg",
+  "sci": "Salix caprea"
+ },
+ "MX.206710": {
+  "fin": "rakkohauru (rakkolev\u00e4)",
+  "swe": "bl\u00e5st\u00e5ng",
+  "sci": "Fucus vesiculosus"
+ },
+ "MX.37993": {
+  "fin": "rauduskoivu",
+  "swe": "v\u00e5rtbj\u00f6rk",
+  "sci": "Betula pendula"
+ },
+ "MX.37863": {
+  "fin": "rentukka",
+  "swe": "kabbleka",
+  "sci": "Caltha palustris"
+ },
+ "MX.39166": {
+  "fin": "ruohokanukka",
+  "swe": "h\u00f6nsb\u00e4r",
+  "sci": "Cornus suecica"
+ },
+ "MX.4994055": {
+  "fin": "sananjalka",
+  "swe": "\u00f6rnbr\u00e4ken",
+  "sci": "Pteridium aquilinum"
+ },
+ "MX.43901": {
+  "fin": "sein\u00e4sammal",
+  "swe": "v\u00e4ggmossa",
+  "sci": "Pleurozium schreberi"
+ },
+ "MX.39871": {
+  "fin": "seittitakiainen",
+  "swe": "ullkardborre",
+  "sci": "Arctium tomentosum"
+ },
+ "MX.39812": {
+  "fin": "siank\u00e4rs\u00e4m\u00f6",
+  "swe": "r\u00f6llika",
+  "sci": "Achillea millefolium"
+ },
+ "MX.43956": {
+  "fin": "sulkasammal",
+  "swe": "kammossa",
+  "sci": "Ptilium crista-castrensis"
+ },
+ "MX.38614": {
+  "fin": "suokukka",
+  "swe": "rosling",
+  "sci": "Andromeda polifolia"
+ },
+ "MX.38605": {
+  "fin": "suopursu",
+  "swe": "skvattram",
+  "sci": "Rhododendron tomentosum"
+ },
+ "MX.39038": {
+  "fin": "valkoapila",
+  "swe": "vitkl\u00f6ver",
+  "sci": "Trifolium repens"
+ },
+ "MX.39467": {
+  "fin": "valkopeippi",
+  "swe": "vitplister",
+  "sci": "Lamium album"
+ },
+ "MX.37879": {
+  "fin": "valkovuokko",
+  "swe": "vitsippa",
+  "sci": "Anemone nemorosa"
+ },
+ "MX.39343": {
+  "fin": "vanamo",
+  "swe": "linnea",
+  "sci": "Linnaea borealis"
+ },
+ "MX.38646": {
+  "fin": "variksenmarja",
+  "swe": "kr\u00e5kb\u00e4r",
+  "sci": "Empetrum nigrum"
+ },
+ "MX.213277": {
+  "fin": "viherahdinparta",
+  "swe": "",
+  "sci": "Cladophora glomerata"
+ },
+ "MX.42419": {
+  "fin": "voikukat",
+  "swe": "maskrosor",
+  "sci": "Taraxacum"
+ },
+ "MX.39201": {
+  "fin": "vuohenputki",
+  "swe": "kirsk\u00e5l",
+  "sci": "Aegopodium podagraria"
+ },
+ "MX.26419": {
+  "fin": "haahka",
+  "swe": "ejder",
+  "sci": "Somateria mollissima",
+  "heading": "Linnut"
+ },
+ "MX.26360": {
+  "fin": "haapana",
+  "swe": "bl\u00e4sand",
+  "sci": "Anas penelope"
+ },
+ "MX.32132": {
+  "fin": "haarap\u00e4\u00e4sky",
+  "swe": "ladusvala",
+  "sci": "Hirundo rustica"
+ },
+ "MX.37122": {
+  "fin": "harakka",
+  "swe": "skata",
+  "sci": "Pica pica"
+ },
+ "MX.26094": {
+  "fin": "harmaahaikara",
+  "swe": "gr\u00e5h\u00e4ger",
+  "sci": "Ardea cinerea"
+ },
+ "MX.27750": {
+  "fin": "harmaalokki",
+  "swe": "gr\u00e5trut",
+  "sci": "Larus argentatus"
+ },
+ "MX.34535": {
+  "fin": "h\u00f6m\u00f6tiainen",
+  "swe": "talltita",
+  "sci": "Poecile montanus"
+ },
+ "MX.26442": {
+  "fin": "isokoskelo",
+  "swe": "storskrake",
+  "sci": "Mergus merganser"
+ },
+ "MX.28715": {
+  "fin": "k\u00e4ki",
+  "swe": "g\u00f6k",
+  "sci": "Cuculus canorus"
+ },
+ "MX.27748": {
+  "fin": "kalalokki",
+  "swe": "fiskm\u00e5s",
+  "sci": "Larus canus"
+ },
+ "MX.30443": {
+  "fin": "k\u00e4pytikka",
+  "swe": "st\u00f6rre hackspett",
+  "sci": "Dendrocopos major"
+ },
+ "MX.35146": {
+  "fin": "keltasirkku",
+  "swe": "gulsparv",
+  "sci": "Emberiza citrinella"
+ },
+ "MX.200535": {
+  "fin": "kesykyyhky",
+  "swe": "tamduva",
+  "sci": "Columba livia domestica"
+ },
+ "MX.34021": {
+  "fin": "kirjosieppo",
+  "swe": "svartvit flugsnappare",
+  "sci": "Ficedula hypoleuca"
+ },
+ "MX.37178": {
+  "fin": "korppi",
+  "swe": "korp",
+  "sci": "Corvus corax"
+ },
+ "MX.36817": {
+  "fin": "kottarainen",
+  "swe": "stare",
+  "sci": "Sturnus vulgaris"
+ },
+ "MX.25837": {
+  "fin": "kuikka",
+  "swe": "storlom",
+  "sci": "Gavia arctica"
+ },
+ "MX.27613": {
+  "fin": "kuovi",
+  "swe": "storspov",
+  "sci": "Numenius arquata"
+ },
+ "MX.27214": {
+  "fin": "kurki",
+  "swe": "trana",
+  "sci": "Grus grus"
+ },
+ "MX.26277": {
+  "fin": "kyhmyjoutsen",
+  "swe": "kn\u00f6lsvan",
+  "sci": "Cygnus olor"
+ },
+ "MX.26280": {
+  "fin": "laulujoutsen",
+  "swe": "s\u00e5ngsvan",
+  "sci": "Cygnus cygnus"
+ },
+ "MX.27459": {
+  "fin": "meriharakka",
+  "swe": "strandskata",
+  "sci": "Haematopus ostralegus"
+ },
+ "MX.26530": {
+  "fin": "merikotka",
+  "swe": "havs\u00f6rn",
+  "sci": "Haliaeetus albicilla"
+ },
+ "MX.26043": {
+  "fin": "merimetso",
+  "swe": "storskarv",
+  "sci": "Phalacrocorax carbo"
+ },
+ "MX.33106": {
+  "fin": "mustarastas",
+  "swe": "koltrast",
+  "sci": "Turdus merula"
+ },
+ "MX.37142": {
+  "fin": "naakka",
+  "swe": "kaja",
+  "sci": "Corvus monedula"
+ },
+ "MX.27774": {
+  "fin": "naurulokki",
+  "swe": "skrattm\u00e5s",
+  "sci": "Larus ridibundus"
+ },
+ "MX.27381": {
+  "fin": "nokikana",
+  "swe": "soth\u00f6na",
+  "sci": "Fulica atra"
+ },
+ "MX.33873": {
+  "fin": "pajulintu",
+  "swe": "l\u00f6vs\u00e5ngare",
+  "sci": "Phylloscopus trochilus"
+ },
+ "MX.30504": {
+  "fin": "palok\u00e4rki",
+  "swe": "spillkr\u00e5ka",
+  "sci": "Dryocopus martius"
+ },
+ "MX.36237": {
+  "fin": "peippo",
+  "swe": "bofink",
+  "sci": "Fringilla coelebs"
+ },
+ "MX.36589": {
+  "fin": "pikkuvarpunen",
+  "swe": "pilfink",
+  "sci": "Passer montanus"
+ },
+ "MX.32801": {
+  "fin": "punarinta",
+  "swe": "r\u00f6dhake",
+  "sci": "Erithacus rubecula"
+ },
+ "MX.36366": {
+  "fin": "punatulkku",
+  "swe": "domherre",
+  "sci": "Pyrrhula pyrrhula"
+ },
+ "MX.33117": {
+  "fin": "r\u00e4k\u00e4ttirastas",
+  "swe": "bj\u00f6rktrast",
+  "sci": "Turdus pilaris"
+ },
+ "MX.27911": {
+  "fin": "sepelkyyhky",
+  "swe": "ringduva",
+  "sci": "Columba palumbus"
+ },
+ "MX.25860": {
+  "fin": "silkkiuikku",
+  "swe": "sk\u00e4ggdopping",
+  "sci": "Podiceps cristatus"
+ },
+ "MX.26373": {
+  "fin": "sinisorsa",
+  "swe": "gr\u00e4sand",
+  "sci": "Anas platyrhynchos"
+ },
+ "MX.34574": {
+  "fin": "sinitiainen",
+  "swe": "bl\u00e5mes",
+  "sci": "Cyanistes caeruleus"
+ },
+ "MX.34567": {
+  "fin": "talitiainen",
+  "swe": "talgoxe",
+  "sci": "Parus major"
+ },
+ "MX.26926": {
+  "fin": "teeri",
+  "swe": "orre",
+  "sci": "Tetrao tetrix"
+ },
+ "MX.26435": {
+  "fin": "telkk\u00e4",
+  "swe": "knipa",
+  "sci": "Bucephala clangula"
+ },
+ "MX.29324": {
+  "fin": "tervap\u00e4\u00e4sky",
+  "swe": "tornseglare",
+  "sci": "Apus apus"
+ },
+ "MX.36306": {
+  "fin": "tikli",
+  "swe": "steglits",
+  "sci": "Carduelis carduelis"
+ },
+ "MX.32608": {
+  "fin": "tilhi",
+  "swe": "sidensvans\u00a0",
+  "sci": "Bombycilla garrulus"
+ },
+ "MX.27527": {
+  "fin": "t\u00f6yht\u00f6hyypp\u00e4",
+  "swe": "tofsvipa",
+  "sci": "Vanellus vanellus"
+ },
+ "MX.26299": {
+  "fin": "valkoposkihanhi",
+  "swe": "vitkindad g\u00e5s",
+  "sci": "Branta leucopsis"
+ },
+ "MX.73566": {
+  "fin": "varis",
+  "swe": "kr\u00e5ka",
+  "sci": "Corvus corone"
+ },
+ "MX.36573": {
+  "fin": "varpunen",
+  "swe": "gr\u00e5sparv",
+  "sci": "Passer domesticus"
+ },
+ "MX.32183": {
+  "fin": "v\u00e4st\u00e4r\u00e4kki",
+  "swe": "s\u00e4des\u00e4rla",
+  "sci": "Motacilla alba"
+ },
+ "MX.36283": {
+  "fin": "viherpeippo",
+  "swe": "gr\u00f6nfink",
+  "sci": "Carduelis chloris"
+ },
+ "MX.36287": {
+  "fin": "vihervarpunen",
+  "swe": "gr\u00f6nsiska",
+  "sci": "Carduelis spinus"
+ },
+ "MX.37641": {
+  "fin": "kyy",
+  "swe": "huggorm",
+  "sci": "Vipera berus",
+  "heading": "Matelijat ja sammakkoel\u00e4imet"
+ },
+ "MX.37639": {
+  "fin": "rantak\u00e4\u00e4rme",
+  "swe": "vanlig snok",
+  "sci": "Natrix natrix"
+ },
+ "MX.37626": {
+  "fin": "rupikonna",
+  "swe": "vanlig padda",
+  "sci": "Bufo bufo"
+ },
+ "MX.37620": {
+  "fin": "ruskosammakot",
+  "swe": "",
+  "sci": "Rana"
+ },
+ "MX.37635": {
+  "fin": "sisilisko",
+  "swe": "skogs\u00f6dla",
+  "sci": "Zootoca vivipara"
+ },
+ "MX.52830": {
+  "fin": "lehtokotilo",
+  "swe": "",
+  "sci": "Arianta arbustorum",
+  "heading": "Muut selk\u00e4rangattomat"
+ },
+ "MX.232411": {
+  "fin": "lierot",
+  "swe": "",
+  "sci": "Lumbricidae"
+ },
+ "MX.213793": {
+  "fin": "maasiirat",
+  "swe": "",
+  "sci": "Oniscidea"
+ },
+ "MX.52802": {
+  "fin": "mets\u00e4etana",
+  "swe": "",
+  "sci": "Arion fuscus"
+ },
+ "MX.52810": {
+  "fin": "pensaskotilo",
+  "swe": "",
+  "sci": "Fruticicola fruticum"
+ },
+ "MX.212392": {
+  "fin": "sinisimpukka",
+  "swe": "bl\u00e5mussla",
+  "sci": "Mytilus trossulus"
+ },
+ "MX.211495": {
+  "fin": "tuhatjalkaiset",
+  "swe": "m\u00e5ngfotingar",
+  "sci": "Myriapoda"
+ },
+ "MX.47503": {
+  "fin": "hirvi",
+  "swe": "\u00e4lg",
+  "sci": "Alces alces",
+  "heading": "Nis\u00e4kk\u00e4\u00e4t"
+ },
+ "MX.46587": {
+  "fin": "kettu",
+  "swe": "r\u00f6dr\u00e4v",
+  "sci": "Vulpes vulpes"
+ },
+ "MX.50471": {
+  "fin": "lepakot",
+  "swe": "fladderm\u00f6ss",
+  "sci": "Chiroptera"
+ },
+ "MX.48243": {
+  "fin": "liito-orava",
+  "swe": "flygekorre",
+  "sci": "Pteromys volans"
+ },
+ "MX.48469": {
+  "fin": "mets\u00e4hiiri",
+  "swe": "st\u00f6rre skogsmus",
+  "sci": "Apodemus flavicollis"
+ },
+ "MX.50106": {
+  "fin": "mets\u00e4j\u00e4nis",
+  "swe": "skogshare",
+  "sci": "Lepus timidus"
+ },
+ "MX.47507": {
+  "fin": "mets\u00e4kauris",
+  "swe": "r\u00e5djur",
+  "sci": "Capreolus capreolus"
+ },
+ "MX.48745": {
+  "fin": "mets\u00e4myyr\u00e4",
+  "swe": "skogssork",
+  "sci": "Myodes glareolus"
+ },
+ "MX.48089": {
+  "fin": "orava",
+  "swe": "ekorre",
+  "sci": "Sciurus vulgaris"
+ },
+ "MX.50515": {
+  "fin": "p\u00e4\u00e4st\u00e4iset",
+  "swe": "vanlig n\u00e4bbmus",
+  "sci": "Soricidae"
+ },
+ "MX.47636": {
+  "fin": "poro",
+  "swe": "",
+  "sci": "Rangifer tarandus"
+ },
+ "MX.49649": {
+  "fin": "rotta",
+  "swe": "brunr\u00e5tta",
+  "sci": "Rattus norvegicus"
+ },
+ "MX.50386": {
+  "fin": "rusakko",
+  "swe": "f\u00e4lthare",
+  "sci": "Lepus europaeus"
+ },
+ "MX.47169": {
+  "fin": "saukko",
+  "swe": "utter",
+  "sci": "Lutra lutra"
+ },
+ "MX.44990": {
+  "fin": "siili",
+  "swe": "igelkott",
+  "sci": "Erinaceus europaeus"
+ },
+ "MX.47629": {
+  "fin": "valkoh\u00e4nt\u00e4kauris",
+  "swe": "vitsvanshjort",
+  "sci": "Odocoileus virginianus"
+ },
+ "MX.72694": {
+  "fin": "haaparousku",
+  "swe": "skogsriska",
+  "sci": "Lactarius trivialis",
+  "heading": "Sienet"
+ },
+ "MX.66900": {
+  "fin": "haavankeltaj\u00e4k\u00e4l\u00e4",
+  "swe": "v\u00e4gglav",
+  "sci": "Xanthoria parietina"
+ },
+ "MX.65567": {
+  "fin": "haavanl\u00e4isk\u00e4j\u00e4k\u00e4l\u00e4",
+  "swe": "blemlav",
+  "sci": "Phlyctis argena"
+ },
+ "MX.65613": {
+  "fin": "harmaar\u00f6yhel\u00f6",
+  "swe": "n\u00e4verlav",
+  "sci": "Platismatia glauca"
+ },
+ "MX.72563": {
+  "fin": "herkkutatti",
+  "swe": "stensopp",
+  "sci": "Boletus edulis"
+ },
+ "MX.67626": {
+  "fin": "isohirvenj\u00e4k\u00e4l\u00e4",
+  "swe": "islandslav",
+  "sci": "Cetraria islandica subsp. islandica"
+ },
+ "MX.66364": {
+  "fin": "isorustoj\u00e4k\u00e4l\u00e4",
+  "swe": "brosklav",
+  "sci": "Ramalina fraxinea"
+ },
+ "MX.73235": {
+  "fin": "kangashapero",
+  "swe": "tegelkremla",
+  "sci": "Russula decolorans"
+ },
+ "MX.235909": {
+  "fin": "k\u00e4ns\u00e4tuhkelo",
+  "swe": "v\u00e5rtig r\u00f6ksvamp",
+  "sci": "Lycoperdon perlatum"
+ },
+ "MX.205931": {
+  "fin": "kantok\u00e4\u00e4p\u00e4",
+  "swe": "klibbticka",
+  "sci": "Fomitopsis pinicola"
+ },
+ "MX.72276": {
+  "fin": "karvarousku",
+  "swe": "sk\u00e4ggriska",
+  "sci": "Lactarius torminosus"
+ },
+ "MX.73001": {
+  "fin": "keltahapero",
+  "swe": "gulkremla",
+  "sci": "Russula claroflava"
+ },
+ "MX.66403": {
+  "fin": "keltakarttaj\u00e4k\u00e4l\u00e4",
+  "swe": "kartlav",
+  "sci": "Rhizocarpon geographicum"
+ },
+ "MX.66887": {
+  "fin": "keltar\u00f6yhel\u00f6",
+  "swe": "granlav",
+  "sci": "Vulpicida pinastri"
+ },
+ "MX.205509": {
+  "fin": "keltasarvikka",
+  "swe": "gullhorn",
+  "sci": "Calocera viscosa"
+ },
+ "MX.205511": {
+  "fin": "keltavahvero",
+  "swe": "kantarell",
+  "sci": "Cantharellus cibarius"
+ },
+ "MX.5081105": {
+  "fin": "korvasieni",
+  "swe": "stenmurkla",
+  "sci": "Gyromitra esculenta"
+ },
+ "MX.205395": {
+  "fin": "lampaank\u00e4\u00e4p\u00e4",
+  "swe": "f\u00e5rticka",
+  "sci": "Albatrellus ovinus"
+ },
+ "MX.72660": {
+  "fin": "limanuljaska",
+  "swe": "citronslemskivling",
+  "sci": "Gomphidius glutinosus"
+ },
+ "MX.205598": {
+  "fin": "mustatorvisieni",
+  "swe": "svart trumpetsvamp",
+  "sci": "Craterellus cornucopioides"
+ },
+ "MX.67212": {
+  "fin": "naavat",
+  "swe": "sk\u00e4gglavar",
+  "sci": "Usnea"
+ },
+ "MX.206058": {
+  "fin": "pakurik\u00e4\u00e4p\u00e4",
+  "swe": "spr\u00e4ngticka",
+  "sci": "Inonotus obliquus"
+ },
+ "MX.65104": {
+  "fin": "palleroporonj\u00e4k\u00e4l\u00e4",
+  "swe": "f\u00f6nsterlav",
+  "sci": "Cladonia stellaris"
+ },
+ "MX.205773": {
+  "fin": "p\u00f6kkel\u00f6k\u00e4\u00e4p\u00e4",
+  "swe": "bj\u00f6rkticka",
+  "sci": "Piptoporus betulinus"
+ },
+ "MX.73056": {
+  "fin": "punak\u00e4rp\u00e4ssieni",
+  "swe": "r\u00f6d flugsvamp",
+  "sci": "Amanita muscaria"
+ },
+ "MX.5102924": {
+  "fin": "punikkitatit",
+  "swe": "tegelsopp agg.",
+  "sci": "Leccinum versipelle group."
+ },
+ "MX.66291": {
+  "fin": "raidanisokarve",
+  "swe": "skrynkellav",
+  "sci": "Parmelia sulcata"
+ },
+ "MX.205932": {
+  "fin": "rusokantok\u00e4\u00e4p\u00e4",
+  "swe": "rosenticka",
+  "sci": "Fomitopsis rosea"
+ },
+ "MX.65804": {
+  "fin": "sormipaisukarve",
+  "swe": "bl\u00e5slav",
+  "sci": "Hypogymnia physodes"
+ },
+ "MX.73119": {
+  "fin": "suippumyrkkyseitikki",
+  "swe": "toppig giftspindling",
+  "sci": "Cortinarius rubellus"
+ },
+ "MX.73330": {
+  "fin": "suomumustesieni",
+  "swe": "fj\u00e4llig bl\u00e4cksvamp",
+  "sci": "Coprinus comatus"
+ },
+ "MX.205515": {
+  "fin": "suppilovahvero",
+  "swe": "trattkantarell",
+  "sci": "Craterellus tubaeformis"
+ },
+ "MX.67279": {
+  "fin": "tummalupot",
+  "swe": "tagellavar",
+  "sci": "Bryoria"
+ },
+ "MX.65724": {
+  "fin": "valkohankaj\u00e4k\u00e4l\u00e4",
+  "swe": "sl\u00e5nlav",
+  "sci": "Evernia prunastri"
+ },
+ "MX.72561": {
+  "fin": "valkok\u00e4rp\u00e4ssieni",
+  "swe": "vit flugsvamp",
+  "sci": "Amanita virosa"
+ }
+}

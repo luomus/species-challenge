@@ -18,7 +18,7 @@ def main(challenge_id_untrusted, participation_id_untrusted):
         # Not participation of this user
         return {"redirect": True, "url": "/"}
 
-    html["taxa_html"] = common_helpers.make_taxa_html(participations, challenge_data["taxon"], participation_data["taxa_json"])
+    html["taxa_html"] = common_helpers.make_taxa_html(participations, challenge_data, participation_data["taxa_json"])
 
     html["challenge_data"] = challenge_data
     html["participation_data"] = participation_data
