@@ -116,8 +116,12 @@ def test_add_edit_participation(browser):
 
     # Add taxa in different ways
     page.fill("#MX_71896", "2024-01-01") # Add by filling in the field
-    page.fill("#MX_71663", "2024-06-01") # Add by filling in the field
     page.click("#MX_73304_id") # Add by clicking the taxon name
+
+    # Add taxon by autocomplete
+    page.fill('input#autocomplete-input', 'valko')
+    page.click('#autocomplete-results > :first-child')
+    page.fill("#MX_66563", "2024-06-01") # Add by filling in the field
 
     # Submit the form
     page.click("#submit_button")
@@ -138,7 +142,7 @@ def test_add_edit_participation(browser):
 
     # Remove taxon in different ways
     page.fill("#MX_71896", "") # Editing field directly
-    page.click('span.clear_date[data-clear-for="MX_71663"]') # Clicking the clear button
+    page.click('span.clear_date[data-clear-for="MX_66563"]') # Clicking the clear button
 
     # Submit the form
     page.click("#submit_button")

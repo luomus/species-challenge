@@ -28,7 +28,7 @@ phpMyAdmin admin UI will be at http://localhost:8080
 
 - Run the app with `docker-compose up; docker-compose down;`
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
-- Run tests with `python -m pytest -v`. Add `-s` option to the end to see print outputs.
+- Run tests with `python -m pytest -v -s`. The `-s` option enables print outputs.
 
 ## OpenShift setup
 
@@ -77,6 +77,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
+* Fix autocomplete-added species min/max dates being 2022-??
 * If user removes name and then trashes the participation, saving fails, and some data disappears.
     * Should removal be completely different procedure, that only UPDATES trashed = 1, and does not UPDATE anything else?
 * Trim whitespace from MX codes, both on read and write
@@ -100,6 +101,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     - Accessibility
     - Challenge sort order (int) for the front page - larger number shown on top
 - Later / nice:
+    - Todo if simple form fullness verification field is not enough: Calculate taxon count on frontend, make backend validate this is same as taxa with dates.
     - Show challenge days also on participation form (in case challenge is open, but challenge period has not yet started)
     - If today is not within date begin and end, don't update taxon datw by clicking taxon name (now updates, but browser validation then prevents saving)
     - Move login_url, api_url, target id yms. konfiguraatiotiedostoon
