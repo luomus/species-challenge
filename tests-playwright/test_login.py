@@ -170,6 +170,53 @@ def test_add_edit_participation(browser):
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
 
+# Set up and edit new school participation
+def test_add_edit_school_participation(browser):
+    context = browser.new_context(storage_state='state.json')
+    page = context.new_page()
+
+    # Access participation adding page
+    page.goto("http://web:8081/haaste/3")
+    page.click("#add_participation")
+    assert "Osallistuminen: Kouluhaaste" in page.content()
+
+    # Fill in fields
+    page.fill("input[name='name']", "Playwright-koulu-nimi")
+    page.fill("#place", "Playwright-koulu-paikka")
+
+    # Add taxa in different ways
+    page.fill("#MX_60910", "2024-08-23") # Add by filling in the field
+    page.click("#MX_204051_id") # Add by clicking the taxon name
+
+    # Add taxon by autocomplete
+#    page.fill('input#autocomplete-input', 'valko')
+#    page.click('#autocomplete-results > :first-child')
+#    page.fill("#MX_66563", "2024-06-01") # Add by filling in the field
+
+    # Submit the form
+    page.click("#submit_button")
+
+    # Check that the participation was added and contains exactly 2 taxa, which were added above
+    page.wait_for_selector(".flash")
+    assert "Osallistumisesi on nyt tallennettu" in page.content()
+    assert "2 lajia" in page.content()
+    assert "Playwright-koulu-nimi" in page.content()
+    assert "Playwright-koulu-paikka" in page.content()
+
+    # Trash the participation
+    page.click("#trash_button")
+    page.click("#confirm_button")
+
+    # Check that trash was successful
+    page.wait_for_selector(".flash")
+    assert "Osallistumisesi on nyt tallennettu" in page.content()
+    assert page.input_value("#trashed") == "1"
+
+    # Check that trashed participation is not visible
+    page.goto("http://web:8081/haaste/3")
+    assert "Et ole osallistunut tähän haasteeseen" in page.content()
+
+
 # Access content with no rights to access
 def test_access_forbidden(browser):
     context = browser.new_context(storage_state='state.json')
