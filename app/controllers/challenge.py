@@ -78,7 +78,7 @@ def make_participant_html(participations):
     
     table += "</table>"
 
-    number_of_participants = common_helpers.get_participant_count(participations, target_count)
+    number_of_participants = common_helpers.get_participant_count(participations, 1)
 
     # Avoid division by zero
     if number_of_participants > 0:

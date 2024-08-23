@@ -350,8 +350,8 @@ def make_taxa_html(participations, challenge_data, taxa_json = ""):
 # Function to calculate how many participants have reached at least a given proportion or number of taxa
 def get_participant_count(participations, target_count):
 
-    # Proprtion
     '''
+    # Proportion, UNTESTED
     proportion = 0.1
     count = 0
     for participation in participations:
@@ -360,10 +360,9 @@ def get_participant_count(participations, target_count):
     '''
 
     # Number
-    limit = 1
     count = 0
     for participation in participations:
-        if participation["taxa_count"] >= limit:
+        if participation["taxa_count"] >= target_count:
             count += 1
 
     return count

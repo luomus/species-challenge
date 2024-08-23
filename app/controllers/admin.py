@@ -33,7 +33,7 @@ def make_participations_stats_html(participations):
     target_taxa_count_reached = 0
     taxa_count_total = 0
 
-    number_of_participants = common_helpers.get_participant_count(participations, target_count)
+    number_of_participants = common_helpers.get_participant_count(participations, 1)
 
     for participation in participations:
         if participation.get("taxa_count", 0) >= target_count:
