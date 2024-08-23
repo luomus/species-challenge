@@ -52,3 +52,13 @@ def test_anon_restricted_pages(browser):
 
     page.close()
 
+
+# Access health status page
+def test_health_page(browser):
+    page = browser.new_page()
+
+    # Access health page
+    page.goto("http://web:8081/health")
+    assert "OK" in page.content()
+
+    page.close() 
