@@ -66,15 +66,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ## Todo
 
-### Changes for v 2.0
-
-- Update code to staging
-- Add new fields to database:
-  ALTER TABLE `challenges` ADD `date_begin` VARCHAR(10) NULL AFTER `year`, ADD `date_end` VARCHAR(10) NULL AFTER `date_begin`;
-- Remove old fields from database:
-  ALTER TABLE `challenges` DROP `year`;
-- Add begin and end date to all challenges
-
 ### Next
 
 * Fix autocomplete-added species min/max dates being 2022-??

@@ -189,9 +189,9 @@ def test_add_edit_school_participation(browser):
     page.click("#MX_204051_id") # Add by clicking the taxon name
 
     # Add taxon by autocomplete
-#    page.fill('input#autocomplete-input', 'valko')
-#    page.click('#autocomplete-results > :first-child')
-#    page.fill("#MX_66563", "2024-06-01") # Add by filling in the field
+    page.fill('input#autocomplete-input', 'valkoapila')
+    page.click('#autocomplete-results > :first-child')
+    page.fill("#MX_39038", "2024-08-23") # Add by filling in the field
 
     # Submit the form
     page.click("#submit_button")
@@ -199,7 +199,7 @@ def test_add_edit_school_participation(browser):
     # Check that the participation was added and contains exactly 2 taxa, which were added above
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
-    assert "2 lajia" in page.content()
+    assert "3 lajia" in page.content()
     assert "Playwright-koulu-nimi" in page.content()
     assert "Playwright-koulu-paikka" in page.content()
 

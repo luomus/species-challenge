@@ -61,13 +61,15 @@ def make_challenges_html(challenges):
     for challenge in challenges:
         participations_html = ""
 
+        challenge_id = f"challenge_{ challenge['challenge_id'] }"
+
         if challenge["status"] == "open" or challenge["status"] == "closed":
             participations_html = "Ei osallistujia" # default value
             participations = get_participations(challenge["challenge_id"])
             if len(participations) > 0:
                 participations_html = make_participations_stats_html(participations)
 
-        html += "<div class='challenge'>\n"
+        html += f"<div class='challenge' id='{ challenge_id }'>\n"
         html += f"<h3>{ challenge['title'] }</a></h3>\n"
         html += participations_html
         html += "<p>"
