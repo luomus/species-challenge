@@ -163,22 +163,26 @@ def valid_taxon_qname(input_string):
 
 def taxon_file_exists(taxon_file_id):
     """
-    Checks if a file exists in ./data/{taxon_file_id}.json.
+    Checks if all necessary taxon files exist in data and static directories.
 
     Args:
     taxon_file_id (str): The taxon file id (from database).
 
     Returns:
-    bool: True if the file exists, False otherwise.
-
-    Todo: This only checks basic file, because additional file is not alwats used. Should check both when they are needed
+    bool: True if all the files exists, False otherwise.
     """
-    filename = "./data/" + taxon_file_id + ".json"
-    basic_file = os.path.isfile(filename)
 
-    if basic_file:
-        return True
-    return False
+    # Loop filenames to check if all of them exist
+    files_to_check = []
+    files_to_check.append("./data/" + taxon_file_id + ".json")
+    files_to_check.append("./data/" + taxon_file_id + "_all.json")
+    files_to_check.append("./static/taxa/" + taxon_file_id + "_all.json")
+
+    for filename in files_to_check:
+        if not os.path.isfile(filename):
+            return False
+
+    return True
 
 
 def load_taxon_file(taxon_file_id):

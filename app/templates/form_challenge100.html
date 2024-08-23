@@ -296,12 +296,19 @@
         {% endif %}
 
         <!-- Show autocomplete only if form is enabled, and this is standard challenge -->
-        {% if html['disabled'] != 'disabled' and html['challenge']['type'] == 'challenge100' %}
+        {% if html['disabled'] != 'disabled' %}
             <div id="autocomplete-container">
-                <label for="autocomplete-input"><h4>Hae lajia tai lisää listan ulkopuolisia lajeja:</h4></label>
-                <input type="text" id="autocomplete-input" placeholder="">
-                <div id="autocomplete-results"></div>
-                <p>Voit lisätä tällä haulla havaintoja myös peruslistan ulkopuolisista lajeista. Muista merkitä havaintopäivämäärä kaikille.</p>
+                {% if html['challenge']['type'] == 'school100' %}
+                    <label for="autocomplete-input"><h4>Hae listan lajeja:</h4></label>
+                    <input type="text" id="autocomplete-input" placeholder="">
+                    <div id="autocomplete-results"></div>
+                    <p>Muista merkitä havaintopäivämäärä kaikille havaitsemillesi lajeille.</p>
+                {% else %}
+                    <label for="autocomplete-input"><h4>Hae lajeja tai lisää listan ulkopuolisia lajeja:</h4></label>
+                    <input type="text" id="autocomplete-input" placeholder="">
+                    <div id="autocomplete-results"></div>
+                    <p>Voit lisätä tällä haulla havaintoja myös peruslistan ulkopuolisista lajeista. Muista merkitä havaintopäivämäärä kaikille.</p>
+                {% endif %}
             </div>
         {% endif %}
 

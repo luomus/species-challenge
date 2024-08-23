@@ -76,14 +76,8 @@ def make_taxa_html(challenge, taxa_dates_json = None):
     }
     """
 
-    # Ordinary challenger: all taxa file 
-    if challenge["type"] == "challenge100":
-        all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
-    # School challenge: only basic taxa file
-    elif challenge["type"] == "school100":
-        all_taxa_names = common_helpers.load_taxon_file(taxon_file_id)
-    else:
-        raise Exception("Unknown challenge type.")
+    # Load all taxa names of this challenge, i.e. autocomplete taxa
+    all_taxa_names = common_helpers.load_taxon_file(taxon_file_id + "_all")
 
     basic_taxa_html = ""
 
@@ -106,56 +100,44 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             del taxa_dates[taxon_id]
 
 
-    # 2) If standard challenge, loop remaining taxa_dates, i.e. the additional taxa user has observed
+    # 2) Loop remaining taxa_dates, i.e. the additional taxa user has observed
+
+    additional_taxa_html = ""
     
-    if "challenge100" == challenge["type"]:
-        # If taxa_dates is empty, set message text
-        if not taxa_dates:
-            additional_taxa_html = "<li class='no_additional_taxa'>Ei peruslistan ulkopuolisia lajeja.</li>\n"
-        else:
-            additional_taxa_html = ""
-            print(taxa_dates)
+    for observed_taxon_id, observed_taxon_date in taxa_dates.items():
 
-        for observed_taxon_id, observed_taxon_date in taxa_dates.items():
+        # Add to additional_taxa_html
+        # Check if taxon exists in all_taxa_names. Might not if 
+        # A) It has been added to Laji.fi after the taxon list on this app has been set up (if using API for autocomplete)
+        # B) basic and all taxon files are not in sync (if using files for autocomplete)
+        fin = "" # default
+        swe = "" # default
+        sci = observed_taxon_id # default
+        if observed_taxon_id in all_taxa_names:
+            sci = all_taxa_names[observed_taxon_id]["sci"]
 
-            # Add to additional_taxa_html
-            # Check if taxon exists in all_taxa_names. Might not if 
-            # A) It has been added to Laji.fi after the taxon list on this app has been set up (if using API for autocomplete)
-            # B) basic and all taxon files are not in sync (if using files for autocomplete)
-            fin = "" # default
-            swe = "" # default
-            sci = observed_taxon_id # default
-            if observed_taxon_id in all_taxa_names:
-                sci = all_taxa_names[observed_taxon_id]["sci"]
+            # Finnish name might not exist
+            if "fin" in all_taxa_names[observed_taxon_id]:
+                fin = all_taxa_names[observed_taxon_id]["fin"]
+    
+            # Swedish name might not exist
+            if "swe" in all_taxa_names[observed_taxon_id]:
+                swe = all_taxa_names[observed_taxon_id]["swe"]
+    
+        additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date)
 
-                # Finnish name might not exist
-                if "fin" in all_taxa_names[observed_taxon_id]:
-                    fin = all_taxa_names[observed_taxon_id]["fin"]
-        
-                # Swedish name might not exist
-                if "swe" in all_taxa_names[observed_taxon_id]:
-                    swe = all_taxa_names[observed_taxon_id]["swe"]
-        
-            additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date)
+    # If additional taxa exist, add title for them
+    if additional_taxa_html:
+        additional_taxa_html = f" <li class='list_heading_3'><h3>Peruslistan ulkopuoliset lajit:</h3></li>\n{ additional_taxa_html }"
 
-        # Combine into a list
-        html = f"""
-            <ul id='taxa'>\n
-            <li class='list_heading_3'><h3>Peruslistan ulkopuoliset lajit:</h3></li>\n
-                { additional_taxa_html }
-            <li class='list_heading_3'><h3>Peruslistan lajit:</h3></li>\n
-                { basic_taxa_html }
-            </ul>\n
-            """
-    else:
-        # Combine into a list
-        html = f"""
-            <ul id='taxa'>\n
-            <li class='list_heading_3'><h3>Lajit:</h3></li>\n
-                { basic_taxa_html }
-            </ul>\n
-            """        
-
+    # Combine into a list
+    html = f"""
+        <ul id='taxa'>\n
+            { additional_taxa_html }
+        <li class='list_heading_3'><h3>Peruslistan lajit:</h3></li>\n
+            { basic_taxa_html }
+        </ul>\n
+        """
 
     return html
 
