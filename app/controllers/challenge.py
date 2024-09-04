@@ -131,14 +131,15 @@ def main(challenge_id_untrusted):
         raise ValueError
     
     challenge_data = common_helpers.get_challenge(challenge_id)
+    # If challenge not found, quietly redirect to homepage
     if not challenge_data:
-#        flash("Tätä haastetta ei löydy.", "info")
         return {"redirect": True, "url": "/"}
     
-    # If challenge is still a draft, redirect to homepage
+    # If challenge is still a draft, quietly redirect to homepage
     if challenge_data["status"] == "draft":
-#        flash("Tämä haaste ei ole juuri nyt avoinna.", "info")
         return {"redirect": True, "url": "/"}
+    
+    # TODO: If challenge is not open anymore
 
     # Participation data
     # Logged in user

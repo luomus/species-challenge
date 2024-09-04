@@ -157,6 +157,7 @@ def test_add_edit_participation(browser):
     assert page.input_value("#MX_71663") == ""
 
     # Trash the participation
+    page.fill("#MX_71822", "2024-01-01") # Add one more taxon to test trashing with changed taxon count
     page.click("#trash_button")
     page.click("#confirm_button")
 

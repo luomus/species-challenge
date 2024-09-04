@@ -152,6 +152,28 @@
         .then(data => speciesData = data);
 
     document.addEventListener('DOMContentLoaded', function() {
+
+        // Count filled in date field before submission 
+        // Todo: Change form name to participation. Side-effects?
+        document.getElementById('challenge').addEventListener('submit', function(event) {
+            
+            // Select all date inputs with the class 'species_date'
+            var dateFields = document.querySelectorAll('#challenge input[type="date"]');
+            var filledCount = 0;
+
+            // Loop through each date field to check if it's filled
+            dateFields.forEach(function(field) {
+                if (field.value) {  // If the field is not empty (i.e., has a value)
+                    filledCount++;
+                }
+            });
+
+            // Set the count in the hidden input field
+            document.getElementById('date_fields_count').value = filledCount;
+            console.log("Number of filled date fields: " + filledCount);
+        });
+
+        // Autocmplete logic
         const input = document.getElementById('autocomplete-input');
         const resultsContainer = document.getElementById('autocomplete-results');
         
@@ -215,7 +237,7 @@
             }, 300); // Wait 300 ms before processing the input
         });
     });
-
+  
     </script>
 
 {% endblock %}
@@ -276,6 +298,9 @@
             >
         </p>
 
+        <!-- Hidden input field to store the count of filled date fields -->
+        <input type="hidden" id="date_fields_count" name="date_fields_count">
+
         <p id="submit_container">
             <button type="submit" id="submit_button">Tallenna osallistuminen</button>
         </p>
@@ -315,9 +340,6 @@
         <fieldset {{ html['disabled'] }}>
         {{ html['taxa']|safe }}
         </fieldset>
-
-        <!-- Hidden form field -->
-        <input type="hidden" name="form_completed" value="ready">
 
     </form>
 

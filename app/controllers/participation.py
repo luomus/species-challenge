@@ -248,6 +248,10 @@ def validate_participation_data(form_data):
     else:
         form_data["place"] = ""
 
+    # 0) Add trashed if not present
+    if "trashed" not in form_data:
+        form_data["trashed"] = False
+
     # Handle taxon data
     # 1) Extract taxon data from form data
     taxa_data = taxa_to_dict(form_data)
@@ -261,12 +265,22 @@ def validate_participation_data(form_data):
         if not common_helpers.is_yyyy_mm_dd(value):
             del taxa_data[key]
 
-    # 4) Add trashed if not present
-    if "trashed" not in form_data:
-        form_data["trashed"] = False
-
-    # 5) Calculate number of species
+    # 4) Calculate number of species
     form_data["taxa_count"] = len(taxa_data)
+
+    # 5) Compare to date_fields_count, to see if all fields were received from the browser
+    #    Do this only if user is not trashing / has not trashed the participation
+    if form_data["trashed"] == True or form_data["trashed"] == 1 or form_data["trashed"] == "1":
+        print("Trashed, skipping date_fields_count check.")
+    else:
+        if "date_fields_count" in form_data:
+#            print("Taxa count: ", form_data["taxa_count"])
+#            print("Date field count: ", form_data["date_fields_count"])
+
+            if form_data["taxa_count"] != int(form_data["date_fields_count"]):
+                raise Exception(f"Received incomplete data from browser (expected { form_data['date_fields_count'] } taxa, received { form_data['taxa_count'] }).")
+        else:
+            raise Exception("Received incomplete data from browser (date_fields_count missing).")
 
     # 6) Convert to JSON string (for database JSON field) where dates are YYYY-MM-DD
     # Note: form_data still has the original taxon data
@@ -382,10 +396,6 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Note that optional empty fields like "place" need to be put back to the form data - this is donw at validation step.
         # Todo: Maybe instead remove only empty taxon fields here?
         form_data = {key: value for key, value in form_data.items(multi=True) if value}
-
-        # First check that form is fully received by checking that field form_completed has value "ready"
-        if "form_completed" not in form_data or form_data["form_completed"] != "ready":
-            raise Exception("Received incomplete data from browser.")
 
         errors, form_data = validate_participation_data(form_data)
 
