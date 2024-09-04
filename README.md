@@ -1,8 +1,12 @@
-# 100 Species Challenge Web Service
+# 100 Species Challenge Web App
 
-A web app designed for organizing and participating in wildlife observation challenges, specifically targeting the identification of 100 species. In these challenges, participants aim to observe a hundred different species of plants, fungi, or insects over the course of a year.
+The 100 Species Challenge web app is designed to facilitate wildlife observation challenges, specifically focused on observing 100 species. These challenges, open to the general public, encourage participants to observe and document 100 different species of plants, fungi, or insects over the course of a year.
 
-Backend application built with Flask. Database on MariaDB. Depends on FinBIF Laji-auth authentication service (Laji.fi). Funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/).
+The app allows administrators to create and manage multiple challenges, and users can participate in one or more challenges simultaneously. Participants can enter their name or nickname, location, and observed species with dates. The app tracks progress, showing who has completed the challenge, along with an aggregated list of all observed species. Users can also compare their personal observations against the total species recorded in each challenge.
+
+The backend is built using Flask, with MariaDB as the database, and is designed to run on the Rahti 2 OpenShift environment provided by CSC. User authentication is handled through the FinBIF Laji-auth service (Laji.fi).
+
+The 100 Species Challenge (100 lajia -haaste) project is funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/). The live production version is available at https://100lajia.luomus.fi
 
 ![alt text](./app/static/screencapture.png)
 
@@ -30,7 +34,16 @@ phpMyAdmin admin UI will be at http://localhost:8080
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
 - Run tests with `python -m pytest -v -s`. The `-s` option enables print outputs.
 
-## OpenShift setup
+## Deploying to Rahti 2
+
+- Run e2e-tests
+- Merge changes to main, if deploying production version
+- Check that build is successful at https://github.com/luomus/species-challenge/actions
+- Select deployment from https://console-openshift-console.apps.2.rahti.csc.fi/k8s/ns/species-challenge/deployments
+- Actions > Restart rollout
+- Check that everything works
+
+## OpenShift setup notes
 
 Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump does not work. You need to create the dump on the command line:
 
