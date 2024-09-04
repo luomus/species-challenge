@@ -1,12 +1,12 @@
 # 100 Species Challenge Web App
 
-The 100 Species Challenge web app is designed to facilitate wildlife observation challenges, specifically focused on observing 100 species. These challenges, open to the general public, encourage participants to observe and document 100 different species of plants, fungi, or insects over the course of a year.
+This 100 Species Challenge web app is designed to facilitate wildlife observation challenges, specifically focused on observing 100 species. These challenges, open to the general public, encourage participants to observe and document 100 different species of plants, fungi, or insects over the course of a year.
 
-The app allows administrators to create and manage multiple challenges, and users can participate in one or more challenges simultaneously. Participants can enter their name or nickname, location, and observed species with dates. The app tracks progress, showing who has completed the challenge, along with an aggregated list of all observed species. Users can also compare their personal observations against the total species recorded in each challenge.
+The app allows administrators to create and manage multiple challenges, with different species lists and timespans. Users can participate in one or more challenges simultaneously. Participants can enter their name/nickname, location, and observed species with dates. The app tracks progress, showing who has completed the challenge, along with an aggregated list of all observed species. Users can also compare their personal observations against the total species recorded in each challenge.
 
 The app is built using Python/Flask and minimal vanilla Javascript, with MariaDB as the database. It is designed to run on the Rahti 2 OpenShift environment provided by CSC. User authentication is handled through the FinBIF Laji-auth service (Laji.fi). E2E testing is done with Playwright.
 
-The 100 Species Challenge (Sata lajia -haaste) project is funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/). The live production version is available at https://100lajia.luomus.fi
+The live production app is available at https://100lajia.luomus.fi The 100 Species Challenge (Sata lajia -haaste) project is funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/). 
 
 ![alt text](./app/static/screencapture.png)
 
