@@ -69,8 +69,10 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 ### Next
 
 * Fix autocomplete-added species min/max dates being 2022-??
-* If user removes name and then trashes the participation, saving fails, and some data disappears.
+* Refactor trashing. Now issues with 
     * Should removal be completely different procedure, that only UPDATES trashed = 1, and does not UPDATE anything else?
+    * field value can be "1" or true, "0" or false
+    * If user removes name and then trashes the participation, saving fails, and some data disappears.
 * Trim whitespace from MX codes, both on read and write
 * On Safari, scroll date errors in view: https://chat.openai.com/share/cf043643-8b07-4394-b10e-30a383d54479
 * On safari, autocomplete shows list bullets
