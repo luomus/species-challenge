@@ -4,9 +4,9 @@ The 100 Species Challenge web app is designed to facilitate wildlife observation
 
 The app allows administrators to create and manage multiple challenges, and users can participate in one or more challenges simultaneously. Participants can enter their name or nickname, location, and observed species with dates. The app tracks progress, showing who has completed the challenge, along with an aggregated list of all observed species. Users can also compare their personal observations against the total species recorded in each challenge.
 
-The backend is built using Flask, with MariaDB as the database, and is designed to run on the Rahti 2 OpenShift environment provided by CSC. User authentication is handled through the FinBIF Laji-auth service (Laji.fi).
+The app is built using Python/Flask and minimal vanilla Javascript, with MariaDB as the database. It is designed to run on the Rahti 2 OpenShift environment provided by CSC. User authentication is handled through the FinBIF Laji-auth service (Laji.fi). E2E testing is done with Playwright.
 
-The 100 Species Challenge (100 lajia -haaste) project is funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/). The live production version is available at https://100lajia.luomus.fi
+The 100 Species Challenge (Sata lajia -haaste) project is funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/). The live production version is available at https://100lajia.luomus.fi
 
 ![alt text](./app/static/screencapture.png)
 
