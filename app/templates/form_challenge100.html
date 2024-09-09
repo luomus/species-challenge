@@ -160,11 +160,13 @@
             // Select all date inputs with the class 'species_date'
             var dateFields = document.querySelectorAll('#challenge input[type="date"]');
             var filledCount = 0;
+            var uniqueIds = new Set(); // Create a Set to store unique field IDs
 
             // Loop through each date field to check if it's filled
             dateFields.forEach(function(field) {
-                if (field.value) {  // If the field is not empty (i.e., has a value)
+                if (field.value && !uniqueIds.has(field.id)) {  // If the field is filled and ID is not a duplicate
                     filledCount++;
+                    uniqueIds.add(field.id);  // Add the ID to the Set to prevent duplicates
                 }
             });
 
