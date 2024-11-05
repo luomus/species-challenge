@@ -196,6 +196,8 @@ def load_taxon_file(taxon_file_id):
     dict: A dictionary containing the taxon file data.
     """
     file_path = f"./data/{ taxon_file_id }.json"
+    print(file_path)
+
     with open(file_path, 'r') as file:
         taxa_names = json.load(file)
 
@@ -382,3 +384,17 @@ def date_to_fi(date_begin, date_end):
 
     # Else return formatted date range
     return f"{ date_begin_parts[2] }.{ date_begin_parts[1] }.{ date_begin_parts[0] } &ndash; { date_end_parts[2] }.{ date_end_parts[1] }.{ date_end_parts[0] }"
+
+
+def make_safe_filename(original_string):
+    # Replace spaces with underscores
+    safe_string = original_string.replace(" ", "_")
+    
+    # Remove any character that is not a letter, number, underscore, or hyphen
+    safe_string = re.sub(r'[^\w\-_]', '', safe_string)
+    
+    # Limit the length of the filename if necessary
+    max_length = 255  # Adjust this limit as needed
+    safe_string = safe_string[:max_length]
+    
+    return safe_string

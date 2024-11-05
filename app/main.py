@@ -1,11 +1,12 @@
 # Flask app main file.
 
-from flask import Flask, render_template, redirect, session, g, flash, request, send_from_directory
+from flask import Flask, render_template, redirect, session, g, flash, request, send_from_directory, make_response
 
 from functools import wraps
 from datetime import timedelta
 import sys
 import os
+import io
 import requests
 from datetime import datetime
 
@@ -146,6 +147,26 @@ def participation_stats(challenge_id_untrusted, participation_id_untrusted):
         return redirect(html['url'])
 
     return render_template("participation_stats.html", html=html)
+
+
+import controllers.participation_download
+@app.route("/lataa/<string:challenge_id_untrusted>/<string:participation_id_untrusted>")
+@login_required
+def participation_download(challenge_id_untrusted, participation_id_untrusted):
+    data = controllers.participation_download.main(challenge_id_untrusted, participation_id_untrusted)
+
+    if data.get('redirect'):
+        return redirect(data['url'])
+
+    # Create an in-memory text stream
+    tsv_file = io.StringIO(data['tsv'])
+    
+    # Create a response with the file
+    response = make_response(tsv_file.getvalue())
+    response.headers["Content-Disposition"] = f"attachment; filename={data['filename']}"
+    response.headers["Content-Type"] = "text/tab-separated-values"
+    
+    return response
 
 
 import controllers.admin_challenge
