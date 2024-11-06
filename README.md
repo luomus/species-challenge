@@ -100,8 +100,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 ### Features todo
 
 - Test:
-    - Automated testing with Playwright
-        - Admin editing challenges (requires setting up admin username limited to this system & saving that to Playwright env)
+    - If some assertions fails, also trashing the participation wil faill, which make all future tests fail as well.
 - For 2025:
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Accessibility

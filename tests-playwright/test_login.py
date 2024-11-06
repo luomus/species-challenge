@@ -111,8 +111,8 @@ def test_add_edit_participation(browser):
     assert "Osallistuminen: Sienihaaste" in page.content()
 
     # Fill in fields
-    page.fill("input[name='name']", "Playwright-nimi")
-    page.fill("#place", "Playwright-paikka")
+    page.fill("input[name='name']", "Playwright-nimi poistotesti")
+    page.fill("#place", "Playwright-paikka poistotesti")
 
     # Add taxa in different ways
     page.fill("#MX_71896", "2024-01-01") # Add by filling in the field
@@ -130,8 +130,8 @@ def test_add_edit_participation(browser):
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert "3 lajia" in page.content()
-    assert "Playwright-nimi" in page.content()
-    assert "Playwright-paikka" in page.content()
+    assert "Playwright-nimi poistotesti" in page.content()
+    assert "Playwright-paikka poistotesti" in page.content()
 
     # Access own stats
     page.click("text=Tilastoja tästä osallistumisesta")
@@ -139,6 +139,18 @@ def test_add_edit_participation(browser):
 
     # Back to editing the participation
     page.click("#subnavi a")
+
+    # Access data download page
+    # Start listening for a download
+    with page.expect_download() as download_info:
+        # Trigger the download by navigating to the URL or clicking the download link
+        page.click("text=Omat lajit taulukkona")
+    
+    # Retrieve the download object from the `expect_download` context
+    download = download_info.value
+
+    # Verify the file extension if needed (e.g., ".tsv")
+    assert download.suggested_filename.endswith(".tsv")
 
     # Remove taxon in different ways
     page.fill("#MX_71896", "") # Editing field directly
