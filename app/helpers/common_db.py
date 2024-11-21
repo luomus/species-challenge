@@ -1,4 +1,4 @@
-# Common database functions.
+# Common database functions shared by the application.
 
 import mysql.connector
 from contextlib import contextmanager
@@ -11,6 +11,15 @@ class DatabaseConnectionError(Exception):
 
 
 def none_to_empty_string(row):
+    """
+    Converts None values in a row to empty strings.
+
+    Args:
+        row (tuple): The row to be converted.
+
+    Returns:
+        tuple: The row with None values replaced by empty strings    
+    """
     return ["" if column is None else column for column in row]
 
 
