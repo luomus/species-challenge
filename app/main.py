@@ -198,12 +198,12 @@ def login_page():
     person_token_untrusted = request.args.get('token', None)
 
     if "localhost" == g.itsystem_name:
-        login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
-        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+        login_url = "https://fmnh-ws-test-24.it.helsinki.fi/laji-auth/login?target=KE.1521&redirectMethod=GET&locale=fi&next="
+        api_url = "https://fmnh-ws-test-24.it.helsinki.fi/laji-auth/token/"
         target = "KE.1521"
     elif "development" == g.itsystem_name:
-        login_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/login?target=KE.1522&redirectMethod=GET&locale=fi&next="
-        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+        login_url = "https://fmnh-ws-test-24.it.helsinki.fi/laji-auth/login?target=KE.1522&redirectMethod=GET&locale=fi&next="
+        api_url = "https://fmnh-ws-test-24.it.helsinki.fi/laji-auth/token/"
         target = "KE.1522"
     elif "production" == g.itsystem_name:
         login_url = "https://login.laji.fi/login?target=KE.1741&redirectMethod=GET&locale=fi&next="
@@ -288,9 +288,9 @@ def login_page():
 @app.route("/logout")
 def logout():
     if "localhost" == g.itsystem_name:
-        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+        api_url = "https://fmnh-ws-test-24.it.helsinki.fi/laji-auth/token/"
     elif "development" == g.itsystem_name:
-        api_url = "https://fmnh-ws-test.it.helsinki.fi/laji-auth/token/"
+        api_url = "https://fmnh-ws-test-24.it.helsinki.fi/laji-auth/token/"
     elif "production" == g.itsystem_name:
         api_url = "https://login.laji.fi/laji-auth/token/"
 
