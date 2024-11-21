@@ -36,9 +36,7 @@ The 100 Species Challenge (Sata lajia -haaste) project is funded by [Kone Founda
    - Copy `.env.example` to `.env` and configure variables
    - Copy `playwright.example.env` to `playwright.env` for testing
 - Build Docker image `docker build -t species-challenge:latest .`
-- Startup with one of these commands:
-    - With Playwright: `docker-compose up build playwright; docker-compose down;`
-    - Without Playwright: `docker-compose up; docker-compose down;`
+- Startup `docker compose up; docker compose down;`
 - Initialize database:
     - Access phpMyAdmin at http://localhost:8080
     - Import `./sql/species_challenge_dev.sql`
@@ -47,7 +45,7 @@ The application will be visible http://localhost:8081
 
 ## Running tests
 
-- Run the app with `docker-compose up; docker-compose down;`
+- Run the app
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
 - Run tests with `python -m pytest -v -s`. The `-s` option enables print outputs.
 
