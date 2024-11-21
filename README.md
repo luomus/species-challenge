@@ -1,32 +1,49 @@
 # 100 Species Challenge Web App
 
+[![Build Status](https://github.com/luomus/species-challenge/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/luomus/species-challenge/actions)
+[![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Deployment](https://img.shields.io/badge/deploy-Rahti_2_OpenShift-red.svg)](https://100lajia.luomus.fi)
+[![Database](https://img.shields.io/badge/database-MariaDB-blue.svg)](https://mariadb.org/)
+[![Testing](https://img.shields.io/badge/testing-Playwright-green.svg)](https://playwright.dev)
+
 This 100 Species Challenge web app is designed to facilitate wildlife observation challenges, specifically focused on observing 100 species. These challenges, open to the general public, encourage participants to observe and document 100 different species of plants, fungi, or insects over the course of a year.
 
 The app allows administrators to create and manage multiple challenges, with different species lists and timespans. Users can participate in one or more challenges simultaneously. Participants can enter their name/nickname, location, and observed species with dates. The app tracks progress, showing who has completed the challenge, along with an aggregated list of all observed species. Users can also compare their personal observations against the total species recorded in each challenge.
 
 The app is built using Python/Flask and minimal vanilla Javascript, with MariaDB as the database. It is designed to run on the Rahti 2 OpenShift environment provided by CSC. User authentication is handled through the FinBIF Laji-auth service (Laji.fi). E2E testing is done with Playwright.
 
-The live production app is available at https://100lajia.luomus.fi The 100 Species Challenge (Sata lajia -haaste) project is funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/). 
+The live production app is available at https://100lajia.luomus.fi
+
+The 100 Species Challenge (Sata lajia -haaste) project is funded by [Kone Foundation, 2023](https://koneensaatio.fi/en/grants-and-residencies/sata-lajia-haaste-2/). 
 
 ![alt text](./app/static/screencapture.png)
 
 ## Development setup
 
+### Prerequisites
+
+- Docker and Docker Compose
+- Git
+- Access to FinBIF Laji-auth service
+
+### Setup
+
 - Clone this repository `git clone ...`
 - Switch to dev branch `git checkout dev`
 - Optionally change development database password to `docker-entrypoint-initdb.d/init_db.sql`
-- Set up environment variables to `.env.` and `playwright.example` Use example files as templates.
+- Set up environment variables:
+   - Copy `.env.example` to `.env` and configure variables
+   - Copy `playwright.example.env` to `playwright.env` for testing
 - Build Docker image `docker build -t species-challenge:latest .`
 - Startup with one of these commands:
     - With Playwright: `docker-compose up build playwright; docker-compose down;`
     - Without Playwright: `docker-compose up; docker-compose down;`
-- Set up database:
-    - phpMyAdmin is available at http://localhost:8080
-    - Import file from ´./sql/species_challenge_dev.sql´
+- Initialize database:
+    - Access phpMyAdmin at http://localhost:8080
+    - Import `./sql/species_challenge_dev.sql`
 
-Site will be visible http://localhost:8081
-
-phpMyAdmin admin UI will be at http://localhost:8080 
+The application will be visible http://localhost:8081
 
 ## Running tests
 
@@ -38,9 +55,11 @@ phpMyAdmin admin UI will be at http://localhost:8080
 
 - Run e2e-tests
 - Merge changes to main, if deploying production version
+- Git push to GitHub
 - Check that build is successful at https://github.com/luomus/species-challenge/actions
 - Select deployment from https://console-openshift-console.apps.2.rahti.csc.fi/k8s/ns/species-challenge/deployments
 - Actions > Restart rollout
+- Wait until "0 scaling to 1" disappears 
 - Check that everything works
 
 ## OpenShift setup notes
