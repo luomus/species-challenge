@@ -6,6 +6,7 @@ import os
 
 from urllib.parse import urljoin, urlparse, parse_qs
 
+
 def extract_token(url):
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
@@ -59,7 +60,7 @@ def test_login_and_save_state(browser):
 
     # Issue: Playwright cannot follow these login redirections, but gets stuck at /login.
     # Workaround: extract token and navigate to /login manually.
-    token = extract_token(page.url)
+    token = extract_token(page.url)    
     page.goto("http://web:8081/login?token=" + token)
 
     page.wait_for_selector('#logout')

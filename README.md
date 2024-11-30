@@ -49,6 +49,8 @@ The application will be visible http://localhost:8081
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
 - Run tests with `python -m pytest -v -s`. The `-s` option enables print outputs.
 
+- Note: if tests fail with `page.goto("http://web:8081/login?token=nonrealtoken")`, restart the Docker containers and try again.
+
 ## Deploying to Rahti 2
 
 - Run e2e-tests
