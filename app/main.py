@@ -78,7 +78,7 @@ def set_security_headers(response):
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     response.headers['X-Permitted-Cross-Domain-Policies'] = 'none'
-    response.headers['Feature-Policy'] = "microphone 'none'"
+    response.headers['Permissions-Policy'] = "geolocation=(), microphone=()"
     return response
 
 # Make data available for templates
