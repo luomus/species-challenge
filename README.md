@@ -101,6 +101,8 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 ### Next
 
 * Fix autocomplete-added species min/max dates being 2022-??
+* Make challenge cards use uniform height
+* Challenge sort order (int) for the front page - larger number shown on top
 * Refactor trashing. Now issues with 
     * Should removal be completely different procedure, that only UPDATES trashed = 1, and does not UPDATE anything else?
     * field value can be "1" or true, "0" or false
@@ -123,7 +125,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 - For 2025:
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Accessibility
-    - Challenge sort order (int) for the front page - larger number shown on top
 - Later / nice:
     - Todo if simple form fullness verification field is not enough: Calculate taxon count on frontend, make backend validate this is same as taxa with dates.
     - Show challenge days also on participation form (in case challenge is open, but challenge period has not yet started)

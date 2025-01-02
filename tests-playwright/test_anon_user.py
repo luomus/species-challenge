@@ -12,7 +12,7 @@ def test_anon_public_pages(browser):
     assert "Kirjaudu sisään" in page.content()
 
     # Access challenge page
-    page.click("text=Sienihaaste 2024 Playwright")
+    page.click("text=Sienihaaste 2025 Playwright")
     assert "Playwright-paikka" in page.content()
     assert "Osallistujat ovat havainneet yhteensä" in page.content()
 

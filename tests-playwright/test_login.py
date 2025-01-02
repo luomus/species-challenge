@@ -91,8 +91,8 @@ def test_own_data(browser):
     assert "<h1>Omat osallistumiset</h1>" in page.content()
     assert "Teppo Playwright" in page.content()
 
-    # Access challenge this person hasn't participated in 
-    page.goto("http://web:8081/haaste/5")
+    # Access challenge this person hasn't participated in, and is not going to participate in this test script
+    page.goto("http://web:8081/haaste/6")
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
     # Access challenge this person hasn't participated in 
@@ -105,6 +105,8 @@ def test_add_edit_participation(browser):
     context = browser.new_context(storage_state='state.json')
     page = context.new_page()
 
+    date_to_fill_in = "2025-01-01" # NOTE: this will fail when year changes, see below.
+
     # Access participation adding page
     page.goto("http://web:8081/haaste/5")
     page.click("#add_participation")
@@ -115,18 +117,19 @@ def test_add_edit_participation(browser):
     page.fill("#place", "Playwright-paikka poistotesti")
 
     # Add taxa in different ways
-    page.fill("#MX_71896", "2024-01-01") # Add by filling in the field
-    page.click("#MX_73304_id") # Add by clicking the taxon name
+    page.fill("#MX_71896", date_to_fill_in) # Add by filling in the field
+    page.click("#MX_73304_id") # Add by clicking the taxon name. 
 
     # Add taxon by autocomplete
-    page.fill('input#autocomplete-input', 'valko')
+    page.fill('input#autocomplete-input', 'valkorisakasryh')
     page.click('#autocomplete-results > :first-child')
-    page.fill("#MX_66563", "2024-06-01") # Add by filling in the field
+    page.fill("#MX_72622", date_to_fill_in) # Add by filling in the field
 
     # Submit the form
     page.click("#submit_button")
 
     # Check that the participation was added and contains exactly 3 taxa, which were added above
+    # NOTE: when year changes, this test will fail, because adding observation with today's date will not be accepted by browser validation. You need to update dates in the challenge and this file.
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert "3 lajia" in page.content()
@@ -154,7 +157,7 @@ def test_add_edit_participation(browser):
 
     # Remove taxon in different ways
     page.fill("#MX_71896", "") # Editing field directly
-    page.click('span.clear_date[data-clear-for="MX_66563"]') # Clicking the clear button
+    page.click('span.clear_date[data-clear-for="MX_72622"]') # Clicking the clear button
 
     # Submit the form
     page.click("#submit_button")
@@ -169,7 +172,7 @@ def test_add_edit_participation(browser):
     assert page.input_value("#MX_71663") == ""
 
     # Trash the participation
-    page.fill("#MX_71822", "2024-01-01") # Add one more taxon to test trashing with changed taxon count
+    page.fill("#MX_71822", date_to_fill_in) # Add one more taxon to test trashing with changed taxon count
     page.click("#trash_button")
     page.click("#confirm_button")
 
