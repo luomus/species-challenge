@@ -175,7 +175,7 @@
             console.log("Number of filled date fields: " + filledCount);
         });
 
-        // Autocmplete logic
+        // Autocomplete logic
         const input = document.getElementById('autocomplete-input');
         const resultsContainer = document.getElementById('autocomplete-results');
         
@@ -203,8 +203,9 @@
                         const taxaList = document.getElementById('taxa');
                         const newLi = document.createElement('li');
                         
-                        const min = {{ html['challenge']['date_begin'] }};
-                        let max = {{ html['challenge']['date_end'] }};
+                        const min = "{{ html['challenge']['date_begin'] }}";
+                        let max = "{{ html['challenge']['date_end'] }}";
+                        
                         // If max date is in future, make it today instead
                         if (max > new Date().toISOString().split('T')[0]) {
                             max = new Date().toISOString().split('T')[0];

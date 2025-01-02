@@ -100,7 +100,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
-* Fix autocomplete-added species min/max dates being 2022-??
 * Make challenge cards use uniform height
 * Challenge sort order (int) for the front page - larger number shown on top
 * Refactor trashing. Now issues with 
@@ -113,7 +112,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Setup
 
-- Version numbering?
 - More robust error handling and restart? Try with triggering syntax error.
 - Database sorting/collation settings utf8mb4_swedish_ci?
 - Backup monitoring
@@ -121,7 +119,8 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 ### Features todo
 
 - Test:
-    - If some assertions fails, also trashing the participation wil faill, which make all future tests fail as well.
+    - Check: If some assertions fail, also trashing the participation will fail, which can leave undeleted participations behind.
+    - Login fails intermittently with "TypeError: can only concatenate str (not "NoneType") to str"
 - For 2025:
     - Handling higher taxa (is uses adds rikkavoikukka, don't add voikukat to taxon_count)
     - Accessibility
