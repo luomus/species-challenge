@@ -305,9 +305,13 @@ def make_taxa_html(participations, challenge_data, taxa_json = ""):
     number_of_participations = len(participations)
 
     taxa_counts = dict()
-    for participation in participations:
+    for single_participation in participations:
+        # Fill in taxa_json if empty. Should not be possible, but happened in dev.
+        if not single_participation["taxa_json"]:
+            single_participation["taxa_json"] = "{}"
+
         # Get taxa dict from taxa_json field
-        taxa = json.loads(participation["taxa_json"])
+        taxa = json.loads(single_participation["taxa_json"])
         
         for taxon_id, date in taxa.items():
             if taxon_id not in taxa_counts:
