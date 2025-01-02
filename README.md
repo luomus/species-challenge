@@ -100,6 +100,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
+* Mobile usability & overflow
 * Make challenge cards use uniform height
 * Challenge sort order (int) for the front page - larger number shown on top
 * Refactor trashing. Now issues with 
@@ -108,7 +109,6 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     * If user removes name and then trashes the participation, saving fails, and some data disappears.
 * Trim whitespace from MX codes, both on read and write
 * On Safari, scroll date errors in view: https://chat.openai.com/share/cf043643-8b07-4394-b10e-30a383d54479
-* On safari, autocomplete shows list bullets
 
 ### Setup
 
