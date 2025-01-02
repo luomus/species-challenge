@@ -100,7 +100,7 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
-* Mobile usability & overflow
+* Mobile usability
 * Make challenge cards use uniform height
 * Challenge sort order (int) for the front page - larger number shown on top
 * Refactor trashing. Now issues with 

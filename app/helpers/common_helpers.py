@@ -319,7 +319,7 @@ def make_taxa_html(participations, challenge_data, taxa_json = ""):
     number_of_taxa = len(taxa_counts_sorted)
 
     html = f"<p>Osallistujat ovat havainneet yhteensä { number_of_taxa } lajia.</p>"
-    html += "<table id='taxa_results'>"
+    html += "<div class='table-container'>\n<table id='taxa_results'>"
     html += "<tr><th>Laji</th><th>Havaintoja</th><th>%</th></tr>"
     for taxon_id, count in taxa_counts_sorted:
         taxon_observed_class = "not_observed" # default
@@ -348,7 +348,7 @@ def make_taxa_html(participations, challenge_data, taxa_json = ""):
         html += f"<td>{ str(round(((count / number_of_participations) * 100), 1)).replace('.', ',') } %</td>"
         html += "</tr>"
 
-    html += "</table>"
+    html += "</table>\n</div>"
     
     return html
 

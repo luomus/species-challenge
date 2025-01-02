@@ -38,7 +38,7 @@ def make_participant_html(participations):
     html = ""
     table = ""
 
-    table += "<table id='participant_results'>"
+    table += "<div class='table-container'>\n<table id='participant_results'>"
     table += "<tr><th>Osallistuja</th><th>Paikka</th><th>Lajimäärä</th>"
     if g.is_admin:
         table += "<th>Käyttäjä</th>"
@@ -76,7 +76,7 @@ def make_participant_html(participations):
         if participation["taxa_count"] >= target_count:
             target_taxa_count_reached += 1
     
-    table += "</table>"
+    table += "</table>\n</div>"
 
     number_of_participants = common_helpers.get_participant_count(participations, 1)
 
