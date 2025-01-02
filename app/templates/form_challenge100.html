@@ -342,7 +342,8 @@
             </div>
         {% endif %}
 
-        <fieldset {{ html['disabled'] }}>
+        <!-- Note: This fieldset must not be disabled, because that will disable submitting the data, not just editing it. -->
+        <fieldset>
         {{ html['taxa']|safe }}
         </fieldset>
 

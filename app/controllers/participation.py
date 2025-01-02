@@ -9,7 +9,12 @@ import json
 import os
 
 
-def make_species_html(id, fin, swe, sci, min_date, max_date, date):
+def make_species_html(id, fin, swe, sci, min_date, max_date, date, challenge_status):
+
+    # Readonly if participation is closed
+    readonly_value = ""
+    if "closed" == challenge_status:
+        readonly_value = "readonly"
 
     id_html = id.replace(".", "_").replace(" ", "")
     if swe:
@@ -18,7 +23,7 @@ def make_species_html(id, fin, swe, sci, min_date, max_date, date):
     html = f"""
         <li>
             <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
-            <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ id }' value='{ date }' min='{ min_date }' max='{ max_date }'>
+            <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ id }' value='{ date }' min='{ min_date }' max='{ max_date }' {readonly_value}>
             <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
             <a href='https://laji.fi/taxon/{ id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
         </li>\n"""
@@ -93,7 +98,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         swe = taxon_data.get("swe", "")
         sci = taxon_data.get("sci", "")
 
-        basic_taxa_html += make_species_html(taxon_id, fin, swe, sci, min_date, max_date, taxa_dates.get(taxon_id, ''))
+        basic_taxa_html += make_species_html(taxon_id, fin, swe, sci, min_date, max_date, taxa_dates.get(taxon_id, ''), challenge["status"])
 
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
         if taxon_id in taxa_dates:
@@ -124,7 +129,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             if "swe" in all_taxa_names[observed_taxon_id]:
                 swe = all_taxa_names[observed_taxon_id]["swe"]
     
-        additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date)
+        additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date, challenge["status"])
 
     # If additional taxa exist, add title for them
     if additional_taxa_html:
@@ -274,8 +279,8 @@ def validate_participation_data(form_data):
         print("Trashed, skipping date_fields_count check.")
     else:
         if "date_fields_count" in form_data:
-#            print("Taxa count: ", form_data["taxa_count"])
-#            print("Date field count: ", form_data["date_fields_count"])
+            print("Taxa count: ", form_data["taxa_count"])
+            print("Date field count: ", form_data["date_fields_count"])
 
             if form_data["taxa_count"] != int(form_data["date_fields_count"]):
                 raise Exception(f"Received incomplete data from browser (expected { form_data['date_fields_count'] } taxa, received { form_data['taxa_count'] }).")
