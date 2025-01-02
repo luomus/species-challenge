@@ -11,9 +11,9 @@ import os
 
 def make_species_html(id, fin, swe, sci, min_date, max_date, date, challenge_status):
 
-    # Readonly if participation is closed
+    # Readonly if participation is closed or draft
     readonly_value = ""
-    if "closed" == challenge_status:
+    if challenge_status != "open":
         readonly_value = "readonly"
 
     id_html = id.replace(".", "_").replace(" ", "")
