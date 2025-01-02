@@ -233,6 +233,48 @@ def test_add_edit_school_participation(browser):
     assert "Et ole osallistunut tähän haasteeseen" in page.content()
 
 
+# Edit participation to a closed challenge
+def test_edit_closed_challenge(browser):
+    context = browser.new_context(storage_state='state.json')
+    page = context.new_page()
+
+    # Access participation edit page
+    page.goto("http://web:8081/osallistuminen/1/181")
+
+    # Check that challenge is closed
+    assert "Tämä haaste on suljettu" in page.content()
+
+    # Fill in fields that are still editable
+    page.fill("input[name='name']", "Suljettu testi Playwright 2")
+    page.fill("#place", "Testi 2")
+    
+    # Submit the form
+    page.click("#submit_button")
+
+    # Check that the edit was successful
+    page.wait_for_selector(".flash")
+    assert "Tämä haaste on suljettu" in page.content()
+
+    # Check that fields are filled in with values set above
+    assert page.input_value("input[name='name']") == "Suljettu testi Playwright 2"
+    assert page.input_value("#place") == "Testi 2"
+
+    # Revert content back to original
+    page.fill("input[name='name']", "Suljettu testi Playwright")
+    page.fill("#place", "Testi")
+
+    # Submit the form
+    page.click("#submit_button")
+
+    # Check that the edit was successful
+    page.wait_for_selector(".flash")
+    assert "Tämä haaste on suljettu" in page.content()
+
+    # Check that fields are filled in with values set above
+    assert page.input_value("input[name='name']") == "Suljettu testi Playwright"
+    assert page.input_value("#place") == "Testi"
+
+
 # Access content with no rights to access
 def test_access_forbidden(browser):
     context = browser.new_context(storage_state='state.json')
