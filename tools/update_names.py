@@ -1,4 +1,5 @@
 # Script to fetch species names from FinBIF API and update the species names in the species list
+# This was used to update names after challenge 2024 had already started.
 
 import requests
 import json

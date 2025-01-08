@@ -69,16 +69,38 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
     mariadb-dump --user=USERNAME --password --lock-tables --databases DATABASENAME > ./species-challenge.sql
 
 
+## Setting up new challenge
+
+If new challenge uses taxon lists that differ from previous challenges, make new lists like this:
+
+### Basic taxa list
+
+- Add a list of basic taxa to `app/data/`, e.g. `plantae_2024.json`.
+
+### All allowed taxa list
+
+- Download list of all allowed taxa from Laji.fi. Use English UI to get column names in English. This link has preset filters for plant challenge:
+   - https://laji.fi/en/taxon/list?target=MX.37601&onlyFinnish=true&taxonRanks=MX.species
+   - Note that must contain all taxa that the basic list above contains, including non-species like 'voikukka'.
+- Convert the file to json using `tools/create_name_file.py`.
+- Copy this list to two places: `app/data/` (for backend) and `static/taxa/` (for frontend autocomplete), e.g. `plantae_2024_all.json`.
+
+### Notes about handling taxon names
+
+Taxon names are handled in local files for few reasons:
+
+- This makes it explicit which taxa are included. Challenges might have very specific rules which taxa are included, and not all these are supported by FinBIF API.
+- If taxon concepts or names change during a challenge, this might create confusion with participants. Having a fixed list of taxa prevents this.
+- Autocomplete works much faster with a local file than by using the FinBIF API.
+
 ## Notes
 
-- Setting up new challenge
-    - Provide list of basic taxa to `app/data/`, e.g. `plantae_2024.json` or use one of the existing ones.
-    - Provide list of all allowed taxa to `app/data/` (for backend) and `static/taxa/` (for frontend autocomplete), e.g. `plantae_2024_all.json`. This must contain all taxa that the basic list above contains, icnluding non-species.
 - Challenges-table has field for autocomplete-parameters, but these are not currently used. Instead autocomplete uses static file as described above. This is to 
     - Make it faster than API calls (nearly instantaneous)
     - Allow more flexibility, e.g. having only few higher taxa in addition to species
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages, and has limitations based on browser.
 - When challenge is in draft or closed state, editing it still needs to be possible, e.g. to anonymize or trash it. Therefore only editing species list is disabled by setting the date fields disabled, and not enabling  Javascript to change them either.
+
 
 #### Future: To have a new challenge type, you would need to:
 
@@ -100,7 +122,8 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ### Next
 
-* White removes comma from name & locality?
+* Add alternative names to autocomplete, e.g. kanttarelli, and order the list based on species commonness
+* What removes comma & point from name & locality?
 * Mobile usability
 * Make challenge cards use uniform height
 * Challenge sort order (int) for the front page - larger number shown on top

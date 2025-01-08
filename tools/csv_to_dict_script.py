@@ -1,9 +1,11 @@
+# Script to convert a CSV file from project coordinator to a json file for this app.
+# Note: this is made for format in fall 2024
 
 import pandas as pd
 
 def csv_to_dict(file_path, id = 'id'):
     """
-    Converts a CSV file from Laji.fi to a dictionary.
+    Converts a CSV file to a dictionary.
     Uses the 'id' column as keys and the remaining columns as values.
     """
     # Read the CSV file with the correct delimiter
