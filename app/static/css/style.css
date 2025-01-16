@@ -464,6 +464,10 @@ button:active {
     color: #777;
 }
 
+#submit_button {
+    background-image: linear-gradient(to top, #1fad2b 0%, #39cc34 80%, #34cc3c 100%)
+}
+
 /* TABLES */
 
 .table-container {
