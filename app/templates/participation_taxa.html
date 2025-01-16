@@ -1,0 +1,86 @@
+<!-- Template for a page that displays a single participation and statistics about it. -->
+
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Lajit: {{ html['challenge_data']['title'] }} - 100 lajia</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.getElementById('taxa');
+            const headers = table.querySelectorAll('th');
+            let currentSort = { column: -1, asc: true };
+
+            headers.forEach((header, index) => {
+                header.addEventListener('click', () => {
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+                    
+                    // Toggle sort direction if clicking same column
+                    if (currentSort.column === index) {
+                        currentSort.asc = !currentSort.asc;
+                    } else {
+                        currentSort.asc = true;
+                    }
+                    currentSort.column = index;
+
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        const aVal = a.cells[index].textContent.trim();
+                        const bVal = b.cells[index].textContent.trim();
+                        
+                        if (index === 3) { // Date column
+                            return currentSort.asc ? 
+                                new Date(aVal) - new Date(bVal) :
+                                new Date(bVal) - new Date(aVal);
+                        }
+                        
+                        return currentSort.asc ? 
+                            aVal.localeCompare(bVal) :
+                            bVal.localeCompare(aVal);
+                    });
+
+                    // Update table
+                    const tbody = table.querySelector('tbody');
+                    rows.forEach(row => tbody.appendChild(row));
+
+                    // Update sort indicators
+                    headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+                    header.classList.add(currentSort.asc ? 'sort-asc' : 'sort-desc');
+                });
+            });
+        });
+    </script>
+    <style>
+        #taxa th {
+            cursor: pointer;
+            position: relative;
+            padding-right: 20px;
+        }
+        #taxa th::after {
+            content: '↕';
+            position: absolute;
+            right: 5px;
+        }
+        #taxa th.sort-asc::after {
+            content: '↑';
+        }
+        #taxa th.sort-desc::after {
+            content: '↓';
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+<h1>{{ html['challenge_data']['title'] }} &ndash; {{ html['participation_data']['name'] }}, {{ html['participation_data']['place'] }}</h1>
+
+<p id="subnavi"><a href="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}">&laquo; Takaisin omaan osallistumiseen</a></p>
+
+<p>Olet havainnut {{ html['participation_data']['taxa_count']|safe }} lajia.</p>
+
+<p><a href="/lataa/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Omat lajit CSV-tiedostona</a></p>
+
+{{ html['taxa_html']|safe }}
+
+
+
+{% endblock %}

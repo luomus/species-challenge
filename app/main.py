@@ -160,6 +160,18 @@ def participation_stats(challenge_id_untrusted, participation_id_untrusted):
     return render_template("participation_stats.html", html=html)
 
 
+import controllers.participation_taxa
+@app.route("/lajit/<string:challenge_id_untrusted>/<string:participation_id_untrusted>")
+@login_required
+def participation_taxa(challenge_id_untrusted, participation_id_untrusted):
+    html = controllers.participation_taxa.main(challenge_id_untrusted, participation_id_untrusted)
+
+    if html.get('redirect'):
+        return redirect(html['url'])
+
+    return render_template("participation_taxa.html", html=html)
+
+
 import controllers.participation_download
 @app.route("/lataa/<string:challenge_id_untrusted>/<string:participation_id_untrusted>")
 @login_required
