@@ -241,7 +241,6 @@
             }, 300); // Wait 300 ms before processing the input
         });
     });
-  
     </script>
 
 {% endblock %}
@@ -310,6 +309,8 @@
             <button type="submit" id="submit_button">Tallenna osallistuminen</button>
         </p>
 
+        <button type="button" id="sort_button">Järjestä aakkosjärjestykseen</button> Voit palauttaa listan alkuperäiseen järjestykseen tallentamalla osallistumisen.
+
         {% if 'taxa_count' not in html['data_fields'] %}
             <!-- Empty form -->
         {% else %}
@@ -348,5 +349,42 @@
         </fieldset>
 
     </form>
+
+    <script>
+
+    // Sorting taxa list
+    // Select the list element
+    const taxaList = document.getElementById('taxa');
+
+    // Get all list items except the headings
+    function sortTaxaList() {
+        // Remove all heading elements first
+        const headings = Array.from(taxaList.children).filter(item => 
+            item.classList.contains('list_heading_3') || item.classList.contains('list_heading_4')
+        );
+        headings.forEach(item => taxaList.removeChild(item));
+
+        // Get and sort the remaining list items
+        const listItems = Array.from(taxaList.children);
+        listItems.sort((a, b) => {
+            const nameA = a.querySelector('.taxon_name').textContent.trim().toLowerCase();
+            const nameB = b.querySelector('.taxon_name').textContent.trim().toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+
+        // Remove all items from the DOM
+        listItems.forEach(item => taxaList.removeChild(item));
+
+        // Append the sorted list items back to the list
+        taxaList.append(...listItems);
+    }
+
+    // Attach the sorting function to an existing HTML button
+    const existingSortButton = document.getElementById('sort_button');
+    if (existingSortButton) {
+        existingSortButton.addEventListener('click', sortTaxaList);
+    }
+
+    </script>
 
 {% endblock %}
