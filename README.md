@@ -158,3 +158,9 @@ Taxon names are handled in local files for few reasons:
     - My participation species accumulation chart
     - Activity stats, e.g. users active during last 7 days, new participations
     - Maybe: Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
+- Out of scope:
+    - Sorting taxa on entry form. Could cause confusion because
+        - New additional taxa would not be sorted
+        - Same species via basic & additional taxa would show together
+        - Loses headings
+        - Sorting cannot be undone, without major development, including taxon sort order to taxon lists
