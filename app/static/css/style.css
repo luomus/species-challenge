@@ -303,10 +303,13 @@ a:visited {
 #challenge_results_container {
     display: flex;
     flex-wrap: wrap;
+    gap: 1em;
 }
   
 #challenge_results_container div {
-    flex: 1;
+    flex: 1 1 300px;
+    min-width: 300px;
+    max-width: 100%;
     padding-right: 1em;
 }
 
@@ -454,6 +457,7 @@ button:active {
 
 .anchor_link li {
     list-style-type: none;
+    margin: 0;
 }
 
 .anchor_link li a span {
