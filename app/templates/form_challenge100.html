@@ -283,32 +283,34 @@
         </div>
         {% endif %}
 
-        <p>
-            <label for="name">Osallistujan nimi tai nimimerkki (pakollinen):</label><br>
-            <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                value="{{ html['data_fields'].get('name', '') }}"
-            required>
-        </p>
+        <div id="main_form">
+            <p>
+                <label for="name"><strong>Osallistujan nimi tai nimimerkki (pakollinen):</strong></label><br>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    value="{{ html['data_fields'].get('name', '') }}"
+                required>
+            </p>
 
-        <p>
-            <label for="place">Paikka (vapaaehtoinen): Haasteeseen osallistumisen tärkein havainnointipaikka.  Voit lisätä kenttään myös laajemman alueen tai useamman paikannimen (esim. <em>Pääkaupunkiseutu</em> tai <em>Tampere ja Lappeenranta</em>).</label><br>
-            <input 
-                type="text" 
-                id="place" 
-                name="place" 
-                value="{{ html['data_fields'].get('place', '') }}" 
-            >
-        </p>
+            <p>
+                <label for="place"><strong>Paikka (vapaaehtoinen):</strong> Haasteeseen osallistumisen tärkein havainnointipaikka.  Voit lisätä kenttään myös laajemman alueen tai useamman paikannimen (esim. <em>Pääkaupunkiseutu</em> tai <em>Tampere ja Lappeenranta</em>).</label><br>
+                <input 
+                    type="text" 
+                    id="place" 
+                    name="place" 
+                    value="{{ html['data_fields'].get('place', '') }}" 
+                >
+            </p>
 
-        <!-- Hidden input field to store the count of filled date fields -->
-        <input type="hidden" id="date_fields_count" name="date_fields_count">
+            <!-- Hidden input field to store the count of filled date fields -->
+            <input type="hidden" id="date_fields_count" name="date_fields_count">
 
-        <p id="submit_container">
-            <button type="submit" id="submit_button">Tallenna osallistuminen</button>
-        </p>
+            <p id="submit_container">
+                <button type="submit" id="submit_button">Tallenna osallistuminen</button>
+            </p>
+        </div>
 
         {% if 'taxa_count' not in html['data_fields'] %}
             <!-- Empty form -->

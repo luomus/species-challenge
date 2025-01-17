@@ -31,7 +31,7 @@ def main(challenge_id_untrusted, participation_id_untrusted):
     participation_dict = json.loads(participation_data["taxa_json"])
 
     # Loop participation_data["taxa_json"], which contains observed taxon codes and dates
-    html["taxa_html"] = "<table id='taxa'><thead><tr><th>Suomenkielinen nimi</th><th>Ruotsinkielinen nimi</th><th>Tieteellinen nimi</th><th>Havaintopäivämäärä</th></tr></thead><tbody>"
+    html["taxa_html"] = "<div class='table-container'>\n<table id='taxa'>\n<thead>\n<tr>\n<th>Suomenkielinen nimi</th><th>Ruotsinkielinen nimi</th><th>Tieteellinen nimi</th><th>Havaintopäivämäärä</th>\n</tr>\n</thead>\n<tbody>\n"
 
     for taxon_id, date in participation_dict.items():
         fin_name = taxa_names[taxon_id].get('fin', "")
@@ -39,9 +39,8 @@ def main(challenge_id_untrusted, participation_id_untrusted):
         sci_name = taxa_names[taxon_id].get('sci', "")
         full_taxon_id = f"http://tun.fi/{taxon_id}"
 
-        row = f"<tr><td>{fin_name}</td><td>{swe_name}</td><td><em>{sci_name}</em></td><td>{date}</td></tr>"
+        row = f"<tr><td>{fin_name}</td><td>{swe_name}</td><td><em>{sci_name}</em></td><td>{date}</td></tr>\n"
         html["taxa_html"] += row
 
-    html["taxa_html"] += "</tbody></table>"
-
+    html["taxa_html"] += "</tbody>\n</table>\n</div>\n"
     return html

@@ -15,22 +15,35 @@
         {{ html["participations_html"]|safe }}
     </div>
 
-    <ul class="only_mobi anchor_link">
-        <li>
-            <a href="#challenge_participants">Hyppää osallistujaluetteloon</a>
-        </li>
-    </ul>
-
     <div id="challenge_results_container">
 
+        <ul class="only_mobi anchor_link">
+            <li>
+                <a href="#challenge_participants"><span>⬇ </span>Osallistujaluetteloon</a>
+            </li>
+        </ul>
+    
         <div id="challenge_species">
             <h2>Havaitut lajit</h2>
             {{ html["taxa_html"]|safe }}
         </div>
+
+        <ul class="only_mobi anchor_link">
+            <li>
+                <a href="#content"><span>⬆ </span>Alkuun</a>
+            </li>
+        </ul>
+
         <div id="challenge_participants">
             <h2>Osallistujat</h2>
             {{ html["participant_html"]|safe }}
         </div>
+
+        <ul class="only_mobi anchor_link">
+            <li>
+                <a href="#content"><span>⬆ </span>Alkuun</a>
+            </li>
+        </ul>
     </div>
 
 

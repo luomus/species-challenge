@@ -14,6 +14,10 @@
 
 <p>Olet havainnut {{ html['participation_data']['taxa_count']|safe }} lajia ✅.</p>
 
-{{ html['taxa_html']|safe }}
+<div id="challenge_results_container">
+    <div id="challenge_species">
+        {{ html['taxa_html']|safe }}
+    </div>
+</div>
 
 {% endblock %}
