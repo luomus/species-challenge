@@ -18,11 +18,13 @@
         <li>Email: <a href="mailto:100lajia@helsinki.fi">100lajia@helsinki.fi</a></li>
         <li>Instagram: <a href="https://www.instagram.com/100lajia_haaste/" target="_top">@100lajia_haaste</a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61557025145815" target="_top">Facebook</a></li>
-        <li><a href="https://luomus.fi/fi/100-lajia-haaste" target="_top">Lisätietoa</a></li>
+        <li><a href="https://www.helsinki.fi/fi/luomus/havainnot-ja-seurannat/100-lajia-haaste" target="_top">Lisätietoa</a></li>
     </ul>
 
     {% if g.user_data %}
-        <h3 class="strong_link"><a href="/oma">Omat osallistumiset</a></h3>
+        <div id="challenge_mine">
+            <h3 class="strong_link"><a href="/oma">Omat osallistumiset</a></h3>
+        </div>
     {% else %}
         <h3 class="strong_link"><a href="/login">Kirjaudu sisään</a> osallistuaksesi haasteisiin ja nähdäksesi omat osallistumisesi.</h3>
     {% endif %}

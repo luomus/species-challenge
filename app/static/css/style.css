@@ -114,9 +114,6 @@ a:visited {
     text-decoration: none;
 }
 
-
-
-
 #login_p {
     font-size: 120%;
 }
@@ -234,7 +231,7 @@ a:visited {
     padding: 1em;
     background-color: #fff;
     float: left;
-    min-height: 8em;
+    height: 9em;
     box-shadow: #ccc 4px 4px 4px;
 }
 
@@ -286,16 +283,20 @@ a:visited {
 
 #challenge_mine {
     background-color: #fff;
-    padding: 0 1em 0.5em 1em;
-    border-radius: 10px;
+    padding: 1em;
+    border-left: 5px solid #1F74AD;
+    margin-top: 1em;
+    box-shadow: #ccc 4px 4px 4px;
 }
 
-#challenge_mine h2 {
+#challenge_mine h2, #challenge_mine h3 {
     margin: 0;
+    padding-top: 0;
 }
 
 #challenge_mine li {
     margin-top: 0.5em;
+    font-weight: bold;
 }
 
 #challenge_mine li a {
