@@ -79,7 +79,11 @@
 
 <p><a href="/lataa/{{ html["challenge_id"] }}/{{ html['participation_id'] }}">Omat lajit CSV-tiedostona</a></p>
 
-{{ html['taxa_html']|safe }}
+<div id="challenge_results_container">
+    <div id="challenge_species">
+        {{ html['taxa_html']|safe }}
+    </div>
+</div>
 
 
 
