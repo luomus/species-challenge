@@ -32,6 +32,9 @@ def main(challenge_id_untrusted, participation_id_untrusted):
 
     # Loop participation_data["taxa_json"], which contains observed taxon codes and dates
     for taxon_id, date in participation_dict.items():
+        # Skip if taxon not found, can happen if taxon list is changed after the challenge has been created
+        if not taxon_id in taxa_names:
+            continue
         fin_name = taxa_names[taxon_id].get('fin', "")
         swe_name = taxa_names[taxon_id].get('swe', "")
         sci_name = taxa_names[taxon_id].get('sci', "")

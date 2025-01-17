@@ -34,6 +34,9 @@ def main(challenge_id_untrusted, participation_id_untrusted):
     html["taxa_html"] = "<div class='table-container'>\n<table id='taxa'>\n<thead>\n<tr>\n<th>Suomenkielinen nimi</th><th>Ruotsinkielinen nimi</th><th>Tieteellinen nimi</th><th>Havaintopäivämäärä</th>\n</tr>\n</thead>\n<tbody>\n"
 
     for taxon_id, date in participation_dict.items():
+        # Skip if taxon not found, can happen if taxon list is changed after the challenge has been created
+        if not taxon_id in taxa_names:
+            continue
         fin_name = taxa_names[taxon_id].get('fin', "")
         swe_name = taxa_names[taxon_id].get('swe', "")
         sci_name = taxa_names[taxon_id].get('sci', "")
