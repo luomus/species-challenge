@@ -143,17 +143,24 @@ def test_add_edit_participation(browser):
     # Back to editing the participation
     page.click("#subnavi a")
 
-    # Access data download page
-    # Start listening for a download
+    # Access own species list
+    page.click("text=Omat lajit taulukkona")
+    assert "Olet havainnut 3 lajia" in page.content()
+    assert "valkorisakasryh" in page.content()
+
+    # Access data download
     with page.expect_download() as download_info:
         # Trigger the download by navigating to the URL or clicking the download link
-        page.click("text=Omat lajit taulukkona")
+        page.click("text=Omat lajit CSV-tiedostona")
     
     # Retrieve the download object from the `expect_download` context
     download = download_info.value
 
     # Verify the file extension if needed (e.g., ".tsv")
     assert download.suggested_filename.endswith(".tsv")
+
+    # Back to editing the participation
+    page.click("#subnavi a")
 
     # Remove taxon in different ways
     page.fill("#MX_71896", "") # Editing field directly
