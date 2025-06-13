@@ -71,7 +71,10 @@ Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump doe
 
 ## Setting up new challenge
 
-If new challenge uses taxon lists that differ from previous challenges, make new lists like this:
+If new challenge uses taxon lists that differ from previous challenges, make new lists like this. 
+
+* Note: if you update only the basic taxa list, you have to check that it matches the all allowed taxa list.
+* Note: School contests done't have additional taxa, so basic and all taxa files are similar.
 
 ### Basic taxa list
 

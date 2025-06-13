@@ -104,6 +104,7 @@ def root():
     return render_template("index.html", html=html)
 
 
+
 import controllers.my
 @app.route("/oma")
 @login_required
