@@ -49,7 +49,11 @@ The application will be visible http://localhost:8081
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
 - Run tests with `python -m pytest -v -s`. The `-s` option enables print outputs.
 
-- Note: if tests fail with `page.goto("http://web:8081/login?token=nonrealtoken")`, restart the Docker containers and try again.
+### Dealing with test issues:
+
+- If tests fail with `page.goto("http://web:8081/login?token=nonrealtoken")`, restart the Docker containers and try again.
+- If tests fail with `TypeError: can only concatenate str (not "NoneType") to str` check that playwright.env contains working username & password for production Laji.fi.
+
 
 ## Deploying to Rahti 2
 
@@ -57,7 +61,7 @@ The application will be visible http://localhost:8081
 - Merge changes to main, if deploying production version
 - Git push to GitHub
 - Check that build is successful at https://github.com/luomus/species-challenge/actions
-- Select deployment from https://console-openshift-console.apps.2.rahti.csc.fi/k8s/ns/species-challenge/deployments
+- Select deployment from https://console.rahti.csc.fi/k8s/ns/species-challenge/deployments
 - Actions > Restart rollout
 - Wait until "0 scaling to 1" disappears 
 - Check that everything works
