@@ -96,17 +96,15 @@ If new challenge uses taxon lists that differ from previous challenges, make new
 
 Taxon names are handled in local files for few reasons:
 
-- This makes it explicit which taxa are included. Challenges might have very specific rules which taxa are included, and not all these are supported by FinBIF API.
-- If taxon concepts or names change during a challenge, this might create confusion with participants. Having a fixed list of taxa prevents this.
+- This makes it explicit which taxa are included. Challenges might have very specific rules which taxa are included (e.g. including some genera, excluding some species), and not all these are supported by FinBIF API.
+- If taxon concepts or names change, or taxa are removed during a challenge, this can create confusion with participants. Having a fixed list of taxa prevents this.
 - Autocomplete works much faster with a local file than by using the FinBIF API.
 
 ## Notes
 
-- Challenges-table has field for autocomplete-parameters, but these are not currently used. Instead autocomplete uses static file as described above. This is to 
-    - Make it faster than API calls (nearly instantaneous)
-    - Allow more flexibility, e.g. having only few higher taxa in addition to species
+- Challenges-table has field for autocomplete-parameters, but these are not currently used. Instead autocomplete uses static file as described above.
 - The UI prevents setting dates that are outside the challenge dates, and dates in the future. This relies on min & max attributes on the date field and browser validation and error messages, and has limitations based on browser.
-- When challenge is in draft or closed state, editing it still needs to be possible, e.g. to anonymize or trash it. Therefore only editing species list is disabled by setting the date fields disabled, and not enabling  Javascript to change them either.
+- When challenge is in draft or closed state, editing it still needs to be possible, e.g. to anonymize or trash it. Therefore only editing species list is disabled by setting the date fields disabled, and not enabling Javascript to change them either.
 
 
 #### Future: To have a new challenge type, you would need to:
