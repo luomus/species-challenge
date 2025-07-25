@@ -126,8 +126,8 @@ def clean_int(input_string):
     
 
 def sanitize_name(name):
-    # Allow Unicode letter characters, spaces, hyphens, and apostrophes
-    pattern = re.compile(r'[^\w\s\'-]', re.UNICODE)
+    # Allow Unicode letter characters, spaces, hyphens, apostrophes, commas, and periods
+    pattern = re.compile(r'[^\w\s\'-.,]', re.UNICODE)
     return pattern.sub('', name)
 
 

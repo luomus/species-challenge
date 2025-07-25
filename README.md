@@ -127,8 +127,7 @@ Taxon names are handled in local files for few reasons:
 
 ### Next
 
-* Add alternative names to autocomplete, e.g. kanttarelli, and order the list based on species commonness
-* What removes comma & point from name & locality?
+* Add alternative names to autocomplete, e.g. kanttarelli
 * Mobile usability
 * Make challenge cards use uniform height
 * Challenge sort order (int) for the front page - larger number shown on top
