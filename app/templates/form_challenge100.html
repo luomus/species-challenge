@@ -307,9 +307,6 @@
             <!-- Hidden input field to store the count of filled date fields -->
             <input type="hidden" id="date_fields_count" name="date_fields_count">
 
-            <p id="submit_container">
-                <button type="submit" id="submit_button">Tallenna osallistuminen</button>
-            </p>
         </div>
 
         {% if 'taxa_count' not in html['data_fields'] %}
@@ -348,6 +345,10 @@
         <fieldset>
         {{ html['taxa']|safe }}
         </fieldset>
+
+        <p id="submit_container">
+            <button type="submit" id="submit_button">Tallenna osallistuminen</button>
+        </p>
 
     </form>
 

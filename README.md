@@ -129,7 +129,6 @@ Taxon names are handled in local files for few reasons:
 
 * Add alternative names to autocomplete, e.g. kanttarelli
 * Mobile usability
-* Make challenge cards use uniform height
 * Challenge sort order (int) for the front page - larger number shown on top
 * Refactor trashing. Now issues with 
     * Should removal be completely different procedure, that only UPDATES trashed = 1, and does not UPDATE anything else?
