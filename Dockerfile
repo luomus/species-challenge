@@ -1,6 +1,6 @@
 
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim-buster
+FROM python:3.11-slim-bookworm
 
 ENV PYTHONUNBUFFERED True
 ENV FLASK_DEBUG 0
