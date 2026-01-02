@@ -27,21 +27,23 @@
                 var formIsSubmitting = false; 
                 var form = document.querySelector('form');
 
-                form.addEventListener('input', function () {
-                    formIsDirty = true;
-                });
+                if (form) {
+                    form.addEventListener('input', function () {
+                        formIsDirty = true;
+                    });
 
-                // Listen for the form submission and update the flag
-                form.addEventListener('submit', function () {
-                    formIsSubmitting = true;
-                });
+                    // Listen for the form submission and update the flag
+                    form.addEventListener('submit', function () {
+                        formIsSubmitting = true;
+                    });
 
-                window.addEventListener('beforeunload', function (e) {
-                    if (formIsDirty && !formIsSubmitting) {
-                        e.returnValue = 'Tekemiäsi muutoksia ei ole tallennettu.'; // Some content necessary for the dialog to appear
-                        return e.returnValue;
-                    }
-                });
+                    window.addEventListener('beforeunload', function (e) {
+                        if (formIsDirty && !formIsSubmitting) {
+                            e.returnValue = 'Tekemiäsi muutoksia ei ole tallennettu.'; // Some content necessary for the dialog to appear
+                            return e.returnValue;
+                        }
+                    });
+                }
             });
 
             // Mobile navigation

@@ -48,6 +48,7 @@ The application will be visible http://localhost:8081
 - Run the app
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
 - Run tests with `python -m pytest -v -s`. The `-s` option enables print outputs.
+- NOTE: Test success requires that there are challenges (numbers 3 and 5) that are currently open.
 
 ### Dealing with test issues:
 
