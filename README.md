@@ -66,6 +66,8 @@ The application will be visible http://localhost:8081
 - Wait until "0 scaling to 1" disappears 
 - Check that everything works
 
+Dev is at https://100lajia-dev.luomus.fi/ and production at https://100lajia.luomus.fi/
+
 ## OpenShift setup notes
 
 Note that in order to create MariaDB database on Rahti, PHPMyAdmin data dump does not work. You need to create the dump on the command line:
