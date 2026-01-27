@@ -160,7 +160,19 @@
             
             // Track Plausible custom event before form submission
             if (typeof window.plausible !== 'undefined') {
-                window.plausible('Participation Submit');
+                window.plausible('Participation Submit', {
+                    callback: function(result) {
+                        if (result && result.status) {
+                            console.log('Plausible event sent successfully. Status:', result.status);
+                        } else if (result && result.error) {
+                            console.error('Plausible event error:', result.error);
+                        } else {
+                            console.warn('Plausible event was ignored');
+                        }
+                    }
+                });
+            } else {
+                console.warn('Plausible is not available');
             }
             
             // Select all date inputs with the class 'species_date'
