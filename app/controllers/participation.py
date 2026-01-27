@@ -7,9 +7,42 @@ from helpers import common_db
 from helpers import common_helpers
 import json
 import os
+import csv
+
+# Cache for school100 links CSV
+_school100_links_cache = None
+
+def load_school100_links():
+    """
+    Loads the school100 links CSV file into a dictionary.
+    Returns a dict mapping lowercase Finnish names to URLs.
+    """
+    global _school100_links_cache
+    
+    if _school100_links_cache is not None:
+        return _school100_links_cache
+    
+    links = {}
+    csv_path = "./data/school100-links.csv"
+    
+    try:
+        with open(csv_path, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                fin_lower = row['fin'].strip().lower()
+                url = row['url'].strip()
+                links[fin_lower] = url
+    except FileNotFoundError:
+        # If file doesn't exist, return empty dict
+        pass
+    except Exception as e:
+        print(f"Error loading school100-links.csv: {e}")
+    
+    _school100_links_cache = links
+    return links
 
 
-def make_species_html(id, fin, swe, sci, min_date, max_date, date, challenge_status):
+def make_species_html(id, fin, swe, sci, min_date, max_date, date, challenge_status, challenge_type):
 
     # Readonly if participation is closed or draft
     readonly_value = ""
@@ -20,12 +53,30 @@ def make_species_html(id, fin, swe, sci, min_date, max_date, date, challenge_sta
     if swe:
         swe = f", { swe }"  
 
+    # Generate link based on challenge type
+    if challenge_type == "school100":
+        # For school challenges, look up link from CSV file
+        school100_links = load_school100_links()
+        fin_lower = fin.lower().strip() if fin else ""
+        taxon_link = school100_links.get(fin_lower)
+        
+        if taxon_link:
+            # Link found, create anchor tag
+            taxon_link_html = f"<a href='{ taxon_link }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>"
+        else:
+            # Link not found, add HTML comment
+            taxon_link_html = f"<!-- no school100 link for { fin } -->"
+    else:
+        # For regular challenges, use laji.fi link with taxon ID
+        taxon_link = f"https://laji.fi/taxon/{ id }"
+        taxon_link_html = f"<a href='{ taxon_link }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>"
+
     html = f"""
         <li>
             <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
             <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ id }' value='{ date }' min='{ min_date }' max='{ max_date }' {readonly_value}>
             <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
-            <a href='https://laji.fi/taxon/{ id }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>
+            { taxon_link_html }
         </li>\n"""
     return html
 
@@ -98,7 +149,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
         swe = taxon_data.get("swe", "")
         sci = taxon_data.get("sci", "")
 
-        basic_taxa_html += make_species_html(taxon_id, fin, swe, sci, min_date, max_date, taxa_dates.get(taxon_id, ''), challenge["status"])
+        basic_taxa_html += make_species_html(taxon_id, fin, swe, sci, min_date, max_date, taxa_dates.get(taxon_id, ''), challenge["status"], challenge["type"])
 
         # Remove taxon_id from taxa_dates, so that it won't be added to additional_taxa_html
         if taxon_id in taxa_dates:
@@ -129,7 +180,7 @@ def make_taxa_html(challenge, taxa_dates_json = None):
             if "swe" in all_taxa_names[observed_taxon_id]:
                 swe = all_taxa_names[observed_taxon_id]["swe"]
     
-        additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date, challenge["status"])
+        additional_taxa_html += make_species_html(observed_taxon_id, fin, swe, sci, min_date, max_date, observed_taxon_date, challenge["status"], challenge["type"])
 
     # If additional taxa exist, add title for them
     if additional_taxa_html:
