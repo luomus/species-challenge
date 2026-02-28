@@ -102,8 +102,10 @@ def validate_challenge_data(form_data):
             errors += "Haasteen nimi on liian pitkä, maksimi 250 merkkiä. "
 
     # Description
-    if len(form_data["description"]) > 2000:
-        errors += "Haasteen nimi on liian pitkä, maksimi 2000 merkkiä. "
+    description = form_data.get("description") or ""
+    if len(description) > 2000:
+        errors += "Haasteen kuvaus on liian pitkä, maksimi 2000 merkkiä. "
+    form_data["description"] = common_helpers.sanitize_description_html(description)
 
     # Taxon
     if not form_data["taxon"]:

@@ -1,5 +1,6 @@
 # Common helpers functions.
 
+import bleach
 import requests
 import json
 import sys
@@ -129,6 +130,21 @@ def sanitize_name(name):
     # Allow Unicode letter characters, spaces, hyphens, apostrophes, commas, and periods
     pattern = re.compile(r'[^\w\s\'-.,]', re.UNICODE)
     return pattern.sub('', name)
+
+
+def sanitize_description_html(html):
+    """
+    Sanitizes HTML content, allowing only img, a, em, and strong tags.
+    Prevents XSS while preserving basic formatting and links.
+    """
+    if not html:
+        return ""
+    return bleach.clean(
+        html,
+        tags=["img", "a", "em", "strong"],
+        attributes={"a": ["href", "title", "target"], "img": ["src", "alt"]},
+        protocols={"http", "https", "mailto"},
+    )
 
 
 def is_yyyy_mm_dd(input_string):
