@@ -316,7 +316,12 @@ def validate_participation_data(form_data):
     # 2) Remove empty values
     # Todo: is this needed anymore?
     taxa_data = {k: v for k, v in taxa_data.items() if v}
-    
+
+    # 2.5) Remove keys that are not valid taxon QNames (MX.\d+) - prevents XSS via malicious form data
+    for key in list(taxa_data.keys()):
+        if not common_helpers.valid_taxon_qname(key):
+            del taxa_data[key]
+
     # 3) Remove values that are not YYYY-MM-DD dates
     for key, value in taxa_data.items():
         if not common_helpers.is_yyyy_mm_dd(value):
