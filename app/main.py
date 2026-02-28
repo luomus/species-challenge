@@ -52,7 +52,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not g.user_data:
-            flash("<a href='/login'>Kirjaudu ensin sisään</a>.")
+            flash("Kirjaudu ensin sisään.")
             return redirect("/")
         return f(*args, **kwargs)
     return decorated_function

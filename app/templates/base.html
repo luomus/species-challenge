@@ -100,7 +100,7 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% set category, message = messages[-1] %}
-                    <div class="flash {{ category }}">{{ message|safe }}</div>
+                    <div class="flash {{ category }}">{{ message }}</div>
                 {% endif %}
             {% endwith %}
 
