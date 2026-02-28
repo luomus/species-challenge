@@ -52,6 +52,7 @@ The application will be visible http://localhost:8081
 
 ### Dealing with test issues:
 
+- Check that the challengers contain exactly the strings that are being tested for.
 - If tests fail with `page.goto("http://web:8081/login?token=nonrealtoken")`, restart the Docker containers and try again.
 - If tests fail with `TypeError: can only concatenate str (not "NoneType") to str` check that playwright.env contains working username & password for production Laji.fi.
 

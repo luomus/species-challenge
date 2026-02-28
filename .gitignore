@@ -2,6 +2,8 @@
 .env
 .rahti.env
 playwright.env
+*.env
+
 tests-playwright/state.json
 *NOGIT*
 
