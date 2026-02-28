@@ -19,8 +19,8 @@ def test_login_and_save_state(browser):
     page = context.new_page()
 
 # Debug helpers
-#    page.on('request', lambda request: print('----> Request URL:', request.url))
-#    page.on('response', lambda response: print(f'      Response URL: {response.url}, Status: {response.status}'))
+    page.on('request', lambda request: print('----> Request URL:', request.url))
+    page.on('response', lambda response: print(f'      Response URL: {response.url}, Status: {response.status}'))
 
     lajifi_username = os.environ.get("LAJIFI_USERNAME")
     lajifi_password = os.environ.get("LAJIFI_PASSWORD")
@@ -54,11 +54,14 @@ def test_login_and_save_state(browser):
     page.fill("input[name='email']", lajifi_username)
     page.fill("input[name='password']", lajifi_password)
     
-    # Step 5: Submit the form
-    page.click("button.submit")
+    # Step 5: Submit the form and wait for navigation
+    with page.expect_navigation():
+        page.click("button.submit")
 
     # Issue: Playwright cannot follow these login redirections, but gets stuck at /login.
     # Workaround: extract token and navigate to /login manually.
+    print("DEBUG: page.url after submit and wait:", page.url)
+    print("DEBUG: page.content() snippet:", page.content()[:5000])
     token = extract_token(page.url)
     page.goto("http://web:8081/login?token=" + token)
 
