@@ -143,7 +143,7 @@ def sanitize_description_html(html):
         html,
         tags=["img", "a", "em", "strong"],
         attributes={"a": ["href", "title", "target"], "img": ["src", "alt"]},
-        protocols={"http", "https", "mailto"},
+        protocols={"https"},
     )
 
 
