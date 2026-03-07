@@ -141,6 +141,14 @@ Taxon names are handled in local files for few reasons:
 * Trim whitespace from MX codes, both on read and write
 * On Safari, scroll date errors in view: https://chat.openai.com/share/cf043643-8b07-4394-b10e-30a383d54479
 
+### Accessibility: check these
+
+- Measure and fix remaining color contrast issues (especially error/muted states) to WCAG AA.
+- Verify keyboard order and focus-visible styles on all pages at desktop + mobile widths.
+- Run manual screen-reader smoke tests (VoiceOver/NVDA): landmarks, headings, form labels, status/error announcements.
+- Add automated a11y checks in Playwright (axe or equivalent) for core flows (login, participation form, taxa table, admin edit).
+- Test zoom/reflow at 200% and ensure no content loss or hidden controls.
+
 ### Setup
 
 - More robust error handling and restart? Try with triggering syntax error.

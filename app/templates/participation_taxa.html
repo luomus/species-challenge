@@ -11,7 +11,16 @@
             let currentSort = { column: -1, asc: true };
 
             headers.forEach((header, index) => {
-                header.addEventListener('click', () => {
+                const headerText = header.textContent.trim();
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'sort-button';
+                button.textContent = headerText;
+                header.textContent = '';
+                header.appendChild(button);
+                header.setAttribute('aria-sort', 'none');
+
+                button.addEventListener('click', () => {
                     const rows = Array.from(table.querySelectorAll('tbody tr'));
                     
                     // Toggle sort direction if clicking same column
@@ -43,17 +52,31 @@
                     rows.forEach(row => tbody.appendChild(row));
 
                     // Update sort indicators
-                    headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+                    headers.forEach(h => {
+                        h.classList.remove('sort-asc', 'sort-desc');
+                        h.setAttribute('aria-sort', 'none');
+                    });
                     header.classList.add(currentSort.asc ? 'sort-asc' : 'sort-desc');
+                    header.setAttribute('aria-sort', currentSort.asc ? 'ascending' : 'descending');
                 });
             });
         });
     </script>
     <style>
         #taxa th {
-            cursor: pointer;
             position: relative;
             padding-right: 20px;
+        }
+        #taxa th .sort-button {
+            background: none;
+            border: 0;
+            color: inherit;
+            cursor: pointer;
+            font: inherit;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            width: 100%;
         }
         #taxa th::after {
             content: '↕';

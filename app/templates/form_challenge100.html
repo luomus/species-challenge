@@ -198,64 +198,119 @@
         const resultsContainer = document.getElementById('autocomplete-results');
         
         let timeoutId = null;
+        let activeIndex = -1;
+        let matchedSpecies = [];
+
+        function clearAutocompleteResults() {
+            resultsContainer.innerHTML = '';
+            activeIndex = -1;
+            matchedSpecies = [];
+            input.setAttribute('aria-expanded', 'false');
+            input.removeAttribute('aria-activedescendant');
+        }
+
+        function setActiveAutocompleteItem(index) {
+            const options = resultsContainer.querySelectorAll('.autocomplete-item');
+            options.forEach((option, optionIndex) => {
+                const active = optionIndex === index;
+                option.classList.toggle('active', active);
+                option.setAttribute('aria-selected', active ? 'true' : 'false');
+                if (active) {
+                    input.setAttribute('aria-activedescendant', option.id);
+                }
+            });
+        }
+
+        function addTaxonFromAutocomplete(id, fin, sci, swe) {
+            const taxaList = document.getElementById('taxa');
+            const newLi = document.createElement('li');
+            
+            const min = "{{ html['challenge']['date_begin'] }}";
+            let max = "{{ html['challenge']['date_end'] }}";
+
+            // If max date is in future, make it today instead
+            if (max > new Date().toISOString().split('T')[0]) {
+                max = new Date().toISOString().split('T')[0];
+            }
+
+            // Replace . with _ in id, to be valid CSS selector
+            const id_underscore = id.replace(/\./g, '_');
+
+            newLi.innerHTML = `
+                        <button type="button" class='taxon_name' title='Merkitse havaintopäivä tälle lajille'>${fin}, ${swe} (<em>${sci}</em>)</button>
+                        <label class='sr-only' for="${id_underscore}">Havaintopaiva</label>
+                        <input title='Valitse havaintopäivä tälle lajille' type="date" id="${id_underscore}" name='taxa:${id}' value="" min="${min}" max="${max}">
+                        <button type="button" class='clear_date' data-clear-for="${id_underscore}" title='Poista havaintopäivä' aria-label='Poista havaintopaiva'>❌</button>
+                        <a href='https://laji.fi/taxon/${id}' target='_blank' rel='noopener noreferrer' class='taxon_info' title='Lisätietoa: ${fin}' aria-label='Lisätietoa lajista ${fin} (avautuu uudessa valilehdessa)'>i</a>
+                    `;
+            taxaList.prepend(newLi);
+            formIsDirty = true;
+
+            // Add event listeners to the newly added <li>
+            addClickListenerToLi(newLi);
+            addInputEventListenerToDateInput(newLi);
+            addClearDateListenerToLi(newLi);
+
+            input.value = "";
+            clearAutocompleteResults();
+        }
 
         input.addEventListener('input', function() {
             clearTimeout(timeoutId);
 
             const query = this.value.trim().toLowerCase();
-            resultsContainer.innerHTML = ''; // Clear previous results
+            clearAutocompleteResults();
 
             if (!query) return; // Stop if the query is empty
 
             timeoutId = setTimeout(() => {
-                const matchedSpecies = Object.entries(speciesData)
+                matchedSpecies = Object.entries(speciesData)
                     .filter(([id, {fin, sci, swe}]) => fin.toLowerCase().includes(query) || sci.toLowerCase().includes(query) || swe.toLowerCase().includes(query))
                     .slice(0, 5); // Get the first 5 matches
 
-                matchedSpecies.forEach(([id, {fin, sci, swe}]) => {
+                if (matchedSpecies.length > 0) {
+                    input.setAttribute('aria-expanded', 'true');
+                }
+
+                matchedSpecies.forEach(([id, {fin, sci, swe}], index) => {
                     const li = document.createElement('li');
                     li.textContent = `${fin}, ${swe} (${sci})`; // Todo: comma between fin and swe only when both exist
                     li.classList.add('autocomplete-item');
-
+                    li.setAttribute('role', 'option');
+                    li.setAttribute('aria-selected', 'false');
+                    li.id = `autocomplete-option-${id.replace(/\./g, '_')}-${index}`;
                     li.addEventListener('click', () => {
-                        const taxaList = document.getElementById('taxa');
-                        const newLi = document.createElement('li');
-                        
-                        const min = "{{ html['challenge']['date_begin'] }}";
-                        let max = "{{ html['challenge']['date_end'] }}";
-
-                        // If max date is in future, make it today instead
-                        if (max > new Date().toISOString().split('T')[0]) {
-                            max = new Date().toISOString().split('T')[0];
-                        }
-
-                        // Todo: comma between fin and swe only when both exist
-
-                        // Replace . with _ in id, to be valid CSS selector
-                        const id_underscore = id.replace(/\./g, '_'); 
-
-                        newLi.innerHTML = `
-                                    <span class='taxon_name' title='Merkitse havaintopäivä tälle lajille'>${fin}, ${swe} (<em>${sci}</em>)</span>
-                                    <input title='Valitse havaintopäivä tälle lajille' type="date" id="${id_underscore}" name='taxa:${id}' value="" min="${min}" max="${max}">
-                                    <span class='clear_date' data-clear-for="${id_underscore}" title='Poista havaintopäivä'>❌</span>
-                                    <a href='https://laji.fi/taxon/${id}' target='_blank' class='taxon_info' title='Lisätietoa: ${fin}'>i</a>
-                                `
-//                        taxaList.appendChild(newLi); // Append to end of list
-                        taxaList.prepend(newLi); // Append to beginning of list
-                        formIsDirty = true;
-
-                        // Add event listeners to the newly added <li>
-                        addClickListenerToLi(newLi);
-                        addInputEventListenerToDateInput(newLi);
-                        addClearDateListenerToLi(newLi);
-
-                        input.value = ""; // Clear input field
-                        resultsContainer.innerHTML = ''; // Clear results after selection
+                        addTaxonFromAutocomplete(id, fin, sci, swe);
                     });
 
                     resultsContainer.appendChild(li);
                 });
             }, 300); // Wait 300 ms before processing the input
+        });
+
+        input.addEventListener('keydown', function(event) {
+            const optionCount = matchedSpecies.length;
+            if (optionCount === 0) {
+                return;
+            }
+
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                activeIndex = (activeIndex + 1) % optionCount;
+                setActiveAutocompleteItem(activeIndex);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                activeIndex = (activeIndex - 1 + optionCount) % optionCount;
+                setActiveAutocompleteItem(activeIndex);
+            } else if (event.key === 'Enter') {
+                if (activeIndex >= 0) {
+                    event.preventDefault();
+                    const [id, {fin, sci, swe}] = matchedSpecies[activeIndex];
+                    addTaxonFromAutocomplete(id, fin, sci, swe);
+                }
+            } else if (event.key === 'Escape') {
+                clearAutocompleteResults();
+            }
         });
     });
   
@@ -308,7 +363,11 @@
                     id="name" 
                     name="name" 
                     value="{{ html['data_fields'].get('name', '') }}"
+                    {% if html.get('field_errors', {}).get('name') %}aria-invalid="true" aria-describedby="name-error"{% endif %}
                 required>
+                {% if html.get('field_errors', {}).get('name') %}
+                    <br><span id="name-error" class="field_error">{{ html['field_errors']['name'] }}</span>
+                {% endif %}
             </p>
 
             <p>
@@ -318,7 +377,11 @@
                     id="place" 
                     name="place" 
                     value="{{ html['data_fields'].get('place', '') }}" 
+                    {% if html.get('field_errors', {}).get('place') %}aria-invalid="true" aria-describedby="place-error"{% endif %}
                 >
+                {% if html.get('field_errors', {}).get('place') %}
+                    <br><span id="place-error" class="field_error">{{ html['field_errors']['place'] }}</span>
+                {% endif %}
             </p>
 
             <!-- Hidden input field to store the count of filled date fields -->
@@ -345,14 +408,14 @@
         {% if html['disabled'] != 'disabled' %}
             <div id="autocomplete-container">
                 {% if html['challenge']['type'] == 'school100' %}
-                    <label for="autocomplete-input"><h4>Hae listan lajeja:</h4></label>
-                    <input type="text" id="autocomplete-input" placeholder="">
-                    <div id="autocomplete-results"></div>
+                    <h4><label for="autocomplete-input">Hae listan lajeja:</label></h4>
+                    <input type="text" id="autocomplete-input" role="combobox" aria-autocomplete="list" aria-controls="autocomplete-results" aria-expanded="false" placeholder="">
+                    <ul id="autocomplete-results" role="listbox"></ul>
                     <p>Muista merkitä havaintopäivämäärä kaikille havaitsemillesi lajeille.</p>
                 {% else %}
-                    <label for="autocomplete-input"><h4>Hae lajeja tai lisää listan ulkopuolisia lajeja:</h4></label>
-                    <input type="text" id="autocomplete-input" placeholder="">
-                    <div id="autocomplete-results"></div>
+                    <h4><label for="autocomplete-input">Hae lajeja tai lisää listan ulkopuolisia lajeja:</label></h4>
+                    <input type="text" id="autocomplete-input" role="combobox" aria-autocomplete="list" aria-controls="autocomplete-results" aria-expanded="false" placeholder="">
+                    <ul id="autocomplete-results" role="listbox"></ul>
                     <p>Voit lisätä tällä haulla havaintoja myös peruslistan ulkopuolisista lajeista. Muista merkitä havaintopäivämäärä kaikille.</p>
                 {% endif %}
             </div>

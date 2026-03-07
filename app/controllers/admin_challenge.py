@@ -93,38 +93,47 @@ def validate_challenge_data(form_data):
               sanitized values.
     """
     errors = ""
+    field_errors = {}
 
     # Title
     if not form_data["title"]:
         errors += "Haasteen nimi puuttuu. "
+        field_errors["title"] = "Haasteen nimi puuttuu."
     else:
         if len(form_data["title"]) > 250:
             errors += "Haasteen nimi on liian pitkä, maksimi 250 merkkiä. "
+            field_errors["title"] = "Haasteen nimi on liian pitkä."
 
     # Description
     description = form_data.get("description") or ""
     if len(description) > 2000:
         errors += "Haasteen kuvaus on liian pitkä, maksimi 2000 merkkiä. "
+        field_errors["description"] = "Haasteen kuvaus on liian pitkä."
     form_data["description"] = common_helpers.sanitize_description_html(description)
 
     # Taxon
     if not form_data["taxon"]:
         errors += "Taksoni puuttuu. "
+        field_errors["taxon"] = "Taksoni puuttuu."
     else:
         # Check if file exists in ./data/{taxon}_taxa.json
         if not common_helpers.taxon_file_exists(form_data["taxon"]):
             errors += f"Taksonin { form_data['taxon'] } lajiluetteloa ei löytynyt: valitse toinen taksoni tai pyydä ylläpitäjää lisäämään luettelo. "
+            field_errors["taxon"] = "Taksonin lajiluetteloa ei löytynyt."
 
     # Autocomplete
     if len(form_data["autocomplete"]) > 250:
         errors += "autocomplete on liian pitkä, maksimi 250 merkkiä. "
+        field_errors["autocomplete"] = "Autocomplete on liian pitkä."
 
     # Begin and end date
     if not form_data["date_begin"]:
         errors += "Alkupäivä puuttuu. "
+        field_errors["date_begin"] = "Alkupäivä puuttuu."
 
     if not form_data["date_end"]:
         errors += "Loppupäivä puuttuu. "
+        field_errors["date_end"] = "Loppupäivä puuttuu."
 
     # Sanitize field values
     form_data["title"] = common_helpers.sanitize_name(form_data["title"].strip())
@@ -134,7 +143,7 @@ def validate_challenge_data(form_data):
     else:
         errors = False
 
-    return errors, form_data
+    return errors, form_data, field_errors
 
 
 def get_challenge(challenge_id):
@@ -196,6 +205,7 @@ def make_option_field_html(field_name, challenge_data = None):
 
 def main(challenge_id_untrusted = None, form_data = None):
     html = dict()
+    html["field_errors"] = {}
 
     # Get challenge IDs from URL
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
@@ -244,7 +254,7 @@ def main(challenge_id_untrusted = None, form_data = None):
         # Convert to normal dictionary for sanitization
         form_data = form_data.to_dict()
 
-        errors, form_data = validate_challenge_data(form_data)
+        errors, form_data, field_errors = validate_challenge_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
@@ -253,6 +263,7 @@ def main(challenge_id_untrusted = None, form_data = None):
             html["status_field_html"] = make_option_field_html("status", form_data)
             html["type_field_html"] = make_option_field_html("type", form_data)
             html["data_fields"] = form_data
+            html["field_errors"] = field_errors
             return html
         
         # Case C2: No errors found. Insert to database and redirect to participation page.

@@ -167,7 +167,7 @@ def test_add_edit_participation(browser):
 
     # Remove taxon in different ways
     page.fill("#MX_71896", "") # Editing field directly
-    page.click('span.clear_date[data-clear-for="MX_72622"]') # Clicking the clear button
+    page.click('button.clear_date[data-clear-for="MX_72622"]') # Clicking the clear button
 
     # Submit the form
     page.click("#submit_button")

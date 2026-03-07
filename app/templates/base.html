@@ -9,18 +9,6 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         {% block head %}{% endblock %}
         <script>
-            // Fade out flash messages
-            document.addEventListener('DOMContentLoaded', (event) => {
-              const N = 5; // seconds
-            
-              setTimeout(() => {
-                const flashDiv = document.querySelector('.flash');
-                if (flashDiv) {
-                  flashDiv.classList.add('fade-out');
-                }
-              }, N * 1000);
-            });
-
             // Confirm before leaving the page if form is dirty
             var formIsDirty = false;
             document.addEventListener('DOMContentLoaded', function () {
@@ -49,10 +37,17 @@
             // Mobile navigation
             function openNav() {
                 var navigation = document.getElementById("login_navi");
+                var menuButton = document.getElementById("hamburger-menu");
                 if (navigation.className === "active") {
                     navigation.className = "";
+                    if (menuButton) {
+                        menuButton.setAttribute("aria-expanded", "false");
+                    }
                 } else {
                     navigation.className = "active";
+                    if (menuButton) {
+                        menuButton.setAttribute("aria-expanded", "true");
+                    }
                 }
             }
             
@@ -64,7 +59,7 @@
            
     </head>
     <body{% block body_attributes %}{% endblock %} class="body_{{ itsystem_name }}">
-        <div id="navi" class="nav-container">
+        <nav id="navi" class="nav-container" aria-label="Paanavigaatio">
             <h2><a href='/'>100 Lajia</a></h2>
             <ul id="login_navi">
                 {% if user_data %}
@@ -80,16 +75,22 @@
                     <li id="login"><a href="/login">Kirjaudu sisään</a></li>
                 {% endif %}
             </ul>
-            <div class="hamburger-menu" id="hamburger-menu" onclick="openNav()">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-              </div>
-              
-            <!--<span id="hamburger-menu"><a href="javascript:void(0);" onclick="openNav()">MENU</a></span>-->
-        </div>
+            <button
+                type="button"
+                class="hamburger-menu"
+                id="hamburger-menu"
+                onclick="openNav()"
+                aria-controls="login_navi"
+                aria-expanded="false"
+                aria-label="Avaa valikko"
+            >
+                <span class="line" aria-hidden="true"></span>
+                <span class="line" aria-hidden="true"></span>
+                <span class="line" aria-hidden="true"></span>
+            </button>
+        </nav>
 
-        <div id="content">
+        <main id="content">
 
             <div id="hero">
                 <a href="https://luomus.fi"><img src="{{ url_for('static', filename='images/luomus_50.png') }}" alt="Luomus"></a>
@@ -100,12 +101,18 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% set category, message = messages[-1] %}
-                    <div class="flash {{ category }}">{{ message }}</div>
+                    {% set live_role = "status" %}
+                    {% set live_type = "polite" %}
+                    {% if category == "error" %}
+                        {% set live_role = "alert" %}
+                        {% set live_type = "assertive" %}
+                    {% endif %}
+                    <div class="flash {{ category }}" role="{{ live_role }}" aria-live="{{ live_type }}">{{ message }}</div>
                 {% endif %}
             {% endwith %}
 
             {% block body %}{% endblock %}
-        </div>
+        </main>
         <p id="aftercontent">&nbsp;</p>
 
         <div id="footer">

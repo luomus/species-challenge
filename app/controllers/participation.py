@@ -63,20 +63,21 @@ def make_species_html(id, fin, swe, sci, min_date, max_date, date, challenge_sta
         
         if taxon_link:
             # Link found, create anchor tag
-            taxon_link_html = f"<a href='{ taxon_link }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>"
+            taxon_link_html = f"<a href='{ taxon_link }' target='_blank' rel='noopener noreferrer' class='taxon_info' title='Lisätietoa tästä lajista' aria-label='Lisätietoa tästä lajista (avautuu uudessa valilehdessa)'>i</a>"
         else:
             # Link not found, add HTML comment
             taxon_link_html = f"<!-- no school100 link for { fin } -->"
     else:
         # For regular challenges, use laji.fi link with taxon ID
         taxon_link = f"https://laji.fi/taxon/{ id }"
-        taxon_link_html = f"<a href='{ taxon_link }' target='_blank' class='taxon_info' title='Lisätietoa tästä lajista'>i</a>"
+        taxon_link_html = f"<a href='{ taxon_link }' target='_blank' rel='noopener noreferrer' class='taxon_info' title='Lisätietoa tästä lajista' aria-label='Lisätietoa tästä lajista (avautuu uudessa valilehdessa)'>i</a>"
 
     html = f"""
         <li>
-            <span class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</span>
+            <button type='button' class='taxon_name' id='{ id_html }_id' title='Merkitse havaintopäivä tälle lajille'>{ fin.capitalize() }{ swe } (<em>{ sci }</em>)</button>
+            <label class='sr-only' for='{ id_html }'>Havaintopaiva</label>
             <input title='Valitse havaintopäivä tälle lajille' type='date' id={ id_html } name='taxa:{ id }' value='{ date }' min='{ min_date }' max='{ max_date }' {readonly_value}>
-            <span class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä'>❌</span>
+            <button type='button' class='clear_date' data-clear-for="{ id_html }" title='Poista havaintopäivä' aria-label='Poista havaintopaiva'>❌</button>
             { taxon_link_html }
         </li>\n"""
     return html
@@ -288,20 +289,24 @@ def validate_participation_data(form_data):
               sanitized values.
     """
     errors = ""
+    field_errors = {}
 
     # Name
     if not "name" in form_data:
         errors += "osallistujan nimi puuttuu. "
+        field_errors["name"] = "Osallistujan nimi puuttuu."
     else:
         form_data["name"] = common_helpers.sanitize_name(form_data["name"].strip())
         if len(form_data["name"]) > 120:
             errors += "osallistujan nimi on liian pitkä, enintään 120 merkkiä. "
+            field_errors["name"] = "Osallistujan nimi on liian pitkä."
 
     # Place
     if "place" in form_data:
         form_data["place"] = common_helpers.sanitize_name(form_data["place"].strip())
         if len(form_data["place"]) > 120:
             errors += "paikannimi on liian pitkä, enintään 120 merkkiä. "
+            field_errors["place"] = "Paikannimi on liian pitkä."
     else:
         form_data["place"] = ""
 
@@ -353,7 +358,7 @@ def validate_participation_data(form_data):
     else:
         errors = False
 
-    return errors, form_data
+    return errors, form_data, field_errors
 
 
 def get_challenge(challenge_id):
@@ -382,6 +387,7 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
     html['disabled'] = ""
     html["public_selected"] = "selected='selected'"
     html["trashed_selected"] = ""
+    html["field_errors"] = {}
 
     # Get challenge and participation IDs from URL
     challenge_id = common_helpers.clean_int(challenge_id_untrusted)
@@ -459,13 +465,14 @@ def main(challenge_id_untrusted, participation_id_untrusted, form_data = None):
         # Todo: Maybe instead remove only empty taxon fields here?
         form_data = {key: value for key, value in form_data.items(multi=True) if value}
 
-        errors, form_data = validate_participation_data(form_data)
+        errors, form_data, field_errors = validate_participation_data(form_data)
 
         # Case C1: Errors found. Show the form again with error messages.
         if errors:
 #            print("CASE C1")
             flash(errors, "error")
             html["data_fields"] = form_data
+            html["field_errors"] = field_errors
             return html
         
         # Case C2: No errors found. Insert to database and redirect to participation page.

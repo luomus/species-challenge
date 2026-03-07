@@ -19,7 +19,11 @@
                 id="title" 
                 name="title" 
                 value="{{ html['data_fields'].get('title', '') }}"
+                {% if html.get('field_errors', {}).get('title') %}aria-invalid="true" aria-describedby="title-error"{% endif %}
             required>
+            {% if html.get('field_errors', {}).get('title') %}
+                <br><span id="title-error" class="field_error">{{ html['field_errors']['title'] }}</span>
+            {% endif %}
         </p>
 
         <p>
@@ -27,7 +31,11 @@
             <textarea 
                 id="description" 
                 name="description"
+                {% if html.get('field_errors', {}).get('description') %}aria-invalid="true" aria-describedby="description-error"{% endif %}
             >{{ html['data_fields'].get('description', '') }}</textarea>
+            {% if html.get('field_errors', {}).get('description') %}
+                <br><span id="description-error" class="field_error">{{ html['field_errors']['description'] }}</span>
+            {% endif %}
         </p>        
 
         <p>
@@ -39,23 +47,31 @@
         </p>
 
         <p>
-            <label for="title">Taksonitiedoston tunniste (esim. plantae_2024):</label><br>
+            <label for="taxon">Taksonitiedoston tunniste (esim. plantae_2024):</label><br>
             <input 
                 type="text" 
                 id="taxon" 
                 name="taxon" 
                 value="{{ html['data_fields'].get('taxon', '') }}"
+                {% if html.get('field_errors', {}).get('taxon') %}aria-invalid="true" aria-describedby="taxon-error"{% endif %}
             required>
+            {% if html.get('field_errors', {}).get('taxon') %}
+                <br><span id="taxon-error" class="field_error">{{ html['field_errors']['taxon'] }}</span>
+            {% endif %}
         </p>
 
         <p>
-            <label for="title">Autocomplete-parametrit:</label><br>
+            <label for="autocomplete">Autocomplete-parametrit:</label><br>
             <input 
                 type="text" 
                 id="autocomplete" 
                 name="autocomplete" 
                 value="{{ html['data_fields'].get('autocomplete', '') }}"
+                {% if html.get('field_errors', {}).get('autocomplete') %}aria-invalid="true" aria-describedby="autocomplete-error"{% endif %}
             >
+            {% if html.get('field_errors', {}).get('autocomplete') %}
+                <br><span id="autocomplete-error" class="field_error">{{ html['field_errors']['autocomplete'] }}</span>
+            {% endif %}
         </p>
 
         <p>
@@ -65,7 +81,11 @@
                 id="date_begin" 
                 name="date_begin" 
                 value="{{ html['data_fields'].get('date_begin', '') }}"
+                {% if html.get('field_errors', {}).get('date_begin') %}aria-invalid="true" aria-describedby="date-begin-error"{% endif %}
             required>
+            {% if html.get('field_errors', {}).get('date_begin') %}
+                <br><span id="date-begin-error" class="field_error">{{ html['field_errors']['date_begin'] }}</span>
+            {% endif %}
         </p>
 
         <p>
@@ -75,7 +95,11 @@
                 id="date_end" 
                 name="date_end" 
                 value="{{ html['data_fields'].get('date_end', '') }}"
+                {% if html.get('field_errors', {}).get('date_end') %}aria-invalid="true" aria-describedby="date-end-error"{% endif %}
             required>
+            {% if html.get('field_errors', {}).get('date_end') %}
+                <br><span id="date-end-error" class="field_error">{{ html['field_errors']['date_end'] }}</span>
+            {% endif %}
         </p>
 
         <p>

@@ -41,6 +41,11 @@ a:visited {
     color: #205791;
 }
 
+.field_error {
+    color: #8a1f11;
+    font-size: 90%;
+}
+
 .error {
     background-color: #ffecec;
     border-color: #f5aca6;
@@ -111,6 +116,26 @@ a:visited {
 
 #navi h2 a {
     text-decoration: none;
+}
+
+.sr-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #0b4f84;
+    outline-offset: 2px;
 }
 
 #login_p {
@@ -353,6 +378,27 @@ textarea#description {
     display: inline-block;
 }
 
+#taxa button.taxon_name {
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+#taxa button.clear_date {
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font-size: 120%;
+    margin: 0 0.1em 0 0.8em;
+    padding: 0;
+}
+
 #challenge {
     position: relative;
 }
@@ -379,6 +425,10 @@ textarea#description {
 .clear_date {
     margin: 0 0.1em 0 0.8em;
     cursor: pointer;
+}
+
+.autocomplete-item.active {
+    background-color: #bcffbc;
 }
 
 #challenge #name,
@@ -584,6 +634,9 @@ padding: 10px;
     .hamburger-menu {
         display: inline-block;
         cursor: pointer;
+        background: none;
+        border: 0;
+        padding: 0;
     }
       
     .hamburger-menu .line {
