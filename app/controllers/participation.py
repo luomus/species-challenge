@@ -328,7 +328,7 @@ def validate_participation_data(form_data):
             del taxa_data[key]
 
     # 3) Remove values that are not YYYY-MM-DD dates
-    for key, value in taxa_data.items():
+    for key, value in list(taxa_data.items()):
         if not common_helpers.is_yyyy_mm_dd(value):
             del taxa_data[key]
 
