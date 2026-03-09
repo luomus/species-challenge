@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+import re
 
 
 # Access pages that are publicly available
@@ -11,8 +12,8 @@ def test_anon_public_pages(browser):
     page.goto("http://web:8081")
     assert "Kirjaudu sisään" in page.content()
 
-    # Access challenge page
-    page.click("text=Sienihaaste 2024 Playwright")
+    # Access the Playwright fungi challenge; title years may change.
+    page.get_by_role("link", name=re.compile(r"Sienihaaste .* Playwright")).first.click()
     assert "Playwright-paikka" in page.content()
     assert "Osallistujat ovat havainneet yhteensä" in page.content()
 

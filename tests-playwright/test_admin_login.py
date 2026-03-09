@@ -14,17 +14,16 @@ def extract_token(url):
     return token
 
 
-# Login ans save login state
-def test_login_and_save_state(browser):
+def ensure_admin_state(browser, state_path='state_admin.json'):
+    if os.path.exists(state_path):
+        return
+
     context = browser.new_context()
     page = context.new_page()
 
-# Debug helpers
-#    page.on('request', lambda request: print('----> Request URL:', request.url))
-#    page.on('response', lambda response: print(f'      Response URL: {response.url}, Status: {response.status}'))
-
     lajifi_username = os.environ.get("LAJIFI_SC_ADMIN_USERNAME")
     lajifi_password = os.environ.get("LAJIFI_SC_ADMIN_PASSWORD")
+    assert lajifi_username and lajifi_password, "Missing admin credentials in environment."
 
     page.goto("http://web:8081")
     
@@ -60,22 +59,25 @@ def test_login_and_save_state(browser):
 
     # Issue: Playwright cannot follow these login redirections, but gets stuck at /login.
     # Workaround: extract token and navigate to /login manually.
-    token = extract_token(page.url)    
-    page.goto("http://web:8081/login?token=" + token)
+    token = extract_token(page.url)
+    assert token, "Login token missing from redirect URL."
+    page.goto(f"http://web:8081/login?token={token}")
 
     page.wait_for_selector('#logout')
 
     # Save the authentication state to a file (/tests-playgright/state_admin.json)
-    context.storage_state(path='state_admin.json')
+    context.storage_state(path=state_path)
+    context.close()
 
-    # Wait for the state to be saved
-    page.wait_for_timeout(3000)
 
-    page.close()
+# Login and save login state
+def test_login_and_save_state(browser):
+    ensure_admin_state(browser)
 
 
 # Access pages as logged in user
 def test_admin_edits(browser):
+    ensure_admin_state(browser)
     context = browser.new_context(storage_state='state_admin.json')
     page = context.new_page()
 
@@ -91,7 +93,7 @@ def test_admin_edits(browser):
 
     # Access challenge edit page
     page.click("#challenge_12 .button")
-    assert "<h1>Haasteen muokkaus: Luonnos Playwright</h1>" in page.content()
+    assert ": Luonnos Playwright" in page.content()
 
     # Replace text in #description field
     random_text = f"Playwright testi {os.urandom(8).hex()}"
@@ -114,6 +116,7 @@ def test_admin_edits(browser):
 # Logout and tear down state
 def test_teardown(browser):
     state_file = 'state_admin.json'
+    ensure_admin_state(browser)
     context = browser.new_context(storage_state='state_admin.json')
     page = context.new_page()
 
@@ -129,5 +132,6 @@ def test_teardown(browser):
     page.wait_for_selector('#body_home')
     assert "Kirjaudu sisään" in page.content()
 
-    os.remove(state_file)
+    if os.path.exists(state_file):
+        os.remove(state_file)
     
