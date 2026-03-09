@@ -45,17 +45,16 @@ The application will be visible http://localhost:8081
 
 ## Running tests
 
+- Set database contents using `./sql/species_challenge_dev.sql`
 - Run the app
 - Login to playwright container with `docker exec -ti species-challenge-playwright-1 bash`
 - Run tests with `python -m pytest -v -s`. The `-s` option enables print outputs.
-- NOTE: Test success requires that there are challenges (numbers 3 and 5) that are currently open.
 
 ### Dealing with test issues:
 
-- Check that the challengers contain exactly the strings that are being tested for.
+- Check that the challengers contain exactly the strings that are being tested for. Using the provided SQL file ensures this.
 - If tests fail with `page.goto("http://web:8081/login?token=nonrealtoken")`, restart the Docker containers and try again.
 - If tests fail with `TypeError: can only concatenate str (not "NoneType") to str` check that playwright.env contains working username & password for production Laji.fi.
-
 
 ## Deploying to Rahti 2
 
