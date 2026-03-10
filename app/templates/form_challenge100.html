@@ -6,7 +6,6 @@
     <style>
         #autocomplete-container {
             position: relative;
-            margin-left: 10px;
         }
 
         #autocomplete-input {
@@ -45,22 +44,48 @@
     <title>Osallistuminen: {{ html['challenge']['title'] }} - 100 lajia</title>
     <script>
 
-    // Trash button logic
+    // Participation status actions (soft delete / restore)
     document.addEventListener("DOMContentLoaded", function() {
-        var trashButton = document.getElementById("trash_button");
-        var confirmButton = document.getElementById("confirm_button");
         var form = document.getElementById("challenge");
-        var trashedSelect = document.getElementById("trashed");
+        var trashedInput = document.getElementById("trashed");
+        var trashButton = document.getElementById("trash_button");
+        var restoreButton = document.getElementById("restore_button");
 
-        trashButton.addEventListener("click", function() {
-            confirmButton.style.display = "block"; // Show the confirm button
-            trashButton.style.display = "none"; // Hide the trash button
-        });
+        if (!form || !trashedInput) {
+            return;
+        }
 
-        confirmButton.addEventListener("click", function() {
-            trashedSelect.value = "1"; // Set trashed = 1 (true)
-            form.submit(); // Submit the form
-        });
+        function submitParticipationForm() {
+            // requestSubmit triggers submit handlers (needed for date_fields_count)
+            if (typeof form.requestSubmit === "function") {
+                form.requestSubmit();
+                return;
+            }
+
+            // Fallback for older browsers
+            var submitEvent = new Event("submit", { bubbles: true, cancelable: true });
+            if (form.dispatchEvent(submitEvent)) {
+                form.submit();
+            }
+        }
+
+        if (trashButton) {
+            trashButton.addEventListener("click", function() {
+                var isConfirmed = window.confirm("Poistetaanko osallistuminen? Voit halutessasi palauttaa osallistumisen myöhemmin takaisin näkyville.");
+                if (!isConfirmed) {
+                    return;
+                }
+                trashedInput.value = "1";
+                submitParticipationForm();
+            });
+        }
+
+        if (restoreButton) {
+            restoreButton.addEventListener("click", function() {
+                trashedInput.value = "0";
+                submitParticipationForm();
+            });
+        }
     });
 
     // Taxa date field selection and clearing logic
@@ -334,7 +359,7 @@
 
     <!-- First check if participation exists and if 'trashed' key exists and equals 1 -->
     {% if html.get('participation', {}).get('trashed') == 1 %}
-        <div class="info flash">Olet merkinnyt tämän osallistumisen poistetuksi, joten muut eivät näe sitä. (Voit palauttaa sen näkyville muuttamalla osallistumisen tilan julkiseksi ja tallentamalla.)</div>
+        <div class="info flash">Olet merkinnyt tämän osallistumisen poistetuksi, joten muut eivät näe sitä. Voit halutessasi palauttaa osallistumisen milloin tahansa takaisin näkyville.</div>
     {% endif %}
 
     <h1>Osallistuminen: {{ html['challenge']['title'] }}</h1>
@@ -349,20 +374,24 @@
 
     <form name="challenge" id="challenge" class="trashed_{{ html['data_fields'].get('trashed', 'false') }}" action="/osallistuminen/{{ html['challenge_id'] }}/{{ html['participation_id'] }}" method="post">
 
-        <!-- Trash button -->
         {% if html['participation'] %}
-        <div id="trash">
-            <div id="trashed_formfield">
-                <label for="trashed">Osallistumisen tila:</label>
-                <select id="trashed" name="trashed">
-                    <option value="0" {{ html['public_selected'] }}>Julkinen</option>
-                    <option value="1" {{ html['trashed_selected'] }}>Poistettu</option>
-                </select>
-            </div>
+            {% set is_trashed = html.get('data_fields', {}).get('trashed', 0) in [1, '1', true] %}
+            <details id="participation_status" class="{% if is_trashed %}is_trashed{% endif %}" {% if is_trashed %}open{% endif %}>
+                <summary>
+                    <span>Osallistuminen on </span>
+                    <span id="participation_status_text"> {% if is_trashed %}poistettu{% else %}julkinen{% endif %}</span>
+                </summary>
 
-            <button type="button" id="trash_button">Poista tämä osallistuminen</button>
-            <button type="button" id="confirm_button">Olen varma: Poista osallistuminen</button>
-        </div>
+                <div class="status_card_body">
+                    <input type="hidden" id="trashed" name="trashed" value="{% if is_trashed %}1{% else %}0{% endif %}">
+                    {% if is_trashed %}
+                        <button type="button" id="restore_button">Palauta osallistuminen</button>
+                    {% else %}
+                        <button type="button" id="trash_button">Poista osallistuminen</button>
+                    {% endif %}
+                    <p>Voit halutessasi palauttaa osallistumisen myöhemmin takaisin näkyville.</p>
+                </div>
+            </details>
         {% endif %}
 
         <div id="main_form">
@@ -381,7 +410,7 @@
             </p>
 
             <p>
-                <label for="place"><strong>Paikka (vapaaehtoinen):</strong> Haasteeseen osallistumisen tärkein havainnointipaikka.  Voit lisätä kenttään myös laajemman alueen tai useamman paikannimen (esim. <em>Pääkaupunkiseutu</em> tai <em>Tampere ja Lappeenranta</em>).</label><br>
+                <label for="place"><strong>Paikka (vapaaehtoinen):</strong> Haasteeseen osallistumisen tärkein havainnointipaikka.  Voit kirjata tähän myös laajemman alueen tai useamman paikannimen.</label><br>
                 <input 
                     type="text" 
                     id="place" 

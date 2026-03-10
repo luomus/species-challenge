@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Mar 09, 2026 at 09:07 PM
+-- Generation Time: Mar 10, 2026 at 12:59 PM
 -- Server version: 10.5.29-MariaDB-ubu2004
 -- PHP Version: 8.3.26
 
@@ -51,10 +51,10 @@ INSERT INTO `challenges` (`challenge_id`, `taxon`, `autocomplete`, `date_begin`,
 (1, 'insecta_2024', '', NULL, NULL, 'challenge100', 'Hyönteiset 2024', 'draft', '', 'MA.3', '2024-01-28 10:39:59', 'MA.3', '2024-07-16 09:40:19'),
 (2, 'fungi_2024', '', '2025-11-01', '2026-02-28', 'challenge100', 'Suljettu Playwright Sienet 2025-2026', 'closed', 'Kuka havaitsee vuoden aikana eniten lajeja omalla kotikunnassaan? Perinteinen kuntahaaste on avoin kilpailu kaikille alueen asukkaille.\n\nLiikkumistavaksi suositellaan ekovaihtoehtoja, mutta kaikki liikkumistavat ovat kuitenkin sallittuja. Lorem ipsum dolor sit amet. Liikkumistavaksi suositellaan ekovaihtoehtoja, mutta kaikki liikkumistavat ovat kuitenkin sallittuja. Lorem ipsum dolor sit amet.', 'MA.3', '2024-01-28 10:39:59', 'MA.311', '2026-03-09 20:01:17'),
 (3, 'fungi_2024', '', '2024-07-01', '2024-07-31', 'challenge100', 'Luonnos Playwright sienet', 'open', '', 'MA.3', '2024-01-28 10:41:49', 'MA.3', '2026-02-28 04:56:49'),
-(4, 'plantae_2024', '', '2024-01-01', '2024-12-31', 'challenge100', 'Kasvit 2024', 'open', '<img src=\'/static/images/icon_plantae_100.png\'>\r\n\r\nHavaitse 100 kasvilajia vuodessa!\r\n<p>\r\n<a href=\"https://pinkka.laji.fi/pinkat/#/\">Lue lisää haasteen lajeista Pinkasta</a>.', 'MA.3', '2024-01-28 10:42:23', 'MA.3', '2024-07-23 08:51:55'),
+(4, 'plantae_2024', '', '2024-01-01', '2024-12-31', 'challenge100', 'Kasvit 2024', 'open', '<img src=\"/static/images/icon_plantae_100.png\">\n\nHavaitse 100 kasvilajia vuodessa! !!\n&lt;p&gt;\n<a href=\"https://pinkka.laji.fi/pinkat/#/\">Lue lisää haasteen lajeista Pinkasta</a>.', 'MA.3', '2024-01-28 10:42:23', 'MA.311', '2026-03-10 11:47:04'),
 (5, 'fungi_2024', '', '2026-01-01', '2030-12-31', 'challenge100', 'Sienihaaste 2026-2030 Playwright', 'open', '<img src=\"/static/images/icon_fungi_100.png\">\n\nHavaitse 100 sienilajia 5 vuodessa!', 'MA.3', '2024-01-28 22:32:58', 'MA.311', '2026-03-09 19:38:44'),
 (6, 'insecta_2024', '', '2026-02-01', '2026-02-28', 'challenge100', '100 hyönteislajia helmikuu 2026', 'open', '<img src=\"/static/images/icon_insecta_100.png\">\n\nHavaitse <em>100</em> hyönteislajia <strong>vuodessa</strong>!', 'MA.3', '2024-01-28 22:33:44', 'MA.3', '2026-02-28 05:51:27'),
-(12, 'plantae_2024', '', '2024-07-01', '2024-07-31', 'challenge100', 'Luonnos Playwright', 'draft', 'Playwright testi c955ede7aeaa6a04', 'MA.3', '2024-07-23 08:57:59', 'MA.311', '2026-03-09 21:06:53');
+(12, 'plantae_2024', '', '2024-07-01', '2024-07-31', 'challenge100', 'Luonnos Playwright', 'draft', 'Playwright testi 78081e96745247c6', 'MA.3', '2024-07-23 08:57:59', 'MA.311', '2026-03-10 12:58:29');
 
 -- --------------------------------------------------------
 
@@ -92,15 +92,7 @@ INSERT INTO `participations` (`participation_id`, `challenge_id`, `name`, `place
 (49, 4, 'Nolla', 'Nolla', 0, '{}', 'MA.3', '2024-07-16 10:42:20', 'MA.3', '2024-07-16 10:42:20', 0),
 (50, 6, 'Nollanen', 'Nollala', 0, '{}', 'MA.3', '2024-07-16 10:47:50', 'MA.3', '2026-02-28 16:30:27', 0),
 (51, 3, 'Testi', 'Testi', 16, '{\"MX.66563\": \"2024-07-02\", \"MX.71896\": \"2024-07-28\", \"MX.71663\": \"2024-07-02\", \"MX.73283\": \"2024-07-23\", \"MX.72788\": \"2024-07-23\", \"MX.72555\": \"2024-07-23\", \"MX.72358\": \"2024-07-23\", \"MX.72148\": \"2024-07-23\", \"MX.72561\": \"2024-07-23\", \"MX.69690\": \"2024-07-23\", \"MX.71822\": \"2024-07-23\", \"MX.73304\": \"2024-07-23\", \"MX.72814\": \"2024-07-23\", \"MX.73307\": \"2024-07-23\", \"MX.292558\": \"2024-07-23\", \"MX.73330\": \"2024-07-23\"}', 'MA.3', '2024-07-16 12:48:37', 'MA.3', '2026-02-28 05:45:54', 0),
-(54, 2, 'Suljettu testi Playwright', 'Testi', 1, '{\"MX.72358\": \"2026-01-01\"}', 'MA.315', '2026-03-09 20:01:10', 'MA.315', '2026-03-09 21:06:59', 0),
-(65, 3, 'Playwright-koulu-nimi', 'Playwright-koulu-paikka', 1, '{\"MX.71896\": \"2024-07-15\"}', 'MA.315', '2026-03-09 21:03:25', 'MA.315', '2026-03-09 21:03:26', 1),
-(66, 5, 'Playwright-nimi poistotesti', 'Playwright-paikka poistotesti', 1, '{\"MX.71822\": \"2026-01-01\"}', 'MA.315', '2026-03-09 21:03:34', 'MA.315', '2026-03-09 21:03:35', 1),
-(67, 3, 'Playwright-koulu-nimi', 'Playwright-koulu-paikka', 1, '{\"MX.71896\": \"2024-07-15\"}', 'MA.315', '2026-03-09 21:03:38', 'MA.315', '2026-03-09 21:03:38', 1),
-(68, 5, 'Playwright-nimi poistotesti', 'Playwright-paikka poistotesti', 1, '{\"MX.71822\": \"2026-01-01\"}', 'MA.315', '2026-03-09 21:05:45', 'MA.315', '2026-03-09 21:05:45', 1),
-(69, 3, 'Playwright-koulu-nimi', 'Playwright-koulu-paikka', 1, '{\"MX.71896\": \"2024-07-15\"}', 'MA.315', '2026-03-09 21:05:49', 'MA.315', '2026-03-09 21:05:49', 1),
-(70, 5, 'Playwright-nimi poistotesti', 'Playwright-paikka poistotesti', 1, '{\"MX.71822\": \"2026-01-01\"}', 'MA.315', '2026-03-09 21:05:57', 'MA.315', '2026-03-09 21:05:57', 1),
-(71, 5, 'Playwright-nimi poistotesti', 'Playwright-paikka poistotesti', 1, '{\"MX.71822\": \"2026-01-01\"}', 'MA.315', '2026-03-09 21:06:55', 'MA.315', '2026-03-09 21:06:55', 1),
-(72, 3, 'Playwright-koulu-nimi', 'Playwright-koulu-paikka', 1, '{\"MX.71896\": \"2024-07-15\"}', 'MA.315', '2026-03-09 21:06:59', 'MA.315', '2026-03-09 21:06:59', 1);
+(54, 2, 'Suljettu testi Playwright', 'Testi', 1, '{\"MX.72358\": \"2026-01-01\"}', 'MA.315', '2026-03-09 20:01:10', 'MA.315', '2026-03-10 12:58:36', 0);
 
 --
 -- Indexes for dumped tables
@@ -137,7 +129,7 @@ ALTER TABLE `challenges`
 -- AUTO_INCREMENT for table `participations`
 --
 ALTER TABLE `participations`
-  MODIFY `participation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `participation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- Constraints for dumped tables

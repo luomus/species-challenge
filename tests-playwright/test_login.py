@@ -126,6 +126,13 @@ def get_first_filled_taxon_id(page, exclude_ids=None):
     return None
 
 
+def open_participation_status_section(page):
+    section = page.locator("#participation_status")
+    section.wait_for()
+    if section.get_attribute("open") is None:
+        page.click("#participation_status summary")
+
+
 # Login and save login state
 def test_login_and_save_state(browser):
     ensure_user_state(browser)
@@ -250,15 +257,29 @@ def test_add_edit_participation(browser):
 
     # Trash the participation
     page.fill("#MX_71822", date_to_fill_in) # Add one more taxon to test trashing with changed taxon count
+    open_participation_status_section(page)
+    page.once("dialog", lambda dialog: dialog.accept())
     page.click("#trash_button")
-    page.click("#confirm_button")
 
     # Check that trash was successful
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert page.input_value("#trashed") == "1"
 
+    # Restore the participation
+    open_participation_status_section(page)
+    page.click("#restore_button")
+
+    # Check that restore was successful
+    page.wait_for_selector(".flash")
+    assert "Osallistumisesi on nyt tallennettu" in page.content()
+    assert page.input_value("#trashed") == "0"
+
     # Check that trashed participation is not visible
+    open_participation_status_section(page)
+    page.once("dialog", lambda dialog: dialog.accept())
+    page.click("#trash_button")
+    page.wait_for_selector(".flash")
     page.goto("http://web:8081/haaste/5")
     assert "Playwright-nimi poistotesti" not in page.content()
 
@@ -300,8 +321,9 @@ def test_add_edit_school_participation(browser):
     assert "Playwright-koulu-paikka" in page.content()
 
     # Trash the participation
+    open_participation_status_section(page)
+    page.once("dialog", lambda dialog: dialog.accept())
     page.click("#trash_button")
-    page.click("#confirm_button")
 
     # Check that trash was successful
     page.wait_for_selector(".flash")

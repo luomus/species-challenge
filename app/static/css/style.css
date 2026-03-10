@@ -164,6 +164,7 @@ textarea:focus-visible {
 
 #footer {
     background-color: #1F74AD;
+    background-color: #444444; /* different color gives emphasis for blue buttons */
     padding: 10px 10px 10px 20px;
     margin: 2em 0 0 -10px;
     clear: both;
@@ -352,10 +353,6 @@ ul h4 {
     margin: 0;
 }
 
-#taxon_count_heading {
-    margin-left: 0.5em;
-}
-
 textarea#description {
     width: 30em;
     height: 10em;
@@ -472,41 +469,54 @@ button:active {
     transform: translateY(2px);
 }
 
-#trash {
-    float: right;
-    width: 15em;
-    height: 4em;
-    position: relative;
-    background-color: #ffcccc;
-    background-color: #F0F0F4;
+#participation_status {
+    margin: 1em 0;
+    max-width: 22em;
+    border: 1px solid #d8d8de;
     border-radius: 5px;
-    padding: 0.5em;
+    background-color: #F0F0F4;
 }
 
-#trash #trash_button {
-    border: 1px solid #9f6c6c;
-    background-image: linear-gradient(to top, #dc6464 0%, #f3acac 80%, #ffd8d8 100%)
+#participation_status summary {
+    cursor: pointer;
+    padding: 0.6em 0.8em;
+
+    font-weight: bold;
 }
 
-#trash #confirm_button {
-    display: none; /* Hidden initially */
-    background-image: linear-gradient(to top, #dd0000 0%, #ff6464 80%, #ff9f9f 100%);
-    color: #fff;
-    border: 1px solid #ef7979;
-    position: absolute;
-    bottom: 0.5em;
-}
-
-#trash #trashed_formfield {
-    display: none; /* The option field is hidden for non-trashed challenges */
-}
-    
-/* If form is already trashed, show the select option field, but not the trash button */
-.trashed_1 #trash #trashed_formfield {
-    display: block;
-}
-.trashed_1 #trash #trash_button {
+#participation_status summary::-webkit-details-marker {
     display: none;
+}
+
+#participation_status #participation_status_text {
+    font-weight: bold;
+}
+
+#participation_status.is_trashed #participation_status_text {
+    color: #8d2020;
+}
+
+#participation_status .status_card_body {
+    padding: 0 0.8em 0.8em 0.8em;
+}
+
+#participation_status .status_card_body p {
+    margin: 0.8em 0 0 0;
+}
+
+#participation_status button {
+    margin-right: 0;
+    width: 100%;
+}
+
+#participation_status #trash_button {
+    border: 1px solid #9f6c6c;
+    background-image: linear-gradient(to top, #dc6464 0%, #f3acac 80%, #ffd8d8 100%);
+}
+
+#participation_status #restore_button {
+    border: 1px solid #1f8f3c;
+    background-image: linear-gradient(to top, #178f30 0%, #39cc68 80%, #5cd889 100%);
 }
 
 .anchor_link {
@@ -667,6 +677,10 @@ padding: 10px;
 
     #main_form {
         clear: both;
+    }
+
+    #participation_status {
+        max-width: none;
     }
 
     #footer a {
