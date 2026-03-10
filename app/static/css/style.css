@@ -69,6 +69,11 @@ a:visited {
     color: #555;
 }
 
+.flash-hidden-stable {
+    opacity: 0;
+    pointer-events: none;
+}
+
 
 /* NAVIGATION */
 

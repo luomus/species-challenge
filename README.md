@@ -56,7 +56,7 @@ The application will be visible http://localhost:8081
 - If tests fail with `page.goto("http://web:8081/login?token=nonrealtoken")`, restart the Docker containers and try again.
 - If tests fail with `TypeError: can only concatenate str (not "NoneType") to str` check that playwright.env contains working username & password for production Laji.fi.
 
-## Deploying to Rahti 2
+## Deploying to OpenShift Rahti 2
 
 - Run e2e-tests
 - Merge changes to main, if deploying production version
@@ -171,7 +171,13 @@ Taxon names are handled in local files for few reasons:
     - Admin ability to edit any participations
     - My participation species accumulation chart
     - Activity stats, e.g. users active during last 7 days, new participations
-    - Maybe: Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species 
+    - Maybe: Move observed species list away from challenge main page to separate page, preparing for tables that have >200 observers and species
+- Bird challenges:
+    - Modular authentication
+    - Sorting species alphabetically
+    - Language versions
+    - Badges
+    - Admin ability to edit any participations
 - Out of scope:
     - Sorting taxa on entry form. Could cause confusion because
         - New additional taxa would not be sorted

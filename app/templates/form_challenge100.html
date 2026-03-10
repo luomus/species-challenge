@@ -65,7 +65,13 @@
 
     // Taxa date field selection and clearing logic
     // Don't apply listeners if form is disabled
-    if ('{{ html['disabled'] }}' != 'disabled') {
+    function hideFlashMessagesAfterFormEdit() {
+        if (typeof window.hideVisibleFlashMessages === 'function') {
+            window.hideVisibleFlashMessages();
+        }
+    }
+
+    if ("{{ html['disabled'] }}" != 'disabled') {
         document.addEventListener('DOMContentLoaded', (event) => {
             document.querySelectorAll('#taxa li').forEach(addClickListenerToLi);
             document.querySelectorAll('#taxa li').forEach(addInputEventListenerToDateInput);
@@ -89,6 +95,7 @@
                     dateInput.value = new Date().toISOString().split('T')[0]; // Set to today's date
                     updateClass(li);
                     formIsDirty = true;
+                    hideFlashMessagesAfterFormEdit();
                 }
             });
         }
@@ -140,6 +147,8 @@
                     dateInput.value = ''; // Clear the input value
                     // Remove the 'date-filled' class from the parent <li>
                     liElement.classList.remove('date-filled');
+                    formIsDirty = true;
+                    hideFlashMessagesAfterFormEdit();
                 }
             });
         }
@@ -245,6 +254,7 @@
                     `;
             taxaList.prepend(newLi);
             formIsDirty = true;
+            hideFlashMessagesAfterFormEdit();
 
             // Add event listeners to the newly added <li>
             addClickListenerToLi(newLi);

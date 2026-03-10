@@ -11,6 +11,19 @@
         <script>
             // Confirm before leaving the page if form is dirty
             var formIsDirty = false;
+            function hideVisibleFlashMessages() {
+                document.querySelectorAll('.flash').forEach(function (flashElement) {
+                    if (flashElement.classList.contains('flash-hidden-stable')) {
+                        return;
+                    }
+                    flashElement.classList.add('flash-hidden-stable');
+                    flashElement.setAttribute('aria-hidden', 'true');
+                    flashElement.removeAttribute('role');
+                    flashElement.setAttribute('aria-live', 'off');
+                });
+            }
+
+            window.hideVisibleFlashMessages = hideVisibleFlashMessages;
             document.addEventListener('DOMContentLoaded', function () {
                 var formIsSubmitting = false; 
                 var form = document.querySelector('form');
@@ -18,6 +31,11 @@
                 if (form) {
                     form.addEventListener('input', function () {
                         formIsDirty = true;
+                        hideVisibleFlashMessages();
+                    });
+
+                    form.addEventListener('change', function () {
+                        hideVisibleFlashMessages();
                     });
 
                     // Listen for the form submission and update the flag
