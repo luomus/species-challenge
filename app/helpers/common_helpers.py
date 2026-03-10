@@ -141,7 +141,7 @@ def sanitize_description_html(html):
         return ""
     return bleach.clean(
         html,
-        tags=["img", "a", "em", "strong"],
+        tags=["img", "a", "em", "strong", "br"],
         attributes={"a": ["href", "title", "target"], "img": ["src", "alt"]},
         protocols={"https"},
     )
