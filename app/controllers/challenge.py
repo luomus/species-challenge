@@ -22,10 +22,10 @@ def make_challenge_html(challenge):
     return html
 
 
-# Function to get participations of current user to this challenge, excluding trashed participations
+# Function to get participations of current user to this challenge
 def get_my_participations(challenge_id):
     with common_db.connection() as conn:
-        query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s AND trashed = 0"
+        query = "SELECT * FROM participations WHERE challenge_id = %s AND meta_created_by = %s ORDER BY participation_id DESC"
         params = (challenge_id, g.user_data["id"])
         participations = common_db.select(conn, query, params)
 
@@ -105,9 +105,13 @@ def make_participant_html(participations):
 def make_participations_html(participations, challenge_id, challenge_status):
     html = ""
     for participation in participations:
+        participation_title = ", ".join([participation["name"], participation["place"]])
+        if participation.get("trashed"):
+            participation_title += " <strong class='trashed_suffix'>(poistettu)</strong>"
+
         html += "<li>"
         html += "<a href='/osallistuminen/" + str(participation["challenge_id"]) + "/" + str(participation["participation_id"]) + "'>"
-        html += ", ".join([participation["name"], participation["place"]])
+        html += participation_title
         html += "</a>"
         html += "</li>"
 

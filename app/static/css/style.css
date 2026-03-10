@@ -519,6 +519,10 @@ button:active {
     background-image: linear-gradient(to top, #178f30 0%, #39cc68 80%, #5cd889 100%);
 }
 
+.trashed_suffix {
+    background-color: #ffe9e9;
+}
+
 .anchor_link {
     margin: 1em 0 0 0;
     padding-left: 0;

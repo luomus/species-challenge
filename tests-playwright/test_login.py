@@ -3,6 +3,7 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 
 import pytest
 import os
+import time
 
 from urllib.parse import urljoin, urlparse, parse_qs
 
@@ -133,6 +134,10 @@ def open_participation_status_section(page):
         page.click("#participation_status summary")
 
 
+def unique_label(prefix):
+    return f"{prefix}-{int(time.time() * 1000)}"
+
+
 # Login and save login state
 def test_login_and_save_state(browser):
     ensure_user_state(browser)
@@ -173,6 +178,8 @@ def test_add_edit_participation(browser):
     page = context.new_page()
 
     date_to_fill_in = "2026-01-01" # NOTE: this will fail when year changes, see below.
+    participation_name = unique_label("Playwright-nimi-poistotesti")
+    participation_place = unique_label("Playwright-paikka-poistotesti")
 
     # Access participation adding page
     page.goto("http://web:8081/haaste/5")
@@ -180,8 +187,8 @@ def test_add_edit_participation(browser):
     assert "Osallistuminen: Sienihaaste" in page.content()
 
     # Fill in fields
-    page.fill("input[name='name']", "Playwright-nimi poistotesti")
-    page.fill("#place", "Playwright-paikka poistotesti")
+    page.fill("input[name='name']", participation_name)
+    page.fill("#place", participation_place)
 
     # Add taxa in different ways without relying on specific taxon IDs.
     first_taxon_id = fill_first_empty_taxon_date(page, date_to_fill_in) # Add by filling the first empty date field
@@ -203,8 +210,8 @@ def test_add_edit_participation(browser):
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert f"{expected_count_after_add} lajia" in page.content()
-    assert "Playwright-nimi poistotesti" in page.content()
-    assert "Playwright-paikka poistotesti" in page.content()
+    assert participation_name in page.content()
+    assert participation_place in page.content()
 
     # Access own stats
     page.click("text=Tilastoja tästä osallistumisesta")
@@ -275,17 +282,24 @@ def test_add_edit_participation(browser):
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert page.input_value("#trashed") == "0"
 
-    # Check that trashed participation is not visible
+    # Check that trashed participation is listed in own section, but hidden from public participant list
     open_participation_status_section(page)
     page.once("dialog", lambda dialog: dialog.accept())
     page.click("#trash_button")
     page.wait_for_selector(".flash")
     page.goto("http://web:8081/haaste/5")
-    assert "Playwright-nimi poistotesti" not in page.content()
+    challenge_mine_text = page.locator("#challenge_mine").inner_text()
+    assert participation_name in challenge_mine_text
+    assert "(poistettu)" in challenge_mine_text
+    challenge_participants_text = page.locator("#challenge_participants").inner_text()
+    assert participation_name not in challenge_participants_text
 
 
 # Set up and edit new school participation
 def test_add_edit_school_participation(browser):
+    participation_name = unique_label("Playwright-koulu-nimi")
+    participation_place = unique_label("Playwright-koulu-paikka")
+
     ensure_user_state(browser)
     context = browser.new_context(storage_state='state.json')
     page = context.new_page()
@@ -296,8 +310,8 @@ def test_add_edit_school_participation(browser):
     assert "Osallistuminen: Luonnos Playwright" in page.content()
 
     # Fill in fields
-    page.fill("input[name='name']", "Playwright-koulu-nimi")
-    page.fill("#place", "Playwright-koulu-paikka")
+    page.fill("input[name='name']", participation_name)
+    page.fill("#place", participation_place)
 
     # Add taxa in different ways without relying on specific taxon IDs.
     first_taxon_id = fill_first_empty_taxon_date(page, "2024-07-15") # Add by filling in a field
@@ -317,8 +331,8 @@ def test_add_edit_school_participation(browser):
     page.wait_for_selector(".flash")
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert f"{expected_count_after_add} lajia" in page.content()
-    assert "Playwright-koulu-nimi" in page.content()
-    assert "Playwright-koulu-paikka" in page.content()
+    assert participation_name in page.content()
+    assert participation_place in page.content()
 
     # Trash the participation
     open_participation_status_section(page)
@@ -330,9 +344,13 @@ def test_add_edit_school_participation(browser):
     assert "Osallistumisesi on nyt tallennettu" in page.content()
     assert page.input_value("#trashed") == "1"
 
-    # Check that trashed participation is not visible
+    # Check that trashed participation is listed in own section, but hidden from public participant list
     page.goto("http://web:8081/haaste/3")
-    assert "Et ole osallistunut tähän haasteeseen" in page.content()
+    challenge_mine_text = page.locator("#challenge_mine").inner_text()
+    assert participation_name in challenge_mine_text
+    assert "(poistettu)" in challenge_mine_text
+    challenge_participants_text = page.locator("#challenge_participants").inner_text()
+    assert participation_name not in challenge_participants_text
 
 
 # Edit participation to a closed challenge

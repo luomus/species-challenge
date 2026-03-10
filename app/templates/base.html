@@ -12,7 +12,7 @@
             // Confirm before leaving the page if form is dirty
             var formIsDirty = false;
             function hideVisibleFlashMessages() {
-                document.querySelectorAll('.flash').forEach(function (flashElement) {
+                document.querySelectorAll('.flash.success').forEach(function (flashElement) {
                     if (flashElement.classList.contains('flash-hidden-stable')) {
                         return;
                     }
